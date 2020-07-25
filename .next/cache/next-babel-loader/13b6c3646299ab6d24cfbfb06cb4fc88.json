@@ -1,0 +1,1 @@
+{"ast":null,"code":"export default (() => \"hola\");","map":{"version":3,"sources":["E:/proyecto-frifolly/frifolly-frontend/components/Header/Account.js"],"names":[],"mappings":"AAAA,gBAAc,MACR,MADN","sourcesContent":["export default()=>(\r\n      \"hola\"\r\n)"]},"metadata":{},"sourceType":"module"}
