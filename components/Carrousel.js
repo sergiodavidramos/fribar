@@ -11,7 +11,7 @@ export default () => {
         <div
           id="rev_slider_5_1"
           className="rev_slider fullscreenbanner"
-          style={{ "display": "block" }}
+          style={{ display: "block" }}
           data-version="5.4.8.1"
         >
           <ul>
@@ -73,17 +73,17 @@ export default () => {
                 data-paddingbottom="[0,0,0,0]"
                 data-paddingleft="[0,0,0,0]"
                 style={{
-                  "z-index": "11",
-                  "min-width": "685px",
-                  "max-width": "685px",
-                  "max-width": "196px",
-                  "max-width": "196px",
-                  "white-space": "normal",
-                  "font-size": "20px",
-                  "line-height": "22px",
-                  "font-weight": "400",
-                  "color": "#ffffff",
-                  "letter-spacing": "0px",
+                  zIndex: 11,
+                  minWidth: "685px",
+                  maxWidth: "685px",
+                  maxWidth: "196px",
+                  maxWidth: "196px",
+                  whiteSpace: "normal",
+                  fontSize: "20px",
+                  lineHeight: "22px",
+                  fontWeight: "400",
+                  color: "#ffffff",
+                  letterSpacing: "0px",
                 }}
               >
                 <div
@@ -108,7 +108,7 @@ export default () => {
                   data-paddingright="[0,0,0,0]"
                   data-paddingbottom="[0,0,0,0]"
                   data-paddingleft="[0,0,0,0]"
-                  style={{ "z-index": "12" }}
+                  style={{ zIndex: 12 }}
                 >
                   <img
                     src="/img/demo_shop_trendy/images/805f9-brk_slide_element-3.png"
@@ -143,32 +143,30 @@ export default () => {
                   data-paddingbottom="[0,0,0,0]"
                   data-paddingleft="[0,0,0,0]"
                   style={{
-                    "z-index": "13",
-                    "min-width": "682px",
-                    "max-width": "682px",
-                    " white-space": "normal",
-                    " font-size": "72px",
-                    "line-height": "78px",
-                    "font-weight": "300",
+                    zIndex: 13,
+                    minWidth: "682px",
+                    maxWidth: "682px",
+                    whiteSpace: "normal",
+                    fontSize: "72px",
+                    lineHeight: "78px",
+                    fontWeight: "300",
                     color: "#ffffff",
-                    "letter-spacing": "0px",
-                    "font-family": "Montserrat",
-                    "text-transform": "uppercase",
+                    letterSpacing: "0px",
+                    fontFamily: "Montserrat",
+                    textTransform: "uppercase",
                   }}
                 >
-                  " " Save"
+                  "Save"
                   <span
                     style={{
                       color: "#3e2acd",
-                      "font-weight": "200",
-                      "margin-left": "35px",
+                      fontWeight: "200",
+                      marginLeft: "35px",
                     }}
                   >
                     50%
                   </span>
-                  <div
-                    style={{ "font-weight": "700", "font-family": "Open Sans" }}
-                  >
+                  <div style={{ fontWeight: "700", fontFamily: "Open Sans" }}>
                     only this week
                   </div>
                 </div>
@@ -196,17 +194,17 @@ export default () => {
                 data-paddingbottom="[0,0,0,0]"
                 data-paddingleft="[0,0,0,0]"
                 style={{
-                  "z-index": "14",
-                  "min-width": "252px",
-                  "max-width": "252px",
-                  "max-width": "83px",
-                  "max-width": "83px",
-                  "white-space": "nowrap",
-                  "font-size": "20px",
-                  "line-height": "22px",
-                  "font-weight": "400",
+                  zIndex: "14",
+                  minWidth: "252px",
+                  maxWidth: "252px",
+                  maxWidth: "83px",
+                  maxWidth: "83px",
+                  whiteSpace: "nowrap",
+                  fontSize: "20px",
+                  lineHeight: "22px",
+                  fontWeight: "400",
                   color: "#ffffff",
-                  "letter-spacing": "0px",
+                  letterSpacing: "0px",
                 }}
               >
                 <a
@@ -237,18 +235,18 @@ export default () => {
                   data-paddingbottom="[20,20,20,19]"
                   data-paddingleft="[20,20,20,18]"
                   style={{
-                    "z-index": "15",
-                    "white-space": "nowrap",
-                    "font-size": "20px",
-                    "line-height": "22px",
-                    "font-weight": "400",
+                    zIndex: "15",
+                    whiteSpace: "nowrap",
+                    fontSize: "20px",
+                    lineHeight: "22px",
+                    fontWeight: "400",
                     color: "#2775ff",
-                    "letter-spacing": "0px",
-                    "font-family": "Open Sans",
-                    "background-color": "rgb(255,255,255)",
-                    "border-radius": "40px 40px 40px 40px",
+                    letterSpacing: "0px",
+                    fontFamily: "Open Sans",
+                    backgroundColor: "rgb(255,255,255)",
+                    borderRadius: "40px 40px 40px 40px",
                     cursor: "pointer",
-                    "text-decoration": "none",
+                    textDecoration: "none",
                   }}
                 >
                   <i className="fas fa-shopping-basket"></i>{" "}
@@ -278,15 +276,15 @@ export default () => {
                   data-paddingbottom="[0,0,0,0]"
                   data-paddingleft="[0,0,0,0]"
                   style={{
-                    "z-index": "16",
-                    "white-space": "nowrap",
-                    "font-size": "28px",
-                    "line-height": "30px",
-                    "font-weight": "700",
+                    zIndex: "16",
+                    whiteSpace: "nowrap",
+                    fontSize: "28px",
+                    lineHeight: "30px",
+                    fontWeight: "700",
                     color: "#ffffff",
-                    "letter-spacing": "0px",
-                    "font-family": "Open Sans",
-                    "text-transform": "uppercase",
+                    letterSpacing: "0px",
+                    fontFamily: "Open Sans",
+                    textTransform: "uppercase",
                   }}
                 >
                   Buy now{" "}
@@ -315,14 +313,14 @@ export default () => {
                   data-paddingbottom="[0,0,0,0]"
                   data-paddingleft="[0,0,0,0]"
                   style={{
-                    "z-index": "17",
-                    "white-space": "nowrap",
-                    "font-size": "16px",
-                    "line-height": "18px",
-                    "font-weight": " 700",
+                    zIndex: "17",
+                    whiteSpace: "nowrap",
+                    fontSize: "16px",
+                    lineHeight: "18px",
+                    fontWeight: " 700",
                     color: "#69adff",
-                    "letter-spacing": "0px",
-                    "font-family": "Open Sans",
+                    letterSpacing: "0px",
+                    fontFamily: "Open Sans",
                   }}
                 >
                   <i className="fa-icon-instagram"></i> berserk{" "}
@@ -351,17 +349,17 @@ export default () => {
                 data-paddingbottom="[0,0,0,0]"
                 data-paddingleft="[0,0,0,0]"
                 style={{
-                  "z-index": "18",
-                  "min-width": "270px",
-                  "max-width": "270px",
-                  "max-width": "217px",
-                  " max-width": " 217px",
-                  "white-space": "nowrap",
-                  "font-size": "20px",
-                  "line-height": "22px",
-                  "font-weight": "400",
+                  zIndex: "18",
+                  minWidth: "270px",
+                  maxWidth: "270px",
+                  maxWidth: "217px",
+                  maxWidth: " 217px",
+                  whiteSpace: "nowrap",
+                  fontSize: "20px",
+                  lineHeight: "22px",
+                  fontWeight: "400",
                   color: "#ffffff",
-                  "letter-spacing": "0px",
+                  letterSpacing: "0px",
                 }}
               >
                 <div
@@ -389,14 +387,14 @@ export default () => {
                   data-paddingbottom="[0,0,0,0]"
                   data-paddingleft="[0,0,0,0]"
                   style={{
-                    "z-index": "19",
-                    "white-space": "nowrap",
-                    "font-size": "136px",
-                    "line-height": "140px",
-                    "font-weight": "700",
+                    zIndex: "19",
+                    whiteSpace: "nowrap",
+                    fontSize: "136px",
+                    lineHeight: "140px",
+                    fontWeight: "700",
                     color: "#ffffff",
-                    "letter-spacing": "0px",
-                    "font-family": "Montserrat",
+                    letterSpacing: "0px",
+                    fontFamily: "Montserrat",
                   }}
                 >
                   $59{" "}
@@ -426,15 +424,15 @@ export default () => {
                   data-paddingbottom="[0,0,0,0]"
                   data-paddingleft="[0,0,0,0]"
                   style={{
-                    "z-index": "20",
-                    "white-space": "nowrap",
-                    "font-size": "40px",
-                    "line-height": "42px",
-                    "font-weight": "300",
+                    zIndex: "20",
+                    whiteSpace: "nowrap",
+                    fontSize: "40px",
+                    lineHeight: "42px",
+                    fontWeight: "300",
                     color: "#ffffff",
-                    "letter-spacing": "0px",
-                    "font-family": "Open Sans",
-                    "text-transform": "uppercase",
+                    letterSpacing: "0px",
+                    fontFamily: "Open Sans",
+                    textTransform: "uppercase",
                   }}
                 >
                   For <span style={{ color: "#b88eff" }}>7 Days</span>
@@ -461,8 +459,8 @@ export default () => {
                 data-paddingbottom="[0,0,0,0]"
                 data-paddingleft="[0,0,0,0]"
                 style={{
-                  "z-index": "5",
-                  "background":
+                  zIndex: "5",
+                  background:
                     "linear-gradient(50deg, rgba(15,90,224,0.92) 0%, rgba(116,0,186,0.92) 100%)",
                 }}
               ></div>
@@ -486,7 +484,7 @@ export default () => {
                 data-paddingright="[0,0,0,0]"
                 data-paddingbottom="[0,0,0,0]"
                 data-paddingleft="[0,0,0,0]"
-                style={{ "z-index": "6" }}
+                style={{ zIndex: "6" }}
               >
                 <img
                   src="/img/demo_shop_trendy/images/940ba-brk_slide_element-1.png"
@@ -494,7 +492,7 @@ export default () => {
                   data-ww="['100%','100%','100%','100%']"
                   data-hh=""
                   data-no-retina
-                />{" "}
+                />
               </div>
               <div
                 className="tp-caption tp-resizeme rs-parallaxlevel-3"
@@ -516,7 +514,7 @@ export default () => {
                 data-paddingright="[0,0,0,0]"
                 data-paddingbottom="[0,0,0,0]"
                 data-paddingleft="[0,0,0,0]"
-                style={{ "z-index": "7" }}
+                style={{ zIndex: "7" }}
               >
                 <img
                   src="/img/demo_shop_trendy/images/5b275-brk_slide_element-4.png"
@@ -546,7 +544,7 @@ export default () => {
                 data-paddingright="[0,0,0,0]"
                 data-paddingbottom="[0,0,0,0]"
                 data-paddingleft="[0,0,0,0]"
-                style={{ "z-index": "8" }}
+                style={{ zIndex: "8" }}
               >
                 <img
                   src="/img/demo_shop_trendy/images/8b295-brk_slide_element-5.png"
@@ -576,7 +574,7 @@ export default () => {
                 data-paddingright="[0,0,0,0]"
                 data-paddingbottom="[0,0,0,0]"
                 data-paddingleft="[0,0,0,0]"
-                style={{ "z-index": "9" }}
+                style={{ zIndex: "9" }}
               >
                 <img
                   src="/img/demo_shop_trendy/images/e7f74-brk_slide_element-6.png"
@@ -584,7 +582,7 @@ export default () => {
                   data-ww="['295auto','295auto','295auto','295auto']"
                   data-hh="['295px','295px','295px','295px']"
                   data-no-retina
-                />{" "}
+                />
               </div>
               <div
                 className="tp-caption tp-resizeme"
@@ -604,7 +602,7 @@ export default () => {
                 data-paddingright="[0,0,0,0]"
                 data-paddingbottom="[0,0,0,0]"
                 data-paddingleft="[0,0,0,0]"
-                style={{ "z-index": "10" }}
+                style={{ zIndex: "10" }}
               >
                 <img
                   src="/img/demo_shop_trendy/images/77913-brk_slide_element-2.png"
@@ -673,17 +671,17 @@ export default () => {
                 data-paddingbottom="[0,0,0,0]"
                 data-paddingleft="[0,0,0,0]"
                 style={{
-                  "z-index": "11",
-                  "min-width": "685px",
-                  "max-width": "685px",
-                  "max-width": "196px",
-                  "max-width": "196px",
-                  "white-space": "normal",
-                  "font-size": "20px",
-                  "line-height": "22px",
-                  "font-weight": "400",
+                  zIndex: "11",
+                  minWidth: "685px",
+                  maxWidth: "685px",
+                  maxWidth: "196px",
+                  maxWidth: "196px",
+                  whiteSpace: "normal",
+                  fontSize: "20px",
+                  lineHeight: "22px",
+                  fontWeight: "400",
                   color: "#ffffff",
-                  "letter-spacing": "0px",
+                  letterSpacing: "0px",
                 }}
               >
                 <div
@@ -708,7 +706,7 @@ export default () => {
                   data-paddingright="[0,0,0,0]"
                   data-paddingbottom="[0,0,0,0]"
                   data-paddingleft="[0,0,0,0]"
-                  style={{ "z-index": "12" }}
+                  style={{ zIndex: "12" }}
                 >
                   <img
                     src="/img/demo_shop_trendy/images/805f9-brk_slide_element-3.png"
@@ -743,32 +741,30 @@ export default () => {
                   data-paddingbottom="[0,0,0,0]"
                   data-paddingleft="[0,0,0,0]"
                   style={{
-                    "z-index": "13",
-                    "min-width": "682px",
-                    "max-width": "682px",
-                    "white-space": "normal",
-                    "font-size": "72px",
-                    "line-height": "78px",
-                    "font-weight": "300",
+                    zIndex: "13",
+                    minWidth: "682px",
+                    maxWidth: "682px",
+                    whiteSpace: "normal",
+                    fontSize: "72px",
+                    lineHeight: "78px",
+                    fontWeight: "300",
                     color: "#ffffff",
-                    "letter-spacing": "0px",
-                    "font-family": "Montserrat",
-                    "text-transform": "uppercase",
+                    letterSpacing: "0px",
+                    fontFamily: "Montserrat",
+                    textTransform: "uppercase",
                   }}
                 >
                   Save{" "}
                   <span
                     style={{
                       color: "#3e2acd",
-                      "font-weight": "200",
-                      "margin-left": "35px",
+                      fontWeight: "200",
+                      marginLeft: "35px",
                     }}
                   >
                     30%
                   </span>
-                  <div
-                    style={{ "font-weight": "700", "font-family": "Open Sans" }}
-                  >
+                  <div style={{ fontWeight: "700", fontFamily: "Open Sans" }}>
                     only this week
                   </div>
                 </div>
@@ -796,17 +792,17 @@ export default () => {
                 data-paddingbottom="[0,0,0,0]"
                 data-paddingleft="[0,0,0,0]"
                 style={{
-                  "z-index": "14",
-                  "min-width": "252px",
-                  "max-width": "252px",
-                  "max-width": "83px",
-                  "max-width": "83px",
-                  "white-space": "nowrap",
-                  "font-size": "20px",
-                  "line-height": "22px",
-                  "font-weight": "400",
+                  zIndex: "14",
+                  minWidth: "252px",
+                  maxWidth: "252px",
+                  maxWidth: "83px",
+                  maxWidth: "83px",
+                  whiteSpace: "nowrap",
+                  fontSize: "20px",
+                  lineHeight: "22px",
+                  fontWeight: "400",
                   color: "#ffffff",
-                  "letter-spacing": "0px",
+                  letterSpacing: "0px",
                 }}
               >
                 <a
@@ -837,18 +833,18 @@ export default () => {
                   data-paddingbottom="[20,20,20,19]"
                   data-paddingleft="[20,20,20,18]"
                   style={{
-                    "z-index": "15",
-                    "white-space": "nowrap",
-                    "font-size": "20px",
-                    "line-height": "22px",
-                    "font-weight": "400",
+                    zIndex: "15",
+                    whiteSpace: "nowrap",
+                    fontSize: "20px",
+                    lineHeight: "22px",
+                    fontWeight: "400",
                     color: "#2775ff",
-                    "letter-spacing": "0px",
-                    "font-family": "Open Sans",
-                    "background-color": "rgb(255,255,255)",
-                    "border-radius": "40px 40px 40px 40px",
+                    letterSpacing: "0px",
+                    fontFamily: "Open Sans",
+                    backgroundColor: "rgb(255,255,255)",
+                    borderRadius: "40px 40px 40px 40px",
                     cursor: "pointer",
-                    "text-decoration": "none",
+                    textDecoration: "none",
                   }}
                 >
                   <i className="fas fa-shopping-basket"></i>{" "}
@@ -878,15 +874,15 @@ export default () => {
                   data-paddingbottom="[0,0,0,0]"
                   data-paddingleft="[0,0,0,0]"
                   style={{
-                    "z-index": "16",
-                    "white-space": "nowrap",
-                    "font-size": "28px",
-                    "line-height": "30px",
-                    "font-weight": "700",
+                    zIndex: "16",
+                    whiteSpace: "nowrap",
+                    fontSize: "28px",
+                    lineHeight: "30px",
+                    fontWeight: "700",
                     color: "#ffffff",
-                    "letter-spacing": "0px",
-                    "font-family": "Open Sans",
-                    "text-transform": "uppercase",
+                    letterSpacing: "0px",
+                    fontFamily: "Open Sans",
+                    textTransform: "uppercase",
                   }}
                 >
                   Buy now{" "}
@@ -915,14 +911,14 @@ export default () => {
                   data-paddingbottom="[0,0,0,0]"
                   data-paddingleft="[0,0,0,0]"
                   style={{
-                    "z-index": "17",
-                    "white-space": "nowrap",
-                    "font-size": "16px",
-                    "line-height": "18px",
-                    "font-weight": "700",
+                    zIndex: "17",
+                    whiteSpace: "nowrap",
+                    fontSize: "16px",
+                    lineHeight: "18px",
+                    fontWeight: "700",
                     color: "#69adff",
-                    "letter-spacing": "0px",
-                    "font-family": "Open Sans",
+                    letterSpacing: "0px",
+                    fontFamily: "Open Sans",
                   }}
                 >
                   <i className="fa-icon-instagram"></i> berserk{" "}
@@ -951,17 +947,17 @@ export default () => {
                 data-paddingbottom="[0,0,0,0]"
                 data-paddingleft="[0,0,0,0]"
                 style={{
-                  "z-index": "18",
-                  "min-width": "270px",
-                  "max-width": "270px",
-                  "max-width": "217px",
-                  "max-width": "217px",
-                  "white-space": "nowrap",
-                  "font-size": "20px",
-                  "line-height": "22px",
-                  "font-weight": "400",
+                  zIndex: "18",
+                  minWidth: "270px",
+                  maxWidth: "270px",
+                  maxWidth: "217px",
+                  maxWidth: "217px",
+                  whiteSpace: "nowrap",
+                  fontSize: "20px",
+                  lineHeight: "22px",
+                  fontWeight: "400",
                   color: "#ffffff",
-                  "letter-spacing": "0px",
+                  letterSpacing: "0px",
                 }}
               >
                 <div
@@ -989,14 +985,14 @@ export default () => {
                   data-paddingbottom="[0,0,0,0]"
                   data-paddingleft="[0,0,0,0]"
                   style={{
-                    "z-index": "19",
-                    "white-space": "nowrap",
-                    "font-size": "136px",
-                    "line-height": "140px",
-                    "font-weight": "700",
+                    zIndex: "19",
+                    whiteSpace: "nowrap",
+                    fontSize: "136px",
+                    lineHeight: "140px",
+                    fontWeight: "700",
                     color: "#ffffff",
-                    "letter-spacing": "0px",
-                    "font-family": "Montserrat",
+                    letterSpacing: "0px",
+                    fontFamily: "Montserrat",
                   }}
                 >
                   $39
@@ -1026,15 +1022,15 @@ export default () => {
                   data-paddingbottom="[0,0,0,0]"
                   data-paddingleft="[0,0,0,0]"
                   style={{
-                    "z-index": "20",
-                    "white-space": "nowrap",
-                    "font-size": "40px",
-                    "line-height": "42px",
-                    "font-weight": "300",
+                    zIndex: "20",
+                    whiteSpace: "nowrap",
+                    fontSize: "40px",
+                    lineHeight: "42px",
+                    fontWeight: "300",
                     color: "#ffffff",
-                    "letter-spacing": "0px",
-                    "font-family": "Open Sans",
-                    "text-transform": "uppercase",
+                    letterSpacing: "0px",
+                    fontFamily: "Open Sans",
+                    textTransform: "uppercase",
                   }}
                 >
                   For <span style={{ color: "#b88eff" }}>7 Days</span>{" "}
@@ -1061,7 +1057,7 @@ export default () => {
                 data-paddingbottom="[0,0,0,0]"
                 data-paddingleft="[0,0,0,0]"
                 style={{
-                  "z-index": "5",
+                  zIndex: "5",
                   background:
                     "linear-gradient(50deg, rgba(15,90,224,0.92) 0%, rgba(116,0,186,0.92) 100%)",
                 }}
@@ -1086,7 +1082,7 @@ export default () => {
                 data-paddingright="[0,0,0,0]"
                 data-paddingbottom="[0,0,0,0]"
                 data-paddingleft="[0,0,0,0]"
-                style={{ "z-index": "6" }}
+                style={{ zIndex: "6" }}
               >
                 <img
                   src="/img/demo_shop_trendy/images/940ba-brk_slide_element-1.png"
@@ -1116,7 +1112,7 @@ export default () => {
                 data-paddingright="[0,0,0,0]"
                 data-paddingbottom="[0,0,0,0]"
                 data-paddingleft="[0,0,0,0]"
-                style={{ "z-index": "7" }}
+                style={{ zIndex: "7" }}
               >
                 <img
                   src="/img/demo_shop_trendy/images/5b275-brk_slide_element-4.png"
@@ -1146,7 +1142,7 @@ export default () => {
                 data-paddingright="[0,0,0,0]"
                 data-paddingbottom="[0,0,0,0]"
                 data-paddingleft="[0,0,0,0]"
-                style={{ "z-index": "8" }}
+                style={{ zIndex: "8" }}
               >
                 <img
                   src="/img/demo_shop_trendy/images/8b295-brk_slide_element-5.png"
@@ -1176,7 +1172,7 @@ export default () => {
                 data-paddingright="[0,0,0,0]"
                 data-paddingbottom="[0,0,0,0]"
                 data-paddingleft="[0,0,0,0]"
-                style={{ "z-index": "9" }}
+                style={{ zIndex: "9" }}
               >
                 <img
                   src="/img/demo_shop_trendy/images/e7f74-brk_slide_element-6.png"
@@ -1204,7 +1200,7 @@ export default () => {
                 data-paddingright="[0,0,0,0]"
                 data-paddingbottom="[0,0,0,0]"
                 data-paddingleft="[0,0,0,0]"
-                style={{ "z-index": "10" }}
+                style={{ zIndex: "10" }}
               >
                 <img
                   src="/img/demo_shop_trendy/images/dfa1f-brk_slide_element-7.png"
@@ -1222,8 +1218,6 @@ export default () => {
           ></div>
         </div>
       </div>
-
     </>
- 
- );
+  );
 };

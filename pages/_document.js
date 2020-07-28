@@ -15,7 +15,8 @@ class MyDocument extends Document {
       <Html>
         <Head>
           <style>{`body { margin: 0 } /* custom! */`}</style>
-          <script defer="defer" src="/js/scripts.min.js"></script>
+
+          <script defer="defer" src="/js/scripts.js"></script>
           <script
             defer="defer"
             src="vendor/revslider/js/jquery.themepunch.tools.min.js"

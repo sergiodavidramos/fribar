@@ -2,11 +2,9 @@ import Head from "next/head";
 import Loader from "../components/Loader";
 import Header from "../components/Header";
 import Carrousel from "../components/Carrousel";
-import $, { extend } from "jquery";
 
 export default class hola extends React.Component {
   componentDidMount() {
-    console.log("asdasdas", jQuery);
     jQuery("#rev_slider_5_1")
       .show()
       .revolution({
@@ -87,7 +85,7 @@ export default class hola extends React.Component {
       <>
         <Head>
           <title>FriFolly</title>
-          <meta charset="utf-8" />
+          <meta charSet="utf-8" />
           <meta
             name="viewport"
             content="width=device-width,height=device-height,initial-scale=1,maximum-scale=1"
@@ -100,100 +98,56 @@ export default class hola extends React.Component {
             content="themeforest, theme, html, template"
           />
           <meta property="og:title" content="My page title" key="title" />
-          <link
-            rel="stylesheet"
-            id="brk-direction-bootstrap"
-            href="/css/assets/bootstrap.css"
-          />
-          <link
+          {/* <link
             id="brk-css-min"
             rel="stylesheet"
             href="/css/assets/styles.min.css"
-          />
+          /> */}
           <link
             rel="stylesheet"
             href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
             integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
-            crossorigin="anonymous"
+            crossOrigin="anonymous"
           />
-          <link
-            rel="stylesheet"
-            id="brk-skin-color"
-            href="/css/skins/brk-blue.css"
-          />
-          <link
-            id="brk-base-color"
-            rel="stylesheet"
-            href="/css/skins/brk-base-color.css"
-          />
-          <link
-            rel="stylesheet"
-            id="brk-direction-offsets"
-            href="/css/assets/offsets.css"
-          ></link>
           <link
             rel="stylesheet"
             href="/vendor/revslider/css/settings.css"
           ></link>
+          <link
+            rel="stylesheet"
+            type="text/css"
+            href="/vendor/semantic/semantic.min.css"
+          ></link>
+          <link
+            href="/vendor/fontawesome-free/css/all.min.css"
+            rel="stylesheet"
+          />
+          <link
+            href="/vendor/OwlCarousel/assets/owl.carousel.css"
+            rel="stylesheet"
+          />
+          <link
+            href="/vendor/OwlCarousel/assets/owl.theme.default.min.css"
+            rel="stylesheet"
+          />
+          <link
+            href="/vendor/bootstrap/css/bootstrap.min.css"
+            rel="stylesheet"
+          />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+          />
+          <link
+            href="/vendor/unicons-2.0.1/css/unicons.css"
+            rel="stylesheet"
+          ></link>
+          <link href="/css/style.css" rel="stylesheet"></link>
+          <link href="/css/responsive.css" rel="stylesheet" />
+          <link href="/css/night-mode.css" rel="stylesheet" />
         </Head>
-
-        <div className="main-page">
-          <div
-            className="brk-header-mobile"
-            data-brk-library="component__header"
-          >
-            <div className="brk-header-mobile__open ">
-              <span></span>
-            </div>
-            <div className="brk-header-mobile__logo">
-              <a href="#">
-                <img src="img/logo-2.png" alt="" />
-              </a>
-            </div>
-          </div>
-        </div>
-
         <Header />
-        <Carrousel />
-        <style jsx>{`
-          #rev_slider_5_1_wrapper .tp-loader.spinner2 {
-            background-color: #0071fc !important;
-          }
-        `}</style>
-
-        {/* <script defer="defer" src="/js/scripts.min.js"></script> */}
-        {/* <script
-          defer="defer"
-          src="/vendor/revslider/js/jquery.themepunch.tools.min.js"
-        ></script>
-        <script
-          defer="defer"
-          src="/vendor/revslider/js/jquery.themepunch.revolution.min.js"
-        ></script> */}
-        <script
-          defer="defer"
-          src="/vendor/revslider/js/extensions/revolution.extension.layeranimation.min.js"
-        ></script>
-        <script
-          defer="defer"
-          src="/vendor/revslider/js/extensions/revolution.extension.navigation.min.js"
-        ></script>
-        <script
-          defer="defer"
-          src="/vendor/revslider/js/extensions/revolution.extension.parallax.min.js"
-        ></script>
-        <script
-          defer="defer"
-          src="/vendor/revslider/js/extensions/revolution.extension.slideanims.min.js"
-        ></script>
-        <script
-          defer="defer"
-          src="/vendor/revslider/js/extensions/revolution.extension.actions.min.js"
-        ></script>
-
-        {/* <script> */}
-        {/* {console.log("hola", jQuery)} */}
-        {/* </script> */}
+        {/* <Carrousel /> */}
       </>
     );
   }
