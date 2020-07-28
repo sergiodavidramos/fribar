@@ -461,7 +461,7 @@ export default () => {
                 style={{
                   zIndex: "5",
                   background:
-                    "linear-gradient(50deg, rgba(15,90,224,0.92) 0%, rgba(116,0,186,0.92) 100%)",
+                    "linear-gradient(50deg, rgba(108,86,123,0.50) 0%, rgba(116,0,186,0.92) 100%)",
                 }}
               ></div>
               <div

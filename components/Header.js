@@ -5,16 +5,16 @@ import CartSidebar from "./CartSidebar";
 export default () => {
   return (
     <>
-      {/* <ModelCategory />
-      <SearchModel /> */}
+      <ModelCategory />
+      <SearchModel />
       <CartSidebar />
-      {/* <!-- Header Start --> */}
+
       <header className="header clearfix">
         <div className="top-header-group">
           <div className="top-header">
             <div className="res_main_logo">
               <a href="index.html">
-                <img src="images/dark-logo-1.svg" alt="" />
+                <img src="/images/dark-logo-1.svg" alt="" />
               </a>
             </div>
             <div className="main_logo" id="logo">
@@ -24,7 +24,7 @@ export default () => {
               <a href="index.html">
                 <img
                   className="logo-inverse"
-                  src="images/dark-logo.svg"
+                  src="/images/dark-logo.svg"
                   alt=""
                 />
               </a>
@@ -41,6 +41,8 @@ export default () => {
                     <i className="uil uil-location-point"></i>
                     Gurugram
                   </div>
+                 
+                 
                   <div className="item channel_item">
                     <i className="uil uil-location-point"></i>
                     New Delhi
@@ -70,6 +72,7 @@ export default () => {
                     Chandigrah
                   </div>
                 </div>
+           
               </div>
             </div>
             <div className="search120">

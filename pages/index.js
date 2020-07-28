@@ -41,8 +41,8 @@ export default class hola extends React.Component {
             },
           },
         },
-        responsiveLevels: [1240, 1024, 778, 480],
-        visibilityLevels: [1240, 1024, 778, 480],
+        responsiveLevels: [576, 480, 480, 480],
+        visibilityLevels: [576, 576, 576, 480],
         gridwidth: [1200, 992, 768, 576],
         gridheight: [960, 768, 960, 720],
         lazyType: "none",
@@ -98,11 +98,6 @@ export default class hola extends React.Component {
             content="themeforest, theme, html, template"
           />
           <meta property="og:title" content="My page title" key="title" />
-          {/* <link
-            id="brk-css-min"
-            rel="stylesheet"
-            href="/css/assets/styles.min.css"
-          /> */}
           <link
             rel="stylesheet"
             href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
@@ -138,16 +133,18 @@ export default class hola extends React.Component {
             href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap"
             rel="stylesheet"
           />
-          <link
-            href="/vendor/unicons-2.0.1/css/unicons.css"
-            rel="stylesheet"
-          ></link>
+          <link href="/vendor/unicons-2.0.1/css/unicons.css" rel="stylesheet" />
           <link href="/css/style.css" rel="stylesheet"></link>
           <link href="/css/responsive.css" rel="stylesheet" />
           <link href="/css/night-mode.css" rel="stylesheet" />
         </Head>
+        <div>
+            
         <Header />
-        {/* <Carrousel /> */}
+        <Carrousel />
+        <h1>asdasd</h1><br/>
+        <h1>asdasdasd</h1>
+        </div>
       </>
     );
   }
