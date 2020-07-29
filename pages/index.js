@@ -2,8 +2,13 @@ import Head from "next/head";
 import Loader from "../components/Loader";
 import Header from "../components/Header";
 import Carrousel from "../components/Carrousel";
+import Banner from "../components/Banner";
+import Categories from "../components/Categories";
+import Destacados from "../components/Destacados";
+import MejoresValores from "../components/MejoresValores";
+import Footer from "../components/Footer";
 
-export default class hola extends React.Component {
+export default class Home extends React.Component {
   componentDidMount() {
     jQuery("#rev_slider_5_1")
       .show()
@@ -138,13 +143,18 @@ export default class hola extends React.Component {
           <link href="/css/responsive.css" rel="stylesheet" />
           <link href="/css/night-mode.css" rel="stylesheet" />
         </Head>
-        <div>
-            
+
         <Header />
         <Carrousel />
-        <h1>asdasd</h1><br/>
-        <h1>asdasdasd</h1>
+        <div className="wrapper">
+          <Banner />
+          <Categories />
+          <Destacados />
+          <MejoresValores />
+          <Destacados />
+          <Destacados />
         </div>
+        <Footer />
       </>
     );
   }
