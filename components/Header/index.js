@@ -41,8 +41,7 @@ export default () => {
                     <i className="uil uil-location-point"></i>
                     Gurugram
                   </div>
-                 
-                 
+
                   <div className="item channel_item">
                     <i className="uil uil-location-point"></i>
                     New Delhi
@@ -72,7 +71,6 @@ export default () => {
                     Chandigrah
                   </div>
                 </div>
-           
               </div>
             </div>
             <div className="search120">

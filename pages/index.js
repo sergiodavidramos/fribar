@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Loader from "../components/Loader";
 import Header from "../components/Header";
 import Carrousel from "../components/Carrousel";
 import Banner from "../components/Banner";
@@ -103,45 +102,6 @@ export default class Home extends React.Component {
             content="themeforest, theme, html, template"
           />
           <meta property="og:title" content="My page title" key="title" />
-          <link
-            rel="stylesheet"
-            href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
-            integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
-            crossOrigin="anonymous"
-          />
-          <link
-            rel="stylesheet"
-            href="/vendor/revslider/css/settings.css"
-          ></link>
-          <link
-            rel="stylesheet"
-            type="text/css"
-            href="/vendor/semantic/semantic.min.css"
-          ></link>
-          <link
-            href="/vendor/fontawesome-free/css/all.min.css"
-            rel="stylesheet"
-          />
-          <link
-            href="/vendor/OwlCarousel/assets/owl.carousel.css"
-            rel="stylesheet"
-          />
-          <link
-            href="/vendor/OwlCarousel/assets/owl.theme.default.min.css"
-            rel="stylesheet"
-          />
-          <link
-            href="/vendor/bootstrap/css/bootstrap.min.css"
-            rel="stylesheet"
-          />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap"
-            rel="stylesheet"
-          />
-          <link href="/vendor/unicons-2.0.1/css/unicons.css" rel="stylesheet" />
-          <link href="/css/style.css" rel="stylesheet"></link>
-          <link href="/css/responsive.css" rel="stylesheet" />
-          <link href="/css/night-mode.css" rel="stylesheet" />
         </Head>
 
         <Header />

@@ -1865,6 +1865,10 @@ i.icon1 {
   padding-top: 0px;
   padding-bottom: 50px;
 }
+.wrapper-single{
+    padding-top: 128px;
+    padding-bottom: 50px;
+}
 
 .wrapper-blog {
   padding-top: 60px !important;

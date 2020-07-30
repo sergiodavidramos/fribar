@@ -14,6 +14,46 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          <link href="/css/style.css" rel="stylesheet"></link>
+          <link href="/vendor/unicons-2.0.1/css/unicons.css" rel="stylesheet" />
+          <link href="/css/responsive.css" rel="stylesheet" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+          />
+          <link
+            href="/vendor/fontawesome-free/css/all.min.css"
+            rel="stylesheet"
+          />
+          <link
+            rel="stylesheet"
+            type="text/css"
+            href="/vendor/semantic/semantic.min.css"
+          ></link>
+          <link
+            href="/vendor/bootstrap/css/bootstrap.min.css"
+            rel="stylesheet"
+          />
+          <link href="/css/night-mode.css" rel="stylesheet" />
+          <link
+            rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+            integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="stylesheet"
+            href="/vendor/revslider/css/settings.css"
+          ></link>
+
+          <link
+            href="/vendor/OwlCarousel/assets/owl.carousel.css"
+            rel="stylesheet"
+          />
+          <link
+            href="/vendor/OwlCarousel/assets/owl.theme.default.min.css"
+            rel="stylesheet"
+          />
           <style>{`body { margin: 0 } /* custom! */`}</style>
 
           <script defer="defer" src="/js/scripts.js"></script>
