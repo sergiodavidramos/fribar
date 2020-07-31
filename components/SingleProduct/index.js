@@ -103,19 +103,19 @@ export default () => (
                               <div className="quantity buttons_added">
                                 <input
                                   type="button"
-                                  value="-"
+                                  defaultValue="-"
                                   className="minus minus-btn"
                                 />
                                 <input
                                   type="number"
                                   step="1"
                                   name="quantity"
-                                  value="1"
+                                  defaultValue="1"
                                   className="input-text qty text"
                                 />
                                 <input
                                   type="button"
-                                  value="+"
+                                  defaultValue="+"
                                   className="plus plus-btn"
                                 />
                               </div>
@@ -221,19 +221,19 @@ export default () => (
                         <div className="quantity buttons_added">
                           <input
                             type="button"
-                            value="-"
+                            defaultValue="-"
                             className="minus minus-btn"
                           />
                           <input
                             type="number"
                             step="1"
                             name="quantity"
-                            value="1"
+                            defaultValue="1"
                             className="input-text qty text"
                           />
                           <input
                             type="button"
-                            value="+"
+                            defaultValue="+"
                             className="plus plus-btn"
                           />
                         </div>
@@ -273,19 +273,19 @@ export default () => (
                         <div className="quantity buttons_added">
                           <input
                             type="button"
-                            value="-"
+                            defaultValue="-"
                             className="minus minus-btn"
                           />
                           <input
                             type="number"
                             step="1"
                             name="quantity"
-                            value="1"
+                            defaultValue="1"
                             className="input-text qty text"
                           />
                           <input
                             type="button"
-                            value="+"
+                            defaultValue="+"
                             className="plus plus-btn"
                           />
                         </div>
@@ -324,19 +324,19 @@ export default () => (
                         <div className="quantity buttons_added">
                           <input
                             type="button"
-                            value="-"
+                            defaultValue="-"
                             className="minus minus-btn"
                           />
                           <input
                             type="number"
                             step="1"
                             name="quantity"
-                            value="1"
+                            defaultValue="1"
                             className="input-text qty text"
                           />
                           <input
                             type="button"
-                            value="+"
+                            defaultValue="+"
                             className="plus plus-btn"
                           />
                         </div>

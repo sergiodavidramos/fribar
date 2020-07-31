@@ -34,6 +34,7 @@ class MyDocument extends Document {
             href="/vendor/bootstrap/css/bootstrap.min.css"
             rel="stylesheet"
           />
+          <link href="/css/step-wizard.css" rel="stylesheet" />
           <link href="/css/night-mode.css" rel="stylesheet" />
           <link
             rel="stylesheet"
@@ -54,6 +55,7 @@ class MyDocument extends Document {
             href="/vendor/OwlCarousel/assets/owl.theme.default.min.css"
             rel="stylesheet"
           />
+
           <style>{`body { margin: 0 } /* custom! */`}</style>
 
           <script defer="defer" src="/js/scripts.js"></script>
@@ -76,6 +78,7 @@ class MyDocument extends Document {
           <script src="/vendor/semantic/semantic.min.js"></script>
           <script src="/js/jquery.countdown.min.js"></script>
           <script src="/js/custom.js"></script>
+          <script src="/js/product.thumbnail.slider.js"></script>
           <script src="/js/offset_overlay.js"></script>
           <script src="/js/night-mode.js"></script>
         </body>

@@ -6,7 +6,6 @@ export default () => (
   <>
     <Head>
       <title>Login</title>
-      <link href="/css/step-wizard.css" rel="stylesheet"></link>
     </Head>
     <Header />
     <div className="sign-inup">

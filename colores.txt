@@ -1,0 +1,50 @@
+rgba(255,90,0,0.6)
+Dark Grey: #393939 – Dark designs take a little bit more fore-thought but can provide tons of contrast if used well. 
+
+Deep Orange: #FF5A09 – With different shades of oranges, there is depth and gradient, without venturing into totally new colors. 
+
+Light Orange: #ec7f37 – Utilizing illustrative elements, requires a bit of flexibility for the natural lightness and darkness to contour objects. 
+
+Orange Yellow: #be4f0c – Using on color over on the color wheel can keep the palette looking classy, bold, and restrained.
+
+primero
+2f2519
+4a3f35
+fa7d09
+ff4301
+
+segundo
+d92027
+ff9234
+ffcd3c
+35d0ba
+
+tercero
+f8f3eb
+c3edea
+fc7e2f
+f40552
+
+cuarto
+511845
+900c3f
+c70039
+ff5733	
+
+quinto
+d63447
+f57b51
+f6eedf
+d1cebd
+
+sexto
+3ec1d3
+f6f7d7
+ff9a00
+ff165d
+
+septimo
+303841
+00adb5
+eeeeee
+ff5722
