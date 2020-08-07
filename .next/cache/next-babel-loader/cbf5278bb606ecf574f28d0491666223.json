@@ -1,1 +1,0 @@
-{"ast":null,"code":"export default (function () {\n  return hola;\n});","map":{"version":3,"sources":["E:/proyecto-frifolly/frifolly-frontend/components/Header/Account.js"],"names":["hola"],"mappings":"AAAA,gBAAc;AAAA,SACRA,IADQ;AAAA,CAAd","sourcesContent":["export default()=>(\r\n      hola\r\n)"]},"metadata":{},"sourceType":"module"}

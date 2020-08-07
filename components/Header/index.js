@@ -13,7 +13,7 @@ export default () => {
         <div className="top-header-group">
           <div className="top-header">
             <div className="res_main_logo">
-              <a href="index.html">
+              <a href="index    .html">
                 <img src="/images/dark-logo-1.svg" alt="" />
               </a>
             </div>
@@ -73,6 +73,7 @@ export default () => {
                 </div>
               </div>
             </div>
+
             <div className="search120">
               <div className="ui search">
                 <div className="ui left icon input swdh10">
@@ -398,13 +399,12 @@ export default () => {
                 data-target="#search_model"
                 title="Search"
               >
-                {/* <i className="uil uil-search"></i> */}
+                <i className="uil uil-search"></i>
               </a>
             </div>
           </div>
         </div>
       </header>
-      {/* <!-- Header End --> */}
     </>
   );
 };

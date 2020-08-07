@@ -58,7 +58,6 @@ class MyDocument extends Document {
 
           <style>{`body { margin: 0 } /* custom! */`}</style>
 
-          <script defer="defer" src="/js/scripts.js"></script>
           <script
             defer="defer"
             src="vendor/revslider/js/jquery.themepunch.tools.min.js"
@@ -67,12 +66,13 @@ class MyDocument extends Document {
             defer="defer"
             src="vendor/revslider/js/jquery.themepunch.revolution.min.js"
           ></script>
+          <script src="/js/jquery-3.3.1.min.js"></script>
+          <script src="/js/prueba.js" />
         </Head>
         <body className="custom_class">
           <Main />
           <NextScript />
 
-          <script src="/js/jquery-3.3.1.min.js"></script>
           <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
           <script src="/vendor/OwlCarousel/owl.carousel.js"></script>
           <script src="/vendor/semantic/semantic.min.js"></script>
@@ -81,6 +81,7 @@ class MyDocument extends Document {
           <script src="/js/product.thumbnail.slider.js"></script>
           <script src="/js/offset_overlay.js"></script>
           <script src="/js/night-mode.js"></script>
+          <script src="/js/scripts.js"></script>
         </body>
       </Html>
     );
