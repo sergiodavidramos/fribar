@@ -5,8 +5,8 @@ export default () => (
         <div className="col-md-12">
           <div className="main-title-tt">
             <div className="main-title-left">
-              <span>Offers</span>
-              <h2>Best Values</h2>
+              <span>Ofertas</span>
+              <h2>Mejores Valores</h2>
             </div>
           </div>
         </div>

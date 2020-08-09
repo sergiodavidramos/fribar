@@ -54,7 +54,7 @@
  Google Fonts
 ===================================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,900&display=swap'),
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,900&display=swap');
   html,
   body,
   div,
@@ -523,7 +523,7 @@ input[type=text] {
 
 .main_logo {
   float: left;
-  width: 125px;
+  width: 200px;
   margin-left: 10px;
 }
 
@@ -548,7 +548,7 @@ input[type=text] {
 
 .res_main_logo {
   display: none;
-  width: 45px;
+  width: 70px;
 }
 
 .res_main_logo img {
@@ -660,6 +660,10 @@ i.icon1 {
   text-align: center;
   line-height: 1.5;
   border-radius: 100%;
+}
+.cart-count{
+    background: #f69733;
+    border-radius: 100%;
 }
 
 .opts_account {
@@ -968,11 +972,13 @@ i.icon1 {
 
 .header_cart {
   margin-left: auto;
+  width: 14rem;
+  margin-right: -25px;
 }
 
 .cart__btn {
   color: #fff !important;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   background: #f55d2c;
   padding: 25px 30px;
@@ -1968,7 +1974,7 @@ i.icon1 {
 /* --- Slider Category --- */
 
 .section145 {
-  padding: 47px 0 0;
+  padding: 10px 0 0;
   width: 100%;
   display: block;
 }
@@ -6756,3 +6762,6 @@ textarea {
   font-weight: 500;
   display: inline-block;
 }
+/* .banner-ofertas{
+    margin-top: 200px;
+} */

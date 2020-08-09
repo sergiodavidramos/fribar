@@ -4,6 +4,11 @@
     margin-left: 5px !important;
     width: 110px !important;
   }
+  .header_cart {
+    margin-left: auto;
+    width: 14rem;
+    margin-right: -89px;
+  }
 
   .search120 {
     display: none;
@@ -322,7 +327,6 @@
   .main_logo {
     margin-left: 10px !important;
   }
-
   .search120 {
     display: none;
     margin-left: 0 !important;
@@ -720,6 +724,9 @@
 
   .menu.dropdown_account {
     z-index: 9999 !important;
+  }
+  .category_drop {
+    font-size: 12px;
   }
 }
 

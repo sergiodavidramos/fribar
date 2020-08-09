@@ -1,6 +1,9 @@
 import ModelCategory from "./ModelCategory";
 import SearchModel from "./SearchModel";
 import CartSidebar from "./CartSidebar";
+import Logo from "./Logo";
+import LogoHorizontal from "./LogoHorizontal";
+import Location from "./Location";
 
 export default () => {
   return (
@@ -13,63 +16,29 @@ export default () => {
         <div className="top-header-group">
           <div className="top-header">
             <div className="res_main_logo">
-              <a href="index    .html">
+              <a href="/">
                 <img src="/images/dark-logo-1.svg" alt="" />
+                <Logo />
               </a>
             </div>
             <div className="main_logo" id="logo">
-              <a href="index.html">
-                <img src="images/logo.svg" alt="" />
-              </a>
-              <a href="index.html">
-                <img
-                  className="logo-inverse"
-                  src="/images/dark-logo.svg"
-                  alt=""
-                />
+              <a href="/">
+                {/* <img src="images/logo.svg" alt="" /> */}
+                <LogoHorizontal />
               </a>
             </div>
             <div className="select_location">
               <div className="ui inline dropdown loc-title">
                 <div className="text">
                   <i className="uil uil-location-point"></i>
-                  Gurugram
+                  Potosí
                 </div>
                 <i className="uil uil-angle-down icon__14"></i>
                 <div className="menu dropdown_loc">
-                  <div className="item channel_item">
-                    <i className="uil uil-location-point"></i>
-                    Gurugram
-                  </div>
-
-                  <div className="item channel_item">
-                    <i className="uil uil-location-point"></i>
-                    New Delhi
-                  </div>
-                  <div className="item channel_item">
-                    <i className="uil uil-location-point"></i>
-                    Bangaluru
-                  </div>
-                  <div className="item channel_item">
-                    <i className="uil uil-location-point"></i>
-                    Mumbai
-                  </div>
-                  <div className="item channel_item">
-                    <i className="uil uil-location-point"></i>
-                    Hyderabad
-                  </div>
-                  <div className="item channel_item">
-                    <i className="uil uil-location-point"></i>
-                    Kolkata
-                  </div>
-                  <div className="item channel_item">
-                    <i className="uil uil-location-point"></i>
-                    Ludhiana
-                  </div>
-                  <div className="item channel_item">
-                    <i className="uil uil-location-point"></i>
-                    Chandigrah
-                  </div>
+                  <Location />
+                  <Location />
+                  <Location />
+                  <Location />
                 </div>
               </div>
             </div>
@@ -90,17 +59,17 @@ export default () => {
               <ul>
                 <li>
                   <a href="#" className="offer-link">
-                    <i className="uil uil-phone-alt"></i>1800-000-000
+                    <i className="uil uil-phone-alt"></i>65487706
                   </a>
                 </li>
                 <li>
                   <a href="offers.html" className="offer-link">
-                    <i className="uil uil-gift"></i>Offers
+                    <i className="uil uil-gift"></i>Ofertas
                   </a>
                 </li>
                 <li>
                   <a href="faq.html" className="offer-link">
-                    <i className="uil uil-question-circle"></i>Help
+                    <i className="uil uil-question-circle"></i>Ayuda
                   </a>
                 </li>
                 <li>
@@ -113,63 +82,67 @@ export default () => {
                     <span className="noti_count1">3</span>
                   </a>
                 </li>
-                <li className="ui dropdown">
-                  <a href="#" className="opts_account">
-                    <img src="images/avatar/img-5.jpg" alt="" />
-                    <span className="user__name">John Doe</span>
-                    <i className="uil uil-angle-down"></i>
-                  </a>
-                  <div className="menu dropdown_account">
-                    <div className="night_mode_switch__btn">
-                      <a href="#" id="night-mode" className="btn-night-mode">
-                        <i className="uil uil-moon"></i> Night mode
-                        <span className="btn-night-mode-switch">
-                          <span className="uk-switch-button"></span>
-                        </span>
+                {false ? (
+                  <li className="ui dropdown">
+                    <a href="#" className="opts_account">
+                      <img src="images/avatar/img-5.jpg" alt="" />
+                      <span className="user__name">Sergio David Ramos</span>
+                      <i className="uil uil-angle-down"></i>
+                    </a>
+                    <div className="menu dropdown_account">
+                      <div className="night_mode_switch__btn">
+                        <a href="#" id="night-mode" className="btn-night-mode">
+                          <i className="uil uil-moon"></i> Night mode
+                          <span className="btn-night-mode-switch">
+                            <span className="uk-switch-button"></span>
+                          </span>
+                        </a>
+                      </div>
+                      <a
+                        href="dashboard_overview.html"
+                        className="item channel_item"
+                      >
+                        <i className="uil uil-apps icon__1"></i>Dashbaord
+                      </a>
+                      <a
+                        href="dashboard_my_orders.html"
+                        className="item channel_item"
+                      >
+                        <i className="uil uil-box icon__1"></i>My Orders
+                      </a>
+                      <a
+                        href="dashboard_my_wishlist.html"
+                        className="item channel_item"
+                      >
+                        <i className="uil uil-heart icon__1"></i>My Wishlist
+                      </a>
+                      <a
+                        href="dashboard_my_wallet.html"
+                        className="item channel_item"
+                      >
+                        <i className="uil uil-usd-circle icon__1"></i>My Wallet
+                      </a>
+                      <a
+                        href="dashboard_my_addresses.html"
+                        className="item channel_item"
+                      >
+                        <i className="uil uil-location-point icon__1"></i>My
+                        Address
+                      </a>
+                      <a href="offers.html" className="item channel_item">
+                        <i className="uil uil-gift icon__1"></i>Offers
+                      </a>
+                      <a href="faq.html" className="item channel_item">
+                        <i className="uil uil-info-circle icon__1"></i>Faq
+                      </a>
+                      <a href="sign_in.html" className="item channel_item">
+                        <i className="uil uil-lock-alt icon__1"></i>Logout
                       </a>
                     </div>
-                    <a
-                      href="dashboard_overview.html"
-                      className="item channel_item"
-                    >
-                      <i className="uil uil-apps icon__1"></i>Dashbaord
-                    </a>
-                    <a
-                      href="dashboard_my_orders.html"
-                      className="item channel_item"
-                    >
-                      <i className="uil uil-box icon__1"></i>My Orders
-                    </a>
-                    <a
-                      href="dashboard_my_wishlist.html"
-                      className="item channel_item"
-                    >
-                      <i className="uil uil-heart icon__1"></i>My Wishlist
-                    </a>
-                    <a
-                      href="dashboard_my_wallet.html"
-                      className="item channel_item"
-                    >
-                      <i className="uil uil-usd-circle icon__1"></i>My Wallet
-                    </a>
-                    <a
-                      href="dashboard_my_addresses.html"
-                      className="item channel_item"
-                    >
-                      <i className="uil uil-location-point icon__1"></i>My
-                      Address
-                    </a>
-                    <a href="offers.html" className="item channel_item">
-                      <i className="uil uil-gift icon__1"></i>Offers
-                    </a>
-                    <a href="faq.html" className="item channel_item">
-                      <i className="uil uil-info-circle icon__1"></i>Faq
-                    </a>
-                    <a href="sign_in.html" className="item channel_item">
-                      <i className="uil uil-lock-alt icon__1"></i>Logout
-                    </a>
-                  </div>
-                </li>
+                  </li>
+                ) : (
+               'hola'
+                )}
               </ul>
             </div>
           </div>
@@ -185,7 +158,7 @@ export default () => {
                 title="Categories"
               >
                 <i className="uil uil-apps"></i>
-                <span className="cate__icon">Select Category</span>
+                <span className="cate__icon">Seleccionar Categoria</span>
               </a>
             </div>
             <nav className="navbar navbar-expand-lg navbar-light py-3">
@@ -208,7 +181,7 @@ export default () => {
                         className="nav-link active"
                         title="Home"
                       >
-                        Home
+                        Inicio
                       </a>
                     </li>
                     <li className="nav-item">
@@ -217,7 +190,7 @@ export default () => {
                         className="nav-link new_item"
                         title="New Products"
                       >
-                        New Products
+                        Nuevos Productos
                       </a>
                     </li>
                     <li className="nav-item">
@@ -226,13 +199,13 @@ export default () => {
                         className="nav-link"
                         title="Featured Products"
                       >
-                        Featured Products
+                        Productos Destacados
                       </a>
                     </li>
                     <li className="nav-item">
                       <div className="ui icon top left dropdown nav__menu">
                         <a className="nav-link" title="Pages">
-                          Pages <i className="uil uil-angle-down"></i>
+                          Paginas <i className="uil uil-angle-down"></i>
                         </a>
                         <div className="menu dropdown_page">
                           <a
@@ -361,7 +334,7 @@ export default () => {
                         className="nav-link"
                         title="Contact"
                       >
-                        Contact Us
+                        Contactanos
                       </a>
                     </li>
                   </ul>
@@ -376,7 +349,7 @@ export default () => {
                 data-target="#category_model"
                 title="Categories"
               >
-                {/* <i className="uil uil-apps"></i> */}
+                <i className="uil uil-apps"></i>
               </a>
             </div>
             <div className="header_cart order-1">
@@ -386,8 +359,8 @@ export default () => {
                 title="Cart"
               >
                 <i className="uil uil-shopping-cart-alt"></i>
-                <span>Cart</span>
-                <ins>2</ins>
+                <span>Carrito</span>
+                <ins className="cart-count">2</ins>
                 <i className="uil uil-angle-down"></i>
               </a>
             </div>

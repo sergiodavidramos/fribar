@@ -1,0 +1,1 @@
+{"code":"(window.webpackJsonp=window.webpackJsonp||[]).push([[14],{EqXy:function(n,t,o){(window.__NEXT_P=window.__NEXT_P||[]).push([\"/logg\",function(){return o(\"KhU+\")}])},\"KhU+\":function(n,t,o){\"use strict\";o.r(t);var u=o(\"q1tI\"),e=o.n(u),w=o(\"tdIn\"),i=e.a.createElement;t.default=function(){return i(w.a,null)}}},[[\"EqXy\",0,1,2]]]);","extractedComments":[]}

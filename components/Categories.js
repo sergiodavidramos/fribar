@@ -1,3 +1,6 @@
+import Items from "./SingleProduct/Items";
+import Head from "next/head";
+
 export default () => (
   <div className="section145">
     <div className="container">
@@ -5,8 +8,8 @@ export default () => (
         <div className="col-md-12">
           <div className="main-title-tt">
             <div className="main-title-left">
-              <span>Shop By</span>
-              <h2>Categories</h2>
+              <span>Comprar por</span>
+              <h2>Categorias</h2>
             </div>
           </div>
         </div>
@@ -18,7 +21,7 @@ export default () => (
                 style={{
                   transform: "translate3d(-1680px, 0px, 0px)",
                   transition: "all 0.25s ease 0s",
-                  width: "5520px",
+                    width: "100% !important",
                 }}
               >
                 <div
@@ -28,9 +31,9 @@ export default () => (
                   <div className="item">
                     <a href="#" className="category-item">
                       <div className="cate-img">
-                        <img src="images/category/icon-6.svg" alt="" />
+                        <img src="/img/category/icon-6.svg" alt="" />
                       </div>
-                      <h4> Home Care </h4>
+                      <h4>Cuidados en el hogar</h4>
                     </a>
                   </div>
                 </div>
@@ -41,7 +44,7 @@ export default () => (
                   <div className="item">
                     <a href="#" className="category-item">
                       <div className="cate-img">
-                        <img src="images/category/icon-7.svg" alt="" />
+                        <img src="/img/category/icon-7.svg" alt="" />
                       </div>
                       <h4> Noodles &amp; Sauces </h4>
                     </a>
@@ -54,7 +57,7 @@ export default () => (
                   <div className="item">
                     <a href="#" className="category-item">
                       <div className="cate-img">
-                        <img src="images/category/icon-8.svg" alt="" />
+                        <img src="/img/category/icon-8.svg" alt="" />
                       </div>
                       <h4> Personal Care </h4>
                     </a>
@@ -67,7 +70,7 @@ export default () => (
                   <div className="item">
                     <a href="#" className="category-item">
                       <div className="cate-img">
-                        <img src="images/category/icon-9.svg" alt="" />
+                        <img src="/img/category/icon-9.svg" alt="" />
                       </div>
                       <h4> Pet Care </h4>
                     </a>
@@ -80,7 +83,7 @@ export default () => (
                   <div className="item">
                     <a href="#" className="category-item">
                       <div className="cate-img">
-                        <img src="images/category/icon-10.svg" alt="" />
+                        <img src="/img/category/icon-10.svg" alt="" />
                       </div>
                       <h4> Meat &amp; Seafood </h4>
                     </a>
@@ -93,7 +96,7 @@ export default () => (
                   <div className="item">
                     <a href="#" className="category-item">
                       <div className="cate-img">
-                        <img src="images/category/icon-11.svg" alt="" />
+                        <img src="/img/category/icon-11.svg" alt="" />
                       </div>
                       <h4> Electronics </h4>
                     </a>
@@ -106,7 +109,7 @@ export default () => (
                   <div className="item">
                     <a href="#" className="category-item">
                       <div className="cate-img">
-                        <img src="images/category/icon-1.svg" alt="" />
+                        <img src="/img/category/icon-1.svg" alt="" />
                       </div>
                       <h4>Vegetables &amp; Fruits</h4>
                     </a>
@@ -119,7 +122,7 @@ export default () => (
                   <div className="item">
                     <a href="#" className="category-item">
                       <div className="cate-img">
-                        <img src="images/category/icon-2.svg" alt="" />
+                        <img src="/img/category/icon-2.svg" alt="" />
                       </div>
                       <h4> Grocery &amp; Staples </h4>
                     </a>
@@ -132,7 +135,7 @@ export default () => (
                   <div className="item">
                     <a href="#" className="category-item">
                       <div className="cate-img">
-                        <img src="images/category/icon-3.svg" alt="" />
+                        <img src="/img/category/icon-3.svg" alt="" />
                       </div>
                       <h4> Dairy &amp; Eggs </h4>
                     </a>
@@ -145,7 +148,7 @@ export default () => (
                   <div className="item">
                     <a href="#" className="category-item">
                       <div className="cate-img">
-                        <img src="images/category/icon-4.svg" alt="" />
+                        <img src="/img/category/icon-4.svg" alt="" />
                       </div>
                       <h4> Beverages </h4>
                     </a>
@@ -158,7 +161,7 @@ export default () => (
                   <div className="item">
                     <a href="#" className="category-item">
                       <div className="cate-img">
-                        <img src="images/category/icon-5.svg" alt="" />
+                        <img src="/img/category/icon-5.svg" alt="" />
                       </div>
                       <h4> Snacks </h4>
                     </a>
@@ -171,7 +174,7 @@ export default () => (
                   <div className="item">
                     <a href="#" className="category-item">
                       <div className="cate-img">
-                        <img src="images/category/icon-6.svg" alt="" />
+                        <img src="/img/category/icon-6.svg" alt="" />
                       </div>
                       <h4> Home Care </h4>
                     </a>
@@ -184,7 +187,7 @@ export default () => (
                   <div className="item">
                     <a href="#" className="category-item">
                       <div className="cate-img">
-                        <img src="images/category/icon-7.svg" alt="" />
+                        <img src="/img/category/icon-7.svg" alt="" />
                       </div>
                       <h4> Noodles &amp; Sauces </h4>
                     </a>
@@ -197,7 +200,7 @@ export default () => (
                   <div className="item">
                     <a href="#" className="category-item">
                       <div className="cate-img">
-                        <img src="images/category/icon-8.svg" alt="" />
+                        <img src="/img/category/icon-8.svg" alt="" />
                       </div>
                       <h4> Personal Care </h4>
                     </a>
@@ -210,7 +213,7 @@ export default () => (
                   <div className="item">
                     <a href="#" className="category-item">
                       <div className="cate-img">
-                        <img src="images/category/icon-9.svg" alt="" />
+                        <img src="/img/category/icon-9.svg" alt="" />
                       </div>
                       <h4> Pet Care </h4>
                     </a>
@@ -223,7 +226,7 @@ export default () => (
                   <div className="item">
                     <a href="#" className="category-item">
                       <div className="cate-img">
-                        <img src="images/category/icon-10.svg" alt="" />
+                        <img src="/img/category/icon-10.svg" alt="" />
                       </div>
                       <h4> Meat &amp; Seafood </h4>
                     </a>
@@ -236,7 +239,7 @@ export default () => (
                   <div className="item">
                     <a href="#" className="category-item">
                       <div className="cate-img">
-                        <img src="images/category/icon-11.svg" alt="" />
+                        <img src="/img/category/icon-11.svg" alt="" />
                       </div>
                       <h4> Electronics </h4>
                     </a>
@@ -249,7 +252,7 @@ export default () => (
                   <div className="item">
                     <a href="#" className="category-item">
                       <div className="cate-img">
-                        <img src="images/category/icon-1.svg" alt="" />
+                        <img src="/img/category/icon-1.svg" alt="" />
                       </div>
                       <h4>Vegetables &amp; Fruits</h4>
                     </a>
@@ -262,7 +265,7 @@ export default () => (
                   <div className="item">
                     <a href="#" className="category-item">
                       <div className="cate-img">
-                        <img src="images/category/icon-2.svg" alt="" />
+                        <img src="/img/category/icon-2.svg" alt="" />
                       </div>
                       <h4> Grocery &amp; Staples </h4>
                     </a>
@@ -275,7 +278,7 @@ export default () => (
                   <div className="item">
                     <a href="#" className="category-item">
                       <div className="cate-img">
-                        <img src="images/category/icon-3.svg" alt="" />
+                        <img src="/img/category/icon-3.svg" alt="" />
                       </div>
                       <h4> Dairy &amp; Eggs </h4>
                     </a>
@@ -288,7 +291,7 @@ export default () => (
                   <div className="item">
                     <a href="#" className="category-item">
                       <div className="cate-img">
-                        <img src="images/category/icon-4.svg" alt="" />
+                        <img src="/img/category/icon-4.svg" alt="" />
                       </div>
                       <h4> Beverages </h4>
                     </a>
@@ -301,7 +304,7 @@ export default () => (
                   <div className="item">
                     <a href="#" className="category-item">
                       <div className="cate-img">
-                        <img src="images/category/icon-5.svg" alt="" />
+                        <img src="/img/category/icon-5.svg" alt="" />
                       </div>
                       <h4> Snacks </h4>
                     </a>
@@ -314,7 +317,7 @@ export default () => (
                   <div className="item">
                     <a href="#" className="category-item">
                       <div className="cate-img">
-                        <img src="images/category/icon-6.svg" alt="" />
+                        <img src="/img/category/icon-6.svg" alt="" />
                       </div>
                       <h4> Home Care </h4>
                     </a>

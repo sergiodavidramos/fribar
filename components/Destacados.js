@@ -1,15 +1,15 @@
-export default () => (
+export default ({ title }) => (
   <div className="section145">
     <div className="container">
       <div className="row">
         <div className="col-md-12">
           <div className="main-title-tt">
             <div className="main-title-left">
-              <span>For You</span>
-              <h2>Top Featured Products</h2>
+              <span>Para Ti</span>
+              <h2>{title}</h2>
             </div>
             <a href="#" className="see-more-btn">
-              See All
+              Ver Todo
             </a>
           </div>
         </div>

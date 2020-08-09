@@ -27,7 +27,7 @@ export default () => (
             <li>
               <a href="#" className="single-cat-item">
                 <div className="icon">
-                  <img src="images/category/icon-1.svg" alt="" />
+                  <img src="/img/category/icon-1.svg" alt="" />
                 </div>
                 <div className="text"> Fruits and Vegetables </div>
               </a>
@@ -35,7 +35,7 @@ export default () => (
             <li>
               <a href="#" className="single-cat-item">
                 <div className="icon">
-                  <img src="images/category/icon-2.svg" alt="" />
+                  <img src="/img/category/icon-2.svg" alt="" />
                 </div>
                 <div className="text"> Grocery & Staples </div>
               </a>
@@ -43,7 +43,7 @@ export default () => (
             <li>
               <a href="#" className="single-cat-item">
                 <div className="icon">
-                  <img src="images/category/icon-3.svg" alt="" />
+                  <img src="/img/category/icon-3.svg" alt="" />
                 </div>
                 <div className="text"> Dairy & Eggs </div>
               </a>
@@ -51,7 +51,7 @@ export default () => (
             <li>
               <a href="#" className="single-cat-item">
                 <div className="icon">
-                  <img src="images/category/icon-4.svg" alt="" />
+                  <img src="/img/category/icon-4.svg" alt="" />
                 </div>
                 <div className="text"> Beverages </div>
               </a>
@@ -59,7 +59,7 @@ export default () => (
             <li>
               <a href="#" className="single-cat-item">
                 <div className="icon">
-                  <img src="images/category/icon-5.svg" alt="" />
+                  <img src="/img/category/icon-5.svg" alt="" />
                 </div>
                 <div className="text"> Snacks </div>
               </a>
@@ -67,7 +67,7 @@ export default () => (
             <li>
               <a href="#" className="single-cat-item">
                 <div className="icon">
-                  <img src="images/category/icon-6.svg" alt="" />
+                  <img src="/img/category/icon-6.svg" alt="" />
                 </div>
                 <div className="text"> Home Care </div>
               </a>
@@ -75,7 +75,7 @@ export default () => (
             <li>
               <a href="#" className="single-cat-item">
                 <div className="icon">
-                  <img src="images/category/icon-7.svg" alt="" />
+                  <img src="/img/category/icon-7.svg" alt="" />
                 </div>
                 <div className="text"> Noodles & Sauces </div>
               </a>
@@ -83,7 +83,7 @@ export default () => (
             <li>
               <a href="#" className="single-cat-item">
                 <div className="icon">
-                  <img src="images/category/icon-8.svg" alt="" />
+                  <img src="/img/category/icon-8.svg" alt="" />
                 </div>
                 <div className="text"> Personal Care </div>
               </a>
@@ -91,7 +91,7 @@ export default () => (
             <li>
               <a href="#" className="single-cat-item">
                 <div className="icon">
-                  <img src="images/category/icon-9.svg" alt="" />
+                  <img src="/img/category/icon-9.svg" alt="" />
                 </div>
                 <div className="text"> Pet Care </div>
               </a>

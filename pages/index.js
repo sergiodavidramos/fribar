@@ -18,7 +18,6 @@ export default class Home extends React.Component {
             content="width=device-width,height=device-height,initial-scale=1,maximum-scale=1"
           />
           <meta name="format-detection" content="telephone=no"></meta>
-          <meta name="theme-color" content="#2775FF"></meta>
           <meta name="keywords" content="themeforest, theme, html, template" />
           <meta
             name="description"
@@ -30,12 +29,12 @@ export default class Home extends React.Component {
         <Header />
         <Carrousel />
         <div className="wrapper">
-          <Banner />
+          {/* <Banner /> */}
           <Categories />
-          <Destacados />
+          <Destacados title="Principales Productos Destacados" />
           <MejoresValores />
-          <Destacados />
-          <Destacados />
+          <Destacados title="Verduras y Frutas Frescas" />
+          <Destacados title="Nuevos Productos Agregados" />
         </div>
         <Footer />
         <script></script>

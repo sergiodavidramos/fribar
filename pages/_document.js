@@ -14,6 +14,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          <meta name="theme-color" content="#ff5a09"></meta>
           <link href="/css/style.css" rel="stylesheet"></link>
           <link href="/vendor/unicons-2.0.1/css/unicons.css" rel="stylesheet" />
           <link href="/css/responsive.css" rel="stylesheet" />
@@ -57,24 +58,23 @@ class MyDocument extends Document {
           />
 
           <style>{`body { margin: 0 } /* custom! */`}</style>
-
-          <script
-            defer="defer"
-            src="vendor/revslider/js/jquery.themepunch.tools.min.js"
-          ></script>
-          <script
-            defer="defer"
-            src="vendor/revslider/js/jquery.themepunch.revolution.min.js"
-          ></script>
-          <script src="/js/jquery-3.3.1.min.js"></script>
-          <script src="/js/prueba.js" />
         </Head>
         <body className="custom_class">
           <Main />
           <NextScript />
 
-          <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+          <script
+            defer="defer"
+            src="/vendor/revslider/js/jquery.themepunch.tools.min.js"
+          ></script>
+          <script
+            defer="defer"
+            src="/vendor/revslider/js/jquery.themepunch.revolution.min.js"
+          ></script>
+          <script src="/js/jquery-3.3.1.min.js"></script>
           <script src="/vendor/OwlCarousel/owl.carousel.js"></script>
+          <script src="/js/revslider.js" />
+          <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
           <script src="/vendor/semantic/semantic.min.js"></script>
           <script src="/js/jquery.countdown.min.js"></script>
           <script src="/js/custom.js"></script>
