@@ -18,6 +18,7 @@ class MyDocument extends Document {
           <link href="/css/style.css" rel="stylesheet"></link>
           <link href="/vendor/unicons-2.0.1/css/unicons.css" rel="stylesheet" />
           <link href="/css/responsive.css" rel="stylesheet" />
+          <link rel='icon' href="/img/icon5.svg" />
           <link
             href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap"
             rel="stylesheet"
