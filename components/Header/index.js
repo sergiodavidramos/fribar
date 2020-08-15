@@ -82,7 +82,7 @@ export default () => {
                     <span className="noti_count1">3</span>
                   </a>
                 </li>
-                {false ? (
+                {true ? (
                   <li className="ui dropdown">
                     <a href="#" className="opts_account">
                       <img src="images/avatar/img-5.jpg" alt="" />
