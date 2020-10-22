@@ -1,29 +1,80 @@
-export default () => (
-  <div className="col-lg-3 col-md-4">
-    <div className="left-side-tabs">
-      <div className="dashboard-left-links">
-        <a href="dashboard_overview.html" className="user-item active">
-          <i className="uil uil-apps"></i>Overview
-        </a>
-        <a href="dashboard_my_orders.html" className="user-item">
-          <i className="uil uil-box"></i>My Orders
-        </a>
-        <a href="dashboard_my_rewards.html" className="user-item">
-          <i className="uil uil-gift"></i>My Rewards
-        </a>
-        <a href="dashboard_my_wallet.html" className="user-item">
-          <i className="uil uil-wallet"></i>My Wallet
-        </a>
-        <a href="dashboard_my_wishlist.html" className="user-item">
-          <i className="uil uil-heart"></i>Shopping Wishlist
-        </a>
-        <a href="dashboard_my_addresses.html" className="user-item">
-          <i className="uil uil-location-point"></i>My Address
-        </a>
-        <a href="sign_in.html" className="user-item">
-          <i className="uil uil-exit"></i>Logout
-        </a>
+import Link from 'next/link'
+import { withRouter } from 'next/router'
+import { useContext } from 'react'
+import UserContext from '../../UserContext'
+import Router from 'next/router'
+
+const MenuLef = ({ router }) => {
+  const { signOut } = useContext(UserContext)
+  const handlerCerrarSesion = () => {
+    signOut()
+    Router.replace('/')
+  }
+  return (
+    <div className="col-lg-3 col-md-4">
+      <div className="left-side-tabs">
+        <div className="dashboard-left-links">
+          <Link href="/perfil">
+            <a
+              className={`user-item ${
+                router.pathname === '/perfil' ? 'active' : ''
+              }`}
+            >
+              <i className="uil uil-apps"></i>Vista General
+            </a>
+          </Link>
+          <Link href="/perfil/pedidos">
+            <a
+              className={`user-item ${
+                router.pathname === '/perfil/pedidos' ? 'active' : ''
+              }`}
+            >
+              <i className="uil uil-box"></i>Mis Pedidos
+            </a>
+          </Link>
+          <Link href="/perfil/rewards">
+            <a
+              className={`user-item ${
+                router.pathname === '/perfil/rewards' ? 'active' : ''
+              }`}
+            >
+              <i className="uil uil-gift"></i>Mis Recompensas
+            </a>
+          </Link>
+          <Link href="/perfil/mibilletera">
+            <a
+              className={`user-item ${
+                router.pathname === '/perfil/mibilletera' ? 'active' : ''
+              }`}
+            >
+              <i className="uil uil-wallet"></i>Mi Billetera
+            </a>
+          </Link>
+          <Link href="/perfil/likes">
+            <a
+              className={`user-item ${
+                router.pathname === '/perfil/likes' ? 'active' : ''
+              }`}
+            >
+              <i className="uil uil-heart"></i>Mi Lista de deseos de
+              compras
+            </a>
+          </Link>
+          <Link href="/perfil/direccion">
+            <a
+              className={`user-item ${
+                router.pathname === '/perfil/direccion' ? 'active' : ''
+              }`}
+            >
+              <i className="uil uil-location-point"></i>Mi direccion
+            </a>
+          </Link>
+          <a className="user-item" onClick={handlerCerrarSesion}>
+            <i className="uil uil-exit"></i>Cerrar sesión
+          </a>
+        </div>
       </div>
     </div>
-  </div>
-);
+  )
+}
+export default withRouter(MenuLef)

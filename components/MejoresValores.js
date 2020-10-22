@@ -29,9 +29,10 @@ export default () => (
             <div className="cmtk_dt">
               <div
                 className="product_countdown-timer offer-counter-text"
-                data-countdown="2021/07/30"
+                data-countdown="2020/9/13"
               >
-                161 days 03:17:02
+                {/* 161 days 03:17:02 */}
+                {/* 0 days 03:17:02 */}
               </div>
             </div>
           </a>
@@ -44,4 +45,4 @@ export default () => (
       </div>
     </div>
   </div>
-);
+)

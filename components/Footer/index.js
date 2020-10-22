@@ -167,7 +167,7 @@ export default () => (
                   <a href="#">
                     <img
                       className="download-btn"
-                      src="images/download-1.svg"
+                      //   src="images/download-1.svg"
                       alt="GooglePlay"
                     />
                   </a>
@@ -176,7 +176,7 @@ export default () => (
                   <a href="#">
                     <img
                       className="download-btn"
-                      src="images/download-2.svg"
+                      //   src="images/download-2.svg"
                       alt="AppStore"
                     />
                   </a>
@@ -191,35 +191,35 @@ export default () => (
                     <img
                       alt="Visa"
                       title="Visa"
-                      src="images/footer-icons/pyicon-6.svg"
+                      //   src="images/footer-icons/pyicon-6.svg"
                     />
                   </li>
                   <li className="financial-institutes__logo">
                     <img
                       alt="Visa"
                       title="Visa"
-                      src="images/footer-icons/pyicon-1.svg"
+                      //   src="images/footer-icons/pyicon-1.svg"
                     />
                   </li>
                   <li className="financial-institutes__logo">
                     <img
                       alt="MasterCard"
                       title="MasterCard"
-                      src="images/footer-icons/pyicon-2.svg"
+                      //   src="images/footer-icons/pyicon-2.svg"
                     />
                   </li>
                   <li className="financial-institutes__logo">
                     <img
                       alt="American Express"
                       title="American Express"
-                      src="images/footer-icons/pyicon-3.svg"
+                      //   src="images/footer-icons/pyicon-3.svg"
                     />
                   </li>
                   <li className="financial-institutes__logo">
                     <img
                       alt="Discover"
                       title="Discover"
-                      src="images/footer-icons/pyicon-4.svg"
+                      //   src="images/footer-icons/pyicon-4.svg"
                     />
                   </li>
                 </ul>
@@ -261,7 +261,9 @@ export default () => (
                   <a href="privacy_policy.html">Privacy Policy</a>
                 </li>
                 <li>
-                  <a href="term_and_conditions.html">Term &amp; Conditions</a>
+                  <a href="term_and_conditions.html">
+                    Term &amp; Conditions
+                  </a>
                 </li>
                 <li>
                   <a href="refund_and_return_policy.html">
@@ -271,7 +273,7 @@ export default () => (
               </ul>
             </div>
             <div className="copyright-text">
-              <i className="uil uil-copyright"></i>Copyright 2020{" "}
+              <i className="uil uil-copyright"></i>Copyright 2020{' '}
               <b>Gambolthemes</b> . All rights reserved
             </div>
           </div>
@@ -279,4 +281,4 @@ export default () => (
       </div>
     </div>
   </footer>
-);
+)

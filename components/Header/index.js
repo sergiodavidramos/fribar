@@ -1,11 +1,18 @@
-import ModelCategory from "./ModelCategory";
-import SearchModel from "./SearchModel";
-import CartSidebar from "./CartSidebar";
-import Logo from "./Logo";
-import LogoHorizontal from "./LogoHorizontal";
-import Location from "./Location";
+import ModelCategory from './ModelCategory'
+import SearchModel from './SearchModel'
+import CartSidebar from './CartSidebar'
+import Logo from './Logo'
+import LogoHorizontal from './LogoHorizontal'
+import Location from './Location'
+import Link from 'next/link'
+import UserContext from '../UserContext'
+import { useContext } from 'react'
+import GetImg from '../GetImg'
+import { API_URL } from '../Config'
 
 export default () => {
+  const { user } = useContext(UserContext)
+  console.log(user)
   return (
     <>
       <ModelCategory />
@@ -36,13 +43,12 @@ export default () => {
                 <i className="uil uil-angle-down icon__14"></i>
                 <div className="menu dropdown_loc">
                   <Location />
+                  {/* <Location />
                   <Location />
-                  <Location />
-                  <Location />
+                  <Location /> */}
                 </div>
               </div>
             </div>
-
             <div className="search120">
               <div className="ui search">
                 <div className="ui left icon input swdh10">
@@ -82,66 +88,99 @@ export default () => {
                     <span className="noti_count1">3</span>
                   </a>
                 </li>
-                {true ? (
+                {user ? (
                   <li className="ui dropdown">
-                    <a href="#" className="opts_account">
-                      <img src="images/avatar/img-5.jpg" alt="" />
-                      <span className="user__name">Sergio David Ramos</span>
-                      <i className="uil uil-angle-down"></i>
-                    </a>
+                    <Link href="/perfil">
+                      <a className="opts_account">
+                        <img
+                          src={GetImg(user.img, `${API_URL}/upload/user`)}
+                          alt="Usuario Frifolly"
+                        />
+                        <span className="user__name">
+                          {user.nombre_comp}
+                        </span>
+                        <i className="uil uil-angle-down"></i>
+                      </a>
+                    </Link>
                     <div className="menu dropdown_account">
                       <div className="night_mode_switch__btn">
-                        <a href="#" id="night-mode" className="btn-night-mode">
-                          <i className="uil uil-moon"></i> Night mode
+                        <a
+                          href="#"
+                          id="night-mode"
+                          className="btn-night-mode"
+                        >
+                          <i className="uil uil-moon"></i> Modo noche
                           <span className="btn-night-mode-switch">
                             <span className="uk-switch-button"></span>
                           </span>
                         </a>
                       </div>
-                      <a
-                        href="dashboard_overview.html"
-                        className="item channel_item"
-                      >
-                        <i className="uil uil-apps icon__1"></i>Dashbaord
-                      </a>
-                      <a
-                        href="dashboard_my_orders.html"
-                        className="item channel_item"
-                      >
-                        <i className="uil uil-box icon__1"></i>My Orders
-                      </a>
-                      <a
-                        href="dashboard_my_wishlist.html"
-                        className="item channel_item"
-                      >
-                        <i className="uil uil-heart icon__1"></i>My Wishlist
-                      </a>
-                      <a
-                        href="dashboard_my_wallet.html"
-                        className="item channel_item"
-                      >
-                        <i className="uil uil-usd-circle icon__1"></i>My Wallet
-                      </a>
-                      <a
-                        href="dashboard_my_addresses.html"
-                        className="item channel_item"
-                      >
-                        <i className="uil uil-location-point icon__1"></i>My
-                        Address
-                      </a>
+                      <Link href="/perfil">
+                        <a className="item channel_item">
+                          <i className="uil uil-apps icon__1"></i>
+                          Tablero/Perfil
+                        </a>
+                      </Link>
+                      <Link href="/perfil/pedidos">
+                        <a className="item channel_item">
+                          <i className="uil uil-box icon__1"></i>Mis
+                          ordenes
+                        </a>
+                      </Link>
+                      <Link href="/perfil/likes">
+                        <a className="item channel_item">
+                          <i className="uil uil-heart icon__1"></i>Mi lista
+                          de deseos
+                        </a>
+                      </Link>
+                      <Link href="/perfil/mibilletera">
+                        <a className="item channel_item">
+                          <i className="uil uil-usd-circle icon__1"></i>Mi
+                          billetera
+                        </a>
+                      </Link>
+
+                      <Link href="direccion">
+                        <a className="item channel_item">
+                          <i className="uil uil-location-point icon__1"></i>
+                          Mi dirección
+                        </a>
+                      </Link>
                       <a href="offers.html" className="item channel_item">
-                        <i className="uil uil-gift icon__1"></i>Offers
+                        <i className="uil uil-gift icon__1"></i>Ofertas
                       </a>
                       <a href="faq.html" className="item channel_item">
-                        <i className="uil uil-info-circle icon__1"></i>Faq
+                        <i className="uil uil-info-circle icon__1"></i>
+                        Preguntas más frecuentes
                       </a>
                       <a href="sign_in.html" className="item channel_item">
-                        <i className="uil uil-lock-alt icon__1"></i>Logout
+                        <i className="uil uil-lock-alt icon__1"></i>Cerrar
+                        sesión
                       </a>
                     </div>
                   </li>
                 ) : (
-               'hola'
+                  <li className="ui dropdown">
+                    <a className="opts_account">
+                      <img src={GetImg()} alt="" />
+                      <span className="user__name">Acceder</span>
+                      <i className="uil uil-angle-down"></i>
+                    </a>
+                    <div className="menu dropdown_account">
+                      <Link href="/login">
+                        <a className="item channel_item">
+                          <i className="uil uil-sign-out-alt icon__1"></i>
+                          Acceder
+                        </a>
+                      </Link>
+                      <Link href="/registro">
+                        <a className="item channel_item">
+                          <i className="uil uil-edit-alt icon__1"></i>
+                          Registrarse
+                        </a>
+                      </Link>
+                    </div>
+                  </li>
                 )}
               </ul>
             </div>
@@ -379,5 +418,5 @@ export default () => {
         </div>
       </header>
     </>
-  );
-};
+  )
+}

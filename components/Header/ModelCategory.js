@@ -269,7 +269,7 @@ export default () => (
       }
 
       .search-by-cat .single-cat {
-        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=85)";
+        -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=85)';
         -webkit-box-align: center;
         -ms-flex-align: center;
         align-items: center;
@@ -312,4 +312,4 @@ export default () => (
     `}</style>
   </div>
   // /* <!-- Category Model End--> */
-);
+)
