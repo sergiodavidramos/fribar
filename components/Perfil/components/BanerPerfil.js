@@ -7,7 +7,7 @@ export default () => {
   const { user } = useContext(UserContext)
   return (
     <>
-      {false ? (
+      {user ? (
         <div className="dashboard-group">
           <div className="container">
             <div className="row">

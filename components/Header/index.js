@@ -9,10 +9,15 @@ import UserContext from '../UserContext'
 import { useContext } from 'react'
 import GetImg from '../GetImg'
 import { API_URL } from '../Config'
+import Router from 'next/router'
 
 export default () => {
-  const { user } = useContext(UserContext)
+  const { user, signOut } = useContext(UserContext)
   console.log(user)
+  const handlerCerrarSesion = () => {
+    signOut()
+    Router.replace('/')
+  }
   return (
     <>
       <ModelCategory />
@@ -23,16 +28,19 @@ export default () => {
         <div className="top-header-group">
           <div className="top-header">
             <div className="res_main_logo">
-              <a href="/">
-                <img src="/images/dark-logo-1.svg" alt="" />
-                <Logo />
-              </a>
+              <Link href="/">
+                <a>
+                  <img src="/images/dark-logo-1.svg" alt="" />
+                  <Logo />
+                </a>
+              </Link>
             </div>
             <div className="main_logo" id="logo">
-              <a href="/">
-                {/* <img src="images/logo.svg" alt="" /> */}
-                <LogoHorizontal />
-              </a>
+              <Link href="/">
+                <a>
+                  <LogoHorizontal />
+                </a>
+              </Link>
             </div>
             <div className="select_location">
               <div className="ui inline dropdown loc-title">
@@ -90,18 +98,17 @@ export default () => {
                 </li>
                 {user ? (
                   <li className="ui dropdown">
-                    <Link href="/perfil">
-                      <a className="opts_account">
-                        <img
-                          src={GetImg(user.img, `${API_URL}/upload/user`)}
-                          alt="Usuario Frifolly"
-                        />
-                        <span className="user__name">
-                          {user.nombre_comp}
-                        </span>
-                        <i className="uil uil-angle-down"></i>
-                      </a>
-                    </Link>
+                    <a className="opts_account">
+                      <img
+                        src={GetImg(user.img, `${API_URL}/upload/user`)}
+                        alt="Usuario Frifolly"
+                      />
+                      <span className="user__name">
+                        {user.nombre_comp}
+                      </span>
+                      <i className="uil uil-angle-down"></i>
+                    </a>
+
                     <div className="menu dropdown_account">
                       <div className="night_mode_switch__btn">
                         <a
@@ -153,7 +160,10 @@ export default () => {
                         <i className="uil uil-info-circle icon__1"></i>
                         Preguntas más frecuentes
                       </a>
-                      <a href="sign_in.html" className="item channel_item">
+                      <a
+                        onClick={handlerCerrarSesion}
+                        className="item channel_item"
+                      >
                         <i className="uil uil-lock-alt icon__1"></i>Cerrar
                         sesión
                       </a>
