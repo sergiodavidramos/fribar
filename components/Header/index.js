@@ -9,12 +9,25 @@ import UserContext from '../UserContext'
 import { useContext } from 'react'
 import GetImg from '../GetImg'
 import { API_URL } from '../Config'
+import Head from 'next/head'
 
 export default () => {
   const { user } = useContext(UserContext)
   console.log(user)
   return (
     <>
+      <Head>
+        <script src="/js/jquery-3.3.1.min.js"></script>
+        <script src="/vendor/OwlCarousel/owl.carousel.js"></script>
+        <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="/vendor/semantic/semantic.min.js"></script>
+        <script src="/js/jquery.countdown.min.js"></script>
+        <script src="/js/custom.js"></script>
+        <script src="/js/product.thumbnail.slider.js"></script>
+        <script src="/js/offset_overlay.js"></script>
+        <script src="/js/night-mode.js"></script>
+      </Head>
+
       <ModelCategory />
       <SearchModel />
       <CartSidebar />
@@ -23,25 +36,28 @@ export default () => {
         <div className="top-header-group">
           <div className="top-header">
             <div className="res_main_logo">
-              <a href="/">
-                <img src="/images/dark-logo-1.svg" alt="" />
-                <Logo />
-              </a>
+              <Link href="/">
+                <a>
+                  <Logo />
+                </a>
+              </Link>
             </div>
             <div className="main_logo" id="logo">
-              <a href="/">
-                {/* <img src="images/logo.svg" alt="" /> */}
-                <LogoHorizontal />
-              </a>
+              <Link href="/">
+                <a>
+                  {/* <img src="images/logo.svg" alt="" /> */}
+                  <LogoHorizontal />
+                </a>
+              </Link>
             </div>
             <div className="select_location">
-              <div className="ui inline dropdown loc-title">
+              <div className="ui inline dropdown loc-title" tabIndex="0">
                 <div className="text">
                   <i className="uil uil-location-point"></i>
                   Potosí
                 </div>
                 <i className="uil uil-angle-down icon__14"></i>
-                <div className="menu dropdown_loc">
+                <div className="menu dropdown_loc" tabIndex="-1">
                   <Location />
                   {/* <Location />
                   <Location />
@@ -90,18 +106,17 @@ export default () => {
                 </li>
                 {user ? (
                   <li className="ui dropdown">
-                    <Link href="/perfil">
-                      <a className="opts_account">
-                        <img
-                          src={GetImg(user.img, `${API_URL}/upload/user`)}
-                          alt="Usuario Frifolly"
-                        />
-                        <span className="user__name">
-                          {user.nombre_comp}
-                        </span>
-                        <i className="uil uil-angle-down"></i>
-                      </a>
-                    </Link>
+                    <a className="opts_account">
+                      <img
+                        src={GetImg(user.img, `${API_URL}/upload/user`)}
+                        alt="Usuario Frifolly"
+                      />
+                      <span className="user__name">
+                        {user.nombre_comp}
+                      </span>
+                      <i className="uil uil-angle-down"></i>
+                    </a>
+
                     <div className="menu dropdown_account">
                       <div className="night_mode_switch__btn">
                         <a
@@ -160,13 +175,13 @@ export default () => {
                     </div>
                   </li>
                 ) : (
-                  <li className="ui dropdown">
+                  <li className="ui dropdown" tabIndex="0">
                     <a className="opts_account">
                       <img src={GetImg()} alt="" />
                       <span className="user__name">Acceder</span>
                       <i className="uil uil-angle-down"></i>
                     </a>
-                    <div className="menu dropdown_account">
+                    <div className="menu dropdown_account" tabIndex="-1">
                       <Link href="/login">
                         <a className="item channel_item">
                           <i className="uil uil-sign-out-alt icon__1"></i>
@@ -188,7 +203,7 @@ export default () => {
         </div>
         <div className="sub-header-group">
           <div className="sub-header">
-            <div className="ui dropdown">
+            <div className="ui dropdown" tabIndex="0">
               <a
                 href="#"
                 className="category_drop hover-btn"
@@ -199,6 +214,7 @@ export default () => {
                 <i className="uil uil-apps"></i>
                 <span className="cate__icon">Seleccionar Categoria</span>
               </a>
+              <div className="menu" tabIndex="-1"></div>
             </div>
             <nav className="navbar navbar-expand-lg navbar-light py-3">
               <div className="container-fluid">
@@ -242,11 +258,14 @@ export default () => {
                       </a>
                     </li>
                     <li className="nav-item">
-                      <div className="ui icon top left dropdown nav__menu">
+                      <div
+                        className="ui icon top left dropdown nav__menu"
+                        tabIndex="0"
+                      >
                         <a className="nav-link" title="Pages">
                           Paginas <i className="uil uil-angle-down"></i>
                         </a>
-                        <div className="menu dropdown_page">
+                        <div className="menu dropdown_page" tabIndex="-1">
                           <a
                             href="dashboard_overview.html"
                             className="item channel_item page__links"
@@ -323,11 +342,14 @@ export default () => {
                       </div>
                     </li>
                     <li className="nav-item">
-                      <div className="ui icon top left dropdown nav__menu">
+                      <div
+                        className="ui icon top left dropdown nav__menu"
+                        tabIndex="0"
+                      >
                         <a className="nav-link" title="Blog">
                           Blog <i className="uil uil-angle-down"></i>
                         </a>
-                        <div className="menu dropdown_page">
+                        <div className="menu dropdown_page" tabIndex="-1">
                           <a
                             href="our_blog.html"
                             className="item channel_item page__links"

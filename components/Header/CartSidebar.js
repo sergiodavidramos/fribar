@@ -27,7 +27,7 @@ export default () => (
       <div className="side-cart-items">
         <div className="cart-item">
           <div className="cart-product-img">
-            <img src="images/product/img-1.jpg" alt="" />
+            <img src="/img/product/img-1.jpg" alt="" />
             <div className="offer-badge">6% OFF</div>
           </div>
           <div className="cart-text">
@@ -84,7 +84,7 @@ export default () => (
         </div>
         <div className="cart-item">
           <div className="cart-product-img">
-            <img src="images/product/img-2.jpg" alt="" />
+            <img src="/img/product/img-2.jpg" alt="" />
             <div className="offer-badge">6% OFF</div>
           </div>
           <div className="cart-text">
@@ -156,4 +156,4 @@ export default () => (
     </div>
   </div>
   // <!-- Cart Sidebar Offsetl End-->
-);
+)

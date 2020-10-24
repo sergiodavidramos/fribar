@@ -12,20 +12,17 @@ export default () => (
         </div>
         <div className="col-lg-4 col-md-6">
           <a href="#" className="best-offer-item">
-            <img src="images/best-offers/offer-1.jpg" alt="" />
+            <img src="./img/best-offers/offer-1.jpg" alt="" />
           </a>
         </div>
         <div className="col-lg-4 col-md-6">
           <a href="#" className="best-offer-item">
-            <img src="images/best-offers/offer-2.jpg" alt="" />
+            <img src="./img/best-offers/offer-2.jpg" alt="" />
           </a>
         </div>
         <div className="col-lg-4 col-md-6">
           <a href="#" className="best-offer-item offr-none">
-            <img
-              src="/img/demo_shop_trendy/images/46e75-brk_slide-1.jpg"
-              alt=""
-            />
+            <img src="/img/best-offers/offer-3.jpg" alt="" />
             <div className="cmtk_dt">
               <div
                 className="product_countdown-timer offer-counter-text"
@@ -39,7 +36,7 @@ export default () => (
         </div>
         <div className="col-md-12">
           <a href="#" className="code-offer-item">
-            <img src="images/best-offers/offer-4.jpg" alt="" />
+            <img src="/img/best-offers/offer-4.jpg" alt="" />
           </a>
         </div>
       </div>

@@ -19,14 +19,14 @@ export default ({ title }) => (
               <div
                 className="owl-stage"
                 style={{
-                  transform: "translate3d(0px, 0px, 0px)",
-                  transition: "all 0s ease 0s",
-                  width: "2360px",
+                  transform: 'translate3d(0px, 0px, 0px)',
+                  transition: 'all 0s ease 0s',
+                  width: '2360px',
                 }}
               >
                 <div
                   className="owl-item active"
-                  style={{ width: "285px", marginRight: "10px" }}
+                  style={{ width: '285px', marginRight: '10px' }}
                 >
                   <div className="item">
                     <div className="product-item">
@@ -34,10 +34,13 @@ export default ({ title }) => (
                         href="http://gambolthemes.net/html-items/gambo_supermarket_demo/single_product_view.html"
                         className="product-img"
                       >
-                        <img src="images/product/img-1.jpg" alt="" />
+                        <img src="/img/product/img-1.jpg" alt="" />
                         <div className="product-absolute-options">
                           <span className="offer-badge-1">6% off</span>
-                          <span className="like-icon" title="wishlist"></span>
+                          <span
+                            className="like-icon"
+                            title="wishlist"
+                          ></span>
                         </div>
                       </a>
                       <div className="product-text-dt">
@@ -78,7 +81,7 @@ export default ({ title }) => (
                 </div>
                 <div
                   className="owl-item active"
-                  style={{ width: "285px", marginRight: "10px" }}
+                  style={{ width: '285px', marginRight: '10px' }}
                 >
                   <div className="item">
                     <div className="product-item">
@@ -86,10 +89,13 @@ export default ({ title }) => (
                         href="http://gambolthemes.net/html-items/gambo_supermarket_demo/single_product_view.html"
                         className="product-img"
                       >
-                        <img src="images/product/img-2.jpg" alt="" />
+                        <img src="/img/product/img-2.jpg" alt="" />
                         <div className="product-absolute-options">
                           <span className="offer-badge-1">2% off</span>
-                          <span className="like-icon" title="wishlist"></span>
+                          <span
+                            className="like-icon"
+                            title="wishlist"
+                          ></span>
                         </div>
                       </a>
                       <div className="product-text-dt">
@@ -130,7 +136,7 @@ export default ({ title }) => (
                 </div>
                 <div
                   className="owl-item active"
-                  style={{ width: "285px", marginRight: "10px" }}
+                  style={{ width: '285px', marginRight: '10px' }}
                 >
                   <div className="item">
                     <div className="product-item">
@@ -138,10 +144,13 @@ export default ({ title }) => (
                         href="http://gambolthemes.net/html-items/gambo_supermarket_demo/single_product_view.html"
                         className="product-img"
                       >
-                        <img src="images/product/img-3.jpg" alt="" />
+                        <img src="/img/product/img-3.jpg" alt="" />
                         <div className="product-absolute-options">
                           <span className="offer-badge-1">5% off</span>
-                          <span className="like-icon" title="wishlist"></span>
+                          <span
+                            className="like-icon"
+                            title="wishlist"
+                          ></span>
                         </div>
                       </a>
                       <div className="product-text-dt">
@@ -182,7 +191,7 @@ export default ({ title }) => (
                 </div>
                 <div
                   className="owl-item active"
-                  style={{ width: "285px", marginRight: "10px" }}
+                  style={{ width: '285px', marginRight: '10px' }}
                 >
                   <div className="item">
                     <div className="product-item">
@@ -190,10 +199,13 @@ export default ({ title }) => (
                         href="http://gambolthemes.net/html-items/gambo_supermarket_demo/single_product_view.html"
                         className="product-img"
                       >
-                        <img src="images/product/img-4.jpg" alt="" />
+                        <img src="/img/product/img-4.jpg" alt="" />
                         <div className="product-absolute-options">
                           <span className="offer-badge-1">3% off</span>
-                          <span className="like-icon" title="wishlist"></span>
+                          <span
+                            className="like-icon"
+                            title="wishlist"
+                          ></span>
                         </div>
                       </a>
                       <div className="product-text-dt">
@@ -234,7 +246,7 @@ export default ({ title }) => (
                 </div>
                 <div
                   className="owl-item"
-                  style={{ width: "285px", marginRight: "10px" }}
+                  style={{ width: '285px', marginRight: '10px' }}
                 >
                   <div className="item">
                     <div className="product-item">
@@ -242,10 +254,13 @@ export default ({ title }) => (
                         href="http://gambolthemes.net/html-items/gambo_supermarket_demo/single_product_view.html"
                         className="product-img"
                       >
-                        <img src="images/product/img-5.jpg" alt="" />
+                        <img src="/img/product/img-5.jpg" alt="" />
                         <div className="product-absolute-options">
                           <span className="offer-badge-1">2% off</span>
-                          <span className="like-icon" title="wishlist"></span>
+                          <span
+                            className="like-icon"
+                            title="wishlist"
+                          ></span>
                         </div>
                       </a>
                       <div className="product-text-dt">
@@ -286,7 +301,7 @@ export default ({ title }) => (
                 </div>
                 <div
                   className="owl-item"
-                  style={{ width: "285px", marginRight: "10px" }}
+                  style={{ width: '285px', marginRight: '10px' }}
                 >
                   <div className="item">
                     <div className="product-item">
@@ -294,10 +309,13 @@ export default ({ title }) => (
                         href="http://gambolthemes.net/html-items/gambo_supermarket_demo/single_product_view.html"
                         className="product-img"
                       >
-                        <img src="images/product/img-6.jpg" alt="" />
+                        <img src="/img/product/img-6.jpg" alt="" />
                         <div className="product-absolute-options">
                           <span className="offer-badge-1">2% off</span>
-                          <span className="like-icon" title="wishlist"></span>
+                          <span
+                            className="like-icon"
+                            title="wishlist"
+                          ></span>
                         </div>
                       </a>
                       <div className="product-text-dt">
@@ -338,7 +356,7 @@ export default ({ title }) => (
                 </div>
                 <div
                   className="owl-item"
-                  style={{ width: "285px", marginRight: "10px" }}
+                  style={{ width: '285px', marginRight: '10px' }}
                 >
                   <div className="item">
                     <div className="product-item">
@@ -346,10 +364,13 @@ export default ({ title }) => (
                         href="http://gambolthemes.net/html-items/gambo_supermarket_demo/single_product_view.html"
                         className="product-img"
                       >
-                        <img src="images/product/img-7.jpg" alt="" />
+                        <img src="/img/product/img-7.jpg" alt="" />
                         <div className="product-absolute-options">
                           <span className="offer-badge-1">1% off</span>
-                          <span className="like-icon" title="wishlist"></span>
+                          <span
+                            className="like-icon"
+                            title="wishlist"
+                          ></span>
                         </div>
                       </a>
                       <div className="product-text-dt">
@@ -390,7 +411,7 @@ export default ({ title }) => (
                 </div>
                 <div
                   className="owl-item"
-                  style={{ width: "285px", marginRight: "10px" }}
+                  style={{ width: '285px', marginRight: '10px' }}
                 >
                   <div className="item">
                     <div className="product-item">
@@ -398,10 +419,13 @@ export default ({ title }) => (
                         href="http://gambolthemes.net/html-items/gambo_supermarket_demo/single_product_view.html"
                         className="product-img"
                       >
-                        <img src="images/product/img-8.jpg" alt="" />
+                        <img src="/img/product/img-8.jpg" alt="" />
                         <div className="product-absolute-options">
                           <span className="offer-badge-1">3% off</span>
-                          <span className="like-icon" title="wishlist"></span>
+                          <span
+                            className="like-icon"
+                            title="wishlist"
+                          ></span>
                         </div>
                       </a>
                       <div className="product-text-dt">
@@ -450,7 +474,11 @@ export default ({ title }) => (
               >
                 <i className="uil uil-angle-left"></i>
               </button>
-              <button type="button" role="presentation" className="owl-next">
+              <button
+                type="button"
+                role="presentation"
+                className="owl-next"
+              >
                 <i className="uil uil-angle-right"></i>
               </button>
             </div>
@@ -460,4 +488,4 @@ export default ({ title }) => (
       </div>
     </div>
   </div>
-);
+)
