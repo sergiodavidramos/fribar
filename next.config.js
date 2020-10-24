@@ -1,12 +1,12 @@
 const webpack = require('webpack')
 
 module.exports = {
-  webpack: (config, { dev }) => {
+  webpack: (config, { dev, }) => {
     config.plugins.push(
       new webpack.ProvidePlugin({
         '$': 'jquery',
         'jQuery': 'jquery',
-        'window.jQuery': 'jquery',
+        : 'jquery',
       })
     )
     return config

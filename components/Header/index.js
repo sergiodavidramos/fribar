@@ -9,11 +9,19 @@ import UserContext from '../UserContext'
 import { useContext } from 'react'
 import GetImg from '../GetImg'
 import { API_URL } from '../Config'
+<<<<<<< HEAD
 import Head from 'next/head'
+=======
+import Router from 'next/router'
+>>>>>>> dad12b7d6990a33fd4435fdea6d4ee8f8ee37f1b
 
 export default () => {
-  const { user } = useContext(UserContext)
+  const { user, signOut } = useContext(UserContext)
   console.log(user)
+  const handlerCerrarSesion = () => {
+    signOut()
+    Router.replace('/')
+  }
   return (
     <>
       <Head>
@@ -38,6 +46,10 @@ export default () => {
             <div className="res_main_logo">
               <Link href="/">
                 <a>
+<<<<<<< HEAD
+=======
+                  <img src="/images/dark-logo-1.svg" alt="" />
+>>>>>>> dad12b7d6990a33fd4435fdea6d4ee8f8ee37f1b
                   <Logo />
                 </a>
               </Link>
@@ -45,7 +57,10 @@ export default () => {
             <div className="main_logo" id="logo">
               <Link href="/">
                 <a>
+<<<<<<< HEAD
                   {/* <img src="images/logo.svg" alt="" /> */}
+=======
+>>>>>>> dad12b7d6990a33fd4435fdea6d4ee8f8ee37f1b
                   <LogoHorizontal />
                 </a>
               </Link>
@@ -168,7 +183,10 @@ export default () => {
                         <i className="uil uil-info-circle icon__1"></i>
                         Preguntas más frecuentes
                       </a>
-                      <a href="sign_in.html" className="item channel_item">
+                      <a
+                        onClick={handlerCerrarSesion}
+                        className="item channel_item"
+                      >
                         <i className="uil uil-lock-alt icon__1"></i>Cerrar
                         sesión
                       </a>

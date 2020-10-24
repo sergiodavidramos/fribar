@@ -5,8 +5,12 @@ import Dashboard from '../../components/Perfil'
 import BanerPerfil from '../../components/Perfil/components/BanerPerfil'
 import { useContext, useEffect } from 'react'
 import UserContext from '../../components/UserContext'
+<<<<<<< HEAD
 import Head from 'next/head'
 import Loader from '../../components/Loader'
+=======
+
+>>>>>>> dad12b7d6990a33fd4435fdea6d4ee8f8ee37f1b
 export default () => {
   const { user } = useContext(UserContext)
   useEffect(() => {}, [])
