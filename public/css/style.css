@@ -3726,7 +3726,7 @@ label.control-label {
 
 .dashboard-group:before {
   content: '';
-  background: url(../img/banner.svg) no-repeat bottom;
+  background: url(/img/banner.svg) no-repeat bottom;
   left: 0;
   right: 0;
   top: 0;
@@ -4801,7 +4801,7 @@ table {
 
 .default-dt:before {
   content: '';
-  background: url(../img/career/default.jpg) no-repeat center;
+  background: url(/img/career/default.jpg) no-repeat center;
   left: 0;
   right: 0;
   top: 0;
@@ -5860,7 +5860,7 @@ textarea {
 }
 
 .banner-blog {
-  background: url(../img/blog/img-1.jpg) 40% 0px / cover no-repeat;
+  background: url(/img/blog/img-1.jpg) 40% 0px / cover no-repeat;
 }
 
 .banner.visible {
@@ -6589,7 +6589,7 @@ textarea {
 
 .faq-dt:before {
   content: '';
-  background: url(../img/career/default.jpg) no-repeat center;
+  background: url(/img/career/default.jpg) no-repeat center;
   left: 0;
   right: 0;
   top: 0;
@@ -6770,4 +6770,17 @@ textarea {
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
   display: inline-block;
+}
+.btn-facebook {
+  font-weight: 600 !important;
+  font-size: 14.5px !important;
+  color: white !important;
+}
+.container-face {
+  background-color: #3d5998;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 0px 20px 0px;
+  border-radius: 0.3em;
 }

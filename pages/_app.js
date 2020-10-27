@@ -14,10 +14,7 @@ import '../public/vendor/OwlCarousel/assets/owl.carousel.css'
 import '../public/vendor/OwlCarousel/assets/owl.theme.default.min.css'
 import '../public/vendor/bootstrap/css/bootstrap.min.css'
 import '../public/vendor/semantic/semantic.min.css'
-
-import 'owl.carousel/dist/assets/owl.carousel.css'
-import 'owl.carousel/dist/assets/owl.theme.default.css'
-
+import loadjs from 'loadjs'
 export default class MyApp extends App {
   constructor(props) {
     super(props)
@@ -47,8 +44,6 @@ export default class MyApp extends App {
     }
   }
   componentDidMount() {
-    require ('owl.carousel/dist/assets/owl.carousel.css');
-    require('owl.carousel')
     this.getCategorias()
     const user = localStorage.getItem('frifolly-user')
     const token = localStorage.getItem('frifolly-token')
@@ -58,6 +53,16 @@ export default class MyApp extends App {
         token,
       })
     }
+
+    loadjs(
+      [
+        '/vendor/semantic/semantic.min.js',
+        '/vendor/OwlCarousel/owl.carousel.js',
+        '/js/custom.js',
+        '/js/offset_overlay.js',
+      ],
+      () => {}
+    )
   }
 
   signIn = (user, token) => {

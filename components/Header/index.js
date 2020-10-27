@@ -6,14 +6,12 @@ import LogoHorizontal from './LogoHorizontal'
 import Location from './Location'
 import Link from 'next/link'
 import UserContext from '../UserContext'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import GetImg from '../GetImg'
 import { API_URL } from '../Config'
-<<<<<<< HEAD
 import Head from 'next/head'
-=======
+import loadjs from 'loadjs'
 import Router from 'next/router'
->>>>>>> dad12b7d6990a33fd4435fdea6d4ee8f8ee37f1b
 
 export default () => {
   const { user, signOut } = useContext(UserContext)
@@ -22,19 +20,14 @@ export default () => {
     signOut()
     Router.replace('/')
   }
+  useEffect(() => {
+    loadjs('js/night-mode.js', () => {
+      loadjs('/vendor/semantic/semantic.min.js', () => {})
+    })
+  })
   return (
     <>
-      <Head>
-        <script src="/js/jquery-3.3.1.min.js"></script>
-        <script src="/vendor/OwlCarousel/owl.carousel.js"></script>
-        <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="/vendor/semantic/semantic.min.js"></script>
-        <script src="/js/jquery.countdown.min.js"></script>
-        <script src="/js/custom.js"></script>
-        <script src="/js/product.thumbnail.slider.js"></script>
-        <script src="/js/offset_overlay.js"></script>
-        <script src="/js/night-mode.js"></script>
-      </Head>
+      <Head></Head>
 
       <ModelCategory />
       <SearchModel />
@@ -46,10 +39,6 @@ export default () => {
             <div className="res_main_logo">
               <Link href="/">
                 <a>
-<<<<<<< HEAD
-=======
-                  <img src="/images/dark-logo-1.svg" alt="" />
->>>>>>> dad12b7d6990a33fd4435fdea6d4ee8f8ee37f1b
                   <Logo />
                 </a>
               </Link>
@@ -57,10 +46,6 @@ export default () => {
             <div className="main_logo" id="logo">
               <Link href="/">
                 <a>
-<<<<<<< HEAD
-                  {/* <img src="images/logo.svg" alt="" /> */}
-=======
->>>>>>> dad12b7d6990a33fd4435fdea6d4ee8f8ee37f1b
                   <LogoHorizontal />
                 </a>
               </Link>
