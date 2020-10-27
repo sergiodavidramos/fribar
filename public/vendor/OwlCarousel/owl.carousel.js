@@ -16,6 +16,7 @@
  * @todo stagePadding calculate wrong active classes
  */
 ;(function($, window, document, undefined) {
+
 	/**
 	 * Creates a carousel.
 	 * @class The Owl Carousel.

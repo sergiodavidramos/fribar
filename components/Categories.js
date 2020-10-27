@@ -2,16 +2,17 @@ import Items from './SingleProduct/Items'
 import Head from 'next/head'
 
 import { useEffect } from 'react'
-import dynamic from 'next/dynamic'
-
+import loadjs from 'loadjs'
 // const DynamicComponent = dynamic(() => import('../public/vendor/OwlCarousel/owl.carousel'))
 
 export default () => {
-    let OwlCarousel
-  useEffect(() => {
-      window.Diamonds=require('owl.carousel')
-    // window.jQuery = require('owl.carousel')
-  }, [])
+    useEffect(() => {
+        loadjs('/vendor/semantic/semantic.min.js', () => {
+            loadjs('/js/custom.js', () => {
+              console.log('sda app')
+            })
+        })
+      }, [])
   return (
     <div className="section145">
       

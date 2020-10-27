@@ -9,11 +9,8 @@ import UserContext from '../UserContext'
 import { useContext } from 'react'
 import GetImg from '../GetImg'
 import { API_URL } from '../Config'
-<<<<<<< HEAD
 import Head from 'next/head'
-=======
 import Router from 'next/router'
->>>>>>> dad12b7d6990a33fd4435fdea6d4ee8f8ee37f1b
 
 export default () => {
   const { user, signOut } = useContext(UserContext)
@@ -46,10 +43,8 @@ export default () => {
             <div className="res_main_logo">
               <Link href="/">
                 <a>
-<<<<<<< HEAD
-=======
                   <img src="/images/dark-logo-1.svg" alt="" />
->>>>>>> dad12b7d6990a33fd4435fdea6d4ee8f8ee37f1b
+
                   <Logo />
                 </a>
               </Link>
@@ -57,10 +52,6 @@ export default () => {
             <div className="main_logo" id="logo">
               <Link href="/">
                 <a>
-<<<<<<< HEAD
-                  {/* <img src="images/logo.svg" alt="" /> */}
-=======
->>>>>>> dad12b7d6990a33fd4435fdea6d4ee8f8ee37f1b
                   <LogoHorizontal />
                 </a>
               </Link>
@@ -119,15 +110,15 @@ export default () => {
                     <span className="noti_count1">3</span>
                   </a>
                 </li>
-                {user ? (
+                {true ? (
                   <li className="ui dropdown">
                     <a className="opts_account">
                       <img
-                        src={GetImg(user.img, `${API_URL}/upload/user`)}
+                        // src={GetImg(user.img, `${API_URL}/upload/user`)}
                         alt="Usuario Frifolly"
                       />
                       <span className="user__name">
-                        {user.nombre_comp}
+                        { 'sdsd'}
                       </span>
                       <i className="uil uil-angle-down"></i>
                     </a>
