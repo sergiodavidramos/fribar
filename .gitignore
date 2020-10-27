@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /node_modules
 /.next
 =======
@@ -36,4 +35,3 @@ yarn-error.log*
 
 # vercel
 .vercel
->>>>>>> 6bfeb1567acc151b9b35021e4b5459fd6d6b9d28

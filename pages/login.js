@@ -146,24 +146,26 @@ export default () => {
                       <div className="form-title">
                         <h6>Login</h6>
                       </div>
-                      <button
-                        className="btn btn-lg btn-google form-group pos_rel"
-                        id="customBtn"
-                      >
-                        <i className="fab fa-google-plus-g mr-2"></i>
-                        Inicia sesión con Google
-                      </button>
-                      <div className="container-face">
-                        <FacebookLogin
-                          appId="284295679548568"
-                          autoLoad={false}
-                          onClick={componentClicked}
-                          callback={responseFacebook}
-                          cssClass="btn btn-lg btn-facebook"
-                          icon="fab fa-facebook-f mr-2"
-                          textButton="Inicia sesión con Facebook"
-                        />
-                      </div>
+                      <main>
+                        <button
+                          className="btn btn-lg btn-google form-group pos_rel"
+                          id="customBtn"
+                        >
+                          <i className="fab fa-google-plus-g mr-2"></i>
+                          Inicia sesión con Google
+                        </button>
+                        <div className="container-face">
+                          <FacebookLogin
+                            appId="284295679548568"
+                            autoLoad={false}
+                            onClick={componentClicked}
+                            callback={responseFacebook}
+                            cssClass="btn btn-lg btn-facebook"
+                            icon="fab fa-facebook-f mr-2"
+                            textButton="Inicia sesión con Facebook"
+                          />
+                        </div>
+                      </main>
                       <form onSubmit={handlerSubmit}>
                         <div className="form-group pos_rel">
                           <input
@@ -221,7 +223,6 @@ export default () => {
       <style jsx>{`
         main {
           display: flex;
-          height: 100vh;
           align-items: center;
           justify-content: center;
           flex-direction: column;
@@ -230,7 +231,6 @@ export default () => {
           color: white;
           background-color: #ea4335;
           font-size: 15px;
-          margin: 10px 0px;
           font-weight: 600;
         }
         .card-modi {

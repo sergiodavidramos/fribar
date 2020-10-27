@@ -33,7 +33,7 @@ export default () => {
                     </a>
                   </p>
                   <div className="earn-points">
-                    <img src="images/Dollar.svg" alt="" />
+                    <img src="/img/Dollar.svg" alt="" />
                     Puntos : <span>{user.puntos}</span>
                   </div>
                 </div>

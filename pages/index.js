@@ -10,13 +10,19 @@ import * as React from 'react'
 import loadjs from 'loadjs'
 const Home = () => {
   useEffect(() => {
-    loadjs('/vendor/semantic/semantic.min.js', () => {
-        loadjs('/js/custom.js', () => {
-          console.log('sda app')
-        })
-    })
-  }, [])
-
+    loadjs(
+      [
+        '/js/jquery-3.3.1.min.js',
+        '/vendor/bootstrap/js/bootstrap.bundle.min.js',
+        '/vendor/OwlCarousel/owl.carousel.js',
+        '/vendor/semantic/semantic.min.js',
+        '/js/jquery.countdown.min.js',
+        '/js/custom.js',
+        '/js/offset_overlay.js',
+      ],
+      () => {}
+    )
+  })
   return (
     <>
       <Head>
@@ -47,7 +53,6 @@ const Home = () => {
         <Destacados title="Nuevos Productos Agregados" />
       </div>
       <Footer />
-      <script src="/vendor/semantic/semantic.min.js"></script>
     </>
   )
 }
