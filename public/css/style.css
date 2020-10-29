@@ -3588,18 +3588,6 @@ label.control-label {
 }
 
 .dashboard-group:before {
-<<<<<<< HEAD
-    content: "";
-    background: url(/img/banner.svg) no-repeat bottom;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    position: absolute;
-    pointer-events: none;
-    background-size: cover;
-    opacity: 0.02;
-=======
   content: '';
   background: url(/img/banner.svg) no-repeat bottom;
   left: 0;
@@ -3610,7 +3598,6 @@ label.control-label {
   pointer-events: none;
   background-size: cover;
   opacity: 0.02;
->>>>>>> 928a38fe89ba1d93027ece5e7bef06a030bc2595
 }
 
 .user-dt {
@@ -4658,18 +4645,6 @@ table {
 }
 
 .default-dt:before {
-<<<<<<< HEAD
-    content: "";
-    background: url(/img/career/default.jpg) no-repeat center;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    position: absolute;
-    pointer-events: none;
-    background-size: cover;
-    opacity: 0.1;
-=======
   content: '';
   background: url(/img/career/default.jpg) no-repeat center;
   left: 0;
@@ -4680,7 +4655,6 @@ table {
   pointer-events: none;
   background-size: cover;
   opacity: 0.1;
->>>>>>> 928a38fe89ba1d93027ece5e7bef06a030bc2595
 }
 
 .default_tabs {
@@ -5710,11 +5684,7 @@ textarea {
 }
 
 .banner-blog {
-<<<<<<< HEAD
-	background: url(/img/blog/img-1.jpg) 40% 0px / cover no-repeat;
-=======
   background: url(/img/blog/img-1.jpg) 40% 0px / cover no-repeat;
->>>>>>> 928a38fe89ba1d93027ece5e7bef06a030bc2595
 }
 
 .banner.visible {
@@ -6432,18 +6402,6 @@ textarea {
 }
 
 .faq-dt:before {
-<<<<<<< HEAD
-    content: "";
-    background: url(/img/career/default.jpg) no-repeat center;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    position: absolute;
-    pointer-events: none;
-    background-size: cover;
-    opacity: 0.1;
-=======
   content: '';
   background: url(/img/career/default.jpg) no-repeat center;
   left: 0;
@@ -6454,7 +6412,6 @@ textarea {
   pointer-events: none;
   background-size: cover;
   opacity: 0.1;
->>>>>>> 928a38fe89ba1d93027ece5e7bef06a030bc2595
 }
 
 .panel-body p {
@@ -6618,18 +6575,6 @@ textarea {
 }
 
 .print-btn {
-<<<<<<< HEAD
-	margin-left: auto;
-    padding: 9px 20px;
-    border: 1px solid #f55d2c;
-    background: #f55d2c;
-    color: #fff;
-    border-radius: 5px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 500;
-    display: inline-block;
-}
-=======
   margin-left: auto;
   padding: 9px 20px;
   border: 1px solid #f55d2c;
@@ -6653,4 +6598,3 @@ textarea {
   margin: 0px 0px 20px 0px;
   border-radius: 0.3em;
 }
->>>>>>> 928a38fe89ba1d93027ece5e7bef06a030bc2595

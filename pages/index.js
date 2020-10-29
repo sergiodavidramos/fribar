@@ -1,27 +1,31 @@
 import Head from 'next/head'
 import Header from '../components/Header'
-import Carrousel from '../components/Carrousel'
+import {Carrousel} from '../components/Carrousel'
 import Categories from '../components/Categories'
 import Destacados from '../components/Destacados'
 import MejoresValores from '../components/MejoresValores'
 import Footer from '../components/Footer'
 import { useEffect } from 'react'
 import * as React from 'react'
+import { LoadFile } from '../components/LoadFile'
 import loadjs from 'loadjs'
 const Home = () => {
   useEffect(() => {
-    loadjs(
-      [
-        '/js/jquery-3.3.1.min.js',
-        '/vendor/bootstrap/js/bootstrap.bundle.min.js',
-        '/vendor/OwlCarousel/owl.carousel.js',
-        '/vendor/semantic/semantic.min.js',
-        '/js/jquery.countdown.min.js',
-        '/js/custom.js',
-        '/js/offset_overlay.js',
-      ],
-      () => {}
-    )
+    loadjs('/js/jquery-3.3.1.min.js', () => {
+      loadjs('/vendor/bootstrap/js/bootstrap.bundle.min.js', () => {
+        loadjs('/vendor/OwlCarousel/owl.carousel.js', () => {
+          loadjs('/vendor/semantic/semantic.min.js', () => {
+            loadjs('/js/jquery.countdown.min.js', () => {
+              loadjs('/js/custom.js', () => {
+                loadjs('/js/offset_overlay.js', () => {
+                //   loadjs('/js/night-mode.js', () => {})
+                })
+              })
+            })
+          })
+        })
+      })
+    })
   })
   return (
     <>

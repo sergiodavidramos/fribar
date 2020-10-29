@@ -1,11 +1,17 @@
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+import { LoadFile } from '../components/LoadFile'
+import { useEffect, useState } from 'react'
 export default function Custom404() {
+  const [ModoNoche, SetModoNoche] = useState(false)
+  useEffect(() => {
+    // LoadFile()
+    SetModoNoche(JSON.parse(localStorage.getItem('gmtNightMode')))
+  })
   return (
     <>
       <Header />
-      <div className="main">
+      <div className={ModoNoche ? 'main-noche' : 'main'}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -22,7 +28,7 @@ export default function Custom404() {
           </defs>
           <g fill="none" fillRule="evenodd">
             <path
-              fill="#FFF"
+              fill={ModoNoche ? '#242424' : '#FFF'}
               d="M0 0H1366V800H0z"
               transform="translate(-448 -157)"
             />
@@ -30,9 +36,12 @@ export default function Custom404() {
               <mask id="prefix__b" fill="#fff">
                 <use xlinkHref="#prefix__a" />
               </mask>
-              <use fill="#F6F6F7" xlinkHref="#prefix__a" />
+              <use
+                fill={ModoNoche ? '#333' : '#F6F6F7'}
+                xlinkHref="#prefix__a"
+              />
               <path
-                fill="#EDEDF0"
+                fill={ModoNoche ? '#333' : '#EDEDF0'}
                 fillRule="nonzero"
                 d="M-14.199 211.2H481.36V301.2H-14.199z"
                 mask="url(#prefix__b)"
@@ -212,7 +221,16 @@ export default function Custom404() {
             justify-content: center;
             background: white;
           }
-
+          .main-noche {
+            min-height: 600px;
+            margin: 0px auto;
+            width: auto;
+            max-width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #242424;
+          }
           .path {
             stroke-dasharray: 300;
             stroke-dashoffset: 300;
@@ -235,5 +253,5 @@ export default function Custom404() {
       </div>
       <Footer />
     </>
-  );
+  )
 }

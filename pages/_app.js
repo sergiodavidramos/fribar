@@ -53,16 +53,21 @@ export default class MyApp extends App {
         token,
       })
     }
-
-    loadjs(
-      [
-        '/vendor/semantic/semantic.min.js',
-        '/vendor/OwlCarousel/owl.carousel.js',
-        '/js/custom.js',
-        '/js/offset_overlay.js',
-      ],
-      () => {}
-    )
+    loadjs('/js/jquery-3.3.1.min.js', () => {
+      loadjs('/vendor/bootstrap/js/bootstrap.bundle.min.js', () => {
+        loadjs('/vendor/OwlCarousel/owl.carousel.js', () => {
+          loadjs('/vendor/semantic/semantic.min.js', () => {
+            loadjs('/js/jquery.countdown.min.js', () => {
+              loadjs('/js/custom.js', () => {
+                loadjs('/js/offset_overlay.js', () => {
+                //   loadjs('/js/night-mode.js', () => {})
+                })
+              })
+            })
+          })
+        })
+      })
+    })
   }
 
   signIn = (user, token) => {
@@ -96,6 +101,7 @@ export default class MyApp extends App {
 
   render() {
     const { Component, pageProps } = this.props
+
     return (
       <>
         <Head>
@@ -104,12 +110,6 @@ export default class MyApp extends App {
             href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap"
             rel="stylesheet"
           />
-          {/* <link
-            rel="stylesheet"
-            href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
-            integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
-            crossOrigin="anonymous"
-          /> */}
         </Head>
         <div
           className={
@@ -134,7 +134,7 @@ export default class MyApp extends App {
             <Component {...pageProps} />
           </UserContext.Provider>
         </div>
-        <script src="/vendor/semantic/semantic.min.js"></script>
+        {loadjs.ready('cargarArchivos', function () {})}
       </>
     )
   }

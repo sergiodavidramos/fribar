@@ -3,31 +3,18 @@ import Head from 'next/head'
 
 import { useEffect } from 'react'
 import loadjs from 'loadjs'
-<<<<<<< HEAD
-// const DynamicComponent = dynamic(() => import('../public/vendor/OwlCarousel/owl.carousel'))
-
-export default () => {
-    useEffect(() => {
-        loadjs('/vendor/semantic/semantic.min.js', () => {
-            loadjs('/js/custom.js', () => {
-              console.log('sda app')
-            })
-        })
-      }, [])
-=======
 export default () => {
   useEffect(() => {
-    loadjs(
-      [
-        '/vendor/semantic/semantic.min.js',
-        '/vendor/OwlCarousel/owl.carousel.js',
-        '/js/custom.js',
-        '/js/offset_overlay.js',
-      ],
-      () => {}
-    )
+    // loadjs(
+    //   [
+    //     '/vendor/semantic/semantic.min.js',
+    //     '/vendor/OwlCarousel/owl.carousel.js',
+    //     '/js/custom.js',
+    //     '/js/offset_overlay.js',
+    //   ],
+    //   () => {}
+    // )
   }, [])
->>>>>>> 928a38fe89ba1d93027ece5e7bef06a030bc2595
   return (
     <div className="section145">
       <div className="container">

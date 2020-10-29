@@ -2,15 +2,15 @@ import loadjs from 'loadjs'
 import { useEffect } from 'react'
 export default () => {
   useEffect(() => {
-    loadjs(
-      [
-        '/vendor/semantic/semantic.min.js',
-        '/vendor/OwlCarousel/owl.carousel.js',
-        '/js/custom.js',
-        '/js/offset_overlay.js',
-      ],
-      () => {}
-    )
+    // loadjs(
+    //   [
+    //     '/vendor/semantic/semantic.min.js',
+    //     '/vendor/OwlCarousel/owl.carousel.js',
+    //     '/js/custom.js',
+    //     '/js/offset_overlay.js',
+    //   ],
+    //   () => {}
+    // )
   })
 
   return (

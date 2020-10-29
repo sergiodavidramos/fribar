@@ -1,0 +1,108 @@
+import Link from 'next/link'
+export const DropPerfil = () => {
+  const handlerCerrarSesion = () => {
+    signOut()
+    Router.replace('/')
+  }
+
+  const handlerNight = () => {
+    'use strict'
+    if (!('localStorage' in window)) return
+
+    document.documentElement.classList.toggle('night-mode')
+    if (document.documentElement.classList.contains('night-mode')) {
+      localStorage.setItem('gmtNightMode', true)
+      return
+    }
+    localStorage.removeItem('gmtNightMode')
+  }
+  return true ? (
+    <li className="ui dropdown">
+      <a className="opts_account">
+        <img
+          // src={GetImg(user.img, `${API_URL}/upload/user`)}
+          src="/img/avatar/img-1.jpg"
+          alt="Usuario Frifolly"
+        />
+        <span className="user__name">{'sdsd'}</span>
+        <i className="uil uil-angle-down"></i>
+      </a>
+
+      <div className="menu dropdown_account">
+        <div className="night_mode_switch__btn">
+          <a
+            href="#"
+            id="night-mode"
+            onClick={handlerNight}
+            className="btn-night-mode"
+          >
+            <i className="uil uil-moon"></i> Modo noche
+            <span className="btn-night-mode-switch">
+              <span className="uk-switch-button"></span>
+            </span>
+          </a>
+        </div>
+        <Link href="/perfil">
+          <a className="item channel_item">
+            <i className="uil uil-apps icon__1"></i>
+            Tablero/Perfil
+          </a>
+        </Link>
+        <Link href="/perfil/pedidos">
+          <a className="item channel_item">
+            <i className="uil uil-box icon__1"></i>Mis ordenes
+          </a>
+        </Link>
+        <Link href="/perfil/likes">
+          <a className="item channel_item">
+            <i className="uil uil-heart icon__1"></i>Mi lista de deseos
+          </a>
+        </Link>
+        <Link href="/perfil/mibilletera">
+          <a className="item channel_item">
+            <i className="uil uil-usd-circle icon__1"></i>Mi billetera
+          </a>
+        </Link>
+
+        <Link href="direccion">
+          <a className="item channel_item">
+            <i className="uil uil-location-point icon__1"></i>
+            Mi dirección
+          </a>
+        </Link>
+        <a href="offers.html" className="item channel_item">
+          <i className="uil uil-gift icon__1"></i>Ofertas
+        </a>
+        <a href="faq.html" className="item channel_item">
+          <i className="uil uil-info-circle icon__1"></i>
+          Preguntas más frecuentes
+        </a>
+        <a onClick={handlerCerrarSesion} className="item channel_item">
+          <i className="uil uil-lock-alt icon__1"></i>Cerrar sesión
+        </a>
+      </div>
+    </li>
+  ) : (
+    <li className="ui dropdown" tabIndex="0">
+      <a className="opts_account">
+        <img src={GetImg()} alt="" />
+        <span className="user__name">Acceder</span>
+        <i className="uil uil-angle-down"></i>
+      </a>
+      <div className="menu dropdown_account" tabIndex="-1">
+        <Link href="/login">
+          <a className="item channel_item">
+            <i className="uil uil-sign-out-alt icon__1"></i>
+            Acceder
+          </a>
+        </Link>
+        <Link href="/registro">
+          <a className="item channel_item">
+            <i className="uil uil-edit-alt icon__1"></i>
+            Registrarse
+          </a>
+        </Link>
+      </div>
+    </li>
+  )
+}
