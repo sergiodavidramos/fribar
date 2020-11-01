@@ -129,18 +129,6 @@ export default () => {
             <div className="col-lg-5">
               <div className="sign-form">
                 <div className="sign-inner">
-                  <div className="sign-logo" id="logo">
-                    <a href="index.html">
-                      <img src="images/logo.svg" alt="" />
-                    </a>
-                    <a href="index.html">
-                      <img
-                        className="logo-inverse"
-                        src="images/dark-logo.svg"
-                        alt=""
-                      />
-                    </a>
-                  </div>
                   <div className="form-dt">
                     <div className="form-inpts checout-address-step">
                       <div className="form-title">

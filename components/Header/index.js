@@ -5,54 +5,27 @@ import Logo from './Logo'
 import LogoHorizontal from './LogoHorizontal'
 import Location from './Location'
 import Link from 'next/link'
-import UserContext from '../UserContext'
-import { useContext, useEffect, useState } from 'react'
-import GetImg from '../GetImg'
-import { API_URL } from '../Config'
+import {useEffect } from 'react'
 import Head from 'next/head'
-import Router from 'next/router'
 import { LoadFile } from '../../components/LoadFile'
-import $ from 'jquery'
 import { NavbarMobile } from './NavbarMobile'
-import loadjs from 'loadjs'
-import {DropPerfil} from './DropPerfil'
+import { DropPerfil } from './DropPerfil'
 export default () => {
-  const { user, signOut } = useContext(UserContext)
-
-  console.log('user', user)
-
 
   useEffect(() => {
-    loadjs('/js/jquery-3.3.1.min.js', () => {
-      loadjs('/vendor/bootstrap/js/bootstrap.bundle.min.js', () => {
-        loadjs('/vendor/OwlCarousel/owl.carousel.js', () => {
-          loadjs('/vendor/semantic/semantic.min.js', () => {
-            loadjs('/js/jquery.countdown.min.js', () => {
-              loadjs('/js/custom.js', () => {
-                loadjs('/js/offset_overlay.js', () => {
-                  //   loadjs('/js/night-mode.js', () => {})
-                })
-              })
-            })
-          })
-        })
-      })
-    })
-
     if (!('localStorage' in window)) return
     var nightMode = localStorage.getItem('gmtNightMode')
     if (nightMode) {
       document.documentElement.className += ' night-mode'
     }
+    LoadFile()
   })
   return (
     <>
       <Head></Head>
-
       <ModelCategory />
       <SearchModel />
       <CartSidebar />
-
       <header className="header clearfix">
         <div className="top-header-group">
           <div className="top-header">
@@ -124,7 +97,7 @@ export default () => {
                     <span className="noti_count1">3</span>
                   </a>
                 </li>
-                  <DropPerfil/>
+                <DropPerfil />
               </ul>
             </div>
           </div>

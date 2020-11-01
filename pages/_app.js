@@ -14,7 +14,7 @@ import '../public/vendor/OwlCarousel/assets/owl.carousel.css'
 import '../public/vendor/OwlCarousel/assets/owl.theme.default.min.css'
 import '../public/vendor/bootstrap/css/bootstrap.min.css'
 import '../public/vendor/semantic/semantic.min.css'
-import loadjs from 'loadjs'
+import { LoadFile } from '../components/LoadFile'
 export default class MyApp extends App {
   constructor(props) {
     super(props)
@@ -22,13 +22,7 @@ export default class MyApp extends App {
       user: null,
       token: null,
       categorias: [],
-      sid: false,
     }
-  }
-  setSitNav = (sid) => {
-    this.setState({
-      sid,
-    })
   }
   getCategorias = async () => {
     try {
@@ -53,21 +47,7 @@ export default class MyApp extends App {
         token,
       })
     }
-    loadjs('/js/jquery-3.3.1.min.js', () => {
-      loadjs('/vendor/bootstrap/js/bootstrap.bundle.min.js', () => {
-        loadjs('/vendor/OwlCarousel/owl.carousel.js', () => {
-          loadjs('/vendor/semantic/semantic.min.js', () => {
-            loadjs('/js/jquery.countdown.min.js', () => {
-              loadjs('/js/custom.js', () => {
-                loadjs('/js/offset_overlay.js', () => {
-                //   loadjs('/js/night-mode.js', () => {})
-                })
-              })
-            })
-          })
-        })
-      })
-    })
+    LoadFile()
   }
 
   signIn = (user, token) => {
@@ -111,13 +91,7 @@ export default class MyApp extends App {
             rel="stylesheet"
           />
         </Head>
-        <div
-          className={
-            this.state.sid
-              ? `sb-nav-fixed sb-sidenav-toggled`
-              : 'sb-nav-fixed'
-          }
-        >
+        <div>
           <Notifications />
           <UserContext.Provider
             value={{
@@ -128,13 +102,11 @@ export default class MyApp extends App {
               signIn: this.signIn,
               signOut: this.signOut,
               setUser: this.setUser,
-              setSitNav: this.setSitNav,
             }}
           >
             <Component {...pageProps} />
           </UserContext.Provider>
         </div>
-        {loadjs.ready('cargarArchivos', function () {})}
       </>
     )
   }

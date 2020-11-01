@@ -1,10 +1,17 @@
 import Link from 'next/link'
+import UserContext from '../UserContext'
+import { useContext } from 'react'
+import GetImg from '../GetImg'
+import { API_URL } from '../Config'
+import Router from 'next/router'
 export const DropPerfil = () => {
+  const { user, signOut } = useContext(UserContext)
+  console.log(user)
+
   const handlerCerrarSesion = () => {
     signOut()
     Router.replace('/')
   }
-
   const handlerNight = () => {
     'use strict'
     if (!('localStorage' in window)) return
@@ -16,15 +23,14 @@ export const DropPerfil = () => {
     }
     localStorage.removeItem('gmtNightMode')
   }
-  return true ? (
+  return user ? (
     <li className="ui dropdown">
       <a className="opts_account">
         <img
-          // src={GetImg(user.img, `${API_URL}/upload/user`)}
-          src="/img/avatar/img-1.jpg"
+          src={GetImg(user.img, `${API_URL}/upload/user`)}
           alt="Usuario Frifolly"
         />
-        <span className="user__name">{'sdsd'}</span>
+        <span className="user__name">{user.nombre_comp}</span>
         <i className="uil uil-angle-down"></i>
       </a>
 

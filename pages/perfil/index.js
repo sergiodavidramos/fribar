@@ -6,11 +6,14 @@ import BanerPerfil from '../../components/Perfil/components/BanerPerfil'
 import { useContext, useEffect } from 'react'
 import UserContext from '../../components/UserContext'
 import Head from 'next/head'
+import Router from 'next/router'
 import Loader from '../../components/Loader'
-
 export default () => {
   const { user } = useContext(UserContext)
-  useEffect(() => {}, [])
+  useEffect(() => {
+    const user = localStorage.getItem('frifolly-user')
+    !user ? Router.push('/login') : ''
+  }, [])
   return (
     <>
       <Head></Head>
