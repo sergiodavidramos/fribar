@@ -5,13 +5,14 @@ import Logo from './Logo'
 import LogoHorizontal from './LogoHorizontal'
 import Location from './Location'
 import Link from 'next/link'
-import {useEffect } from 'react'
+import { useEffect, useContext } from 'react'
+import UserContext from '../UserContext'
 import Head from 'next/head'
 import { LoadFile } from '../../components/LoadFile'
 import { NavbarMobile } from './NavbarMobile'
 import { DropPerfil } from './DropPerfil'
 export default () => {
-
+  const { setModelCategory } = useContext(UserContext)
   useEffect(() => {
     if (!('localStorage' in window)) return
     var nightMode = localStorage.getItem('gmtNightMode')
@@ -106,11 +107,11 @@ export default () => {
           <div className="sub-header">
             <div className="ui dropdown" tabIndex="0">
               <a
-                href="#"
                 className="category_drop hover-btn"
                 data-toggle="modal"
                 data-target="#category_model"
                 title="Categories"
+                onClick={() => setModelCategory(true)}
               >
                 <i className="uil uil-apps"></i>
                 <span className="cate__icon">Seleccionar Categoria</span>

@@ -108,6 +108,19 @@ export const DropPerfil = () => {
             Registrarse
           </a>
         </Link>
+        <div className="night_mode_switch__btn">
+          <a
+            href="#"
+            id="night-mode"
+            onClick={handlerNight}
+            className="btn-night-mode"
+          >
+            <i className="uil uil-moon"></i> Modo noche
+            <span className="btn-night-mode-switch">
+              <span className="uk-switch-button"></span>
+            </span>
+          </a>
+        </div>
       </div>
     </li>
   )

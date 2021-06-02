@@ -2689,8 +2689,8 @@ img.download-btn {
 
 .product-now li {
 	margin-right: 5px;
-    width: 50px;
-    height: 36px;
+    width: 30%;
+    height: auto;
     position: relative;
     text-align: center;
     display: inline-block;
@@ -2699,7 +2699,7 @@ img.download-btn {
 .product-now label,
 .product-now input {
 	display: block;
-	position: absolute;
+	/* position: absolute; */
 	top: 0;
 	left: 0;
 	right: 0;
@@ -3124,6 +3124,7 @@ label.control-label {
 .address-btns {
     display: flex;
     align-items: end;
+    margin-top: 20px;
 }
 
 .save-btn14 {
@@ -6593,6 +6594,7 @@ textarea {
 .container-face {
   background-color: #3d5998;
   display: flex;
+  width: 100% !important;
   justify-content: center;
   align-items: center;
   margin: 0px 0px 20px 0px;

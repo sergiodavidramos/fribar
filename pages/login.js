@@ -6,6 +6,7 @@ import Notifications, { notify } from 'react-notify-toast'
 import FacebookLogin from 'react-facebook-login'
 import UserContext from '../components/UserContext'
 import { encode } from 'base-64'
+import Link from 'next/link'
 export default () => {
   var auth2
   const { signIn } = useContext(UserContext)
@@ -193,7 +194,9 @@ export default () => {
                     <div className="signup-link">
                       <p>
                         ¿No tienes una cuenta? -{' '}
-                        <a href="sign_up.html">Regístrate ahora</a>
+                        <Link href="/registro">
+                          <a>Regístrate ahora</a>
+                        </Link>
                       </p>
                     </div>
                   </div>

@@ -6,7 +6,9 @@ export const LoadFile = () =>
         loadjs('/vendor/semantic/semantic.min.js', () => {
           loadjs('/js/jquery.countdown.min.js', () => {
             loadjs('/js/custom.js', () => {
-              loadjs('/js/offset_overlay.js', () => {})
+              loadjs('/js/product.thumbnail.slider.js', () => {
+                loadjs('/js/offset_overlay.js', () => {})
+              })
             })
           })
         })

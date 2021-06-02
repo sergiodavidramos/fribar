@@ -8,6 +8,7 @@ import '../public/vendor/unicons-2.0.1/css/unicons.css'
 import '../public/css/style.css'
 import '../public/css/responsive.css'
 import '../public/css/night-mode.css'
+import '../public/css/step-wizard.css'
 //  Vendor Stylesheets
 import '../public/vendor/fontawesome-free/css/all.min.css'
 import '../public/vendor/OwlCarousel/assets/owl.carousel.css'
@@ -15,33 +16,48 @@ import '../public/vendor/OwlCarousel/assets/owl.theme.default.min.css'
 import '../public/vendor/bootstrap/css/bootstrap.min.css'
 import '../public/vendor/semantic/semantic.min.css'
 import { LoadFile } from '../components/LoadFile'
+import { API_URL } from '../components/Config'
 export default class MyApp extends App {
   constructor(props) {
     super(props)
     this.state = {
       user: null,
       token: null,
-      categorias: [],
+      movimientos: [],
+      modelCategory: true,
     }
   }
-  getCategorias = async () => {
-    try {
-      const res = await fetch('http://localhost:3001/categoria')
-      const categorias = await res.json()
-      this.setState({
-        categorias: categorias.body,
+  getMovimientos = (token) => {
+    fetch(`${API_URL}/movimiento`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => {
+        if (res.status === 401) {
+          this.signOut()
+        }
+        return res.json()
       })
-    } catch (err) {
-      this.setState({
-        categorias: [],
+      .then((res) => {
+        if (res.error) alert(res.body.message)
+        else {
+          this.setState({
+            movimientos: res.body,
+          })
+        }
       })
-    }
+      .catch((e) => {
+        console.log('No se pudo guardar los cambios')
+      })
   }
   componentDidMount() {
-    this.getCategorias()
     const user = localStorage.getItem('frifolly-user')
     const token = localStorage.getItem('frifolly-token')
     if (user && token) {
+      this.getMovimientos(token)
       this.setState({
         user: JSON.parse(user),
         token,
@@ -63,6 +79,14 @@ export default class MyApp extends App {
       }
     )
   }
+  signInCompra = (user, token) => {
+    localStorage.setItem('frifolly-user', JSON.stringify(user))
+    localStorage.setItem('frifolly-token', token)
+    this.setState({
+      user,
+      token,
+    })
+  }
 
   setUser = (user) => {
     localStorage.setItem('frifolly-user', JSON.stringify(user))
@@ -78,7 +102,11 @@ export default class MyApp extends App {
       token: null,
     })
   }
-
+  setModelCategory = (action) => {
+    this.setState({
+      modelCategory: action,
+    })
+  }
   render() {
     const { Component, pageProps } = this.props
 
@@ -97,11 +125,13 @@ export default class MyApp extends App {
             value={{
               user: this.state.user,
               token: this.state.token,
-              categorias: this.state.categorias,
-              sid: this.state.sid,
+              movimientos: this.state.movimientos,
+              stateModel: this.state.modelCategory,
               signIn: this.signIn,
               signOut: this.signOut,
               setUser: this.setUser,
+              signInCompra: this.signInCompra,
+              setModelCategory: this.setModelCategory,
             }}
           >
             <Component {...pageProps} />
