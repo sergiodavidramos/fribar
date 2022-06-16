@@ -1,5 +1,5 @@
 {
-  "name": "frifolly",
+  "name": "fribar",
   "version": "1.0.0",
   "description": "ecommerce",
   "main": "index.js",
@@ -12,16 +12,17 @@
   "author": "Sergio David Ramos",
   "license": "ISC",
   "dependencies": {
+    "@algolia/autocomplete-core": "1.6.3",
     "base-64": "^0.1.0",
     "loadjs": "^4.2.0",
+    "mapbox-gl": "^1.12.0",
+    "moment": "^2.27.0",
     "next": "^9.5.5",
-    "owl.carousel": "^2.3.4",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-facebook-login": "^4.1.1",
     "react-icons": "^3.11.0",
     "react-notify-toast": "^0.5.1",
-    "styled-components": "^5.2.1",
-    "moment": "^2.27.0"
+    "styled-components": "^5.2.1"
   }
 }

@@ -31,7 +31,7 @@ export default () => {
                       {user ? user.cuenta : 0} Bs
                     </h4>
                     <span className="date-reward">
-                      Agregado :{' '}
+                      Ultimo Agregado fecha:{' '}
                       {movimientos.length > 0
                         ? moment(movimientos[0].fecha).format('ll')
                         : ''}

@@ -8,11 +8,13 @@ import UserContext from '../../components/UserContext'
 import Head from 'next/head'
 import Router from 'next/router'
 import Loader from '../../components/Loader'
+import { LoadFile } from '../../components/LoadFile'
 export default () => {
   const { user } = useContext(UserContext)
   useEffect(() => {
-    const user = localStorage.getItem('frifolly-user')
+    const user = localStorage.getItem('fribar-user')
     !user ? Router.push('/login') : ''
+    // LoadFile()
   }, [])
   return (
     <>

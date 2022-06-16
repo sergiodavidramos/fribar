@@ -32,7 +32,7 @@ const MenuLef = ({ router }) => {
               <i className="uil uil-box"></i>Mis Pedidos
             </a>
           </Link>
-          <Link href="/perfil/rewards">
+          <Link href="/perfil/recompensas">
             <a
               className={`user-item ${
                 router.pathname === '/perfil/rewards' ? 'active' : ''

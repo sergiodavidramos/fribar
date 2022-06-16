@@ -1,76 +1,102 @@
 import ModelCategory from './ModelCategory'
 import SearchModel from './SearchModel'
 import CartSidebar from './CartSidebar'
-import Logo from './Logo'
-import LogoHorizontal from './LogoHorizontal'
 import Location from './Location'
 import Link from 'next/link'
-import { useEffect, useContext } from 'react'
+import { useEffect, useContext, useState } from 'react'
 import UserContext from '../UserContext'
 import Head from 'next/head'
 import { LoadFile } from '../../components/LoadFile'
 import { NavbarMobile } from './NavbarMobile'
 import { DropPerfil } from './DropPerfil'
+import { TOKENMAP, API_URL } from '../Config'
+import Notifications, { notify } from 'react-notify-toast'
+import Search from './search'
+function mostrarUbicacion(ubicacion, setCiudad) {
+  console.log('estoy aqui', ubicacion)
+  fetch(
+    `https://api.mapbox.com/geocoding/v5/mapbox.places/${ubicacion.coords.longitude},${ubicacion.coords.latitude}.json?access_token=${TOKENMAP}`
+  )
+    .then((res) => res.json())
+    .then((re) => {
+      setCiudad(re.features[0].context[1].text)
+      console.log(re.features[0].context[1].text)
+    })
+    .catch((err) => notify.show(err.message, 'error'))
+}
 export default () => {
-  const { setModelCategory } = useContext(UserContext)
+  const { setModelCategory, setCiudades, ciudades, ciudad, setCiudad } =
+    useContext(UserContext)
   useEffect(() => {
     if (!('localStorage' in window)) return
     var nightMode = localStorage.getItem('gmtNightMode')
     if (nightMode) {
       document.documentElement.className += ' night-mode'
     }
-    LoadFile()
-  })
+    if (!navigator.geolocation) {
+      notify.show('No se pudo obtener la ubicacion', 'error')
+    } else {
+      navigator.geolocation.getCurrentPosition((p) =>
+        mostrarUbicacion(p, setCiudad)
+      )
+    }
+    fetch(`${API_URL}/ciudad`)
+      .then((res) => res.json())
+      .then((re) => {
+        setCiudades(re.body)
+      })
+      .catch((err) => notify.show(err.message, 'error'))
+  }, [])
+  useEffect(() => {
+    // LoadFile()
+  }, [])
   return (
     <>
+      <Notifications />
       <Head></Head>
       <ModelCategory />
       <SearchModel />
       <CartSidebar />
+      <div id="map"></div>
       <header className="header clearfix">
         <div className="top-header-group">
           <div className="top-header">
             <div className="res_main_logo">
               <Link href="/">
                 <a>
-                  <Logo />
+                  <img src="/img/logoVertical.svg" alt="FriubarLogo" />
                 </a>
               </Link>
             </div>
             <div className="main_logo" id="logo">
               <Link href="/">
                 <a>
-                  <LogoHorizontal />
+                  <img src="/img/logoFrom.svg" alt="FribarLogo" />
                 </a>
               </Link>
+              <a href="index.html">
+                <img
+                  className="logo-inverse"
+                  src="/img/logo-noche.svg"
+                  alt=""
+                />
+              </a>
             </div>
             <div className="select_location">
               <div className="ui inline dropdown loc-title" tabIndex="0">
                 <div className="text">
                   <i className="uil uil-location-point"></i>
-                  Potosí
+                  {ciudad}
                 </div>
                 <i className="uil uil-angle-down icon__14"></i>
                 <div className="menu dropdown_loc" tabIndex="-1">
-                  <Location />
-                  {/* <Location />
-                  <Location />
-                  <Location /> */}
+                  {ciudades.map((ci) => (
+                    <Location key={ci._id} nombre={ci.nombre} />
+                  ))}
                 </div>
               </div>
             </div>
-            <div className="search120">
-              <div className="ui search">
-                <div className="ui left icon input swdh10">
-                  <input
-                    className="prompt srch10"
-                    type="text"
-                    placeholder="Search for products.."
-                  />
-                  <i className="uil uil-search-alt icon icon1"></i>
-                </div>
-              </div>
-            </div>
+            <Search />
             <div className="header_right">
               <ul>
                 <li>
@@ -133,12 +159,12 @@ export default () => {
             <div className="header_cart order-1">
               <a
                 href="#"
-                className="cart__btn hover-btn pull-bs-canvas-left"
+                className="cart__btn hover-btn pull-bs-canvas-right"
                 title="Cart"
               >
                 <i className="uil uil-shopping-cart-alt"></i>
                 <span>Carrito</span>
-                <ins className="cart-count">2</ins>
+                {/* <ins className="cart-count">2</ins> */}
                 <i className="uil uil-angle-down"></i>
               </a>
             </div>

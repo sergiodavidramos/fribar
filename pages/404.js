@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 export default function Custom404() {
   const [ModoNoche, SetModoNoche] = useState(false)
   useEffect(() => {
-    // LoadFile()
+    LoadFile()
     SetModoNoche(JSON.parse(localStorage.getItem('gmtNightMode')))
   })
   return (

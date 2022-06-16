@@ -7,12 +7,13 @@ import FacebookLogin from 'react-facebook-login'
 import UserContext from '../components/UserContext'
 import { encode } from 'base-64'
 import Link from 'next/link'
+import { LoadFile } from '../components/LoadFile'
 export default () => {
   var auth2
   const { signIn } = useContext(UserContext)
   const setUser = (userResponse) => {
-    if (userResponse.body.usuario.status !== false) {
-      signIn(userResponse.body.usuario, userResponse.body.token)
+    if (userResponse.userData.idPersona.status !== false) {
+      signIn(userResponse.userData, userResponse.token)
     } else
       notify.show(
         'Su cuenta no tiene permisos para ingresar al sistema',
@@ -86,6 +87,7 @@ export default () => {
 
   useEffect(() => {
     startApp()
+    // LoadFile()
   }, [])
   function handlerSubmit() {
     event.preventDefault()
@@ -105,7 +107,7 @@ export default () => {
       .then((response) => {
         response.error
           ? notify.show(response.body.message, 'warning')
-          : setUser(response)
+          : setUser(response.body)
       })
       .catch((err) => {
         notify.show(err.message, 'error')

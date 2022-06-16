@@ -10,12 +10,12 @@ import * as React from 'react'
 import { LoadFile } from '../components/LoadFile'
 const Home = () => {
   useEffect(() => {
-    LoadFile()
+    // LoadFile()
   })
   return (
     <>
       <Head>
-        <title>FriFolly</title>
+        <title>FriBar</title>
         <meta charSet="utf-8" />
         <meta
           name="viewport"

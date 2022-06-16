@@ -6,7 +6,7 @@ import { API_URL } from '../Config'
 import Router from 'next/router'
 export const DropPerfil = () => {
   const { user, signOut } = useContext(UserContext)
-  console.log(user)
+  console.log('sdsd', user)
 
   const handlerCerrarSesion = () => {
     signOut()
@@ -30,7 +30,7 @@ export const DropPerfil = () => {
           src={GetImg(user.img, `${API_URL}/upload/user`)}
           alt="Usuario Frifolly"
         />
-        <span className="user__name">{user.nombre_comp}</span>
+        <span className="user__name">{user.idPersona.nombre_comp}</span>
         <i className="uil uil-angle-down"></i>
       </a>
 
@@ -70,7 +70,7 @@ export const DropPerfil = () => {
           </a>
         </Link>
 
-        <Link href="direccion">
+        <Link href="/perfil/direccion">
           <a className="item channel_item">
             <i className="uil uil-location-point icon__1"></i>
             Mi dirección

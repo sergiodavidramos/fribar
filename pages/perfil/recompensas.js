@@ -1,8 +1,8 @@
-import Header from '../../components/Header'
+import Recompensas from '../../components/Recompensas'
 import Breadcrumb from '../../components/Breadcrumb'
 import BanerPerfil from '../../components/Perfil/components/BanerPerfil'
+import Header from '../../components/Header'
 import Footer from '../../components/Footer'
-import Direcciones from '../../components/Perfil/Direcciones'
 
 export default () => (
   <>
@@ -10,7 +10,7 @@ export default () => (
     <div className="wrapper">
       <Breadcrumb />
       <BanerPerfil />
-      <Direcciones />
+      <Recompensas />
     </div>
     <Footer />
   </>

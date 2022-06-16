@@ -23,6 +23,7 @@ export const Verificacion = ({
     )
       .then((res) => res.json())
       .then((data) => {
+        console.log(data)
         data.error
           ? notify.show('Error en el servidor', 'error')
           : notify.show('Se mando el codigo a su teléfono', 'success')
@@ -107,7 +108,7 @@ export const Verificacion = ({
             aria-expanded="true"
             aria-controls="collapseOne"
           >
-            Verificación de número telefónico 
+            Verificación de número telefónico
           </button>
         </h4>
       </div>
@@ -119,7 +120,7 @@ export const Verificacion = ({
         >
           <div className="checkout-step-body">
             <p>
-              Necesitamos su número telefónico  para poder informarle sobre
+              Necesitamos su número telefónico para poder informarle sobre
               el envio de su compra.
             </p>
             {user.phone ? (

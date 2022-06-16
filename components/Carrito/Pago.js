@@ -1,4 +1,23 @@
+import Link from 'next/link'
+import { API_URL } from '../Config'
+import { useContext } from 'react'
+import UserContext from '../UserContext'
 export const Pago = () => {
+  const { carrito } = useContext(UserContext)
+  const handlerPedido = () => {
+    console.log('ssssssss', carrito)
+    fetch(`${API_URL}/detalle`, {
+      method: 'POST',
+      body: JSON.stringify({
+        detalle: [{ producto: carrito[0]._id, cantidad: 1 }],
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then()
+  }
   return (
     <div className="checkout-step">
       <div className="checkout-card" id="headingFour">
@@ -12,7 +31,7 @@ export const Pago = () => {
             aria-expanded="false"
             aria-controls="collapseFour"
           >
-            Payment
+            Pago
           </button>
         </h4>
       </div>
@@ -41,7 +60,7 @@ export const Pago = () => {
                           htmlFor="cashondelivery1"
                           className="radio-label_1"
                         >
-                          Cash on Delivery
+                          Pagar en la entrega
                         </label>
                       </div>
                     </li>
@@ -55,7 +74,7 @@ export const Pago = () => {
                           data-minimum="50.0"
                         />
                         <label htmlFor="card1" className="radio-label_1">
-                          Credit / Debit Card
+                          Tarjeta de credito / debito
                         </label>
                       </div>
                     </li>
@@ -65,7 +84,7 @@ export const Pago = () => {
                   className="form-group return-departure-dts"
                   data-method="cashondelivery"
                 >
-                  <div className="row">
+                  {/* <div className="row">
                     <div className="col-lg-12">
                       <div className="pymnt_title">
                         <h4>Cash on Delivery</h4>
@@ -75,7 +94,7 @@ export const Pago = () => {
                         </p>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
                 <div
                   className="form-group return-departure-dts"
@@ -84,13 +103,13 @@ export const Pago = () => {
                   <div className="row">
                     <div className="col-lg-12">
                       <div className="pymnt_title mb-4">
-                        <h4>Credit / Debit Card</h4>
+                        <h4>Tarjeta de credito / debito</h4>
                       </div>
                     </div>
                     <div className="col-lg-6">
                       <div className="form-group mt-1">
                         <label className="control-label">
-                          Holder Name*
+                          Nombre Titular*
                         </label>
                         <div className="ui search focus">
                           <div className="ui left icon input swdh11 swdh19">
@@ -111,7 +130,7 @@ export const Pago = () => {
                     <div className="col-lg-6">
                       <div className="form-group mt-1">
                         <label className="control-label">
-                          Card Number*
+                          Numero de tarjeta*
                         </label>
                         <div className="ui search focus">
                           <div className="ui left icon input swdh11 swdh19">
@@ -132,32 +151,32 @@ export const Pago = () => {
                     <div className="col-lg-4">
                       <div className="form-group mt-1">
                         <label className="control-label">
-                          Expiration Month*
+                          Mes de expiracion*
                         </label>
                         <select
                           className="ui fluid search dropdown form-dropdown"
                           name="card[expire-month]"
                         >
-                          <option value="">Month</option>
-                          <option value="1">January</option>
-                          <option value="2">February</option>
-                          <option value="3">March</option>
-                          <option value="4">April</option>
-                          <option value="5">May</option>
-                          <option value="6">June</option>
-                          <option value="7">July</option>
-                          <option value="8">August</option>
-                          <option value="9">September</option>
-                          <option value="10">October</option>
-                          <option value="11">November</option>
-                          <option value="12">December</option>
+                          <option value="">Mes</option>
+                          <option value="1">Enero</option>
+                          <option value="2">Febrero</option>
+                          <option value="3">Marzo</option>
+                          <option value="4">Abril</option>
+                          <option value="5">Mayo</option>
+                          <option value="6">Junio</option>
+                          <option value="7">Julio</option>
+                          <option value="8">Agosto</option>
+                          <option value="9">Septiembre</option>
+                          <option value="10">Octubre</option>
+                          <option value="11">Noviembre</option>
+                          <option value="12">Diciembre</option>
                         </select>
                       </div>
                     </div>
                     <div className="col-lg-4">
                       <div className="form-group mt-1">
                         <label className="control-label">
-                          Expiration Year*
+                          Año de expiracion*
                         </label>
                         <div className="ui search focus">
                           <div className="ui left icon input swdh11 swdh19">
@@ -189,8 +208,12 @@ export const Pago = () => {
                     </div>
                   </div>
                 </div>
-                <a href="#" className="next-btn16 hover-btn">
-                  Place Order
+
+                <a
+                  className="next-btn16 hover-btn"
+                  onClick={handlerPedido}
+                >
+                  Realizar pedido
                 </a>
               </div>
             </div>

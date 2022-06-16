@@ -3,7 +3,7 @@
 
 // ./pages/_document.js
 import Document, { Html, Head, Main, NextScript } from 'next/document'
-
+import { LoadFile } from '../components/LoadFile'
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
     const initialProps = await Document.getInitialProps(ctx)
@@ -12,10 +12,10 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html>
+      <Html lang="es">
         <Head>
           <meta name="theme-color" content="#ff5a09"></meta>
-          <link rel="icon" href="/img/icon.svg" />
+          <link rel="icon" href="/img/recurso.svg" />
         </Head>
         <body className="custom_class">
           <Main />

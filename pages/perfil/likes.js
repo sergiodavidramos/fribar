@@ -8,7 +8,7 @@ export default () => {
   return (
     <>
       <Header />
-      <div className="wrapper-carrito">
+      <div className="wrapper">
         <Breadcrumb />
         <BanerPerfil />
         <Likes />

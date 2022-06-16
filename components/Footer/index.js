@@ -1,4 +1,12 @@
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import { LoadFile } from '../../components/LoadFile'
+// import { scr } from 'react-script-tag'
 export default () => {
+  const router = useRouter()
+  useEffect(() => {
+    LoadFile()
+  }, [router])
   return (
     <footer className="footer">
       <div className="footer-first-row">

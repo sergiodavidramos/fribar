@@ -8,7 +8,7 @@ import Link from 'next/link'
 
 export default () => {
   useEffect(() => {
-    const token = localStorage.getItem('frifolly-user')
+    const token = localStorage.getItem('fribar-user')
     token ? '' : Router.replace('/login')
   }, [])
   return (

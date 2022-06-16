@@ -17,14 +17,22 @@ import '../public/vendor/bootstrap/css/bootstrap.min.css'
 import '../public/vendor/semantic/semantic.min.css'
 import { LoadFile } from '../components/LoadFile'
 import { API_URL } from '../components/Config'
+import mapboxgl from '!mapbox-gl'
+import 'mapbox-gl/dist/mapbox-gl.css'
 export default class MyApp extends App {
   constructor(props) {
+    mapboxgl.accessToken =
+      'pk.eyJ1Ijoic2VyZ2lvZGF2aWRyYW1vcyIsImEiOiJja2NjcnloMzMwN2tjMndtOXM1NTFlMzRkIn0.5LBxHw3qu5t7pLdSjf2_rQ'
+
     super(props)
     this.state = {
       user: null,
       token: null,
       movimientos: [],
       modelCategory: true,
+      ciudades: [],
+      ciudad: null,
+      carrito: [],
     }
   }
   getMovimientos = (token) => {
@@ -53,9 +61,10 @@ export default class MyApp extends App {
         console.log('No se pudo guardar los cambios')
       })
   }
+
   componentDidMount() {
-    const user = localStorage.getItem('frifolly-user')
-    const token = localStorage.getItem('frifolly-token')
+    const user = localStorage.getItem('fribar-user')
+    const token = localStorage.getItem('fribar-token')
     if (user && token) {
       this.getMovimientos(token)
       this.setState({
@@ -63,12 +72,11 @@ export default class MyApp extends App {
         token,
       })
     }
-    LoadFile()
   }
 
   signIn = (user, token) => {
-    localStorage.setItem('frifolly-user', JSON.stringify(user))
-    localStorage.setItem('frifolly-token', token)
+    localStorage.setItem('fribar-user', JSON.stringify(user))
+    localStorage.setItem('fribar-token', token)
     this.setState(
       {
         user,
@@ -80,8 +88,8 @@ export default class MyApp extends App {
     )
   }
   signInCompra = (user, token) => {
-    localStorage.setItem('frifolly-user', JSON.stringify(user))
-    localStorage.setItem('frifolly-token', token)
+    localStorage.setItem('fribar-user', JSON.stringify(user))
+    localStorage.setItem('fribar-token', token)
     this.setState({
       user,
       token,
@@ -89,14 +97,14 @@ export default class MyApp extends App {
   }
 
   setUser = (user) => {
-    localStorage.setItem('frifolly-user', JSON.stringify(user))
+    localStorage.setItem('fribar-user', JSON.stringify(user))
     this.setState({
       user,
     })
   }
   signOut = () => {
-    localStorage.removeItem('frifolly-user')
-    localStorage.removeItem('frifolly-token')
+    localStorage.removeItem('fribar-user')
+    localStorage.removeItem('fribar-token')
     this.setState({
       user: null,
       token: null,
@@ -107,13 +115,28 @@ export default class MyApp extends App {
       modelCategory: action,
     })
   }
+  setCiudad = (ciudad) => {
+    console.log('setCiudaddd')
+    this.setState({
+      ciudad,
+    })
+  }
+  setAllCiudades = (ciudades) => {
+    this.setState({ ciudades })
+  }
+  addProductCar = (p) => {
+    this.setState({
+      carrito: this.state.carrito.concat(p),
+    })
+  }
   render() {
     const { Component, pageProps } = this.props
 
     return (
       <>
         <Head>
-          <script src="https://apis.google.com/js/platform.js"> </script>
+          <script src="https://apis.google.com/js/platform.js" async />
+
           <link
             href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap"
             rel="stylesheet"
@@ -127,11 +150,17 @@ export default class MyApp extends App {
               token: this.state.token,
               movimientos: this.state.movimientos,
               stateModel: this.state.modelCategory,
+              ciudad: this.state.ciudad,
+              ciudades: this.state.ciudades,
+              carrito: this.state.carrito,
               signIn: this.signIn,
               signOut: this.signOut,
               setUser: this.setUser,
               signInCompra: this.signInCompra,
               setModelCategory: this.setModelCategory,
+              setCiudad: this.setCiudad,
+              setCiudades: this.setAllCiudades,
+              addProductCar: this.addProductCar,
             }}
           >
             <Component {...pageProps} />
