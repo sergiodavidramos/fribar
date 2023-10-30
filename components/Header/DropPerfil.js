@@ -6,7 +6,6 @@ import { API_URL } from '../Config'
 import Router from 'next/router'
 export const DropPerfil = () => {
   const { user, signOut } = useContext(UserContext)
-  console.log('sdsd', user)
 
   const handlerCerrarSesion = () => {
     signOut()
@@ -25,15 +24,16 @@ export const DropPerfil = () => {
   }
   return user ? (
     <li className="ui dropdown">
-      <a className="opts_account">
-        <img
-          src={GetImg(user.img, `${API_URL}/upload/user`)}
-          alt="Usuario Frifolly"
-        />
-        <span className="user__name">{user.idPersona.nombre_comp}</span>
-        <i className="uil uil-angle-down"></i>
-      </a>
-
+      <Link href="/perfil">
+        <a className="opts_account">
+          <img
+            src={GetImg(user.img, `${API_URL}/upload/user`)}
+            alt="Usuario Fribar"
+          />
+          <span className="user__name">{user.idPersona.nombre_comp}</span>
+          <i className="uil uil-angle-down"></i>
+        </a>
+      </Link>
       <div className="menu dropdown_account">
         <div className="night_mode_switch__btn">
           <a
@@ -92,7 +92,7 @@ export const DropPerfil = () => {
     <li className="ui dropdown" tabIndex="0">
       <a className="opts_account">
         <img src={GetImg()} alt="" />
-        <span className="user__name">Acceder</span>
+        <span className="user__name">Regístrese o inicie sesión</span>
         <i className="uil uil-angle-down"></i>
       </a>
       <div className="menu dropdown_account" tabIndex="-1">

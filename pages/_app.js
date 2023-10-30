@@ -31,7 +31,7 @@ export default class MyApp extends App {
       movimientos: [],
       modelCategory: true,
       ciudades: [],
-      ciudad: null,
+      ciudad: {},
       carrito: [],
     }
   }
@@ -61,17 +61,25 @@ export default class MyApp extends App {
         console.log('No se pudo guardar los cambios')
       })
   }
-
+  getCiudades = () => {
+    fetch(`${API_URL}/ciudad`)
+      .then((res) => res.json())
+      .then((data) => {
+        this.setState({ ciudades: data.body })
+      })
+      .catch((err) => notify.show(err.message, 'error'))
+  }
   componentDidMount() {
     const user = localStorage.getItem('fribar-user')
     const token = localStorage.getItem('fribar-token')
     if (user && token) {
-      this.getMovimientos(token)
+      //   this.getMovimientos(token)
       this.setState({
         user: JSON.parse(user),
         token,
       })
     }
+    this.getCiudades()
   }
 
   signIn = (user, token) => {
@@ -116,7 +124,7 @@ export default class MyApp extends App {
     })
   }
   setCiudad = (ciudad) => {
-    console.log('setCiudaddd')
+    localStorage.setItem('fribar-ciudad', JSON.stringify(ciudad))
     this.setState({
       ciudad,
     })

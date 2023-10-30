@@ -122,7 +122,7 @@ $('input[name="paymentmethod"]').on('click', function () {
 $('.product_countdown-timer').each(function () {
   var $this = $(this)
   $this.countdown($this.data('countdown'), function (event) {
-    $(this).text(event.strftime('%D days %H:%M:%S'))
+    $(this).text(event.strftime('%D dias %H:%M:%S'))
   })
 })
 
