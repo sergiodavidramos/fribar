@@ -12,21 +12,11 @@ import { DropPerfil } from './DropPerfil'
 import { TOKENMAP, API_URL } from '../Config'
 import Notifications, { notify } from 'react-notify-toast'
 import Search from './search'
-function mostrarUbicacion(ubicacion, setCiudad) {
-  console.log('estoy aqui', ubicacion)
-  fetch(
-    `https://api.mapbox.com/geocoding/v5/mapbox.places/${ubicacion.coords.longitude},${ubicacion.coords.latitude}.json?access_token=${TOKENMAP}`
-  )
-    .then((res) => res.json())
-    .then((re) => {
-      setCiudad(re.features[0].context[1].text)
-      console.log(re.features[0].context[1].text)
-    })
-    .catch((err) => notify.show(err.message, 'error'))
-}
+
 export default () => {
-  const { setModelCategory, setCiudades, ciudades, ciudad, setCiudad } =
+  const { setModelCategory, ciudades, ciudad, setCiudad } =
     useContext(UserContext)
+  let auxCiudades = []
   useEffect(() => {
     if (!('localStorage' in window)) return
     var nightMode = localStorage.getItem('gmtNightMode')
@@ -36,20 +26,59 @@ export default () => {
     if (!navigator.geolocation) {
       notify.show('No se pudo obtener la ubicacion', 'error')
     } else {
-      navigator.geolocation.getCurrentPosition((p) =>
-        mostrarUbicacion(p, setCiudad)
+      navigator.geolocation.getCurrentPosition(
+        (p) => mostrarUbicacion(p, setCiudad),
+        function (error) {
+          // El segundo parámetro es la función de error
+          switch (error.code) {
+            case error.PERMISSION_DENIED:
+              notify.show(
+                'Por favor asigname el permiso para obtener tu ubición.',
+                'warning',
+                5000
+              )
+              break
+            case error.POSITION_UNAVAILABLE:
+              // La ubicación no está disponible.
+              break
+            case error.TIMEOUT:
+              // Se ha excedido el tiempo para obtener la ubicación.
+              break
+            case error.UNKNOWN_ERROR:
+              // Un error desconocido.
+              break
+          }
+        }
       )
     }
-    fetch(`${API_URL}/ciudad`)
+  }, [ciudades])
+
+  function mostrarUbicacion(ubicacion, setCiudad) {
+    fetch(
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${ubicacion.coords.longitude},${ubicacion.coords.latitude}.json?access_token=${TOKENMAP}`
+    )
       .then((res) => res.json())
       .then((re) => {
-        setCiudades(re.body)
+        if (ciudades.length > 0)
+          if (
+            ciudades.find(
+              (ciudad) => ciudad.nombre === re.features[0].context[1].text
+            )
+          ) {
+            setCiudad(
+              ciudades.find(
+                (ciudad) =>
+                  ciudad.nombre === re.features[0].context[1].text
+              )
+            )
+          } else
+            notify.show(
+              'Por favor seleccione una ciudad validad para las compras',
+              'warning'
+            )
       })
       .catch((err) => notify.show(err.message, 'error'))
-  }, [])
-  useEffect(() => {
-    // LoadFile()
-  }, [])
+  }
   return (
     <>
       <Notifications />
@@ -64,7 +93,10 @@ export default () => {
             <div className="res_main_logo">
               <Link href="/">
                 <a>
-                  <img src="/img/logoVertical.svg" alt="FriubarLogo" />
+                  <img
+                    src="/img/logo-pantalla-pequeña.svg"
+                    alt="FribarLogo"
+                  />
                 </a>
               </Link>
             </div>
@@ -78,7 +110,7 @@ export default () => {
                 <img
                   className="logo-inverse"
                   src="/img/logo-noche.svg"
-                  alt=""
+                  alt="FribarLogo"
                 />
               </a>
             </div>
@@ -86,12 +118,19 @@ export default () => {
               <div className="ui inline dropdown loc-title" tabIndex="0">
                 <div className="text">
                   <i className="uil uil-location-point"></i>
-                  {ciudad}
+                  {Object.keys(ciudad).length === 0
+                    ? 'Seleccione ciudad'
+                    : ciudad.nombre}
                 </div>
                 <i className="uil uil-angle-down icon__14"></i>
                 <div className="menu dropdown_loc" tabIndex="-1">
-                  {ciudades.map((ci) => (
-                    <Location key={ci._id} nombre={ci.nombre} />
+                  {ciudades.map((ciudad) => (
+                    <Location
+                      key={ciudad._id}
+                      id={ciudad._id}
+                      nombre={ciudad.nombre}
+                      setCiudad={setCiudad}
+                    />
                   ))}
                 </div>
               </div>
@@ -100,19 +139,23 @@ export default () => {
             <div className="header_right">
               <ul>
                 <li>
-                  <a href="#" className="offer-link">
-                    <i className="uil uil-phone-alt"></i>65487706
+                  <a href="tel:+591 74231490" className="offer-link">
+                    <i className="uil uil-phone-alt"></i>74231490
                   </a>
                 </li>
                 <li>
-                  <a href="offers.html" className="offer-link">
-                    <i className="uil uil-gift"></i>Ofertas
-                  </a>
+                  <Link href={'/ofertas'}>
+                    <a className="offer-link">
+                      <i className="uil uil-gift"></i>Ofertas
+                    </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="faq.html" className="offer-link">
-                    <i className="uil uil-question-circle"></i>Ayuda
-                  </a>
+                  <Link href="/ayuda">
+                    <a className="offer-link">
+                      <i className="uil uil-question-circle"></i>Ayuda
+                    </a>
+                  </Link>
                 </li>
                 <li>
                   <a
@@ -159,7 +202,7 @@ export default () => {
             <div className="header_cart order-1">
               <a
                 href="#"
-                className="cart__btn hover-btn pull-bs-canvas-right"
+                className="cart__btn hover-btn pull-bs-canvas-left"
                 title="Cart"
               >
                 <i className="uil uil-shopping-cart-alt"></i>

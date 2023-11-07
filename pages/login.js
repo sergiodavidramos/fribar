@@ -12,8 +12,8 @@ export default () => {
   var auth2
   const { signIn } = useContext(UserContext)
   const setUser = (userResponse) => {
-    if (userResponse.userData.idPersona.status !== false) {
-      signIn(userResponse.userData, userResponse.token)
+    if (userResponse.body.usuario.status !== false) {
+      signIn(userResponse.body.usuario, userResponse.body.token)
     } else
       notify.show(
         'Su cuenta no tiene permisos para ingresar al sistema',
@@ -205,7 +205,7 @@ export default () => {
                 </div>
               </div>
               <div className="copyright-text text-center mt-3">
-                <i className="uil uil-copyright"></i>Copyright 2020{' '}
+                <i className="uil uil-copyright"></i>Copyright 2023{' '}
                 <b>FriFolly</b> . Todos los derechos reservados
               </div>
             </div>

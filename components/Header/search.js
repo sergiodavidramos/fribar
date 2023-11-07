@@ -4,29 +4,53 @@ import { API_URL } from '../Config'
 import Link from 'next/link'
 import GetImg from '../GetImg'
 
-const AutocompleteItems = ({ name, img, precioVenta, _id }) => {
+const AutocompleteItems = ({ name, img, precioVenta, _id, stock }) => {
   return (
     <li>
       <Link href={`/producto/${_id}`}>
-        <a className="nav-link new_item" style={{ display: 'flex' }}>
+        <a className="filaClass">
           <img
             src={GetImg(img[0], `${API_URL}/upload/producto`)}
             alt={name}
-            className="w-12 h-12 object-contain"
-            style={{
-              width: '20%',
-              height: '20%',
-              contentFlit: 'contain',
-            }}
+            className="imgClass"
           />
           <div>
-            <h3 className="text-sm font-semibold">{name}</h3>
-            <p className="text-xs text-gray-600">
-              Precio: {precioVenta} Bs
-            </p>
+            <h3 className="h3Class">{name}</h3>
+            <p className="parrafoClass">Precio: {precioVenta} Bs</p>
+            <p className="parrafoClass">{`${
+              stock > 0 ? 'Disponible en stock' : 'No disponible'
+            }`}</p>
           </div>
         </a>
       </Link>
+      <style jsx>{`
+        .filaClass {
+          display: flex;
+          padding: 1rem;
+          gap: 1rem;
+        }
+        .filaClass:hover {
+          background-color: #e6d2d2;
+        }
+        .imgClass {
+          object-fit: contain;
+          width: 5rem;
+          height: 5rem;
+        }
+        .h3Class {
+          color: #dc2c28;
+          font-size: 1rem;
+          line-height: 1.25rem;
+          font-weight: 600;
+        }
+        .parrafoClass {
+          padding: 4px;
+          margin: 0px;
+          font-size: 1rem;
+          line-height: 1rem;
+          color: #4b5563;
+        }
+      `}</style>
     </li>
   )
 }
@@ -73,7 +97,7 @@ export default function Search(props) {
   return (
     <div className="search120">
       <div className="ui search">
-        <form {...formProps} ref={formRef} className="stiloForm">
+        <form {...formProps} ref={formRef} className="formClass">
           <div className="ui left icon input swdh10 stiloDiv">
             <input
               ref={inputRef}
@@ -85,7 +109,7 @@ export default function Search(props) {
 
             {autoCompleteState.isOpen && (
               <div
-                className="ui fluid selection dropdown stiloPanel"
+                className="stiloPanel"
                 ref={panelRef}
                 {...autoComplete.getPanelProps()}
               >
@@ -109,23 +133,31 @@ export default function Search(props) {
         </form>
       </div>
       <style jsx>{`
-        .stiloForm {
+        .formClass {
           display: flex;
           justify-content: center;
-          margin-bottom: 20px;
         }
         .stiloDiv {
           display: flex;
           position: relative;
         }
+        .inputClass {
+          flex: 1 1 0%;
+        }
         .stiloPanel {
+          overflow: hidden;
           position: absolute;
-        }
-        .itemsStile:hover {
-          color: #ca6767;
-        }
-        .itemsStile {
-          flex: ga;
+          top: 0;
+          width: 100%;
+          left: 0;
+          z-index: 10000 !important;
+          margin-top: 4rem;
+          border-radius: 0.5rem;
+          border-width: 1px;
+          border-color: #f3f4f6;
+          background-color: #ffffff;
+          box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+            0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
       `}</style>
     </div>

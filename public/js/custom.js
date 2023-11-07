@@ -29,38 +29,38 @@ String.prototype.getDecimals ||
   jQuery(document).on('updated_wc_div', function () {
     wcqib_refresh_quantity_increments()
   }),
-  jQuery(document).on('click', '.plus, .minus', function () {
-    var a = jQuery(this).closest('.quantity').find('.qty'),
-      b = parseFloat(a.val()),
-      c = parseFloat(a.attr('max')),
-      d = parseFloat(a.attr('min')),
-      e = a.attr('step')
-    ;(b && '' !== b && 'NaN' !== b) || (b = 0),
-      ('' !== c && 'NaN' !== c) || (c = ''),
-      ('' !== d && 'NaN' !== d) || (d = 0),
-      ('any' !== e &&
-        '' !== e &&
-        void 0 !== e &&
-        'NaN' !== parseFloat(e)) ||
-        (e = 1),
-      jQuery(this).is('.plus')
-        ? c && b >= c
-          ? a.val(c)
-          : a.val((b + parseFloat(e)).toFixed(e.getDecimals()))
-        : d && b <= d
-        ? a.val(d)
-        : b > 0 && a.val((b - parseFloat(e)).toFixed(e.getDecimals())),
-      a.trigger('change')
-  })
+  //   jQuery(document).on('click', '.plus, .minus', function () {
+  //     var a = jQuery(this).closest('.quantity').find('.qty'),
+  //       b = parseFloat(a.val()),
+  //       c = parseFloat(a.attr('max')),
+  //       d = parseFloat(a.attr('min')),
+  //       e = a.attr('step')
+  //     ;(b && '' !== b && 'NaN' !== b) || (b = 0),
+  //       ('' !== c && 'NaN' !== c) || (c = ''),
+  //       ('' !== d && 'NaN' !== d) || (d = 0),
+  //       ('any' !== e &&
+  //         '' !== e &&
+  //         void 0 !== e &&
+  //         'NaN' !== parseFloat(e)) ||
+  //         (e = 1),
+  //       jQuery(this).is('.plus')
+  //         ? c && b >= c
+  //           ? a.val(c)
+  //           : a.val((b + parseFloat(e)).toFixed(e.getDecimals()))
+  //         : d && b <= d
+  //         ? a.val(d)
+  //         : b > 0 && a.val((b - parseFloat(e)).toFixed(e.getDecimals())),
+  //       a.trigger('change')
+  //   })
 
-// wishlist script //
-$(document).ready(function () {
-  $('.like-icon, .like-button').on('click', function (e) {
-    e.preventDefault()
-    $(this).toggleClass('liked')
-    $(this).children('.like-icon').toggleClass('liked')
+  // wishlist script //
+  $(document).ready(function () {
+    $('.like-icon, .like-button').on('click', function (e) {
+      e.preventDefault()
+      $(this).toggleClass('liked')
+      $(this).children('.like-icon').toggleClass('liked')
+    })
   })
-})
 
 // menu script //
 // $(document).ready(function () {
@@ -122,7 +122,7 @@ $('input[name="paymentmethod"]').on('click', function () {
 $('.product_countdown-timer').each(function () {
   var $this = $(this)
   $this.countdown($this.data('countdown'), function (event) {
-    $(this).text(event.strftime('%D days %H:%M:%S'))
+    $(this).text(event.strftime('%D dias %H:%M:%S'))
   })
 })
 

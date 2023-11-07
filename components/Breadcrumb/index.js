@@ -1,7 +1,20 @@
 import Link from 'next/link'
 import { withRouter } from 'next/router'
+
 const BreadCrumb = (prop) => {
-  console.log('ROUTERRR', prop.router.pathname.split('/').length)
+  const linkActual = prop.router.asPath.split('/')
+  let dirigirAlLink = []
+  for (let i = 0; i < linkActual.length; i++) {
+    if (i === 0) {
+      dirigirAlLink.push(linkActual[i])
+    } else {
+      if (i === 1) dirigirAlLink.push(linkActual[i])
+      else {
+        dirigirAlLink.push(`${dirigirAlLink[i - 1]}/${linkActual[i]}`)
+      }
+    }
+  }
+
   return (
     <div className="gambo-Breadcrumb">
       <div className="container">
@@ -9,7 +22,7 @@ const BreadCrumb = (prop) => {
           <div className="col-md-12">
             <nav aria-label="breadcrumb">
               <ol className="breadcrumb">
-                {prop.router.pathname.split('/').map((r, index) =>
+                {prop.router.asPath.split('/').map((r, index) =>
                   r === '' ? (
                     <li
                       className="breadcrumb-item"
@@ -23,15 +36,25 @@ const BreadCrumb = (prop) => {
                   ) : (
                     <li
                       className={`breadcrumb-item ${
-                        index ===
-                        prop.router.pathname.split('/').length - 1
+                        index === prop.router.asPath.split('/').length - 1
                           ? 'active'
                           : ''
                       }`}
                       aria-current="page"
                       key={index}
                     >
-                      {r}
+                      <Link href={`/${dirigirAlLink[index]}`}>
+                        <a
+                          style={
+                            index ===
+                            prop.router.pathname.split('/').length - 1
+                              ? { color: '#fff' }
+                              : {}
+                          }
+                        >
+                          {r.replace(/-/g, ' ')}
+                        </a>
+                      </Link>
                     </li>
                   )
                 )}

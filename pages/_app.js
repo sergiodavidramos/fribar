@@ -31,8 +31,11 @@ export default class MyApp extends App {
       movimientos: [],
       modelCategory: true,
       ciudades: [],
-      ciudad: null,
+      ciudad: {},
       carrito: [],
+      cantidadProducto: [],
+      total: 0,
+      categorias: [],
     }
   }
   getMovimientos = (token) => {
@@ -61,17 +64,40 @@ export default class MyApp extends App {
         console.log('No se pudo guardar los cambios')
       })
   }
-
+  getCiudades = () => {
+    fetch(`${API_URL}/ciudad`)
+      .then((res) => res.json())
+      .then((data) => {
+        this.setState({ ciudades: data.body })
+      })
+      .catch((err) => notify.show(err.message, 'error'))
+  }
+  getCategorias = async () => {
+    const res = await fetch(`${API_URL}/categoria`)
+    const cate = await res.json()
+    if (cate.error) notify.show('Error al obtener las categorias', 'error')
+    else this.setState({ categorias: cate.body })
+  }
   componentDidMount() {
     const user = localStorage.getItem('fribar-user')
     const token = localStorage.getItem('fribar-token')
+    const cantidades = localStorage.getItem('fribar-cantidades')
+    const productos = localStorage.getItem('fribar-carrito')
     if (user && token) {
-      this.getMovimientos(token)
+      //   this.getMovimientos(token)
       this.setState({
         user: JSON.parse(user),
         token,
       })
     }
+    if (cantidades && productos) {
+      this.setState({
+        carrito: JSON.parse(productos),
+        cantidadProducto: JSON.parse(cantidades),
+      })
+    }
+    this.getCiudades()
+    this.getCategorias()
   }
 
   signIn = (user, token) => {
@@ -116,7 +142,7 @@ export default class MyApp extends App {
     })
   }
   setCiudad = (ciudad) => {
-    console.log('setCiudaddd')
+    localStorage.setItem('fribar-ciudad', JSON.stringify(ciudad))
     this.setState({
       ciudad,
     })
@@ -124,11 +150,51 @@ export default class MyApp extends App {
   setAllCiudades = (ciudades) => {
     this.setState({ ciudades })
   }
-  addProductCar = (p) => {
-    this.setState({
-      carrito: this.state.carrito.concat(p),
-    })
+  addProductCar = (p, c) => {
+    let ban = false
+    if (this.state.carrito.length > 0) {
+      this.state.carrito.find((producto, index) => {
+        if (producto._id === p._id) {
+          this.state.cantidadProducto[index] =
+            this.state.cantidadProducto[index] + c
+          ban = true
+          localStorage.setItem(
+            'fribar-cantidades',
+            JSON.stringify(this.state.cantidadProducto)
+          )
+        }
+      })
+      if (!ban) {
+        this.setState({
+          carrito: this.state.carrito.concat(p),
+          cantidadProducto: this.state.cantidadProducto.concat(c),
+        })
+        localStorage.setItem(
+          'fribar-carrito',
+          JSON.stringify(this.state.carrito.concat(p))
+        )
+        localStorage.setItem(
+          'fribar-cantidades',
+          JSON.stringify(this.state.cantidadProducto.concat(c))
+        )
+      }
+    } else {
+      this.setState({
+        carrito: this.state.carrito.concat(p),
+        cantidadProducto: this.state.cantidadProducto.concat(c),
+      })
+      localStorage.setItem(
+        'fribar-carrito',
+        JSON.stringify(this.state.carrito.concat(p))
+      )
+      localStorage.setItem(
+        'fribar-cantidades',
+        JSON.stringify(this.state.cantidadProducto.concat(c))
+      )
+    }
   }
+
+  calcularTotal
   render() {
     const { Component, pageProps } = this.props
 
@@ -153,6 +219,8 @@ export default class MyApp extends App {
               ciudad: this.state.ciudad,
               ciudades: this.state.ciudades,
               carrito: this.state.carrito,
+              cantidades: this.state.cantidadProducto,
+              categorias: this.state.categorias,
               signIn: this.signIn,
               signOut: this.signOut,
               setUser: this.setUser,

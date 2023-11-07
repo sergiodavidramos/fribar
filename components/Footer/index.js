@@ -1,8 +1,13 @@
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { LoadFile } from '../../components/LoadFile'
+import UserContext from '../UserContext'
+import { useContext } from 'react'
+import Link from 'next/link'
+
 // import { scr } from 'react-script-tag'
 export default () => {
+  const { categorias, ciudades } = useContext(UserContext)
   const router = useRouter()
   useEffect(() => {
     LoadFile()
@@ -16,13 +21,13 @@ export default () => {
               <ul className="call-email-alt">
                 <li>
                   <a href="#" className="callemail">
-                    <i className="uil uil-dialpad-alt"></i>1800-000-000
+                    <i className="uil uil-dialpad-alt"></i>68386715
                   </a>
                 </li>
                 <li>
                   <a href="#" className="callemail">
                     <i className="uil uil-envelope-alt"></i>
-                    info@gambosupermarket.com
+                    info@fribar.bo
                   </a>
                 </li>
               </ul>
@@ -31,33 +36,18 @@ export default () => {
               <div className="social-links-footer">
                 <ul>
                   <li>
-                    <a href="#">
+                    <a href="">
                       <i className="fab fa-facebook-f"></i>
                     </a>
                   </li>
                   <li>
-                    <a href="#">
-                      <i className="fab fa-twitter"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i className="fab fa-google-plus-g"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i className="fab fa-linkedin-in"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
+                    <a href="">
                       <i className="fab fa-instagram"></i>
                     </a>
                   </li>
                   <li>
-                    <a href="#">
-                      <i className="fab fa-pinterest-p"></i>
+                    <a href="">
+                      <i className="fab fa-tiktok"></i>
                     </a>
                   </li>
                 </ul>
@@ -71,41 +61,25 @@ export default () => {
           <div className="row">
             <div className="col-lg-3 col-md-6 col-sm-6">
               <div className="second-row-item">
-                <h4>Categories</h4>
+                <h4>Categorias</h4>
                 <ul>
-                  <li>
-                    <a href="#">Fruits and Vegetables</a>
-                  </li>
-                  <li>
-                    <a href="#">Grocery &amp; Staples</a>
-                  </li>
-                  <li>
-                    <a href="#">Dairy &amp; Eggs</a>
-                  </li>
-                  <li>
-                    <a href="#">Beverages</a>
-                  </li>
-                  <li>
-                    <a href="#">Snacks</a>
-                  </li>
-                  <li>
-                    <a href="#">Home Care</a>
-                  </li>
-                  <li>
-                    <a href="#">Noodles &amp; Sauces</a>
-                  </li>
-                  <li>
-                    <a href="#">Personal Care</a>
-                  </li>
-                  <li>
-                    <a href="#">Pet Care</a>
-                  </li>
-                  <li>
-                    <a href="#">Meat &amp; Seafood</a>
-                  </li>
-                  <li>
-                    <a href="#">Electronics</a>
-                  </li>
+                  {categorias.length > 0 &&
+                    categorias.map((cate, index) => (
+                      <li key={index}>
+                        <Link
+                          href={{
+                            pathname: '/[nombreCategoria]',
+                            query: {
+                              nombreCategoria: cate.name
+                                .toLowerCase()
+                                .replace(/ /g, '-'),
+                            },
+                          }}
+                        >
+                          <a>{cate.name}</a>
+                        </Link>
+                      </li>
+                    ))}
                 </ul>
               </div>
             </div>
@@ -170,29 +144,6 @@ export default () => {
             </div>
             <div className="col-lg-3 col-md-6 col-sm-6">
               <div className="second-row-item-app">
-                <h4>Download App</h4>
-                <ul>
-                  <li>
-                    <a href="#">
-                      <img
-                        className="download-btn"
-                        //   src="images/download-1.svg"
-                        alt="GooglePlay"
-                      />
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <img
-                        className="download-btn"
-                        //   src="images/download-2.svg"
-                        alt="AppStore"
-                      />
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div className="second-row-item-payment">
                 <h4>Payment Method</h4>
                 <div className="footer-payments">
                   <ul id="paypal-gateway" className="financial-institutes">
@@ -261,32 +212,34 @@ export default () => {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <div className="footer-bottom-links">
-                <ul>
-                  <li>
-                    <a href="about_us.html">About</a>
-                  </li>
-                  <li>
-                    <a href="contact_us.html">Contact</a>
-                  </li>
-                  <li>
-                    <a href="privacy_policy.html">Privacy Policy</a>
-                  </li>
-                  <li>
-                    <a href="term_and_conditions.html">
-                      Term &amp; Conditions
-                    </a>
-                  </li>
-                  <li>
-                    <a href="refund_and_return_policy.html">
-                      Refund &amp; Return Policy
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div className="copyright-text">
-                <i className="uil uil-copyright"></i>Copyright 2020{' '}
-                <b>Gambolthemes</b> . All rights reserved
+              <div className="footer-bottom-group">
+                <div className="footer-bottom-links">
+                  <ul>
+                    <li>
+                      <a href="about_us.html">About</a>
+                    </li>
+                    <li>
+                      <a href="contact_us.html">Contact</a>
+                    </li>
+                    <li>
+                      <a href="privacy_policy.html">Privacy Policy</a>
+                    </li>
+                    <li>
+                      <a href="term_and_conditions.html">
+                        Term & Conditions
+                      </a>
+                    </li>
+                    <li>
+                      <a href="refund_and_return_policy.html">
+                        Refund & Return Policy
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div className="copyright-text">
+                  <i className="uil uil-copyright"></i>Copyright 2023{' '}
+                  <b>Fribar</b> . Todos los derechos reservados
+                </div>
               </div>
             </div>
           </div>
