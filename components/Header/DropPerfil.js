@@ -5,7 +5,7 @@ import GetImg from '../GetImg'
 import { API_URL } from '../Config'
 import Router from 'next/router'
 export const DropPerfil = () => {
-  const { user, signOut } = useContext(UserContext)
+  const { user, signOut, setModoNoche } = useContext(UserContext)
 
   const handlerCerrarSesion = () => {
     signOut()
@@ -18,22 +18,23 @@ export const DropPerfil = () => {
     document.documentElement.classList.toggle('night-mode')
     if (document.documentElement.classList.contains('night-mode')) {
       localStorage.setItem('gmtNightMode', true)
+      setModoNoche(true)
       return
     }
     localStorage.removeItem('gmtNightMode')
+    setModoNoche(false)
   }
   return user ? (
     <li className="ui dropdown">
-      <Link href="/perfil">
-        <a className="opts_account">
-          <img
-            src={GetImg(user.img, `${API_URL}/upload/user`)}
-            alt="Usuario Fribar"
-          />
-          <span className="user__name">{user.idPersona.nombre_comp}</span>
-          <i className="uil uil-angle-down"></i>
-        </a>
-      </Link>
+      <a className="opts_account">
+        <img
+          src={GetImg(user.img, `${API_URL}/upload/user`)}
+          alt="Usuario Fribar"
+        />
+        <span className="user__name">{user.idPersona.nombre_comp}</span>
+        <i className="uil uil-angle-down"></i>
+      </a>
+
       <div className="menu dropdown_account">
         <div className="night_mode_switch__btn">
           <a
@@ -51,12 +52,12 @@ export const DropPerfil = () => {
         <Link href="/perfil">
           <a className="item channel_item">
             <i className="uil uil-apps icon__1"></i>
-            Tablero/Perfil
+            Mi Perfil
           </a>
         </Link>
         <Link href="/perfil/pedidos">
           <a className="item channel_item">
-            <i className="uil uil-box icon__1"></i>Mis ordenes
+            <i className="uil uil-box icon__1"></i>Mis pedidos
           </a>
         </Link>
         <Link href="/perfil/likes">

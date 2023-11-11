@@ -17,13 +17,9 @@ import '../public/vendor/bootstrap/css/bootstrap.min.css'
 import '../public/vendor/semantic/semantic.min.css'
 import { LoadFile } from '../components/LoadFile'
 import { API_URL } from '../components/Config'
-import mapboxgl from '!mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 export default class MyApp extends App {
   constructor(props) {
-    mapboxgl.accessToken =
-      'pk.eyJ1Ijoic2VyZ2lvZGF2aWRyYW1vcyIsImEiOiJja2NjcnloMzMwN2tjMndtOXM1NTFlMzRkIn0.5LBxHw3qu5t7pLdSjf2_rQ'
-
     super(props)
     this.state = {
       user: null,
@@ -36,6 +32,9 @@ export default class MyApp extends App {
       cantidadProducto: [],
       total: 0,
       categorias: [],
+      modoNoche: false,
+      direcciones: [],
+      likes: [],
     }
   }
   getMovimientos = (token) => {
@@ -83,11 +82,17 @@ export default class MyApp extends App {
     const token = localStorage.getItem('fribar-token')
     const cantidades = localStorage.getItem('fribar-cantidades')
     const productos = localStorage.getItem('fribar-carrito')
+    const modoNoche = localStorage.getItem('gmtNightMode')
+    const direcciones = localStorage.getItem('user-direcciones')
+    const likes = localStorage.getItem('user-likes')
     if (user && token) {
+      const usuario = JSON.parse(user)
       //   this.getMovimientos(token)
       this.setState({
-        user: JSON.parse(user),
+        user: usuario,
         token,
+        direcciones: usuario.direccion,
+        likes: usuario.favoritos,
       })
     }
     if (cantidades && productos) {
@@ -96,22 +101,44 @@ export default class MyApp extends App {
         cantidadProducto: JSON.parse(cantidades),
       })
     }
+    if (modoNoche)
+      this.setState({
+        modoNoche: true,
+      })
+    if (direcciones) {
+      const dir = JSON.parse(direcciones)
+      this.setState({ direcciones: dir })
+    }
+    if (likes) {
+      const l = JSON.parse(likes)
+      this.setState({
+        likes: l,
+      })
+    }
     this.getCiudades()
     this.getCategorias()
   }
 
   signIn = (user, token) => {
+    const direcciones = user.direccion
+    const likes = user.favoritos
     localStorage.setItem('fribar-user', JSON.stringify(user))
     localStorage.setItem('fribar-token', token)
-    this.setState(
-      {
-        user,
-        token,
-      },
-      () => {
-        Router.push('/')
-      }
-    )
+    if (direcciones.length > 0) {
+      localStorage.setItem('user-direcciones', JSON.stringify(direcciones))
+      this.setState({
+        direcciones,
+      })
+    }
+    if (likes.length > 0) {
+      localStorage.setItem('user-likes', JSON.stringify(likes))
+      this.setState({
+        likes,
+      })
+    }
+    this.setState({ user, token }, () => {
+      Router.push('/')
+    })
   }
   signInCompra = (user, token) => {
     localStorage.setItem('fribar-user', JSON.stringify(user))
@@ -131,10 +158,13 @@ export default class MyApp extends App {
   signOut = () => {
     localStorage.removeItem('fribar-user')
     localStorage.removeItem('fribar-token')
-    this.setState({
-      user: null,
-      token: null,
-    })
+    this.setState(
+      {
+        user: null,
+        token: null,
+      },
+      () => Router.push('/')
+    )
   }
   setModelCategory = (action) => {
     this.setState({
@@ -194,7 +224,16 @@ export default class MyApp extends App {
     }
   }
 
-  calcularTotal
+  setModoNoche = (modo) => {
+    this.setState({ modoNoche: modo })
+  }
+  setDirecciones = (newDirecciones) => {
+    localStorage.setItem(
+      'user-direcciones',
+      JSON.stringify(newDirecciones)
+    )
+    this.setState({ direcciones: newDirecciones })
+  }
   render() {
     const { Component, pageProps } = this.props
 
@@ -221,6 +260,8 @@ export default class MyApp extends App {
               carrito: this.state.carrito,
               cantidades: this.state.cantidadProducto,
               categorias: this.state.categorias,
+              modoNoche: this.state.modoNoche,
+              direcciones: this.state.direcciones,
               signIn: this.signIn,
               signOut: this.signOut,
               setUser: this.setUser,
@@ -229,6 +270,8 @@ export default class MyApp extends App {
               setCiudad: this.setCiudad,
               setCiudades: this.setAllCiudades,
               addProductCar: this.addProductCar,
+              setModoNoche: this.setModoNoche,
+              setDirecciones: this.setDirecciones,
             }}
           >
             <Component {...pageProps} />

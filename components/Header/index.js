@@ -12,10 +12,17 @@ import { DropPerfil } from './DropPerfil'
 import { TOKENMAP, API_URL } from '../Config'
 import Notifications, { notify } from 'react-notify-toast'
 import Search from './search'
+import 'mapbox-gl/dist/mapbox-gl.css'
 
 export default () => {
-  const { setModelCategory, ciudades, ciudad, setCiudad } =
-    useContext(UserContext)
+  const {
+    setModelCategory,
+    ciudades,
+    ciudad,
+    setCiudad,
+    user,
+    setModoNoche,
+  } = useContext(UserContext)
   let auxCiudades = []
   useEffect(() => {
     if (!('localStorage' in window)) return
@@ -158,14 +165,20 @@ export default () => {
                   </Link>
                 </li>
                 <li>
-                  <a
-                    href="dashboard_my_wishlist.html"
-                    className="option_links"
-                    title="Wishlist"
-                  >
-                    <i className="uil uil-heart icon_wishlist"></i>
-                    <span className="noti_count1">3</span>
-                  </a>
+                  <Link href={'/perfil/likes'}>
+                    <a
+                      href="dashboard_my_wishlist.html"
+                      className="option_links"
+                      title="Wishlist"
+                    >
+                      <i className="uil uil-heart icon_wishlist"></i>
+                      {user && (
+                        <span className="noti_count1">
+                          {user.favoritos.length}
+                        </span>
+                      )}
+                    </a>
+                  </Link>
                 </li>
                 <DropPerfil />
               </ul>

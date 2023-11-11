@@ -16,7 +16,7 @@ export default () => {
     // }
     // console.log('MADO AL CARRTIO', carrito)
     if (carrito) {
-      console.log('ESTO ES EN EL CARRITO', carrito, cantidades)
+      //   console.log('ESTO ES EN EL CARRITO', carrito, cantidades)
     }
   }, [carrito])
   return (

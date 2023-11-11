@@ -42,7 +42,8 @@ export default () => {
           </div>
         </div>
       ) : (
-        <Loader />
+        ''
+        // <Loader />
       )}
     </>
   )

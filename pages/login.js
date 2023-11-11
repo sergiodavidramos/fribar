@@ -13,6 +13,7 @@ export default () => {
   const { signIn } = useContext(UserContext)
   const setUser = (userResponse) => {
     if (userResponse.body.usuario.status !== false) {
+      notify.show('Bienvenido 🤩', 'success')
       signIn(userResponse.body.usuario, userResponse.body.token)
     } else
       notify.show(
@@ -91,8 +92,6 @@ export default () => {
   }, [])
   function handlerSubmit() {
     event.preventDefault()
-    console.log(event.target[0].value)
-    console.log(event.target[1].value)
     let headers = new Headers()
     headers.append(
       'Authorization',
@@ -106,8 +105,8 @@ export default () => {
       .then((res) => res.json())
       .then((response) => {
         response.error
-          ? notify.show(response.body.message, 'warning')
-          : setUser(response.body)
+          ? notify.show(response.body, 'warning')
+          : setUser(response)
       })
       .catch((err) => {
         notify.show(err.message, 'error')
@@ -116,7 +115,7 @@ export default () => {
   return (
     <>
       <Head>
-        <title>Login</title>
+        <title>Iniciar sesión</title>
 
         <meta
           name="google-signin-client_id"
@@ -129,13 +128,13 @@ export default () => {
         <Notifications />
         <div className="container">
           <div className="row justify-content-center">
-            <div className="col-lg-5">
+            <div className="col-lg-5" style={{ marginTop: '4em' }}>
               <div className="sign-form">
                 <div className="sign-inner">
                   <div className="form-dt">
                     <div className="form-inpts checout-address-step">
                       <div className="form-title">
-                        <h6>Login</h6>
+                        <h6>Iniciar sesión</h6>
                       </div>
                       <main>
                         <button
@@ -160,14 +159,14 @@ export default () => {
                       <form onSubmit={handlerSubmit}>
                         <div className="form-group pos_rel">
                           <input
-                            id="phone[number]"
-                            name="phone"
-                            type="text"
-                            placeholder="Introduzca num. teléfono / Email"
+                            id="email[address]"
+                            name="emailaddress"
+                            type="email"
+                            placeholder="Introduzca su correo electronico"
                             className="form-control lgn_input"
                             required
                           />
-                          <i className="uil uil-mobile-android-alt lgn_icon"></i>
+                          <i className="uil uil-envelope lgn_icon"></i>
                         </div>
                         <div className="form-group pos_rel">
                           <input

@@ -85,60 +85,48 @@ export default () => {
             </div>
             <div className="col-lg-3 col-md-6 col-sm-6">
               <div className="second-row-item">
-                <h4>Useful Links</h4>
+                <h4>Enlaces útiles</h4>
                 <ul>
                   <li>
-                    <a href="about_us.html">About US</a>
+                    <Link href="/sobre-fribar">
+                      <a>Sobre nosotros</a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="shop_grid.html">Featured Products</a>
+                    <a href="shop_grid.html">Productos Destacados</a>
                   </li>
                   <li>
-                    <a href="offers.html">Offers</a>
+                    <Link href={'/ofertas'}>
+                      <a>Ofertas</a>
+                    </Link>
                   </li>
+
                   <li>
-                    <a href="our_blog.html">Blog</a>
+                    <Link href={'/ayuda'}>
+                      <a>Preguntas más frecuentes</a>
+                    </Link>
                   </li>
+
                   <li>
-                    <a href="faq.html">Faq</a>
-                  </li>
-                  <li>
-                    <a href="career.html">Careers</a>
-                  </li>
-                  <li>
-                    <a href="contact_us.html">Contact Us</a>
+                    <Link href={'/contactanos'}>
+                      <a>Contacta con nosotros</a>
+                    </Link>
                   </li>
                 </ul>
               </div>
             </div>
             <div className="col-lg-3 col-md-6 col-sm-6">
               <div className="second-row-item">
-                <h4>Top Cities</h4>
+                <h4>Ciudades Principales</h4>
                 <ul>
-                  <li>
-                    <a href="#">Gurugram</a>
-                  </li>
-                  <li>
-                    <a href="#">New Delhi</a>
-                  </li>
-                  <li>
-                    <a href="#">Bangaluru</a>
-                  </li>
-                  <li>
-                    <a href="#">Mumbai</a>
-                  </li>
-                  <li>
-                    <a href="#">Hyderabad</a>
-                  </li>
-                  <li>
-                    <a href="#">Kolkata</a>
-                  </li>
-                  <li>
-                    <a href="#">Ludhiana</a>
-                  </li>
-                  <li>
-                    <a href="#">Chandigrah</a>
-                  </li>
+                  {ciudades.length > 0 &&
+                    ciudades.map((datosCiudad, index) => (
+                      <li key={index}>
+                        <Link href={'/contactanos'}>
+                          <a>{datosCiudad.nombre}</a>
+                        </Link>
+                      </li>
+                    ))}
                 </ul>
               </div>
             </div>

@@ -1,7 +1,8 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import UserContext from '../UserContext'
 export default () => {
-  const { stateModel } = useContext(UserContext)
+  const { stateModel, modoNoche } = useContext(UserContext)
+  useEffect(() => {}, [stateModel])
   return (
     // <!-- Category Model Start-->
     <div
@@ -29,7 +30,11 @@ export default () => {
               <div className="cate-header">
                 <h4>Seleccionar Categoria</h4>
               </div>
-              <ul className="category-by-cat">
+              <ul
+                className={`category-by-cat ${
+                  modoNoche ? 'night-mode' : ''
+                }`}
+              >
                 <li>
                   <a href="#" className="single-cat-item">
                     <div className="icon">
