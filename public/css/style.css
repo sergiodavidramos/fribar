@@ -2833,7 +2833,7 @@ img.download-btn {
 
 .product-now li {
   margin-right: 5px;
-  width: 30%;
+  width: 25%;
   height: auto;
   position: relative;
   text-align: center;
@@ -3430,7 +3430,7 @@ label.control-label {
 
 .radio--group-inline-container_1 li {
   display: inline-block;
-  width: 33.333%;
+  width: 31.333%;
   margin-right: 10px;
 }
 

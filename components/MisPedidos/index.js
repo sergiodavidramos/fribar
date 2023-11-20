@@ -1,4 +1,4 @@
-import MenuLef from "../Perfil/components/MenuLef";
+import MenuLef from '../Perfil/components/MenuLef'
 
 export default () => (
   <div className="container">
@@ -10,11 +10,12 @@ export default () => (
             <div className="col-md-12">
               <div className="main-title-tab">
                 <h4>
-                  <i className="uil uil-box"></i>My Orders
+                  <i className="uil uil-box"></i>Mis Pedidos
                 </h4>
               </div>
             </div>
-            <div className="col-lg-12 col-md-12">
+
+            {/* <div className="col-lg-12 col-md-12">
               <div className="pdpt-bg">
                 <div className="pdpt-title">
                   <h6>Delivery Timing 10 May, 3.00PM - 6.00PM</h6>
@@ -72,7 +73,7 @@ export default () => (
                         <a href="#" className="bs-wizard-dot"></a>
                       </div>
                       <div className="bs-wizard-step complete">
-                        {/* <!-- complete --> */}
+           
                         <div className="text-center bs-wizard-stepnum">
                           Packed
                         </div>
@@ -82,7 +83,7 @@ export default () => (
                         <a href="#" className="bs-wizard-dot"></a>
                       </div>
                       <div className="bs-wizard-step active">
-                        {/* <!-- complete --> */}
+            
                         <div className="text-center bs-wizard-stepnum">
                           On the way
                         </div>
@@ -92,7 +93,7 @@ export default () => (
                         <a href="#" className="bs-wizard-dot"></a>
                       </div>
                       <div className="bs-wizard-step disabled">
-                        {/* <!-- active --> */}
+              
                         <div className="text-center bs-wizard-stepnum">
                           Delivered
                         </div>
@@ -180,7 +181,7 @@ export default () => (
                         <a href="#" className="bs-wizard-dot"></a>
                       </div>
                       <div className="bs-wizard-step complete">
-                        {/* <!-- complete --> */}
+                       
                         <div className="text-center bs-wizard-stepnum">
                           Packed
                         </div>
@@ -190,7 +191,7 @@ export default () => (
                         <a href="#" className="bs-wizard-dot"></a>
                       </div>
                       <div className="bs-wizard-step complete">
-                        {/* <!-- complete --> */}
+                       
                         <div className="text-center bs-wizard-stepnum">
                           Arrived
                         </div>
@@ -200,7 +201,7 @@ export default () => (
                         <a href="#" className="bs-wizard-dot"></a>
                       </div>
                       <div className="bs-wizard-step complete">
-                        {/* <!-- complete --> */}
+                       
                         <div className="text-center bs-wizard-stepnum">
                           Delivered
                         </div>
@@ -225,10 +226,10 @@ export default () => (
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
     </div>
   </div>
-);
+)

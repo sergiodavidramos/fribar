@@ -4,10 +4,17 @@ import { API_URL } from '../Config'
 import Link from 'next/link'
 import GetImg from '../GetImg'
 
-const AutocompleteItems = ({ name, img, precioVenta, _id, stock }) => {
+const AutocompleteItems = ({ name, img, precioVenta, stock }) => {
   return (
     <li>
-      <Link href={`/producto/${_id}`}>
+      <Link
+        href={{
+          pathname: '/productos/[nombre]',
+          query: {
+            nombre: name.toLowerCase().replace(/ /g, '-'),
+          },
+        }}
+      >
         <a className="filaClass">
           <img
             src={GetImg(img[0], `${API_URL}/upload/producto`)}
@@ -38,7 +45,7 @@ const AutocompleteItems = ({ name, img, precioVenta, _id, stock }) => {
           height: 5rem;
         }
         .h3Class {
-          color: #dc2c28;
+          color: #dc2c28 !important;
           font-size: 1rem;
           line-height: 1.25rem;
           font-weight: 600;

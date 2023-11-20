@@ -18,23 +18,23 @@ export default () => {
                       src={GetImg(user.img, `${API_URL}/upload/user`)}
                       alt=""
                     />
-                    <div className="img-add">
+                    {/* <div className="img-add">
                       <input type="file" id="file" />
                       <label htmlFor="file">
                         <i className="uil uil-camera-plus"></i>
                       </label>
-                    </div>
+                    </div> */}
                   </div>
-                  <h4>{user.nombre_comp}</h4>
+                  <h4>{user.idPersona.nombre_comp}</h4>
                   <p>
-                    {user.phone}
-                    <a href="#">
+                    <a href={''}>
+                      Editar Perfil:
                       <i className="uil uil-edit"></i>
                     </a>
                   </p>
                   <div className="earn-points">
                     <img src="/img/Dollar.svg" alt="" />
-                    Puntos : <span>{user.puntos}</span>
+                    Puntos : <span>{user.idPersona.puntos}</span>
                   </div>
                 </div>
               </div>

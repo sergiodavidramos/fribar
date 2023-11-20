@@ -44,12 +44,32 @@ export const NavbarMobile = () => {
                 </a>
               </Link>
             </li>
+            {open && (
+              <>
+                <li className="nav-item">
+                  <Link href="/ofertas">
+                    <a className="nav-link" title="Ofertas">
+                      Ofertas
+                    </a>
+                  </Link>
+                </li>
+
+                <li className="nav-item">
+                  <Link href="/ayuda">
+                    <a className="nav-link" title="Ayuda">
+                      Ayuda
+                    </a>
+                  </Link>
+                </li>
+              </>
+            )}
+
             <li className="nav-item">
               <div
                 className="ui icon top left dropdown nav__menu"
                 tabIndex="0"
               >
-                <a className="nav-link active" title="Pages">
+                <a className="nav-link" title="Pages">
                   Sobre nosotros <i className="uil uil-angle-down"></i>
                 </a>
                 <div className="menu dropdown_page" tabIndex="-1">
@@ -59,34 +79,16 @@ export const NavbarMobile = () => {
                     </a>
                   </Link>
                   <Link href="/solicitar-producto">
-                    <a className="item channel_item page__links  active">
+                    <a className="item channel_item page__links">
                       Solicitar un producto
                     </a>
                   </Link>
                   <Link href="/contactanos">
                     <a
-                      href="contact_us.html"
-                      className="nav-link"
+                      className="item channel_item page__links"
                       title="Contact"
                     >
                       Contactanos
-                    </a>
-                  </Link>
-                </div>
-              </div>
-            </li>
-            <li className="nav-item">
-              <div
-                className="ui icon top left dropdown nav__menu"
-                tabIndex="0"
-              >
-                <a className="nav-link" title="Blog">
-                  Blog <i className="uil uil-angle-down"></i>
-                </a>
-                <div className="menu dropdown_page" tabIndex="-1">
-                  <Link href="">
-                    <a className="item channel_item page__links">
-                      Nuestros bloks
                     </a>
                   </Link>
                 </div>

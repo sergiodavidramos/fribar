@@ -5,7 +5,7 @@ jQuery(document).ready(function ($) {
     '.pull-bs-canvas-right, .pull-bs-canvas-left',
     function () {
       $('body').prepend(
-        '<div class="bs-canvas-overlay bg-dark position-fixed w-100 h-100"></div>'
+        '<div id="canvas-eliminar" class="bs-canvas-overlay bg-dark position-fixed w-100 h-100"></div>'
       )
       if ($(this).hasClass('pull-bs-canvas-right'))
         $('.bs-canvas-right').addClass('mr-0')

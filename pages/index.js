@@ -5,13 +5,16 @@ import Categories from '../components/Categories'
 import Destacados from '../components/Destacados'
 import MejoresValores from '../components/MejoresValores'
 import Footer from '../components/Footer'
-import { useEffect } from 'react'
+import { useEffect, useContext } from 'react'
 import * as React from 'react'
 import { LoadFile } from '../components/LoadFile'
-const Home = () => {
+import { API_URL } from '../components/Config'
+import UserContext from '../components/UserContext'
+const Home = ({ productosDescuento }) => {
+  //   const {  } = useContext(UserContext)
   useEffect(() => {
     // LoadFile()
-  })
+  }, [])
   return (
     <>
       <Head>
@@ -34,7 +37,7 @@ const Home = () => {
       </Head>
       <Header />
       <div className="wrapper">
-        <Carrousel />
+        <Carrousel productosDescuento={productosDescuento} />
         <Categories />
         <Destacados title="Principales Productos Destacados" />
         <MejoresValores />
@@ -46,4 +49,14 @@ const Home = () => {
   )
 }
 
+export async function getStaticProps() {
+  try {
+    const res = await fetch(`${API_URL}/productos/filtrados/descuento`)
+    const pro = await res.json()
+    if (pro.error) return { props: { productosDescuento: [] } }
+    return { props: { productosDescuento: pro.body } }
+  } catch (error) {
+    return { props: { productosDescuento: [] } }
+  }
+}
 export default Home

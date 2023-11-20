@@ -1,200 +1,123 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import UserContext from '../UserContext'
+import mapboxgl from 'mapbox-gl'
+import ModelDirecciones from '../Perfil/components/ModelDirecciones'
+import { mapboxglAccessToken } from '../Config'
 export const AddDireccion = () => {
-  const { setModelCategory, stateModel } = useContext(UserContext)
-  console.log('este es el valor de model', stateModel)
+  const { direcciones, direccionEnvio, setDireccionEnvio } =
+    useContext(UserContext)
+  const [direc, setDirec] = useState([])
+  const [abrirModal, setAbrilModal] = useState(false)
+
+  mapboxgl.accessToken = mapboxglAccessToken
+
+  useEffect(() => {
+    const localDirecciones = localStorage.getItem('user-direcciones')
+    if (localDirecciones) setDirec(JSON.parse(localDirecciones))
+  }, [direcciones])
   return (
-    <div className="checkout-step">
-      <div className="checkout-card" id="headingTwo">
-        <span className="checkout-step-number">2</span>
-        <h4 className="checkout-step-title">
-          <button
-            className="wizard-btn collapsed"
-            type="button"
-            data-toggle="collapse"
-            data-target="#collapseTwo"
-            aria-expanded="false"
-            aria-controls="collapseTwo"
-          >
-            Dirección de entrega
-          </button>
-        </h4>
-      </div>
-      <div
-        id="collapseTwo"
-        className="collapse"
-        aria-labelledby="headingTwo"
-        data-parent="#checkout_wizard"
-      >
-        <div className="checkout-step-body">
-          <div className="checout-address-step">
-            <div className="row">
-              <div className="col-lg-12">
-                <form className="">
-                  <div className="form-group">
-                    <div className="product-radio">
-                      <ul className="product-now">
-                        <li>
-                          <input
-                            type="radio"
-                            id="ad1"
-                            name="address1"
-                            defaultChecked
-                          />
-                          <label htmlFor="ad1">
-                            Casa
-                            <br />
-                            <small>calle calero sdsd</small>
-                          </label>
-                        </li>
-                        <li>
-                          <input type="radio" id="ad2" name="address1" />
-                          <label htmlFor="ad2">Oficina</label>
-                        </li>
-                        <li>
-                          <input type="radio" id="ad2" name="address1" />
-                          <label htmlFor="ad2">Trabajo</label>
-                        </li>
-                        <li>
-                          <input type="radio" id="ad2" name="address1" />
-                          <label htmlFor="ad2">Office</label>
-                        </li>
-                        <li></li>
-                      </ul>
-                      {/* <input type="radio" id="ad3" name="address1" />
-                        <label htmlFor="ad3">Other</label> */}
+    <>
+      <ModelDirecciones abrirModal={abrirModal} mapboxgl={mapboxgl} />
+      <div className="checkout-step">
+        <div className="checkout-card" id="headingTwo">
+          <span className="checkout-step-number">2</span>
+          <h4 className="checkout-step-title">
+            <button
+              className="wizard-btn collapsed"
+              type="button"
+              //   data-toggle="collapse"
+              //   data-target="#collapseTwo"
+              //   aria-expanded="false"
+              //   aria-controls="collapseTwo"
+            >
+              Dirección de entrega
+            </button>
+          </h4>
+        </div>
+        <div
+          id="collapseTwo"
+          className="collapse"
+          aria-labelledby="headingTwo"
+          data-parent="#checkout_wizard"
+        >
+          <div className="checkout-step-body">
+            <p>
+              Seleccione una de sus direcciones registrados o registre uno
+              nuevo y seleccione. "El boton de Siguiente aparecerá una ves
+              elija una direcion"
+            </p>
+            <div className="checout-address-step">
+              <div className="row">
+                <div className="col-lg-12">
+                  <form className="">
+                    <div className="form-group">
+                      <div className="product-radio">
+                        <ul className="product-now">
+                          {direc.length > 0 &&
+                            direc.map((direccion, index) => (
+                              <li key={index}>
+                                <input
+                                  type="radio"
+                                  id={direccion._id}
+                                  name="address1"
+                                  onClick={() =>
+                                    setDireccionEnvio(direccion)
+                                  }
+                                />
+                                <label htmlFor={direccion._id}>
+                                  {direccion.nombre}
+                                  <br />
+                                  <small>{direccion.direccion}</small>
+                                </label>
+                              </li>
+                            ))}
+                        </ul>
+                      </div>
                     </div>
-                  </div>
-                  <div className="address-fieldset">
-                    <div className="container">
-                      {/* <div className="row"> */}
-                      <div className="row justify-content-center">
-                        <div className="col-lg-5">
-                          <button
-                            type="button"
-                            data-toggle="modal"
-                            data-target="#category_model"
-                            className="login-btn hover-btn"
-                            onClick={() => {
-                              setModelCategory(false)
-                            }}
-                          >
-                            Agregar Nueva Dirección
-                          </button>
-                        </div>
-                        {/* </div> */}
-                      </div>
-                      {/* <div className="col-lg-6 col-md-12">
-                        <div className="form-group">
-                          <label className="control-label">Name*</label>
-                          <input
-                            id="name"
-                            name="name"
-                            type="text"
-                            placeholder="Name"
-                            className="form-control input-md"
-                            required=""
-                          />
-                        </div>
-                      </div>
-                      <div className="col-lg-6 col-md-12">
-                        <div className="form-group">
-                          <label className="control-label">
-                            Email Address*
-                          </label>
-                          <input
-                            id="email1"
-                            name="email1"
-                            type="text"
-                            placeholder="Email Address"
-                            className="form-control input-md"
-                            required=""
-                          />
-                        </div>
-                      </div>
-                      <div className="col-lg-12 col-md-12">
-                        <div className="form-group">
-                          <label className="control-label">
-                            Flat / House / Office No.*
-                          </label>
-                          <input
-                            id="flat"
-                            name="flat"
-                            type="text"
-                            placeholder="Address"
-                            className="form-control input-md"
-                            required=""
-                          />
-                        </div>
-                      </div> */}
-                      {/* <div className="col-lg-12 col-md-12">
-                        <div className="form-group">
-                          <label className="control-label">
-                            Street / Society / Office Name*
-                          </label>
-                          <input
-                            id="street"
-                            name="street"
-                            type="text"
-                            placeholder="Street Address"
-                            className="form-control input-md"
-                          />
-                        </div>
-                      </div>
-                      <div className="col-lg-6 col-md-12">
-                        <div className="form-group">
-                          <label className="control-label">Pincode*</label>
-                          <input
-                            id="pincode"
-                            name="pincode"
-                            type="text"
-                            placeholder="Pincode"
-                            className="form-control input-md"
-                            required=""
-                          />
-                        </div>
-                      </div>
-                      <div className="col-lg-6 col-md-12">
-                        <div className="form-group">
-                          <label className="control-label">
-                            Locality*
-                          </label>
-                          <input
-                            id="Locality"
-                            name="locality"
-                            type="text"
-                            placeholder="Enter City"
-                            className="form-control input-md"
-                            required=""
-                          />
-                        </div>
-                      </div> */}
-                      <div className="col-lg-12 col-md-12">
-                        <div className="form-group">
-                          <div className="address-btns">
-                            {/* <button className="save-btn14 hover-btn">
-                              Save
-                            </button> */}
-                            <a
-                              className="collapsed ml-auto next-btn16 hover-btn"
-                              role="button"
-                              data-toggle="collapse"
-                              data-parent="#checkout_wizard"
-                              href="#collapseFour"
+                    <div className="address-fieldset">
+                      <div className="container">
+                        <div className="row justify-content-center">
+                          <div className="col-lg-5">
+                            <button
+                              type="button"
+                              data-toggle="modal"
+                              data-target="#address_model"
+                              className="login-btn hover-btn"
+                              onClick={() => {
+                                setAbrilModal(!abrirModal)
+                              }}
                             >
-                              Next
-                            </a>
+                              Agregar Nueva Dirección
+                            </button>
                           </div>
                         </div>
+
+                        {direccionEnvio && (
+                          <div className="col-lg-12 col-md-12">
+                            <div className="form-group">
+                              <div className="address-btns">
+                                <a
+                                  className="collapsed ml-auto next-btn16 hover-btn"
+                                  role="button"
+                                  data-toggle="collapse"
+                                  data-parent="#checkout_wizard"
+                                  href="#collapseFour"
+                                >
+                                  Siguiente
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </div>
-                  </div>
-                </form>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }

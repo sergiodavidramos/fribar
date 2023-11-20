@@ -36,7 +36,9 @@ export default ({ title }) => (
                       >
                         <img src="/img/product/img-1.jpg" alt="" />
                         <div className="product-absolute-options">
-                          <span className="offer-badge-1">6% off</span>
+                          <span className="offer-badge-1">
+                            6% de descuento
+                          </span>
                           <span
                             className="like-icon"
                             title="wishlist"
@@ -45,11 +47,11 @@ export default ({ title }) => (
                       </a>
                       <div className="product-text-dt">
                         <p>
-                          Available<span>(In Stock)</span>
+                          Disponible <span>(EN Stock)</span>
                         </p>
-                        <h4>Product Title Here</h4>
+                        <h4>Nombre Producto</h4>
                         <div className="product-price">
-                          $12 <span>$15</span>
+                          BS: 12 <span>Bs: 15</span>
                         </div>
                         <div className="qty-cart">
                           <div className="quantity buttons_added">
@@ -79,6 +81,7 @@ export default ({ title }) => (
                     </div>
                   </div>
                 </div>
+
                 <div
                   className="owl-item active"
                   style={{ width: '285px', marginRight: '10px' }}
@@ -89,9 +92,11 @@ export default ({ title }) => (
                         href="http://gambolthemes.net/html-items/gambo_supermarket_demo/single_product_view.html"
                         className="product-img"
                       >
-                        <img src="/img/product/img-2.jpg" alt="" />
+                        <img src="/img/product/img-1.jpg" alt="" />
                         <div className="product-absolute-options">
-                          <span className="offer-badge-1">2% off</span>
+                          <span className="offer-badge-1">
+                            6% de descuento
+                          </span>
                           <span
                             className="like-icon"
                             title="wishlist"
@@ -100,11 +105,11 @@ export default ({ title }) => (
                       </a>
                       <div className="product-text-dt">
                         <p>
-                          Available<span>(In Stock)</span>
+                          Disponible <span>(EN Stock)</span>
                         </p>
-                        <h4>Product Title Here</h4>
+                        <h4>Nombre Producto</h4>
                         <div className="product-price">
-                          $10 <span>$13</span>
+                          BS: 12 <span>Bs: 15</span>
                         </div>
                         <div className="qty-cart">
                           <div className="quantity buttons_added">
@@ -134,6 +139,7 @@ export default ({ title }) => (
                     </div>
                   </div>
                 </div>
+
                 <div
                   className="owl-item active"
                   style={{ width: '285px', marginRight: '10px' }}
@@ -144,9 +150,11 @@ export default ({ title }) => (
                         href="http://gambolthemes.net/html-items/gambo_supermarket_demo/single_product_view.html"
                         className="product-img"
                       >
-                        <img src="/img/product/img-3.jpg" alt="" />
+                        <img src="/img/product/img-1.jpg" alt="" />
                         <div className="product-absolute-options">
-                          <span className="offer-badge-1">5% off</span>
+                          <span className="offer-badge-1">
+                            6% de descuento
+                          </span>
                           <span
                             className="like-icon"
                             title="wishlist"
@@ -155,11 +163,11 @@ export default ({ title }) => (
                       </a>
                       <div className="product-text-dt">
                         <p>
-                          Available<span>(In Stock)</span>
+                          Disponible <span>(EN Stock)</span>
                         </p>
-                        <h4>Product Title Here</h4>
+                        <h4>Nombre Producto</h4>
                         <div className="product-price">
-                          $5 <span>$8</span>
+                          BS: 12 <span>Bs: 15</span>
                         </div>
                         <div className="qty-cart">
                           <div className="quantity buttons_added">
@@ -189,6 +197,7 @@ export default ({ title }) => (
                     </div>
                   </div>
                 </div>
+
                 <div
                   className="owl-item active"
                   style={{ width: '285px', marginRight: '10px' }}
@@ -199,64 +208,11 @@ export default ({ title }) => (
                         href="http://gambolthemes.net/html-items/gambo_supermarket_demo/single_product_view.html"
                         className="product-img"
                       >
-                        <img src="/img/product/img-4.jpg" alt="" />
+                        <img src="/img/product/img-1.jpg" alt="" />
                         <div className="product-absolute-options">
-                          <span className="offer-badge-1">3% off</span>
-                          <span
-                            className="like-icon"
-                            title="wishlist"
-                          ></span>
-                        </div>
-                      </a>
-                      <div className="product-text-dt">
-                        <p>
-                          Available<span>(In Stock)</span>
-                        </p>
-                        <h4>Product Title Here</h4>
-                        <div className="product-price">
-                          $15 <span>$20</span>
-                        </div>
-                        <div className="qty-cart">
-                          <div className="quantity buttons_added">
-                            <input
-                              type="button"
-                              defaultValue="-"
-                              className="minus minus-btn"
-                            />
-                            <input
-                              type="number"
-                              step="1"
-                              name="quantity"
-                              defaultValue="1"
-                              className="input-text qty text"
-                            />
-                            <input
-                              type="button"
-                              defaultValue="+"
-                              className="plus plus-btn"
-                            />
-                          </div>
-                          <span className="cart-icon">
-                            <i className="uil uil-shopping-cart-alt"></i>
+                          <span className="offer-badge-1">
+                            6% de descuento
                           </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  className="owl-item"
-                  style={{ width: '285px', marginRight: '10px' }}
-                >
-                  <div className="item">
-                    <div className="product-item">
-                      <a
-                        href="http://gambolthemes.net/html-items/gambo_supermarket_demo/single_product_view.html"
-                        className="product-img"
-                      >
-                        <img src="/img/product/img-5.jpg" alt="" />
-                        <div className="product-absolute-options">
-                          <span className="offer-badge-1">2% off</span>
                           <span
                             className="like-icon"
                             title="wishlist"
@@ -265,176 +221,11 @@ export default ({ title }) => (
                       </a>
                       <div className="product-text-dt">
                         <p>
-                          Available<span>(In Stock)</span>
+                          Disponible <span>(EN Stock)</span>
                         </p>
-                        <h4>Product Title Here</h4>
+                        <h4>Nombre Producto</h4>
                         <div className="product-price">
-                          $9 <span>$10</span>
-                        </div>
-                        <div className="qty-cart">
-                          <div className="quantity buttons_added">
-                            <input
-                              type="button"
-                              defaultValue="-"
-                              className="minus minus-btn"
-                            />
-                            <input
-                              type="number"
-                              step="1"
-                              name="quantity"
-                              defaultValue="1"
-                              className="input-text qty text"
-                            />
-                            <input
-                              type="button"
-                              defaultValue="+"
-                              className="plus plus-btn"
-                            />
-                          </div>
-                          <span className="cart-icon">
-                            <i className="uil uil-shopping-cart-alt"></i>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  className="owl-item"
-                  style={{ width: '285px', marginRight: '10px' }}
-                >
-                  <div className="item">
-                    <div className="product-item">
-                      <a
-                        href="http://gambolthemes.net/html-items/gambo_supermarket_demo/single_product_view.html"
-                        className="product-img"
-                      >
-                        <img src="/img/product/img-6.jpg" alt="" />
-                        <div className="product-absolute-options">
-                          <span className="offer-badge-1">2% off</span>
-                          <span
-                            className="like-icon"
-                            title="wishlist"
-                          ></span>
-                        </div>
-                      </a>
-                      <div className="product-text-dt">
-                        <p>
-                          Available<span>(In Stock)</span>
-                        </p>
-                        <h4>Product Title Here</h4>
-                        <div className="product-price">
-                          $7 <span>$8</span>
-                        </div>
-                        <div className="qty-cart">
-                          <div className="quantity buttons_added">
-                            <input
-                              type="button"
-                              defaultValue="-"
-                              className="minus minus-btn"
-                            />
-                            <input
-                              type="number"
-                              step="1"
-                              name="quantity"
-                              defaultValue="1"
-                              className="input-text qty text"
-                            />
-                            <input
-                              type="button"
-                              defaultValue="+"
-                              className="plus plus-btn"
-                            />
-                          </div>
-                          <span className="cart-icon">
-                            <i className="uil uil-shopping-cart-alt"></i>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  className="owl-item"
-                  style={{ width: '285px', marginRight: '10px' }}
-                >
-                  <div className="item">
-                    <div className="product-item">
-                      <a
-                        href="http://gambolthemes.net/html-items/gambo_supermarket_demo/single_product_view.html"
-                        className="product-img"
-                      >
-                        <img src="/img/product/img-7.jpg" alt="" />
-                        <div className="product-absolute-options">
-                          <span className="offer-badge-1">1% off</span>
-                          <span
-                            className="like-icon"
-                            title="wishlist"
-                          ></span>
-                        </div>
-                      </a>
-                      <div className="product-text-dt">
-                        <p>
-                          Available<span>(In Stock)</span>
-                        </p>
-                        <h4>Product Title Here</h4>
-                        <div className="product-price">
-                          $6.95 <span>$7</span>
-                        </div>
-                        <div className="qty-cart">
-                          <div className="quantity buttons_added">
-                            <input
-                              type="button"
-                              defaultValue="-"
-                              className="minus minus-btn"
-                            />
-                            <input
-                              type="number"
-                              step="1"
-                              name="quantity"
-                              defaultValue="1"
-                              className="input-text qty text"
-                            />
-                            <input
-                              type="button"
-                              defaultValue="+"
-                              className="plus plus-btn"
-                            />
-                          </div>
-                          <span className="cart-icon">
-                            <i className="uil uil-shopping-cart-alt"></i>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  className="owl-item"
-                  style={{ width: '285px', marginRight: '10px' }}
-                >
-                  <div className="item">
-                    <div className="product-item">
-                      <a
-                        href="http://gambolthemes.net/html-items/gambo_supermarket_demo/single_product_view.html"
-                        className="product-img"
-                      >
-                        <img src="/img/product/img-8.jpg" alt="" />
-                        <div className="product-absolute-options">
-                          <span className="offer-badge-1">3% off</span>
-                          <span
-                            className="like-icon"
-                            title="wishlist"
-                          ></span>
-                        </div>
-                      </a>
-                      <div className="product-text-dt">
-                        <p>
-                          Available<span>(In Stock)</span>
-                        </p>
-                        <h4>Product Title Here</h4>
-                        <div className="product-price">
-                          $8 <span>$10</span>
+                          BS: 12 <span>Bs: 15</span>
                         </div>
                         <div className="qty-cart">
                           <div className="quantity buttons_added">

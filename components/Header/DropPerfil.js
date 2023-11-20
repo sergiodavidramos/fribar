@@ -77,13 +77,17 @@ export const DropPerfil = () => {
             Mi dirección
           </a>
         </Link>
-        <a href="offers.html" className="item channel_item">
-          <i className="uil uil-gift icon__1"></i>Ofertas
-        </a>
-        <a href="faq.html" className="item channel_item">
-          <i className="uil uil-info-circle icon__1"></i>
-          Preguntas más frecuentes
-        </a>
+        <Link href={'/ofertas'}>
+          <a className="item channel_item">
+            <i className="uil uil-gift icon__1"></i>Ofertas
+          </a>
+        </Link>
+        <Link href={'/ayuda'}>
+          <a className="item channel_item">
+            <i className="uil uil-info-circle icon__1"></i>
+            Preguntas más frecuentes
+          </a>
+        </Link>
         <a onClick={handlerCerrarSesion} className="item channel_item">
           <i className="uil uil-lock-alt icon__1"></i>Cerrar sesión
         </a>

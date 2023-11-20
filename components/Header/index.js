@@ -21,9 +21,9 @@ export default () => {
     ciudad,
     setCiudad,
     user,
-    setModoNoche,
+    cantidades,
+    likes,
   } = useContext(UserContext)
-  let auxCiudades = []
   useEffect(() => {
     if (!('localStorage' in window)) return
     var nightMode = localStorage.getItem('gmtNightMode')
@@ -113,13 +113,16 @@ export default () => {
                   <img src="/img/logoFrom.svg" alt="FribarLogo" />
                 </a>
               </Link>
-              <a href="index.html">
-                <img
-                  className="logo-inverse"
-                  src="/img/logo-noche.svg"
-                  alt="FribarLogo"
-                />
-              </a>
+
+              <Link href={'/'}>
+                <a>
+                  <img
+                    className="logo-inverse"
+                    src="/img/logo-noche.svg"
+                    alt="FribarLogo"
+                  />
+                </a>
+              </Link>
             </div>
             <div className="select_location">
               <div className="ui inline dropdown loc-title" tabIndex="0">
@@ -166,16 +169,10 @@ export default () => {
                 </li>
                 <li>
                   <Link href={'/perfil/likes'}>
-                    <a
-                      href="dashboard_my_wishlist.html"
-                      className="option_links"
-                      title="Wishlist"
-                    >
+                    <a className="option_links" title="Wishlist">
                       <i className="uil uil-heart icon_wishlist"></i>
                       {user && (
-                        <span className="noti_count1">
-                          {user.favoritos.length}
-                        </span>
+                        <span className="noti_count1">{likes.length}</span>
                       )}
                     </a>
                   </Link>
@@ -203,7 +200,6 @@ export default () => {
             <NavbarMobile />
             <div className="catey__icon">
               <a
-                href="#"
                 className="cate__btn"
                 data-toggle="modal"
                 data-target="#category_model"
@@ -214,19 +210,18 @@ export default () => {
             </div>
             <div className="header_cart order-1">
               <a
-                href="#"
                 className="cart__btn hover-btn pull-bs-canvas-left"
                 title="Cart"
+                onClick={() => setModelCategory(true)}
               >
                 <i className="uil uil-shopping-cart-alt"></i>
                 <span>Carrito</span>
-                {/* <ins className="cart-count">2</ins> */}
+                <ins className="cart-count">{cantidades.length}</ins>
                 <i className="uil uil-angle-down"></i>
               </a>
             </div>
             <div className="search__icon order-1">
               <a
-                href="#"
                 className="search__btn hover-btn"
                 data-toggle="modal"
                 data-target="#search_model"

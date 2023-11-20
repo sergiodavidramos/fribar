@@ -70,7 +70,7 @@ export default ({ handlerFiltro }) => {
                     <input
                       className="prompt srch10"
                       type="text"
-                      placeholder="Search by brand.."
+                      placeholder="Buscar por Marca"
                     />
                     <i className="uil uil-search-alt icon icon1"></i>
                   </div>
@@ -83,97 +83,7 @@ export default ({ handlerFiltro }) => {
                   id="brand_1"
                 />
                 <label className="custom-control-label" htmlFor="brand_1">
-                  Brand Name
-                </label>
-              </div>
-              <div className="custom-control custom-checkbox pb2">
-                <input
-                  type="checkbox"
-                  className="custom-control-input"
-                  id="brand_2"
-                />
-                <label className="custom-control-label" htmlFor="brand_2">
-                  Brand Name
-                </label>
-              </div>
-              <div className="custom-control custom-checkbox pb2">
-                <input
-                  type="checkbox"
-                  className="custom-control-input"
-                  id="brand_3"
-                />
-                <label className="custom-control-label" htmlFor="brand_3">
-                  Brand Name
-                </label>
-              </div>
-              <div className="custom-control custom-checkbox pb2">
-                <input
-                  type="checkbox"
-                  className="custom-control-input"
-                  id="brand_4"
-                />
-                <label className="custom-control-label" htmlFor="brand_4">
-                  Brand Name
-                </label>
-              </div>
-              <div className="custom-control custom-checkbox pb2">
-                <input
-                  type="checkbox"
-                  className="custom-control-input"
-                  id="brand_5"
-                />
-                <label className="custom-control-label" htmlFor="brand_5">
-                  Brand Name
-                </label>
-              </div>
-              <div className="custom-control custom-checkbox pb2">
-                <input
-                  type="checkbox"
-                  className="custom-control-input"
-                  id="brand_6"
-                />
-                <label className="custom-control-label" htmlFor="brand_6">
-                  Brand Name
-                </label>
-              </div>
-              <div className="custom-control custom-checkbox pb2">
-                <input
-                  type="checkbox"
-                  className="custom-control-input"
-                  id="brand_7"
-                />
-                <label className="custom-control-label" htmlFor="brand_7">
-                  Brand Name
-                </label>
-              </div>
-              <div className="custom-control custom-checkbox pb2">
-                <input
-                  type="checkbox"
-                  className="custom-control-input"
-                  id="brand_8"
-                />
-                <label className="custom-control-label" htmlFor="brand_8">
-                  Brand Name
-                </label>
-              </div>
-              <div className="custom-control custom-checkbox pb2">
-                <input
-                  type="checkbox"
-                  className="custom-control-input"
-                  id="brand_9"
-                />
-                <label className="custom-control-label" htmlFor="brand_9">
-                  Brand Name
-                </label>
-              </div>
-              <div className="custom-control custom-checkbox pb2">
-                <input
-                  type="checkbox"
-                  className="custom-control-input"
-                  id="brand_10"
-                />
-                <label className="custom-control-label" htmlFor="brand_10">
-                  Brand Name
+                  Nombre marca
                 </label>
               </div>
             </div>
@@ -192,7 +102,7 @@ export default ({ handlerFiltro }) => {
                   id="price_1"
                 />
                 <label className="custom-control-label" htmlFor="price_1">
-                  Less than $2 <span className="webproduct">(9)</span>
+                  Menos que: Bs 10 <span className="webproduct">(9)</span>
                 </label>
               </div>
               <div className="custom-control custom-checkbox pb2">
@@ -202,7 +112,7 @@ export default ({ handlerFiltro }) => {
                   id="price_2"
                 />
                 <label className="custom-control-label" htmlFor="price_2">
-                  $2 to $5 <span className="webproduct">(8)</span>
+                  Bs 10 a Bs 15 <span className="webproduct">(8)</span>
                 </label>
               </div>
               <div className="custom-control custom-checkbox pb2">
@@ -212,7 +122,7 @@ export default ({ handlerFiltro }) => {
                   id="price_3"
                 />
                 <label className="custom-control-label" htmlFor="price_3">
-                  $6 to $10 <span className="webproduct">(12)</span>
+                  Bs 10 a Bs 15 <span className="webproduct">(12)</span>
                 </label>
               </div>
               <div className="custom-control custom-checkbox pb2">
@@ -222,7 +132,7 @@ export default ({ handlerFiltro }) => {
                   id="price_4"
                 />
                 <label className="custom-control-label" htmlFor="price_4">
-                  $11 to $15 <span className="webproduct">(4)</span>
+                  Bs 10 a Bs 15 <span className="webproduct">(4)</span>
                 </label>
               </div>
               <div className="custom-control custom-checkbox pb2">
@@ -232,7 +142,7 @@ export default ({ handlerFiltro }) => {
                   id="price_5"
                 />
                 <label className="custom-control-label" htmlFor="price_5">
-                  $15 to $20 <span className="webproduct">(16)</span>
+                  Bs 10 a Bs 15 <span className="webproduct">(16)</span>
                 </label>
               </div>
               <div className="custom-control custom-checkbox pb2">
@@ -242,7 +152,7 @@ export default ({ handlerFiltro }) => {
                   id="price_6"
                 />
                 <label className="custom-control-label" htmlFor="price_6">
-                  $21 to $25 <span className="webproduct">(18)</span>
+                  Bs 10 a Bs 15 <span className="webproduct">(18)</span>
                 </label>
               </div>
               <div className="custom-control custom-checkbox pb2">
@@ -252,7 +162,7 @@ export default ({ handlerFiltro }) => {
                   id="price_7"
                 />
                 <label className="custom-control-label" htmlFor="price_7">
-                  More than $25 <span className="webproduct">(25)</span>
+                  Más que Bs 50 <span className="webproduct">(25)</span>
                 </label>
               </div>
             </div>

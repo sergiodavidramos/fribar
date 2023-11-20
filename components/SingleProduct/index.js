@@ -1,27 +1,75 @@
-import Breadcrumb from '../Breadcrumb'
-import IconBar from '../IconBar'
-import Footer from '../Footer'
 import Destacados from '../Destacados'
 import { API_URL } from '../Config'
 import GetImg from '../GetImg'
-import { useContext } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import UserContext from '../UserContext'
-export default (pro) => {
-  const { addProductCar } = useContext(UserContext)
-  const p = pro.producto.body[0]
-  const producto = p[0]
-  const cantidad = pro.producto.body[1]
-  console.log('Los DSSSS', producto.img)
+import expectedRound from 'expected-round'
+import { notify } from 'react-notify-toast'
+export default ({ producto }) => {
+  const { addProductCar, likes, setLikes, token, user, signOut } =
+    useContext(UserContext)
+  const [unidades, setUnidades] = useState(1)
+  let cantidadAsignado = useRef(null)
 
-  function agregarAlCarrito(p) {
-    addProductCar([p])
+  function agregarAlCarrito(producto, cantidad) {
+    if (parseFloat(cantidad) > producto.stock)
+      notify.show(
+        `Lo siento solo hay ${
+          producto.stock + ' ' + producto.tipoVenta
+        } en Stock ☹`,
+        'warning'
+      )
+    else {
+      if (cantidad === '')
+        notify.show(
+          'Por favor asigne una cantidad al producto para agregar al carrito',
+          'warning'
+        )
+      else {
+        addProductCar(producto, parseFloat(cantidad))
+        notify.show('🛒 Agregado al Carrito 🛒', 'success', '2')
+      }
+    }
   }
+  function addLiked(idProducto) {
+    if (likes.includes(idProducto)) {
+      const resultado = likes.filter((like) => like != idProducto)
+      setLikes(resultado)
+      actualizarLikedUser(resultado)
+    } else {
+      setLikes(likes.concat(idProducto))
+      actualizarLikedUser(likes.concat(idProducto))
+    }
+  }
+  async function actualizarLikedUser(likes) {
+    try {
+      const res = await fetch(`${API_URL}/user/${user._id}`, {
+        method: 'PATCH',
+        body: JSON.stringify({ favoritos: likes }),
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      })
+
+      if (res.status === 401) signOut()
+      const datos = await res.json()
+      if (datos.error)
+        notify.show('Error al agrefar a favoritos', 'warning')
+    } catch (error) {
+      alert(error)
+    }
+  }
+
+  useEffect(() => {
+    const deta = producto.detail
+    document.querySelector('#infoProduct').innerHTML = deta
+  }, [producto])
   return (
     <>
-      <IconBar />
+      {/* <IconBar /> */}
       {producto && (
         <div className="wrapper-single">
-          <Breadcrumb />
           <div className="all-product-grid">
             <div className="container">
               <div className="row">
@@ -38,10 +86,13 @@ export default (pro) => {
                                     i,
                                     `${API_URL}/upload/producto`
                                   )}
-                                  alt=""
+                                  alt={producto.name}
                                 />
                               </div>
                             ))}
+
+                          <div className="owl-nav"></div>
+                          <div className="owl-dots disabled"></div>
                         </div>
 
                         <div id="sync2" className="owl-carousel owl-theme">
@@ -64,7 +115,7 @@ export default (pro) => {
                           <h2> {producto.name}</h2>
                           <div className="no-stock">
                             <p className="stock-qty">
-                              {cantidad}
+                              {producto.stock}
                               <span>(En Stock)</span>
                             </p>
                           </div>
@@ -74,34 +125,45 @@ export default (pro) => {
                                 <li>
                                   <input
                                     type="radio"
-                                    id="p1"
-                                    name="product1"
-                                  />
-                                  <label htmlFor="p1">Media docena</label>
-                                </li>
-                                <li>
-                                  <input
-                                    type="radio"
                                     id="p2"
                                     name="product1"
+                                    onClick={() => setUnidades(1)}
                                   />
-                                  <label htmlFor="p2">1 Docena</label>
+                                  <label htmlFor="p2">1 Ud.</label>
                                 </li>
                                 <li>
                                   <input
                                     type="radio"
                                     id="p3"
                                     name="product1"
+                                    onClick={() => {
+                                      setUnidades(2)
+                                      if (
+                                        parseFloat(
+                                          cantidadAsignado.current.value
+                                        ) === 1
+                                      )
+                                        cantidadAsignado.current.value = 2
+                                    }}
                                   />
-                                  <label htmlFor="p3">2 Docenas</label>
+                                  <label htmlFor="p3">2 Uds.</label>
                                 </li>
                                 <li>
                                   <input
                                     type="radio"
                                     id="p4"
                                     name="product1"
+                                    onClick={() => {
+                                      setUnidades(3)
+                                      if (
+                                        parseFloat(
+                                          cantidadAsignado.current.value
+                                        ) === 1
+                                      )
+                                        cantidadAsignado.current.value = 3
+                                    }}
                                   />
-                                  <label htmlFor="p4">3 Docenas</label>
+                                  <label htmlFor="p4">3 Uds.</label>
                                 </li>
                               </ul>
                             ) : (
@@ -111,6 +173,15 @@ export default (pro) => {
                                     type="radio"
                                     id="p1"
                                     name="product1"
+                                    onClick={() => {
+                                      setUnidades(0.5)
+                                      if (
+                                        parseFloat(
+                                          cantidadAsignado.current.value
+                                        ) === 1
+                                      )
+                                        cantidadAsignado.current.value = 0.5
+                                    }}
                                   />
                                   <label htmlFor="p1">500g</label>
                                 </li>
@@ -119,6 +190,7 @@ export default (pro) => {
                                     type="radio"
                                     id="p2"
                                     name="product1"
+                                    onClick={() => setUnidades(1)}
                                   />
                                   <label htmlFor="p2">1kg</label>
                                 </li>
@@ -127,6 +199,15 @@ export default (pro) => {
                                     type="radio"
                                     id="p3"
                                     name="product1"
+                                    onClick={() => {
+                                      setUnidades(2)
+                                      if (
+                                        parseFloat(
+                                          cantidadAsignado.current.value
+                                        ) === 1
+                                      )
+                                        cantidadAsignado.current.value = 2
+                                    }}
                                   />
                                   <label htmlFor="p3">2kg</label>
                                 </li>
@@ -135,20 +216,53 @@ export default (pro) => {
                                     type="radio"
                                     id="p4"
                                     name="product1"
+                                    onClick={() => {
+                                      setUnidades(3)
+                                      if (
+                                        parseFloat(
+                                          cantidadAsignado.current.value
+                                        ) === 1
+                                      )
+                                        cantidadAsignado.current.value = 3
+                                    }}
                                   />
                                   <label htmlFor="p4">3kg</label>
                                 </li>
                               </ul>
                             )}
                           </div>
-                          <p className="pp-descp">{producto.detail}</p>
                           <div className="product-group-dt">
                             <ul>
                               <li>
                                 <div className="main-price color-discount">
-                                  Precio<span>{producto.precioVenta}</span>
+                                  Precio{' '}
+                                  {producto.descuento > 0 &&
+                                    ' con descuento Bs:'}
+                                  <span>
+                                    {' '}
+                                    {expectedRound
+                                      .round10(
+                                        producto.precioVenta -
+                                          (producto.descuento *
+                                            producto.precioVenta) /
+                                            100,
+                                        -1
+                                      )
+                                      .toFixed(2)}
+                                  </span>
                                 </div>
                               </li>
+
+                              {producto.descuento > 0 && (
+                                <li>
+                                  <div className="main-price mrp-price">
+                                    Precio actual Bs:
+                                    <span>
+                                      {producto.precioVenta.toFixed(2)}
+                                    </span>
+                                  </div>
+                                </li>
+                              )}
                             </ul>
                             <ul className="gty-wish-share">
                               <li>
@@ -158,26 +272,80 @@ export default (pro) => {
                                       type="button"
                                       defaultValue="-"
                                       className="minus minus-btn"
+                                      onClick={() => {
+                                        if (
+                                          producto.tipoVenta === 'Unidad'
+                                        ) {
+                                          if (
+                                            parseFloat(
+                                              cantidadAsignado.current
+                                                .value
+                                            ) > unidades
+                                          )
+                                            if (
+                                              parseFloat(
+                                                cantidadAsignado.current
+                                                  .value
+                                              ) > 1
+                                            )
+                                              cantidadAsignado.current.value =
+                                                parseFloat(
+                                                  cantidadAsignado.current
+                                                    .value
+                                                ) - unidades
+                                        } else {
+                                          if (
+                                            parseFloat(
+                                              cantidadAsignado.current
+                                                .value
+                                            ) > 0.5
+                                          )
+                                            if (
+                                              parseFloat(
+                                                cantidadAsignado.current
+                                                  .value
+                                              ) > unidades
+                                            )
+                                              cantidadAsignado.current.value =
+                                                parseFloat(
+                                                  cantidadAsignado.current
+                                                    .value
+                                                ) - unidades
+                                        }
+                                      }}
                                     />
                                     <input
                                       type="number"
                                       step="1"
+                                      min="1"
                                       name="quantity"
-                                      defaultValue="1"
+                                      defaultValue={1}
                                       className="input-text qty text"
+                                      ref={cantidadAsignado}
                                     />
                                     <input
                                       type="button"
                                       defaultValue="+"
                                       className="plus plus-btn"
+                                      onClick={() => {
+                                        cantidadAsignado.current.value =
+                                          parseFloat(
+                                            cantidadAsignado.current.value
+                                          ) + unidades
+                                      }}
                                     />
                                   </div>
                                 </div>
                               </li>
                               <li>
                                 <span
-                                  className="like-icon save-icon"
+                                  className={`like-icon save-icon ${
+                                    likes.includes(producto._id)
+                                      ? 'liked'
+                                      : ''
+                                  }`}
                                   title="wishlist"
+                                  onClick={() => addLiked(producto._id)}
                                 ></span>
                               </li>
                             </ul>
@@ -186,16 +354,14 @@ export default (pro) => {
                                 <button
                                   className="add-cart-btn hover-btn"
                                   onClick={() =>
-                                    agregarAlCarrito(producto)
+                                    agregarAlCarrito(
+                                      producto,
+                                      cantidadAsignado.current.value
+                                    )
                                   }
                                 >
                                   <i className="uil uil-shopping-cart-alt"></i>
                                   Agregar al carrtio
-                                </button>
-                              </li>
-                              <li>
-                                <button className="order-btn hover-btn">
-                                  Ordenar ahora
                                 </button>
                               </li>
                             </ul>
@@ -245,7 +411,7 @@ export default (pro) => {
                   </div>
                 </div>
               </div>
-              {/* <div className="row">
+              <div className="row">
                 <div className="col-lg-4 col-md-12">
                   <div className="pdpt-bg">
                     <div className="pdpt-title">
@@ -419,80 +585,45 @@ export default (pro) => {
                 <div className="col-lg-8 col-md-12">
                   <div className="pdpt-bg">
                     <div className="pdpt-title">
-                      <h4>Product Details</h4>
+                      <h4>Detalles del Producto</h4>
                     </div>
                     <div className="pdpt-body scrollstyle_4">
-                      <div className="pdct-dts-1">
+                      <div className="pdct-dts-1" id="infoProduct">
                         <div className="pdct-dt-step">
-                          <h4>Description</h4>
-                          <p>
-                            Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit. Pellentesque posuere nunc in
-                            condimentum maximus. Integer interdum sem
-                            sollicitudin, porttitor felis in, mollis quam.
-                            Nunc gravida erat eu arcu interdum eleifend.
-                            Cras tortor velit, dignissim sit amet hendrerit
-                            sed, ultricies eget est. Donec eget urna sed
-                            metus dignissim cursus.
-                          </p>
+                          <h4>Descripción</h4>
+                          <p>Escriba la descripcion a qui ...</p>
                         </div>
                         <div className="pdct-dt-step">
-                          <h4>Benefits</h4>
+                          <h4>Beneficios</h4>
                           <div className="product_attr">
-                            Aliquam nec nulla accumsan, accumsan nisl in,
-                            rhoncus sapien.
+                            Escriba intro del beneficio a qui ...
                             <br />
-                            In mollis lorem a porta congue.
+                            Escriba el beneficio a qui ...
                             <br />
-                            Sed quis neque sit amet nulla maximus dignissim
-                            id mollis urna.
+                            Escriba el beneficio a qui ...
                             <br />
-                            Cras non libero at lorem laoreet finibus vel et
-                            turpis.
+                            Escriba el beneficio a qui ...
                             <br />
-                            Mauris maximus ligula at sem lobortis congue.
+                            Escriba el beneficio a qui ...
                             <br />
                           </div>
                         </div>
                         <div className="pdct-dt-step">
-                          <h4>How to Use</h4>
+                          <h4>Vendedor</h4>
                           <div className="product_attr">
-                            The peeled, orange segments can be added to the
-                            daily fruit bowl, and its juice is a refreshing
-                            drink.
+                            Escriba el vendedor a qui ...
                           </div>
-                        </div>
-                        <div className="pdct-dt-step">
-                          <h4>Seller</h4>
-                          <div className="product_attr">
-                            Gambolthemes Pvt Ltd, Sks Nagar, Near Mbd Mall,
-                            Ludhana, 141001
-                          </div>
-                        </div>
-                        <div className="pdct-dt-step">
-                          <h4>Disclaimer</h4>
-                          <p>
-                            Phasellus efficitur eu ligula consequat ornare.
-                            Nam et nisl eget magna aliquam consectetur.
-                            Aliquam quis tristique lacus. Donec eget nibh
-                            et quam maximus rutrum eget ut ipsum. Nam
-                            fringilla metus id dui sollicitudin, sit amet
-                            maximus sapien malesuada.
-                          </p>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div> */}
+              </div>
             </div>
           </div>
         </div>
       )}
-      <div className="wrapper">
-        <Destacados />
-      </div>
-      <Footer />
+      <Destacados />
     </>
   )
 }

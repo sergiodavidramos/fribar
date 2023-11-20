@@ -1,22 +1,37 @@
 import Link from 'next/link'
 import { API_URL } from '../Config'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import UserContext from '../UserContext'
+import { notify } from 'react-notify-toast'
 export const Pago = () => {
   const { carrito } = useContext(UserContext)
+
+  const [tipoPago, setTipoPago] = useState(false)
+
   const handlerPedido = () => {
     console.log('ssssssss', carrito)
-    fetch(`${API_URL}/detalle`, {
-      method: 'POST',
-      body: JSON.stringify({
-        detalle: [{ producto: carrito[0]._id, cantidad: 1 }],
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((res) => res.json())
-      .then()
+    switch (5) {
+      case 0:
+        fetch(`${API_URL}/detalle`, {
+          method: 'POST',
+          body: JSON.stringify({
+            detalle: [{ producto: carrito[0]._id, cantidad: 1 }],
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then((res) => res.json())
+          .then()
+        break
+      case 1:
+        break
+      case 2:
+        break
+
+      default:
+        notify.show('Por favor selecciona un metodo de pago', 'warning')
+    }
   }
   return (
     <div className="checkout-step">
@@ -50,14 +65,14 @@ export const Pago = () => {
                     <li>
                       <div className="radio-item_1">
                         <input
-                          id="cashondelivery1"
-                          value="cashondelivery"
+                          id="cashondelivery2"
                           name="paymentmethod"
                           type="radio"
                           data-minimum="50.0"
+                          onClick={() => setTipoPago(0)}
                         />
                         <label
-                          htmlFor="cashondelivery1"
+                          htmlFor="cashondelivery2"
                           className="radio-label_1"
                         >
                           Pagar en la entrega
@@ -72,9 +87,28 @@ export const Pago = () => {
                           name="paymentmethod"
                           type="radio"
                           data-minimum="50.0"
+                          onClick={() => setTipoPago(1)}
                         />
                         <label htmlFor="card1" className="radio-label_1">
                           Tarjeta de credito / debito
+                        </label>
+                      </div>
+                    </li>
+                    <li>
+                      <div className="radio-item_1">
+                        <input
+                          id="cashondelivery1"
+                          value="cashondelivery"
+                          name="paymentmethod"
+                          type="radio"
+                          data-minimum="50.0"
+                          onClick={() => setTipoPago(3)}
+                        />
+                        <label
+                          htmlFor="cashondelivery1"
+                          className="radio-label_1"
+                        >
+                          QR
                         </label>
                       </div>
                     </li>
@@ -84,7 +118,7 @@ export const Pago = () => {
                   className="form-group return-departure-dts"
                   data-method="cashondelivery"
                 >
-                  {/* <div className="row">
+                  <div className="row">
                     <div className="col-lg-12">
                       <div className="pymnt_title">
                         <h4>Cash on Delivery</h4>
@@ -94,7 +128,7 @@ export const Pago = () => {
                         </p>
                       </div>
                     </div>
-                  </div> */}
+                  </div>
                 </div>
                 <div
                   className="form-group return-departure-dts"
@@ -119,9 +153,9 @@ export const Pago = () => {
                               name="holdername"
                               defaultValue=""
                               id="holder[name]"
-                              required=""
+                              required
                               maxLength="64"
-                              placeholder="Holder Name"
+                              placeholder="Nombre del titular"
                             />
                           </div>
                         </div>
@@ -140,9 +174,9 @@ export const Pago = () => {
                               name="cardnumber"
                               defaultValue=""
                               id="card[number]"
-                              required=""
+                              required
                               maxLength="64"
-                              placeholder="Card Number"
+                              placeholder="Número de tarjeta"
                             />
                           </div>
                         </div>
@@ -185,7 +219,7 @@ export const Pago = () => {
                               type="text"
                               name="card[expire-year]"
                               maxLength="4"
-                              placeholder="Year"
+                              placeholder="Año"
                             />
                           </div>
                         </div>
@@ -201,6 +235,7 @@ export const Pago = () => {
                               name="card[cvc]"
                               maxLength="3"
                               placeholder="CVV"
+                              required
                             />
                           </div>
                         </div>
@@ -213,7 +248,7 @@ export const Pago = () => {
                   className="next-btn16 hover-btn"
                   onClick={handlerPedido}
                 >
-                  Realizar pedido
+                  Confirmar pedido
                 </a>
               </div>
             </div>

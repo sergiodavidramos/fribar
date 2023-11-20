@@ -132,48 +132,34 @@ export default () => {
             </div>
             <div className="col-lg-3 col-md-6 col-sm-6">
               <div className="second-row-item-app">
-                <h4>Payment Method</h4>
+                <h4>Método de pago</h4>
                 <div className="footer-payments">
                   <ul id="paypal-gateway" className="financial-institutes">
                     <li className="financial-institutes__logo">
                       <img
                         alt="Visa"
                         title="Visa"
-                        //   src="images/footer-icons/pyicon-6.svg"
-                      />
-                    </li>
-                    <li className="financial-institutes__logo">
-                      <img
-                        alt="Visa"
-                        title="Visa"
-                        //   src="images/footer-icons/pyicon-1.svg"
+                        src="/img/footer-icons/pyicon-1.svg"
                       />
                     </li>
                     <li className="financial-institutes__logo">
                       <img
                         alt="MasterCard"
                         title="MasterCard"
-                        //   src="images/footer-icons/pyicon-2.svg"
+                        src="/img/footer-icons/pyicon-2.svg"
                       />
                     </li>
                     <li className="financial-institutes__logo">
                       <img
-                        alt="American Express"
-                        title="American Express"
-                        //   src="images/footer-icons/pyicon-3.svg"
-                      />
-                    </li>
-                    <li className="financial-institutes__logo">
-                      <img
-                        alt="Discover"
-                        title="Discover"
-                        //   src="images/footer-icons/pyicon-4.svg"
+                        alt="Pago QR"
+                        title="Pago QR"
+                        src="/img/footer-icons/pago-con-codigo-qr.png"
                       />
                     </li>
                   </ul>
                 </div>
               </div>
-              <div className="second-row-item-payment">
+              {/* <div className="second-row-item-payment">
                 <h4>Newsletter</h4>
                 <div className="newsletter-input">
                   <input
@@ -191,7 +177,7 @@ export default () => {
                     <i className="uil uil-telegram-alt"></i>
                   </button>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -200,34 +186,28 @@ export default () => {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <div className="footer-bottom-group">
-                <div className="footer-bottom-links">
-                  <ul>
-                    <li>
-                      <a href="about_us.html">About</a>
-                    </li>
-                    <li>
-                      <a href="contact_us.html">Contact</a>
-                    </li>
-                    <li>
-                      <a href="privacy_policy.html">Privacy Policy</a>
-                    </li>
-                    <li>
-                      <a href="term_and_conditions.html">
-                        Term & Conditions
-                      </a>
-                    </li>
-                    <li>
-                      <a href="refund_and_return_policy.html">
-                        Refund & Return Policy
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <div className="copyright-text">
-                  <i className="uil uil-copyright"></i>Copyright 2023{' '}
-                  <b>Fribar</b> . Todos los derechos reservados
-                </div>
+              <div className="footer-bottom-links">
+                <ul>
+                  <li>
+                    <a href="privacy_policy.html">
+                      política de privacidad
+                    </a>
+                  </li>
+                  <li>
+                    <a href="term_and_conditions.html">
+                      Términos y condiciones
+                    </a>
+                  </li>
+                  <li>
+                    <a href="refund_and_return_policy.html">
+                      Política de reembolso y devolución
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div className="copyright-text">
+                <i className="uil uil-copyright"></i>Copyright 2023{' '}
+                <b>Fribar</b> . Todos los derechos reservados
               </div>
             </div>
           </div>

@@ -1,8 +1,15 @@
 import { useContext, useEffect } from 'react'
 import UserContext from '../UserContext'
+import Loader from '../Loader'
+import GetImg from '../GetImg'
+import { API_URL } from '../Config'
+import Link from 'next/link'
+import Router from 'next/router'
 export default () => {
-  const { stateModel, modoNoche } = useContext(UserContext)
-  useEffect(() => {}, [stateModel])
+  const { modoNoche, categorias } = useContext(UserContext)
+
+  useEffect(() => {}, [modoNoche])
+
   return (
     // <!-- Category Model Start-->
     <div
@@ -24,182 +31,62 @@ export default () => {
               <i className="uil uil-multiply"></i>
             </button>
           </div>
+          <div className="category-model-content modal-content">
+            <div className="cate-header">
+              <h4>Seleccionar Categoria</h4>
+            </div>
 
-          {stateModel ? (
-            <div className="category-model-content modal-content">
-              <div className="cate-header">
-                <h4>Seleccionar Categoria</h4>
-              </div>
-              <ul
-                className={`category-by-cat ${
-                  modoNoche ? 'night-mode' : ''
-                }`}
-              >
-                <li>
-                  <a href="#" className="single-cat-item">
-                    <div className="icon">
-                      <img src="/img/category/icon-1.svg" alt="" />
-                    </div>
-                    <div className="text"> Fruits and Vegetables </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="single-cat-item">
-                    <div className="icon">
-                      <img src="/img/category/icon-2.svg" alt="" />
-                    </div>
-                    <div className="text"> Grocery & Staples </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="single-cat-item">
-                    <div className="icon">
-                      <img src="/img/category/icon-3.svg" alt="" />
-                    </div>
-                    <div className="text"> Dairy & Eggs </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="single-cat-item">
-                    <div className="icon">
-                      <img src="/img/category/icon-4.svg" alt="" />
-                    </div>
-                    <div className="text"> Beverages </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="single-cat-item">
-                    <div className="icon">
-                      <img src="/img/category/icon-5.svg" alt="" />
-                    </div>
-                    <div className="text"> Snacks </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="single-cat-item">
-                    <div className="icon">
-                      <img src="/img/category/icon-6.svg" alt="" />
-                    </div>
-                    <div className="text"> Home Care </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="single-cat-item">
-                    <div className="icon">
-                      <img src="/img/category/icon-7.svg" alt="" />
-                    </div>
-                    <div className="text"> Noodles & Sauces </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="single-cat-item">
-                    <div className="icon">
-                      <img src="/img/category/icon-8.svg" alt="" />
-                    </div>
-                    <div className="text"> Personal Care </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="single-cat-item">
-                    <div className="icon">
-                      <img src="/img/category/icon-9.svg" alt="" />
-                    </div>
-                    <div className="text"> Pet Care </div>
-                  </a>
-                </li>
-              </ul>
-              <a href="#" className="morecate-btn">
-                <i className="uil uil-apps"></i>More Categories
-              </a>
-            </div>
-          ) : (
-            <div className="category-model-content modal-content">
-              <div className="cate-header">
-                <h4>Agregar tu nueva Dirección</h4>
-              </div>
-              <div className="col-lg-12 col-md-12">
-                <div className="form-group">
-                  <label className="control-label">Name*</label>
-                  <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    placeholder="Name"
-                    className="form-control input-md"
-                    required=""
-                  />
-                </div>
-              </div>
-              <div className="col-lg-12 col-md-12">
-                <div className="form-group">
-                  <label className="control-label">Email Address*</label>
-                  <input
-                    id="email1"
-                    name="email1"
-                    type="text"
-                    placeholder="Email Address"
-                    className="form-control input-md"
-                    required=""
-                  />
-                </div>
-              </div>
-              <div className="col-lg-12 col-md-12">
-                <div className="form-group">
-                  <label className="control-label">
-                    Flat / House / Office No.*
-                  </label>
-                  <input
-                    id="flat"
-                    name="flat"
-                    type="text"
-                    placeholder="Address"
-                    className="form-control input-md"
-                    required=""
-                  />
-                </div>
-              </div>
-              <div className="col-lg-12 col-md-12">
-                <div className="form-group">
-                  <label className="control-label">
-                    Street / Society / Office Name*
-                  </label>
-                  <input
-                    id="street"
-                    name="street"
-                    type="text"
-                    placeholder="Street Address"
-                    className="form-control input-md"
-                  />
-                </div>
-              </div>
-              <div className="col-lg-12 col-md-12">
-                <div className="form-group">
-                  <label className="control-label">Pincode*</label>
-                  <input
-                    id="pincode"
-                    name="pincode"
-                    type="text"
-                    placeholder="Pincode"
-                    className="form-control input-md"
-                    required=""
-                  />
-                </div>
-              </div>
-              <div className="col-lg-12 col-md-12">
-                <div className="form-group">
-                  <label className="control-label">Locality*</label>
-                  <input
-                    id="Locality"
-                    name="locality"
-                    type="text"
-                    placeholder="Enter City"
-                    className="form-control input-md"
-                    required=""
-                  />
-                </div>
-              </div>
-            </div>
-          )}
+            <ul className={`category-by-cat`}>
+              {categorias.length > 0 ? (
+                categorias.map((cate, index) => (
+                  <li key={index}>
+                    <Link
+                      href={{
+                        pathname: '/[nombreCategoria]',
+
+                        query: {
+                          nombreCategoria: cate.name
+                            .toLowerCase()
+                            .replace(/ /g, '-'),
+                        },
+                      }}
+                    >
+                      <a
+                        className={`single-cat-item ${
+                          modoNoche ? 'single-cat-item-noche' : ''
+                        }`}
+                        onClick={() =>
+                          Router.push({
+                            pathname: '/[nombreCategoria]',
+                            query: {
+                              nombreCategoria: cate.name
+                                .toLowerCase()
+                                .replace(/ /g, '-'),
+                            },
+                          })
+                        }
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <div className="icon">
+                          <img
+                            src={GetImg(
+                              cate.img,
+                              `${API_URL}/upload/categoria`
+                            )}
+                            alt={cate.description}
+                          />
+                        </div>
+                        <div className="text">{cate.name}</div>
+                      </a>
+                    </Link>
+                  </li>
+                ))
+              ) : (
+                <Loader />
+              )}
+            </ul>
+          </div>
         </div>
       </div>
       <style jsx>{`
@@ -298,7 +185,10 @@ export default () => {
         }
 
         .single-cat-item:hover {
-          background: #f9f9f9;
+          background: #c4c4c4;
+        }
+        .single-cat-item-noche:hover {
+          background: 'black';
         }
 
         .single-cat-item .text {

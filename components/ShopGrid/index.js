@@ -3,9 +3,13 @@ import Filter from './Filter'
 import expectedRound from 'expected-round'
 import React, { useContext, useRef, useState } from 'react'
 import UserContext from '../UserContext'
+import { notify } from 'react-notify-toast'
+import Link from 'next/link'
+import { API_URL } from '../Config'
 
 export default ({ titulo, productos = [], page, setPage, sonTodos }) => {
-  const { addProductCar, carrito } = useContext(UserContext)
+  const { addProductCar, likes, setLikes, token, user, signOut } =
+    useContext(UserContext)
 
   const [cantidad, setCantidad] = useState(0)
   let totalFiltro = {}
@@ -40,7 +44,36 @@ export default ({ titulo, productos = [], page, setPage, sonTodos }) => {
   }
   function handlerAgregarAlCarrito(producto, cantidad) {
     addProductCar(producto, cantidad)
-    // console.log('El Carrito', carrito)
+    notify.show('🛒 Agregado al Carrito 🛒', 'success', '2')
+  }
+  function addLiked(idProducto) {
+    if (likes.includes(idProducto)) {
+      const resultado = likes.filter((like) => like != idProducto)
+      setLikes(resultado)
+      actualizarLikedUser(resultado)
+    } else {
+      setLikes(likes.concat(idProducto))
+      actualizarLikedUser(likes.concat(idProducto))
+    }
+  }
+  async function actualizarLikedUser(likes) {
+    try {
+      const res = await fetch(`${API_URL}/user/${user._id}`, {
+        method: 'PATCH',
+        body: JSON.stringify({ favoritos: likes }),
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      })
+
+      if (res.status === 401) signOut()
+      const datos = await res.json()
+      if (datos.error)
+        notify.show('Error al agrefar a favoritos', 'warning')
+    } catch (error) {
+      alert(error)
+    }
   }
 
   return (
@@ -68,7 +101,7 @@ export default ({ titulo, productos = [], page, setPage, sonTodos }) => {
                     <div className="text">
                       Todos los productos y ordenar por:{' '}
                     </div>
-                    <div className="menu">
+                    <div className="menu" tabIndex={'-1'}>
                       <div
                         className="item"
                         data-value="0"
@@ -123,29 +156,40 @@ export default ({ titulo, productos = [], page, setPage, sonTodos }) => {
                 productos.map((pro, i) => (
                   <div className="col-lg-3 col-md-6" key={i}>
                     <div className="product-item mb-30">
-                      <a
-                        href="http://gambolthemes.net/html-items/gambo_supermarket_demo/single_product_view.html"
-                        className="product-img"
+                      <Link
+                        href={{
+                          pathname: '/productos/[nombre]',
+                          query: {
+                            nombre: pro.name
+                              .toLowerCase()
+                              .replace(/ /g, '-'),
+                          },
+                        }}
                       >
-                        <img
-                          src={GetImg(
-                            pro.img[0],
-                            'http://localhost:3001/upload/producto'
-                          )}
-                          alt={pro.name}
-                        />
-                        {pro.descuento > 0 && (
+                        <a className="product-img">
+                          <img
+                            src={GetImg(
+                              pro.img[0],
+                              'http://localhost:3001/upload/producto'
+                            )}
+                            alt={pro.name}
+                          />
                           <div className="product-absolute-options">
-                            <span className="offer-badge-1">
-                              {pro.descuento}% de descuento
-                            </span>
+                            {pro.descuento > 0 && (
+                              <span className="offer-badge-1">
+                                {pro.descuento}% de descuento
+                              </span>
+                            )}
                             <span
-                              className="like-icon"
+                              className={`like-icon ${
+                                likes.includes(pro._id) ? 'liked' : ''
+                              }`}
                               title="wishlist"
+                              onClick={() => addLiked(pro._id)}
                             ></span>
                           </div>
-                        )}
-                      </a>
+                        </a>
+                      </Link>
                       <div className="product-text-dt">
                         {pro.stock > 0 ? (
                           <p>
@@ -183,7 +227,9 @@ export default ({ titulo, productos = [], page, setPage, sonTodos }) => {
                             <input
                               type="number"
                               step="1"
-                              min="1"
+                              min={
+                                pro.tipoVenta === 'Unidad' ? '1' : '0.5'
+                              }
                               name="quantity"
                               defaultValue="1"
                               className="input-text qty text"

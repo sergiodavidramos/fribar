@@ -18,6 +18,8 @@ import '../public/vendor/semantic/semantic.min.css'
 import { LoadFile } from '../components/LoadFile'
 import { API_URL } from '../components/Config'
 import 'mapbox-gl/dist/mapbox-gl.css'
+import expectedRound from 'expected-round'
+
 export default class MyApp extends App {
   constructor(props) {
     super(props)
@@ -31,10 +33,13 @@ export default class MyApp extends App {
       carrito: [],
       cantidadProducto: [],
       total: 0,
+      totalConDescuento: 0,
       categorias: [],
       modoNoche: false,
       direcciones: [],
       likes: [],
+      costoEnvio: 0,
+      direccionEnvio: false,
     }
   }
   getMovimientos = (token) => {
@@ -96,10 +101,13 @@ export default class MyApp extends App {
       })
     }
     if (cantidades && productos) {
+      const pro = JSON.parse(productos)
+      const cant = JSON.parse(cantidades)
       this.setState({
         carrito: JSON.parse(productos),
         cantidadProducto: JSON.parse(cantidades),
       })
+      this.calcularTotal(pro, cant)
     }
     if (modoNoche)
       this.setState({
@@ -119,6 +127,113 @@ export default class MyApp extends App {
     this.getCategorias()
   }
 
+  addProductCar = (p, c) => {
+    let ban = false
+    if (this.state.carrito.length > 0) {
+      this.state.carrito.find((producto, index) => {
+        if (producto._id === p._id) {
+          this.state.cantidadProducto[index] =
+            this.state.cantidadProducto[index] + c
+          ban = true
+          localStorage.setItem(
+            'fribar-cantidades',
+            JSON.stringify(this.state.cantidadProducto)
+          )
+          this.setState({
+            cantidadProducto: this.state.cantidadProducto,
+          })
+        }
+      })
+      if (!ban) {
+        this.setState({
+          carrito: this.state.carrito.concat(p),
+          cantidadProducto: this.state.cantidadProducto.concat(c),
+        })
+        localStorage.setItem(
+          'fribar-carrito',
+          JSON.stringify(this.state.carrito.concat(p))
+        )
+        localStorage.setItem(
+          'fribar-cantidades',
+          JSON.stringify(this.state.cantidadProducto.concat(c))
+        )
+      }
+    } else {
+      this.setState({
+        carrito: this.state.carrito.concat(p),
+        cantidadProducto: this.state.cantidadProducto.concat(c),
+      })
+      localStorage.setItem(
+        'fribar-carrito',
+        JSON.stringify(this.state.carrito.concat(p))
+      )
+      localStorage.setItem(
+        'fribar-cantidades',
+        JSON.stringify(this.state.cantidadProducto.concat(c))
+      )
+    }
+    this.calcularTotal(
+      JSON.parse(localStorage.getItem('fribar-carrito')),
+      JSON.parse(localStorage.getItem('fribar-cantidades'))
+    )
+  }
+  setCantidades = (cantidades, productos) => {
+    this.setState({ cantidadProducto: cantidades })
+    localStorage.setItem('fribar-cantidades', JSON.stringify(cantidades))
+    this.calcularTotal(productos, cantidades)
+  }
+  calcularTotal = (productos, cantidades) => {
+    let auxTotalConDescuneto = 0
+    let auxTotal = 0
+    for (let i = 0; i < productos.length; i++) {
+      auxTotalConDescuneto += parseFloat(
+        expectedRound
+          .round10(
+            (productos[i].precioVenta -
+              (productos[i].descuento * productos[i].precioVenta) / 100) *
+              cantidades[i],
+            -1
+          )
+          .toFixed(2)
+      )
+      auxTotal += parseFloat(
+        expectedRound
+          .round10(productos[i].precioVenta * cantidades[i], -1)
+          .toFixed(2)
+      )
+    }
+    this.setState({
+      total: auxTotal,
+      totalConDescuento: auxTotalConDescuneto,
+    })
+  }
+  elimninarProdcutoCarrito = (index) => {
+    this.state.carrito.splice(index, 1)
+    this.state.cantidadProducto.splice(index, 1)
+    this.setState({
+      carrito: this.state.carrito,
+      cantidadProducto: this.state.cantidadProducto,
+    })
+    localStorage.setItem(
+      'fribar-carrito',
+      JSON.stringify(this.state.carrito)
+    )
+    localStorage.setItem(
+      'fribar-cantidades',
+      JSON.stringify(this.state.cantidadProducto)
+    )
+    this.calcularTotal(this.state.carrito, this.state.cantidadProducto)
+  }
+  setCostoEnvio = (costo) => {
+    this.setState({
+      costoEnvio: costo,
+    })
+  }
+  setDireccionEnvio = (direccion) => {
+    this.setState({
+      direccionEnvio: direccion,
+    })
+  }
   signIn = (user, token) => {
     const direcciones = user.direccion
     const likes = user.favoritos
@@ -180,50 +295,6 @@ export default class MyApp extends App {
   setAllCiudades = (ciudades) => {
     this.setState({ ciudades })
   }
-  addProductCar = (p, c) => {
-    let ban = false
-    if (this.state.carrito.length > 0) {
-      this.state.carrito.find((producto, index) => {
-        if (producto._id === p._id) {
-          this.state.cantidadProducto[index] =
-            this.state.cantidadProducto[index] + c
-          ban = true
-          localStorage.setItem(
-            'fribar-cantidades',
-            JSON.stringify(this.state.cantidadProducto)
-          )
-        }
-      })
-      if (!ban) {
-        this.setState({
-          carrito: this.state.carrito.concat(p),
-          cantidadProducto: this.state.cantidadProducto.concat(c),
-        })
-        localStorage.setItem(
-          'fribar-carrito',
-          JSON.stringify(this.state.carrito.concat(p))
-        )
-        localStorage.setItem(
-          'fribar-cantidades',
-          JSON.stringify(this.state.cantidadProducto.concat(c))
-        )
-      }
-    } else {
-      this.setState({
-        carrito: this.state.carrito.concat(p),
-        cantidadProducto: this.state.cantidadProducto.concat(c),
-      })
-      localStorage.setItem(
-        'fribar-carrito',
-        JSON.stringify(this.state.carrito.concat(p))
-      )
-      localStorage.setItem(
-        'fribar-cantidades',
-        JSON.stringify(this.state.cantidadProducto.concat(c))
-      )
-    }
-  }
-
   setModoNoche = (modo) => {
     this.setState({ modoNoche: modo })
   }
@@ -233,6 +304,12 @@ export default class MyApp extends App {
       JSON.stringify(newDirecciones)
     )
     this.setState({ direcciones: newDirecciones })
+  }
+  setLikes = (likes) => {
+    localStorage.setItem('user-likes', JSON.stringify(likes))
+    this.setState({
+      likes: likes,
+    })
   }
   render() {
     const { Component, pageProps } = this.props
@@ -262,6 +339,11 @@ export default class MyApp extends App {
               categorias: this.state.categorias,
               modoNoche: this.state.modoNoche,
               direcciones: this.state.direcciones,
+              total: this.state.total,
+              totalConDescuneto: this.state.totalConDescuento,
+              costoEnvio: this.state.costoEnvio,
+              direccionEnvio: this.state.direccionEnvio,
+              likes: this.state.likes,
               signIn: this.signIn,
               signOut: this.signOut,
               setUser: this.setUser,
@@ -272,6 +354,11 @@ export default class MyApp extends App {
               addProductCar: this.addProductCar,
               setModoNoche: this.setModoNoche,
               setDirecciones: this.setDirecciones,
+              setCantidades: this.setCantidades,
+              elimninarProdcutoCarrito: this.elimninarProdcutoCarrito,
+              setCostoEnvio: this.setCostoEnvio,
+              setDireccionEnvio: this.setDireccionEnvio,
+              setLikes: this.setLikes,
             }}
           >
             <Component {...pageProps} />

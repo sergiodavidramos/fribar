@@ -6,7 +6,6 @@ export default () => (
         padding: 100px;
         width: 100%;
         height: 100%;
-        background-color: #fff;
         transition: all 0.3s;
       }
       .brk-loader-remove {

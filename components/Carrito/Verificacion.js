@@ -4,26 +4,26 @@ import UserContext from '../UserContext'
 import { API_URL } from '../Config'
 import { LoginComponent } from '../LoginComponent'
 export const Verificacion = ({
-  user,
   token,
   setCodigoVerificado,
   codigoVerificado,
 }) => {
   const [valueCode, setValueCode] = useState('')
   const [codigoEnviado, setCodigoEnviado] = useState(false)
-  const { signOut, setUser } = useContext(UserContext)
+  const { signOut, setUser, user } = useContext(UserContext)
   useEffect(() => {}, [])
-  function handlerMandarCode() {
+  function handlerMandarCode(numero) {
     setCodigoEnviado(true)
     fetch(
-      `${API_URL}/verificar/getcode?numero=591${user.phone}&channel=sms`,
+      `${API_URL}/verificar/getcode?numero=591${
+        user.phone ? user.phone : numero
+      }&channel=sms`,
       {
         method: 'GET',
       }
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
         data.error
           ? notify.show('Error en el servidor', 'error')
           : notify.show('Se mando el codigo a su teléfono', 'success')
@@ -52,14 +52,13 @@ export const Verificacion = ({
         .then((data) => {
           if (data.error) notify.show(data.body.message, 'error', 2000)
           else {
-            handlerMandarCode()
+            handlerMandarCode(data.body.phone)
             setUser(data.body)
           }
         })
     }
   }
   function handlerChangeCode() {
-    console.log('2323')
     event.preventDefault()
     setValueCode(event.target.value)
   }
@@ -94,7 +93,6 @@ export const Verificacion = ({
         })
     }
   }
-  console.log(codigoVerificado)
   return (
     <div className="checkout-step">
       <div className="checkout-card" id="headingOne">
@@ -190,6 +188,21 @@ export const Verificacion = ({
                           required
                         />
                       </li>
+                      {!codigoVerificado && (
+                        <li
+                          style={{
+                            marginLeft: '10px',
+                          }}
+                        >
+                          <button
+                            className="collapsed ml-auto next-btn16 hover-btn"
+                            style={{ padding: '2px 3px', height: '35px' }}
+                            onClick={handlerSubmitVerificarCodigo}
+                          >
+                            Verificar codigo
+                          </button>
+                        </li>
+                      )}
                     </ul>
                   </div>
                 </div>
@@ -204,23 +217,28 @@ export const Verificacion = ({
                       <button
                         className="save-btn14 hover-btn"
                         onClick={handlerMandarCode}
-                        style={{ padding: '9px 10px' }}
+                        style={{
+                          padding: '9px 10px',
+                          height: 'auto',
+                          marginRight: '10px',
+                        }}
                       >
                         {codigoEnviado
-                          ? 'Volver a enviar el código'
-                          : 'Enviar el código'}
+                          ? 'Volver a enviar el código a mi numero'
+                          : 'Enviar código a mi numero'}
                       </button>
-                      <button
-                        id="botonSiguiente"
-                        onClick={handlerSubmitVerificarCodigo}
-                        className="collapsed ml-auto next-btn16 hover-btn"
-                        data-toggle="collapse"
-                        data-parent="#checkout_wizard"
-                        href="#collapseTwo"
-                        style={{ padding: '9px 10px' }}
-                      >
-                        Siguiente
-                      </button>
+                      {codigoVerificado && (
+                        <button
+                          id="botonSiguiente"
+                          className="collapsed ml-auto next-btn16 hover-btn"
+                          data-toggle="collapse"
+                          data-parent="#checkout_wizard"
+                          href="#collapseTwo"
+                          style={{ padding: '9px 10px' }}
+                        >
+                          Siguiente
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>

@@ -1,7 +1,51 @@
-import { useContext } from 'react'
+import { useContext, useRef, useMemo, useState } from 'react'
+import { createAutocomplete } from '@algolia/autocomplete-core'
 import UserContext from '../UserContext'
-export default () => {
-  const { modoNoche } = useContext(UserContext)
+import Link from 'next/link'
+import GetImg from '../GetImg'
+import { API_URL } from '../Config'
+import Router from 'next/router'
+export default (props) => {
+  const [autoCompleteState, setAutoCompleteState] = useState({
+    collections: [],
+  })
+
+  const { modoNoche, categorias } = useContext(UserContext)
+
+  const autoComplete = useMemo(
+    () =>
+      createAutocomplete({
+        placeholder: 'Busca tus productos',
+        onStateChange: ({ state }) => setAutoCompleteState(state),
+        getSources: () => [
+          {
+            sourceId: 'productosAPI',
+            getItems: ({ query }) => {
+              if (!!query) {
+                return fetch(`${API_URL}/productos/buscar/${query}`)
+                  .then((res) => res.json())
+                  .then((datos) => {
+                    return datos.body
+                  })
+                  .catch((er) => alert(er))
+              }
+            },
+          },
+        ],
+        ...props,
+      }),
+    [props]
+  )
+
+  const formRef = useRef(null)
+  const inputRef = useRef(null)
+
+  const formProps = autoComplete.getFormProps({
+    inputElement: inputRef.current,
+  })
+  const inputProps = autoComplete.getInputProps({
+    inputElement: inputRef.current,
+  })
   return (
     // <!-- Search Model Start-->
     <div
@@ -25,73 +69,109 @@ export default () => {
           </div>
           <div className="category-model-content modal-content">
             <div className="search-header">
-              <form action="#">
-                <input
-                  type="search"
-                  placeholder="Search for products..."
-                />
+              <form {...formProps} ref={formRef}>
+                <input type="search" ref={inputRef} {...inputProps} />
                 <button type="submit">
                   <i className="uil uil-search"></i>
                 </button>
               </form>
             </div>
-            <div
-              className={`search-by-cat ${modoNoche ? 'night-mode' : ''}`}
-            >
-              <a href="#" className="single-cat">
-                <div className="icon">
-                  <img src="/img/category/icon-1.svg" alt="" />
-                </div>
-                <div className="text">Fruits and Vegetables</div>
-              </a>
-              <a href="#" className="single-cat">
-                <div className="icon">
-                  <img src="/img/category/icon-2.svg" alt="" />
-                </div>
-                <div className="text"> Grocery & Staples </div>
-              </a>
-              <a href="#" className="single-cat">
-                <div className="icon">
-                  <img src="/img/category/icon-3.svg" alt="" />
-                </div>
-                <div className="text"> Dairy & Eggs </div>
-              </a>
-              <a href="#" className="single-cat">
-                <div className="icon">
-                  <img src="/img/category/icon-4.svg" alt="" />
-                </div>
-                <div className="text"> Beverages </div>
-              </a>
-              <a href="#" className="single-cat">
-                <div className="icon">
-                  <img src="/img/category/icon-5.svg" alt="" />
-                </div>
-                <div className="text"> Snacks </div>
-              </a>
-              <a href="#" className="single-cat">
-                <div className="icon">
-                  <img src="/img/category/icon-6.svg" alt="" />
-                </div>
-                <div className="text"> Home Care </div>
-              </a>
-              <a href="#" className="single-cat">
-                <div className="icon">
-                  <img src="/img/category/icon-7.svg" alt="" />
-                </div>
-                <div className="text"> Noodles & Sauces </div>
-              </a>
-              <a href="#" className="single-cat">
-                <div className="icon">
-                  <img src="/img/category/icon-8.svg" alt="" />
-                </div>
-                <div className="text"> Personal Care </div>
-              </a>
-              <a href="#" className="single-cat">
-                <div className="icon">
-                  <img src="/img/category/icon-9.svg" alt="" />
-                </div>
-                <div className="text"> Pet Care </div>
-              </a>
+            <div className={`search-by-cat `}>
+              {autoCompleteState.collections.length > 0
+                ? autoCompleteState.collections[0].items.map(
+                    (pro, index) => (
+                      <Link
+                        href={{
+                          pathname: '/productos/[nombre]',
+                          query: {
+                            nombre: pro.name
+                              .toLowerCase()
+                              .replace(/ /g, '-'),
+                          },
+                        }}
+                        key={index}
+                      >
+                        <a
+                          onClick={() =>
+                            Router.push({
+                              pathname: '/productos/[nombre]',
+                              query: {
+                                nombre: pro.name
+                                  .toLowerCase()
+                                  .replace(/ /g, '-'),
+                              },
+                            })
+                          }
+                          className="single-cat"
+                          data-dismiss="modal"
+                          aria-label="Close"
+                        >
+                          <div className="icon">
+                            <img
+                              src={GetImg(
+                                pro.img[0],
+                                `${API_URL}/upload/categoria`
+                              )}
+                              alt={pro.detail}
+                            />
+                          </div>
+                          <div
+                            className="text"
+                            style={modoNoche ? { color: '#FFF' } : {}}
+                          >
+                            {pro.name}
+                          </div>
+                        </a>
+                      </Link>
+                    )
+                  )
+                : categorias.length > 0
+                ? categorias.map((cate, index) => (
+                    <Link
+                      href={{
+                        pathname: '/[nombreCategoria]',
+                        query: {
+                          nombreCategoria: cate.name
+                            .toLowerCase()
+                            .replace(/ /g, '-'),
+                        },
+                      }}
+                      key={index}
+                    >
+                      <a
+                        className="single-cat"
+                        onClick={() =>
+                          Router.push({
+                            pathname: '/[nombreCategoria]',
+                            query: {
+                              nombreCategoria: cate.name
+                                .toLowerCase()
+                                .replace(/ /g, '-'),
+                            },
+                          })
+                        }
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <div className="icon">
+                          <img
+                            src={GetImg(
+                              cate.img,
+                              `${API_URL}/upload/categoria`
+                            )}
+                            alt={cate.description}
+                          />
+                        </div>
+                        <div
+                          className="text"
+                          style={modoNoche ? { color: '#FFF' } : {}}
+                        >
+                          {cate.name}
+                        </div>
+                      </a>
+                    </Link>
+                  ))
+                : ''}
             </div>
           </div>
         </div>

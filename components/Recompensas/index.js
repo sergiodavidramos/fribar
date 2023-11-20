@@ -1,4 +1,4 @@
-import MenuLef from "../Perfil/components/MenuLef";
+import MenuLef from '../Perfil/components/MenuLef'
 
 export default () => (
   <div className="container">
@@ -10,11 +10,11 @@ export default () => (
             <div className="col-md-12">
               <div className="main-title-tab">
                 <h4>
-                  <i className="uil uil-gift"></i>My Rewards
+                  <i className="uil uil-gift"></i>Mi recompensa
                 </h4>
               </div>
             </div>
-            <div className="col-lg-12 col-md-12">
+            {/* <div className="col-lg-12 col-md-12">
               <div className="pdpt-bg">
                 <ul className="reward-body-all">
                   <li>
@@ -130,10 +130,10 @@ export default () => (
                   <span className="date-reward">3 May 2020</span>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
     </div>
   </div>
-);
+)
