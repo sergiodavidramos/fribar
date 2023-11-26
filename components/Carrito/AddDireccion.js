@@ -40,6 +40,22 @@ export const AddDireccion = () => {
           aria-labelledby="headingTwo"
           data-parent="#checkout_wizard"
         >
+          <div className="col-lg-12 col-md-12">
+            <div className="form-group mb-0">
+              <div className="address-btns">
+                <button
+                  className="save-btn14 hover-btn"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#collapseOne"
+                  aria-expanded="true"
+                  aria-controls="collapseOne"
+                >
+                  Atras
+                </button>
+              </div>
+            </div>
+          </div>
           <div className="checkout-step-body">
             <p>
               Seleccione una de sus direcciones registrados o registre uno

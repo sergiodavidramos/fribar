@@ -58,7 +58,7 @@ export default () => {
         }
       )
     }
-  }, [ciudades])
+  }, [ciudades, cantidades])
 
   function mostrarUbicacion(ubicacion, setCiudad) {
     fetch(

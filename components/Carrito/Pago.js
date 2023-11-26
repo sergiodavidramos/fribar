@@ -1,36 +1,131 @@
 import Link from 'next/link'
-import { API_URL } from '../Config'
-import { useContext, useState } from 'react'
+import { API_URL, TOKENMAP } from '../Config'
+import { useContext, useEffect, useState } from 'react'
 import UserContext from '../UserContext'
 import { notify } from 'react-notify-toast'
+import Loader from '../Loader'
+import { useRouter } from 'next/router'
 export const Pago = () => {
-  const { carrito } = useContext(UserContext)
+  const {
+    carrito,
+    cantidades,
+    token,
+    direccionEnvio,
+    user,
+    totalConDescuneto,
+  } = useContext(UserContext)
 
   const [tipoPago, setTipoPago] = useState(false)
+  const [sucursalAsignado, setSucursalAsignado] = useState(false)
+  const [tiempoEstimadoEntrega, setTiempoEstimadoEntrega] = useState(0)
+  const [stateButton, setStateButton] = useState(false)
 
+  const router = useRouter()
+
+  useEffect(() => {
+    if (direccionEnvio) getSucursales()
+  }, [direccionEnvio])
+
+  const getSucursales = async () => {
+    const res = await fetch(`${API_URL}/sucursal/all`)
+    const suc = await res.json()
+    const lonUser = direccionEnvio.lon
+    const latUser = direccionEnvio.lat
+    let mayorDistancia = 0
+    let sucElegido = false
+    let tiempo = 30
+    if (suc.body.length > 1) {
+      for (let suc of suc.body) {
+        const sucLon = suc.direccion.lon
+        const sucLat = suc.direccion.lat
+        const urlMapBox = `https://api.mapbox.com/directions/v5/mapbox/driving/${sucLon},${sucLat};${lonUser},${latUser}?alternatives=false&geometries=geojson&language=en&overview=full&steps=true&access_token=${TOKENMAP}`
+        const resDatosMapa = await fetch(urlMapBox)
+        const datosMapa = await resDatosMapa.json()
+        if (datosMapa.routes[0].distance / 1000 > mayorDistancia) {
+          mayorDistancia = datosMapa.routes[0].distance / 1000
+        } else {
+          sucElegido = suc
+          tiempo = datosMapa.routes[0].duration / 60
+        }
+      }
+      console.log('La sucursal', sucElegido)
+      setSucursalAsignado(sucElegido._id)
+      setTiempoEstimadoEntrega(tiempo)
+    } else {
+      setSucursalAsignado(suc.body[0]._id)
+      setTiempoEstimadoEntrega(30)
+    }
+  }
   const handlerPedido = () => {
-    console.log('ssssssss', carrito)
-    switch (5) {
-      case 0:
-        fetch(`${API_URL}/detalle`, {
+    setStateButton(true)
+
+    switch (tipoPago) {
+      case 1:
+        notify.show(
+          'Se envio el Pedido por favor espere la confirmacion 😊',
+          'success'
+        )
+        const mandarDetalle = []
+        for (let j = 0; j < carrito.length; j++) {
+          mandarDetalle.push({
+            producto: carrito[j]._id,
+            cantidad: cantidades[j],
+          })
+        }
+
+        fetch(`${API_URL}/pedido`, {
           method: 'POST',
           body: JSON.stringify({
-            detalle: [{ producto: carrito[0]._id, cantidad: 1 }],
+            idSucursal: sucursalAsignado,
+            duracionEstimadaEntrega: tiempoEstimadoEntrega,
+            tipoPago: 'Contra Entrega',
+            direccion: direccionEnvio._id,
+            detalleVenta: mandarDetalle,
           }),
           headers: {
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
         })
-          .then((res) => res.json())
-          .then()
-        break
-      case 1:
+          .then((res) => {
+            if (res.error)
+              notify.show('Error al registrar el pedido 😓', 'error')
+            return res.json()
+          })
+          .then((resPedido) => {
+            console.log('LA RESPUESTA', resPedido)
+            setStateButton(false)
+            router.push({
+              pathname: '/pedido-realizado',
+              query: {
+                direccion: direccionEnvio.direccion,
+                referenciaDireccion: direccionEnvio.referencia,
+                tiempoEstimado: tiempoEstimadoEntrega,
+                numeroTel: user.phone,
+                correo: user.email,
+                pago: 'Contra Entrega',
+                total: totalConDescuneto,
+                estadoPago: false,
+                idPedido: resPedido.body._id,
+              },
+            })
+          })
+          .catch((error) => {
+            notify.show(
+              'Error al registrar el pedido contra entrega',
+              'error'
+            )
+            setStateButton(false)
+          })
         break
       case 2:
+        break
+      case 3:
         break
 
       default:
         notify.show('Por favor selecciona un metodo de pago', 'warning')
+        setStateButton(false)
     }
   }
   return (
@@ -56,6 +151,22 @@ export const Pago = () => {
         aria-labelledby="headingFour"
         data-parent="#checkout_wizard"
       >
+        <div className="col-lg-12 col-md-12">
+          <div className="form-group mb-0">
+            <div className="address-btns">
+              <button
+                className="save-btn14 hover-btn"
+                type="button"
+                data-toggle="collapse"
+                data-target="#collapseTwo"
+                aria-expanded="false"
+                aria-controls="collapseTwo"
+              >
+                Atras
+              </button>
+            </div>
+          </div>
+        </div>
         <div className="checkout-step-body">
           <div className="payment_method-checkout">
             <div className="row">
@@ -69,7 +180,7 @@ export const Pago = () => {
                           name="paymentmethod"
                           type="radio"
                           data-minimum="50.0"
-                          onClick={() => setTipoPago(0)}
+                          onClick={() => setTipoPago(1)}
                         />
                         <label
                           htmlFor="cashondelivery2"
@@ -87,7 +198,7 @@ export const Pago = () => {
                           name="paymentmethod"
                           type="radio"
                           data-minimum="50.0"
-                          onClick={() => setTipoPago(1)}
+                          onClick={() => setTipoPago(2)}
                         />
                         <label htmlFor="card1" className="radio-label_1">
                           Tarjeta de credito / debito
@@ -121,11 +232,11 @@ export const Pago = () => {
                   <div className="row">
                     <div className="col-lg-12">
                       <div className="pymnt_title">
-                        <h4>Cash on Delivery</h4>
-                        <p>
-                          Cash on Delivery will not be available if your
-                          order value exceeds $10.
-                        </p>
+                        <h4>Codigo QR</h4>
+                        <Loader />
+                        {/* <p>
+                       
+                        </p> */}
                       </div>
                     </div>
                   </div>
@@ -244,12 +355,21 @@ export const Pago = () => {
                   </div>
                 </div>
 
-                <a
-                  className="next-btn16 hover-btn"
-                  onClick={handlerPedido}
-                >
-                  Confirmar pedido
-                </a>
+                {stateButton ? (
+                  <div>
+                    <Loader />
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    title="Click para confirmar pedido"
+                    className="next-btn16 hover-btn"
+                    disabled={stateButton}
+                    onClick={handlerPedido}
+                  >
+                    Confirmar pedido
+                  </button>
+                )}
               </div>
             </div>
           </div>

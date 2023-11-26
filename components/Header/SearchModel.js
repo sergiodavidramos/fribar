@@ -110,9 +110,9 @@ export default (props) => {
                             <img
                               src={GetImg(
                                 pro.img[0],
-                                `${API_URL}/upload/categoria`
+                                `${API_URL}/upload/producto`
                               )}
-                              alt={pro.detail}
+                              alt={pro.name}
                             />
                           </div>
                           <div

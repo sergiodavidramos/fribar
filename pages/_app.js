@@ -19,6 +19,7 @@ import { LoadFile } from '../components/LoadFile'
 import { API_URL } from '../components/Config'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import expectedRound from 'expected-round'
+import si from 'search-insights'
 
 export default class MyApp extends App {
   constructor(props) {
@@ -92,6 +93,7 @@ export default class MyApp extends App {
     const likes = localStorage.getItem('user-likes')
     if (user && token) {
       const usuario = JSON.parse(user)
+      si('setAuthenticatedUserToken', user._id)
       //   this.getMovimientos(token)
       this.setState({
         user: usuario,
@@ -235,6 +237,7 @@ export default class MyApp extends App {
     })
   }
   signIn = (user, token) => {
+    si('setAuthenticatedUserToken', user._id)
     const direcciones = user.direccion
     const likes = user.favoritos
     localStorage.setItem('fribar-user', JSON.stringify(user))
@@ -273,6 +276,9 @@ export default class MyApp extends App {
   signOut = () => {
     localStorage.removeItem('fribar-user')
     localStorage.removeItem('fribar-token')
+    localStorage.removeItem('user-likes')
+    localStorage.removeItem('user-direcciones')
+    si('setAuthenticatedUserToken', undefined)
     this.setState(
       {
         user: null,

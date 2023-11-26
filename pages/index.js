@@ -5,16 +5,19 @@ import Categories from '../components/Categories'
 import Destacados from '../components/Destacados'
 import MejoresValores from '../components/MejoresValores'
 import Footer from '../components/Footer'
-import { useEffect, useContext } from 'react'
+import { useEffect, useContext, useState } from 'react'
 import * as React from 'react'
 import { LoadFile } from '../components/LoadFile'
 import { API_URL } from '../components/Config'
 import UserContext from '../components/UserContext'
-const Home = ({ productosDescuento }) => {
-  //   const {  } = useContext(UserContext)
-  useEffect(() => {
-    // LoadFile()
-  }, [])
+import { notify } from 'react-notify-toast'
+import Loader from '../components/Loader'
+
+const Home = ({
+  productosDescuento,
+  productosDestacados,
+  productosNuevos,
+}) => {
   return (
     <>
       <Head>
@@ -39,10 +42,32 @@ const Home = ({ productosDescuento }) => {
       <div className="wrapper">
         <Carrousel productosDescuento={productosDescuento} />
         <Categories />
-        <Destacados title="Principales Productos Destacados" />
+        {productosDestacados.length > 0 ? (
+          <Destacados
+            title="Principales Productos Destacados"
+            productos={productosDestacados}
+            url="/productos/destacados"
+          />
+        ) : (
+          <Loader />
+        )}
         <MejoresValores />
-        <Destacados title="Verduras y Frutas Frescas" />
-        <Destacados title="Nuevos Productos Agregados" />
+
+        <Destacados
+          title="Verduras y Frutas Frescas"
+          productos={productosNuevos}
+          url="/recomendados"
+        />
+
+        {productosNuevos.length > 0 ? (
+          <Destacados
+            title="Nuevos Productos Agregados"
+            productos={productosNuevos}
+            url="/productos"
+          />
+        ) : (
+          <Loader />
+        )}
       </div>
       <Footer />
     </>
@@ -51,12 +76,57 @@ const Home = ({ productosDescuento }) => {
 
 export async function getStaticProps() {
   try {
-    const res = await fetch(`${API_URL}/productos/filtrados/descuento`)
-    const pro = await res.json()
-    if (pro.error) return { props: { productosDescuento: [] } }
-    return { props: { productosDescuento: pro.body } }
+    const resProductosDescuento = await fetch(
+      `${API_URL}/productos/filtrados/descuento`
+    )
+    const resProductosDestacados = await fetch(
+      `${API_URL}/productos/destacados/principales`
+    )
+    const resProductosNuevos = await fetch(
+      `${API_URL}/productos?desde=0&limite=8`
+    )
+    const proDescuento = await resProductosDescuento.json()
+    const proDestacados = await resProductosDestacados.json()
+    const proNuevos = await resProductosNuevos.json()
+    if (proDescuento.error)
+      return {
+        props: {
+          productosDescuento: [],
+          productosDestacados: proDestacados.body,
+          productosNuevos: proNuevos.body[0],
+        },
+      }
+    if (proDestacados.error)
+      return {
+        props: {
+          productosDescuento: proDescuento.body,
+          productosNuevos: proNuevos.body[0],
+          productosDestacados: [],
+        },
+      }
+    if (proNuevos.error)
+      return {
+        props: {
+          productosDescuento: proDescuento.body,
+          productosDestacados: proDestacados.body,
+          productosNuevos: [],
+        },
+      }
+    return {
+      props: {
+        productosDescuento: proDescuento.body,
+        productosDestacados: proDestacados.body,
+        productosNuevos: proNuevos.body[0],
+      },
+    }
   } catch (error) {
-    return { props: { productosDescuento: [] } }
+    return {
+      props: {
+        productosDescuento: [],
+        productosDestacados: [],
+        productosNuevos: [],
+      },
+    }
   }
 }
 export default Home

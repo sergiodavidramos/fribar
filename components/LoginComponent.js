@@ -7,7 +7,7 @@ import UserContext from './UserContext'
 import { API_URL } from './Config'
 export const LoginComponent = () => {
   var auth2
-  const { signInCompra } = useContext(UserContext)
+  const { signIn } = useContext(UserContext)
   function handlerSubmit() {
     event.preventDefault()
     console.log(event.target[0].value)
@@ -35,7 +35,7 @@ export const LoginComponent = () => {
 
   const setUserLogin = (userResponse) => {
     if (userResponse.body.usuario.status !== false) {
-      signInCompra(userResponse.body.usuario, userResponse.body.token)
+      signIn(userResponse.body.usuario, userResponse.body.token)
     } else
       notify.show(
         'Su cuenta no tiene permisos para ingresar al sistema',

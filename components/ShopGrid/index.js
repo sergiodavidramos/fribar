@@ -6,16 +6,20 @@ import UserContext from '../UserContext'
 import { notify } from 'react-notify-toast'
 import Link from 'next/link'
 import { API_URL } from '../Config'
+import useAlgoliaInsights from '../UseAlgolia'
 
 export default ({ titulo, productos = [], page, setPage, sonTodos }) => {
   const { addProductCar, likes, setLikes, token, user, signOut } =
     useContext(UserContext)
 
+  const { sendProductoAgregadoCarrito, sendProductoVisto } =
+    useAlgoliaInsights()
+
   const [cantidad, setCantidad] = useState(0)
   let totalFiltro = {}
   let cantidadAsignado = useRef(
-    [...new Array(productos.length > 0 ? productos.length : 12)].map(() =>
-      React.createRef()
+    [...new Array(productos.length > 0 ? productos.length * 12 : 144)].map(
+      () => React.createRef()
     )
   )
   function restarCantidad(i) {
@@ -30,21 +34,41 @@ export default ({ titulo, productos = [], page, setPage, sonTodos }) => {
     setCantidad(cantidadAsignado.current[i].current.value)
   }
   function updateLength({ valor, index }) {
+    if (valor === '') {
+      cantidadAsignado.current[index].current.value = 1
+    }
     cantidadAsignado.current[index].current.value = parseFloat(valor)
     setCantidad(cantidadAsignado.current[index].current.value)
   }
+
   function handlerFiltroOrdenamiento(orden) {
     totalFiltro.orden = orden
   }
   function handlerFiltro(fil) {
     console.log(fil)
   }
+
   function handlerMostrarMas() {
     setPage(page + 1)
   }
   function handlerAgregarAlCarrito(producto, cantidad) {
-    addProductCar(producto, cantidad)
-    notify.show('🛒 Agregado al Carrito 🛒', 'success', '2')
+    if (isNaN(cantidad)) {
+      notify.show(
+        `Por favor asigne una cantidad para agregar al carrito 😉`,
+        'warning'
+      )
+    } else {
+      if (cantidad > producto.stock)
+        notify.show(
+          `Lo siento solo tengo ${producto.stock} en Stock 🥺`,
+          'warning'
+        )
+      else {
+        addProductCar(producto, cantidad)
+        sendProductoAgregadoCarrito(producto._id)
+        notify.show('🛒 Agregado al Carrito 🛒', 'success', '2')
+      }
+    }
   }
   function addLiked(idProducto) {
     if (likes.includes(idProducto)) {
@@ -54,6 +78,7 @@ export default ({ titulo, productos = [], page, setPage, sonTodos }) => {
     } else {
       setLikes(likes.concat(idProducto))
       actualizarLikedUser(likes.concat(idProducto))
+      sendProductoVisto(idProducto)
     }
   }
   async function actualizarLikedUser(likes) {
@@ -69,8 +94,10 @@ export default ({ titulo, productos = [], page, setPage, sonTodos }) => {
 
       if (res.status === 401) signOut()
       const datos = await res.json()
-      if (datos.error)
+      if (datos.error) {
+        console.log(datos)
         notify.show('Error al agrefar a favoritos', 'warning')
+      }
     } catch (error) {
       alert(error)
     }
@@ -184,7 +211,7 @@ export default ({ titulo, productos = [], page, setPage, sonTodos }) => {
                               className={`like-icon ${
                                 likes.includes(pro._id) ? 'liked' : ''
                               }`}
-                              title="wishlist"
+                              title="Me gusta"
                               onClick={() => addLiked(pro._id)}
                             ></span>
                           </div>
@@ -248,31 +275,35 @@ export default ({ titulo, productos = [], page, setPage, sonTodos }) => {
                               onClick={() => sumarCantidad(i)}
                             />
                           </div>
-                          {cantidadAsignado.current[i].current &&
-                            (parseFloat(
-                              cantidadAsignado.current[i].current.value
-                            ) > pro.stock ? (
-                              <span className="cart-icon">
-                                <p style={{ color: 'red' }}>
-                                  {pro.stock} en Stock
-                                </p>
-                              </span>
-                            ) : (
-                              <span className="cart-icon">
-                                <i
-                                  className="uil uil-shopping-cart-alt"
-                                  onClick={() =>
-                                    handlerAgregarAlCarrito(
-                                      pro,
-                                      parseFloat(
-                                        cantidadAsignado.current[i].current
-                                          .value
-                                      )
+                          {/* {cantidadAsignado.current[i]
+                            ? cantidadAsignado.current[i].current &&
+                              (parseFloat(
+                                cantidadAsignado.current[i].current.value
+                              ) > pro.stock ? (
+                                <span className="cart-icon">
+                                  <p style={{ color: 'red' }}>
+                                    {pro.stock} en Stock
+                                  </p>
+                                </span>
+                              ) : ( */}
+                          {cantidadAsignado.current[i] && (
+                            <span className="cart-icon">
+                              <i
+                                className="uil uil-shopping-cart-alt"
+                                onClick={() =>
+                                  handlerAgregarAlCarrito(
+                                    pro,
+                                    parseFloat(
+                                      cantidadAsignado.current[i].current
+                                        .value
                                     )
-                                  }
-                                ></i>
-                              </span>
-                            ))}
+                                  )
+                                }
+                              ></i>
+                            </span>
+                          )}
+                          {/* ))
+                            : ''} */}
                         </div>
                       </div>
                     </div>

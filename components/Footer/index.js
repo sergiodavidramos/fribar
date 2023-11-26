@@ -93,7 +93,14 @@ export default () => {
                     </Link>
                   </li>
                   <li>
-                    <a href="shop_grid.html">Productos Destacados</a>
+                    <Link href="/productos">
+                      <a>Nuevos Productos</a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/productos/destacados">
+                      <a>Productos Destacados</a>
+                    </Link>
                   </li>
                   <li>
                     <Link href={'/ofertas'}>
@@ -189,19 +196,13 @@ export default () => {
               <div className="footer-bottom-links">
                 <ul>
                   <li>
-                    <a href="privacy_policy.html">
-                      política de privacidad
-                    </a>
+                    <a href="">política de privacidad</a>
                   </li>
                   <li>
-                    <a href="term_and_conditions.html">
-                      Términos y condiciones
-                    </a>
+                    <a href="">Términos y condiciones</a>
                   </li>
                   <li>
-                    <a href="refund_and_return_policy.html">
-                      Política de reembolso y devolución
-                    </a>
+                    <a href="">Política de reembolso y devolución</a>
                   </li>
                 </ul>
               </div>

@@ -101,10 +101,10 @@ export const Verificacion = ({
           <button
             className="wizard-btn"
             type="button"
-            data-toggle="collapse"
-            data-target="#collapseOne"
-            aria-expanded="true"
-            aria-controls="collapseOne"
+            // data-toggle="collapse"
+            // data-target="#collapseOne"
+            // aria-expanded="true"
+            // aria-controls="collapseOne"
           >
             Verificación de número telefónico
           </button>

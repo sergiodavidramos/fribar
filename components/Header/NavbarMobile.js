@@ -1,10 +1,13 @@
 import { useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 export const NavbarMobile = () => {
+  const router = useRouter()
   const [open, setOpen] = useState(false)
   const handlerMenu = () => {
     setOpen(!open)
   }
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light py-3">
       <div className="container-fluid">
@@ -25,21 +28,38 @@ export const NavbarMobile = () => {
           <ul className="navbar-nav main_nav align-self-stretch">
             <li className="nav-item">
               <Link href="/">
-                <a className="nav-link active" title="Inicio">
+                <a
+                  className={`nav-link ${
+                    router.pathname === '/' ? 'active' : ''
+                  }`}
+                  title="Inicio"
+                >
                   Inicio
                 </a>
               </Link>
             </li>
             <li className="nav-item">
-              <Link href="/nuevos-productos">
-                <a className="nav-link new_item" title="Nuevos productos">
+              <Link href="/productos">
+                <a
+                  className={`nav-link new_item ${
+                    router.pathname === '/productos' ? 'active' : ''
+                  }`}
+                  title="Nuevos productos"
+                >
                   Nuevos Productos
                 </a>
               </Link>
             </li>
             <li className="nav-item">
-              <Link href="/destacados">
-                <a className="nav-link" title=" Productos Destacados">
+              <Link href="/productos/destacados">
+                <a
+                  className={`nav-link ${
+                    router.pathname === '/productos/destacados'
+                      ? 'active'
+                      : ''
+                  }`}
+                  title=" Productos Destacados"
+                >
                   Productos Destacados
                 </a>
               </Link>
@@ -78,11 +98,7 @@ export const NavbarMobile = () => {
                       Sobre Fribar
                     </a>
                   </Link>
-                  <Link href="/solicitar-producto">
-                    <a className="item channel_item page__links">
-                      Solicitar un producto
-                    </a>
-                  </Link>
+
                   <Link href="/contactanos">
                     <a
                       className="item channel_item page__links"

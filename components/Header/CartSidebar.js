@@ -21,7 +21,7 @@ export default () => {
   })
   const [precioEnvio, setPrecioEnvio] = useState(0)
   let cantidadAsignado = useRef(
-    [...new Array(carrito.length > 0 ? carrito.length + 1 : 12)].map(() =>
+    [...new Array(carrito.length > 0 ? carrito.length * 50 : 50)].map(() =>
       React.createRef()
     )
   )
@@ -58,7 +58,7 @@ export default () => {
           }
         }
       })
-  }, [totalConDescuneto, total])
+  }, [totalConDescuneto, total, carrito])
   function cambiarValor(valor, index) {
     cantidadAsignado.current[index].current.value = parseFloat(valor)
     cantidades[index] = parseFloat(valor)
@@ -303,12 +303,13 @@ export default () => {
                             (producto.precioVenta -
                               (producto.descuento * producto.precioVenta) /
                                 100) *
-                              (cantidadAsignado.current[index].current
-                                ? parseFloat(
-                                    cantidadAsignado.current[index].current
-                                      .value
-                                  )
-                                : 1),
+                              (cantidadAsignado.current &&
+                                (cantidadAsignado.current[index].current
+                                  ? parseFloat(
+                                      cantidadAsignado.current[index]
+                                        .current.value
+                                    )
+                                  : 1)),
                             -1
                           )
                           .toFixed(2)}

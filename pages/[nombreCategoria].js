@@ -6,11 +6,28 @@ import { API_URL } from '../components/Config'
 import ShopGrid from '../components/ShopGrid'
 import { useEffect, useState } from 'react'
 import { notify } from 'react-notify-toast'
-export default ({ categoria }) => {
+export default ({ categoria, params }) => {
   const [productos, setProductos] = useState([])
   const [page, setPage] = useState(1)
   const [sonTodos, setSonTodos] = useState(false)
+
   const getProductosPorCategoria = async () => {
+    const res = await fetch(
+      `${API_URL}/productos/${categoria._id}?pagina=${page}`
+    )
+    const pro = await res.json()
+    if (pro.error)
+      notify.show(
+        'Error en el servidor no se pudo obtener los productos por categoria',
+        'error'
+      )
+    else {
+      setProductos(pro.body)
+      setPage(1)
+      setSonTodos(false)
+    }
+  }
+  const getProductosPorPagina = async () => {
     const res = await fetch(
       `${API_URL}/productos/${categoria._id}?pagina=${page}`
     )
@@ -25,14 +42,12 @@ export default ({ categoria }) => {
       setProductos(productos.concat(pro.body))
     }
   }
-  const cambiarPagina = () => {
-    console.log('ENTRE A QUI')
-    // setPage(page + 1)
-  }
   useEffect(() => {
     getProductosPorCategoria()
-  }, [categoria._id, page])
-
+  }, [categoria, params.nombreCategoria])
+  useEffect(() => {
+    getProductosPorPagina()
+  }, [page])
   return (
     <>
       <Head>
@@ -105,5 +120,5 @@ export async function getStaticProps({ params }) {
       notFound: true,
     }
   }
-  return { props: { categoria: cate.body[0] } }
+  return { props: { categoria: cate.body[0], params } }
 }

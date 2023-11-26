@@ -5,12 +5,22 @@ import { useContext, useEffect, useRef, useState } from 'react'
 import UserContext from '../UserContext'
 import expectedRound from 'expected-round'
 import { notify } from 'react-notify-toast'
+import useAlgoliaInsights from '../UseAlgolia'
+import useGetFrecuentementeCompradosJuntos from '../UseFrecuentementeCompradosJuntos'
+import useGetProductosRelacionados from '../UseProductosRelacionados'
 export default ({ producto }) => {
   const { addProductCar, likes, setLikes, token, user, signOut } =
     useContext(UserContext)
   const [unidades, setUnidades] = useState(1)
   let cantidadAsignado = useRef(null)
 
+  const { sendProductoAgregadoCarrito, sendProductoVisto } =
+    useAlgoliaInsights()
+
+  const { recomendaciones: productosCompradosJusntos } =
+    useGetFrecuentementeCompradosJuntos(producto._id)
+  const { recomendaciones: productosRelacionados } =
+    useGetProductosRelacionados(producto._id)
   function agregarAlCarrito(producto, cantidad) {
     if (parseFloat(cantidad) > producto.stock)
       notify.show(
@@ -30,6 +40,7 @@ export default ({ producto }) => {
         notify.show('🛒 Agregado al Carrito 🛒', 'success', '2')
       }
     }
+    sendProductoAgregadoCarrito(producto._id)
   }
   function addLiked(idProducto) {
     if (likes.includes(idProducto)) {
@@ -62,6 +73,7 @@ export default ({ producto }) => {
   }
 
   useEffect(() => {
+    sendProductoVisto(producto._id)
     const deta = producto.detail
     document.querySelector('#infoProduct').innerHTML = deta
   }, [producto])
@@ -91,8 +103,8 @@ export default ({ producto }) => {
                               </div>
                             ))}
 
-                          <div className="owl-nav"></div>
-                          <div className="owl-dots disabled"></div>
+                          {/* <div className="owl-nav"></div>
+                          <div className="owl-dots disabled"></div> */}
                         </div>
 
                         <div id="sync2" className="owl-carousel owl-theme">
@@ -104,7 +116,6 @@ export default ({ producto }) => {
                                     i,
                                     `${API_URL}/upload/producto`
                                   )}
-                                  alt=""
                                 />
                               </div>
                             ))}
@@ -588,33 +599,7 @@ export default ({ producto }) => {
                       <h4>Detalles del Producto</h4>
                     </div>
                     <div className="pdpt-body scrollstyle_4">
-                      <div className="pdct-dts-1" id="infoProduct">
-                        <div className="pdct-dt-step">
-                          <h4>Descripción</h4>
-                          <p>Escriba la descripcion a qui ...</p>
-                        </div>
-                        <div className="pdct-dt-step">
-                          <h4>Beneficios</h4>
-                          <div className="product_attr">
-                            Escriba intro del beneficio a qui ...
-                            <br />
-                            Escriba el beneficio a qui ...
-                            <br />
-                            Escriba el beneficio a qui ...
-                            <br />
-                            Escriba el beneficio a qui ...
-                            <br />
-                            Escriba el beneficio a qui ...
-                            <br />
-                          </div>
-                        </div>
-                        <div className="pdct-dt-step">
-                          <h4>Vendedor</h4>
-                          <div className="product_attr">
-                            Escriba el vendedor a qui ...
-                          </div>
-                        </div>
-                      </div>
+                      <div className="pdct-dts-1" id="infoProduct"></div>
                     </div>
                   </div>
                 </div>
@@ -623,7 +608,7 @@ export default ({ producto }) => {
           </div>
         </div>
       )}
-      <Destacados />
+      {/* <Destacados /> */}
     </>
   )
 }
