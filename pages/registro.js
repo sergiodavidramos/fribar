@@ -7,6 +7,7 @@ import FacebookLogin from 'react-facebook-login'
 import { useEffect, useContext } from 'react'
 import UserContext from '../components/UserContext'
 import { encode } from 'base-64'
+import { API_URL } from '../components/Config'
 export default () => {
   var auth2
   const { signIn } = useContext(UserContext)
@@ -40,7 +41,7 @@ export default () => {
       {},
       function (googleUser) {
         const id_token = googleUser.getAuthResponse().id_token
-        fetch('http://localhost:3001/login/google', {
+        fetch(`${API_URL}/login/google`, {
           method: 'POST',
           body: JSON.stringify({
             idtoken: id_token,
@@ -70,7 +71,7 @@ export default () => {
   // login facebook
   const componentClicked = () => {}
   const responseFacebook = (response) => {
-    fetch('http://localhost:3001/login/facebook', {
+    fetch(`${API_URL}/login/facebook`, {
       method: 'POST',
       body: JSON.stringify({
         accessToken: response.accessToken,
@@ -96,7 +97,7 @@ export default () => {
   const handlerRegistro = (event) => {
     event.preventDefault()
     const target = event.target
-    fetch('http://localhost:3001/user/clientes', {
+    fetch(`${API_URL}/user/clientes`, {
       method: 'POST',
       body: JSON.stringify({
         nombre_comp: target[0].value,
@@ -114,7 +115,7 @@ export default () => {
             'Authorization',
             'Basic ' + encode(target[1].value + ':' + target[2].value)
           )
-          fetch('http://localhost:3001/login', {
+          fetch(`${API_URL}/login`, {
             method: 'POST',
             headers: headers,
           })

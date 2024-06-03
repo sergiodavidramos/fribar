@@ -206,7 +206,7 @@ export default ({
                           <img
                             src={GetImg(
                               pro.img[0],
-                              'http://localhost:3001/upload/producto'
+                              `${API_URL}/upload/producto`
                             )}
                             alt={pro.name}
                           />

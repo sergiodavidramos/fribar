@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import UserContext from '../UserContext'
 import useAlgoliaInsights from '../UseAlgolia'
 import { notify } from 'react-notify-toast'
+import { API_URL } from '../Config'
 
 let radioCantidad = []
 export default ({ productRelation, index }) => {
@@ -93,7 +94,7 @@ export default ({ productRelation, index }) => {
           <img
             src={GetImg(
               productRelation.img[0],
-              'http://localhost:3001/upload/producto'
+              `${API_URL}/upload/producto`
             )}
             alt={productRelation.name}
           />

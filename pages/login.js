@@ -7,7 +7,7 @@ import FacebookLogin from 'react-facebook-login'
 import UserContext from '../components/UserContext'
 import { encode } from 'base-64'
 import Link from 'next/link'
-import { LoadFile } from '../components/LoadFile'
+import { API_URL } from '../components/Config'
 export default () => {
   var auth2
   const { signIn } = useContext(UserContext)
@@ -37,7 +37,7 @@ export default () => {
       {},
       function (googleUser) {
         const id_token = googleUser.getAuthResponse().id_token
-        fetch('http://localhost:3001/login/google', {
+        fetch(`${API_URL}/login/google`, {
           method: 'POST',
           body: JSON.stringify({
             idtoken: id_token,
@@ -63,7 +63,7 @@ export default () => {
     )
   }
   const responseFacebook = (response) => {
-    fetch('http://localhost:3001/login/facebook', {
+    fetch(`${API_URL}/login/facebook`, {
       method: 'POST',
       body: JSON.stringify({
         accessToken: response.accessToken,
@@ -98,7 +98,7 @@ export default () => {
       'Basic ' +
         encode(event.target[0].value + ':' + event.target[1].value)
     )
-    fetch('http://localhost:3001/login', {
+    fetch(`${API_URL}/login`, {
       method: 'POST',
       headers: headers,
     })
