@@ -3,7 +3,6 @@ import Footer from '../components/Footer'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Loader from '../components/Loader'
-import { useEffect } from 'react'
 export default () => {
   const router = useRouter()
 

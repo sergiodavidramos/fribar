@@ -1,6 +1,5 @@
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import { LoadFile } from '../components/LoadFile'
 const nobreNosotros = () => {
   //   LoadFile()
   return (

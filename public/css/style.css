@@ -1,64 +1,6 @@
 @charset "utf-8";
 
-/* ------------------------------------------------------------------
- * Name         : Gambo - Online Grocery Supermarket HTML Template
- * File         : style.css
- * Author       : Gambolthemes
- * Author URI   : gambol943@gmail.com
- * All Rights Reserved.
- * --------------------------------------------------------------------- */
-
-/*===================== TABLE OF CONTENT =======================
-
-1. Google Fonts
-2. Typography Css
-3. CROSS BROWSER COMPATABILITY
-4. Body Scrollbar
-5. Night Mode Btn
-6. Search cate scroll
-7. Header
-8. Category Model
-9. Category Model
-10. Cart Offset Overlay
-11. Cart Radio Btn
-12. Quantity box
-13. Filters Overlay
-14. Category Radio Btn
-15. Index Page
-16. Slider Category
-17. Footer
-18. Product Grid Page
-19. Single Product View
-20. Single Product Radio Btn
-21. Checkout Page
-22. User Dashboard Page
-23. Dashboard My Orders
-24. My Rewards
-25. My Wallet
-26. My Addresses
-27. Career Page
-28. About Us
-29. Our Blog
-30. Blog Detail View
-31. Press Page
-32. Sign In
-33. Contact Us
-34. Product Request
-35. Faq Page
-36. Offers Page
-37. Bill Page
-
-=============================================================*/
-
-/* ================================================================================== 
- Google Fonts
-===================================================================================== */
-
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,900&display=swap');
-
-/* ================================================================================== 
-Reset Css
-===================================================================================== */
 
 html,
 body,
@@ -2570,7 +2512,6 @@ img.download-btn {
 }
 .gambo-Breadcrumb:before {
   content: '';
-  background: url(../img/career/default.jpg) no-repeat center;
   left: 0;
   right: 0;
   top: 0;
