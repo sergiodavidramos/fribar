@@ -6,13 +6,20 @@ import { API_URL } from '../../components/Config'
 import Breadcrumb from '../../components/Breadcrumb'
 import Footer from '../../components/Footer'
 import Loader from '../../components/Loader'
-export default ({ producto }) => {
+export default ({ producto, productosDestacados }) => {
   return (
     <>
       <Header />
       <div className="wrapper">
         <Breadcrumb />
-        {producto ? <SingleProduct producto={producto} /> : <Loader />}
+        {producto ? (
+          <SingleProduct
+            producto={producto}
+            productosDestacados={productosDestacados}
+          />
+        ) : (
+          <Loader />
+        )}
       </div>
       <Footer />
     </>
@@ -36,11 +43,20 @@ export async function getStaticProps({ params }) {
       },
     }
   )
+  const resProductosDestacados = await fetch(
+    `${API_URL}/productos/destacados/principales`
+  )
   const product = await res.json()
+  const proDestacados = await resProductosDestacados.json()
   if (!product) {
     return {
       notFound: true,
     }
   }
-  return { props: { producto: product.body[0] } }
+  return {
+    props: {
+      producto: product.body[0],
+      productosDestacados: proDestacados.body,
+    },
+  }
 }

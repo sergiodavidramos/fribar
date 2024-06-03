@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import MenuLef from './components/MenuLef'
 
 export default ({ user }) => (
@@ -15,7 +16,7 @@ export default ({ user }) => (
                   </h4>
                 </div>
                 <div className="welcome-text">
-                  <h2>Hola! {user.nombre_comp}</h2>
+                  <h2>Hola! {user.idPersona.nombre_comp}</h2>
                 </div>
               </div>
               <div className="col-lg-6 col-md-12">
@@ -24,8 +25,8 @@ export default ({ user }) => (
                     <h4>Mis recompensas</h4>
                   </div>
                   <div className="ddsh-body">
-                    <h2>6 Rewards</h2>
-                    <ul>
+                    <h2>0 Recompenzas</h2>
+                    {/* <ul>
                       <li>
                         <a href="#" className="small-reward-dt hover-btn">
                           Won $2
@@ -46,12 +47,14 @@ export default ({ user }) => (
                           +More
                         </a>
                       </li>
-                    </ul>
+                    </ul> */}
                   </div>
-                  <a href="#" className="more-link14">
-                    Recompensas y detalles{' '}
-                    <i className="uil uil-angle-double-right"></i>
-                  </a>
+                  <Link href={'/perfil/recompensas'}>
+                    <a className="more-link14">
+                      Recompensas y detalles
+                      <i className="uil uil-angle-double-right"></i>
+                    </a>
+                  </Link>
                 </div>
               </div>
               <div className="col-lg-6 col-md-12">
@@ -60,9 +63,9 @@ export default ({ user }) => (
                     <h4>Mis Pedidos</h4>
                   </div>
                   <div className="ddsh-body">
-                    <h2>2 Recently Purchases</h2>
+                    <h2>0 Pedidos Recientes</h2>
                     <ul className="order-list-145">
-                      <li>
+                      {/* <li>
                         <div className="smll-history">
                           <div className="order-title">
                             2 Items{' '}
@@ -77,16 +80,18 @@ export default ({ user }) => (
                           <div className="order-status">On the way</div>
                           <p>$22</p>
                         </div>
-                      </li>
+                      </li> */}
                     </ul>
                   </div>
-                  <a href="#" className="more-link14">
-                    All Orders{' '}
-                    <i className="uil uil-angle-double-right"></i>
-                  </a>
+                  <Link href={'/perfil/pedidos'}>
+                    <a className="more-link14">
+                      Todos mis pedidos
+                      <i className="uil uil-angle-double-right"></i>
+                    </a>
+                  </Link>
                 </div>
               </div>
-              <div className="col-lg-12 col-md-12">
+              {/* <div className="col-lg-12 col-md-12">
                 <div className="pdpt-bg">
                   <div className="pdpt-title">
                     <h4>Mi billetera</h4>
@@ -117,7 +122,7 @@ export default ({ user }) => (
                     <i className="uil uil-angle-double-right"></i>
                   </a>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

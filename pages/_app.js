@@ -3,7 +3,7 @@ import App from 'next/app'
 import Head from 'next/head'
 import UserContext from '../components/UserContext'
 import Router from 'next/router'
-import Notifications from 'react-notify-toast'
+import Notifications, { notify } from 'react-notify-toast'
 import '../public/vendor/unicons-2.0.1/css/unicons.css'
 import '../public/css/style.css'
 import '../public/css/responsive.css'
@@ -20,7 +20,6 @@ import { API_URL } from '../components/Config'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import expectedRound from 'expected-round'
 import si from 'search-insights'
-
 export default class MyApp extends App {
   constructor(props) {
     super(props)
@@ -183,6 +182,12 @@ export default class MyApp extends App {
     this.setState({ cantidadProducto: cantidades })
     localStorage.setItem('fribar-cantidades', JSON.stringify(cantidades))
     this.calcularTotal(productos, cantidades)
+  }
+  limpiasCarrito = () => {
+    this.setState({ cantidadProducto: [], carrito: [] })
+    localStorage.setItem('fribar-cantidades', JSON.stringify([]))
+    localStorage.setItem('fribar-carrito', JSON.stringify([]))
+    calcularTotal([], [])
   }
   calcularTotal = (productos, cantidades) => {
     let auxTotalConDescuneto = 0
@@ -365,6 +370,7 @@ export default class MyApp extends App {
               setCostoEnvio: this.setCostoEnvio,
               setDireccionEnvio: this.setDireccionEnvio,
               setLikes: this.setLikes,
+              limpiasCarrito: this.limpiasCarrito,
             }}
           >
             <Component {...pageProps} />

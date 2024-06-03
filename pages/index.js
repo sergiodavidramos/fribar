@@ -18,6 +18,38 @@ const Home = ({
   productosDestacados,
   productosNuevos,
 }) => {
+  let categoriaAletorio
+  const { categorias } = useContext(UserContext)
+  const [localCategoria, setLocalCategoria] = useState(false)
+  const [productosCategoria, setProductosCategoria] = useState([])
+
+  useEffect(() => {
+    if (categorias.length > 0) {
+      categoriaAletorio =
+        categorias[Math.floor(Math.random() * categorias.length)]
+      setLocalCategoria(categoriaAletorio)
+      getProductosCategoria(categoriaAletorio._id)
+    }
+  }, [categorias])
+
+  async function getProductosCategoria(idCategoria) {
+    if (idCategoria) {
+      const res = await fetch(
+        `${API_URL}/productos/${idCategoria}?pagina=1`
+      )
+      const pro = await res.json()
+      if (pro.error) {
+        notify.show(
+          'Error en el servidor no se pudo obtener los productos por categoria',
+          'error'
+        )
+        console.log(pro)
+      } else {
+        setProductosCategoria(pro.body)
+      }
+    }
+  }
+
   return (
     <>
       <Head>
@@ -51,13 +83,19 @@ const Home = ({
         ) : (
           <Loader />
         )}
-        <MejoresValores />
+        {/* <MejoresValores /> */}
 
-        <Destacados
-          title="Verduras y Frutas Frescas"
-          productos={productosNuevos}
-          url="/recomendados"
-        />
+        {localCategoria &&
+          (productosCategoria.length > 0 ? (
+            <Destacados
+              title={localCategoria.name}
+              productos={productosCategoria}
+              url={localCategoria.name}
+              categoriaAleatorio={true}
+            />
+          ) : (
+            <Loader />
+          ))}
 
         {productosNuevos.length > 0 ? (
           <Destacados

@@ -4,7 +4,8 @@ import { API_URL } from '../../Config'
 import { notify } from 'react-notify-toast'
 
 export default ({ abrirModal, mapboxgl }) => {
-  const { token, direcciones, setDirecciones } = useContext(UserContext)
+  const { token, direcciones, setDirecciones, user, signOut } =
+    useContext(UserContext)
   const [otraDireccion, setOtraDireccion] = useState(false)
   const [nombreDireccionSelect, setNombreDireccionSelect] =
     useState('Casa')
@@ -39,6 +40,7 @@ export default ({ abrirModal, mapboxgl }) => {
             'Content-Type': 'application/json',
           },
         })
+        if (res.status === 401) signOut()
         const dir = await res.json()
         if (dir.error)
           notify.show('Error al registrar la direccion', 'error')
@@ -70,7 +72,7 @@ export default ({ abrirModal, mapboxgl }) => {
   async function actualizarDireccionPerfil(idDireccion, newDire) {
     try {
       const res = await fetch(
-        `${API_URL}/user/agregar/direccion/${'este campo es solo para gerente'}`,
+        `${API_URL}/user/agregar/direccion/${user._id}`,
         {
           method: 'PATCH',
           body: JSON.stringify({ direccionId: idDireccion }),
@@ -81,8 +83,10 @@ export default ({ abrirModal, mapboxgl }) => {
         }
       )
       const newUser = await res.json()
-      if (newUser.error)
+      if (newUser.error) {
+        console.log(newUser)
         notify.show('Error al actualizar la direccion en usuario', 'error')
+      }
       notify.show('Dirección registrada ', 'success')
       setDirecciones(direcciones.concat([newDire]))
     } catch (error) {

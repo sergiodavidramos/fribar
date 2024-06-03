@@ -9,7 +9,6 @@ const recommendClient = recommend(ALGOLIA_APP_ID, ALGOLIA_API_KEY)
 const indexName = ALGOLIA_INDEX_NAME
 
 export async function getProductosRelacionados(productId) {
-  console.log('PRODUCTOS RELACIONADOS 1', productId)
   const { results } = await recommendClient.getRelatedProducts([
     {
       indexName: indexName,
@@ -29,6 +28,5 @@ export async function getFrecuentementeCompradosJuntos(productId) {
       objectID: productId,
     },
   ])
-  console.log('PRODUCTOS RELACIONADOS 2', indexName)
   return results?.[0].hits
 }

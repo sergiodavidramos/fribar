@@ -7,7 +7,7 @@ import { API_URL } from './Config'
 import { notify } from 'react-notify-toast'
 import useAlgoliaInsights from './UseAlgolia'
 
-export default ({ title, productos, url }) => {
+export default ({ title, productos, url, categoriaAleatorio = false }) => {
   const { addProductCar, likes, setLikes, token, user, signOut } =
     useContext(UserContext)
   const [cantidad, setCantidad] = useState(0)
@@ -32,15 +32,26 @@ export default ({ title, productos, url }) => {
       parseFloat(cantidadAsignado.current[i].current.value) + 1
     setCantidad(cantidadAsignado.current[i].current.value)
   }
-  function updateLength({ valor, index }) {
-    cantidadAsignado.current[index].current.value = parseFloat(valor)
-    setCantidad(cantidadAsignado.current[index].current.value)
+  function updateLength({ valor, index, tipoVenta }) {
+    if (valor === '') {
+      cantidadAsignado.current[index].current.value =
+        tipoVenta === 'Unidad' ? 1 : 0.5
+    } else {
+      cantidadAsignado.current[index].current.value = parseFloat(valor)
+      setCantidad(cantidadAsignado.current[index].current.value)
+    }
   }
   function handlerAgregarAlCarrito(producto, cantidad) {
-    addProductCar(producto, cantidad)
-    sendProductoAgregadoCarrito(producto._id)
-    console.log(producto._id)
-    notify.show('🛒 Agregado al Carrito 🛒', 'success', '2')
+    if (cantidad > producto.stock)
+      notify.show(
+        `Lo siento solo tengo ${producto.stock} en Stock 🥺`,
+        'warning'
+      )
+    else {
+      addProductCar(producto, cantidad)
+      sendProductoAgregadoCarrito(producto._id)
+      notify.show('🛒 Agregado al Carrito 🛒', 'success', 2)
+    }
   }
   function addLiked(idProducto) {
     if (likes.includes(idProducto)) {
@@ -84,7 +95,21 @@ export default ({ title, productos, url }) => {
                 <span>Para Ti</span>
                 <h2>{title}</h2>
               </div>
-              <Link href={url}>
+              <Link
+                href={
+                  categoriaAleatorio
+                    ? {
+                        pathname: '/[nombreCategoria]',
+
+                        query: {
+                          nombreCategoria: url
+                            .toLowerCase()
+                            .replace(/ /g, '-'),
+                        },
+                      }
+                    : url
+                }
+              >
                 <a className="see-more-btn">Ver Todo</a>
               </Link>
             </div>
@@ -193,6 +218,7 @@ export default ({ title, productos, url }) => {
                                     updateLength({
                                       valor: event.target.value,
                                       index: index,
+                                      tipoVenta: pro.tipoVenta,
                                     })
                                   }
                                 />
@@ -203,7 +229,21 @@ export default ({ title, productos, url }) => {
                                   onClick={() => sumarCantidad(index)}
                                 />
                               </div>
-                              {cantidadAsignado.current[index].current &&
+                              <span className="cart-icon">
+                                <i
+                                  className="uil uil-shopping-cart-alt"
+                                  onClick={() =>
+                                    handlerAgregarAlCarrito(
+                                      pro,
+                                      parseFloat(
+                                        cantidadAsignado.current[index]
+                                          .current.value
+                                      )
+                                    )
+                                  }
+                                ></i>
+                              </span>
+                              {/* {cantidadAsignado.current[index].current &&
                                 (parseFloat(
                                   cantidadAsignado.current[index].current
                                     .value
@@ -213,6 +253,7 @@ export default ({ title, productos, url }) => {
                                       {pro.stock} en Stock
                                     </p>
                                   </span>
+                                  
                                 ) : (
                                   <span className="cart-icon">
                                     <i
@@ -228,7 +269,7 @@ export default ({ title, productos, url }) => {
                                       }
                                     ></i>
                                   </span>
-                                ))}
+                                ))} */}
                             </div>
                           </div>
                         </div>

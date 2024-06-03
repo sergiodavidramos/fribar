@@ -148,7 +148,7 @@ export default () => {
                           Si necesitas cambiar tu contraseña, puedes
                           hacerlo iniciando sesión en tu cuenta y
                           accediendo a tu perfil y luego hacer click en el
-                          icono: <i class="uil uil-edit"></i>. Allí te
+                          icono: <i className="uil uil-edit"></i>. Allí te
                           saldra el formulario para cambiar tu contraseña.
                           <br />
                           2. <strong>Recuperar la contraseña:</strong> En

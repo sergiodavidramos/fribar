@@ -356,16 +356,18 @@ export default () => {
           {/* <a href="#" className="promo-code">
             Have a promocode?
           </a> */}
-          <Link href={'/pago-seguro'}>
-            <a
-              className="cart-checkout-btn hover-btn bs-canvas-close"
-              //   onClick={() => setModelCategory(false)}
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              Pasar por caja
-            </a>
-          </Link>
+          {carrito.length > 0 && (
+            <Link href={'/pago-seguro'}>
+              <a
+                className="cart-checkout-btn hover-btn bs-canvas-close"
+                //   onClick={() => setModelCategory(false)}
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                Pasar por caja
+              </a>
+            </Link>
+          )}
         </div>
       </div>
     </div>

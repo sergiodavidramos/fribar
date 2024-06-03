@@ -24,9 +24,12 @@ export const Verificacion = ({
     )
       .then((res) => res.json())
       .then((data) => {
-        data.error
-          ? notify.show('Error en el servidor', 'error')
-          : notify.show('Se mando el codigo a su teléfono', 'success')
+        if (data.error) {
+          notify.show(
+            'El sistema bloqueo temporalmente este numero debido a actividades fraudulentas',
+            'error'
+          )
+        } else notify.show('Se mando el codigo a su teléfono', 'success')
       })
       .catch((error) => notify.show('Error en el servidor', 'error'))
   }
@@ -50,8 +53,14 @@ export const Verificacion = ({
           return res.json()
         })
         .then((data) => {
-          if (data.error) notify.show(data.body.message, 'error', 2000)
-          else {
+          if (data.error) {
+            console.log(data)
+            notify.show(
+              'Error al actualizar o ya hay un usuario registrado con este numero',
+              'error',
+              2000
+            )
+          } else {
             handlerMandarCode(data.body.phone)
             setUser(data.body)
           }

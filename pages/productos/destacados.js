@@ -11,10 +11,13 @@ export default ({ productosDestacados }) => {
   const [productos, setProductos] = useState(productosDestacados)
   const [page, setPage] = useState(1)
   const [sonTodos, setSonTodos] = useState(false)
+  const [ordenSeleccionado, setOrdenSeleccionado] = useState(false)
 
-  const getProductosPorPagina = async () => {
+  const getProductosPorPagina = async (orden) => {
     const res = await fetch(
-      `${API_URL}/productos/destacados/principales?pagina=${page}`
+      `${API_URL}/productos/destacados/principales?pagina=${
+        orden ? page - 1 : page
+      }&orden=${orden ? orden : ''}`
     )
     const pro = await res.json()
     if (pro.error)
@@ -28,8 +31,16 @@ export default ({ productosDestacados }) => {
     }
   }
   useEffect(() => {
-    if (page > 1) getProductosPorPagina()
-  }, [page])
+    if (page > 1) {
+      getProductosPorPagina(ordenSeleccionado)
+    }
+  }, [page, ordenSeleccionado])
+  function cambiarOrden(orden) {
+    setProductos([])
+    setPage(2)
+    setOrdenSeleccionado(orden)
+    setSonTodos(false)
+  }
   return (
     <>
       <Head>
@@ -63,6 +74,7 @@ export default ({ productosDestacados }) => {
                   page={page}
                   setPage={setPage}
                   sonTodos={sonTodos}
+                  cambiarOrden={cambiarOrden}
                 />
               ) : (
                 <Loader />

@@ -3,7 +3,7 @@ import MenuLef from './components/MenuLef'
 import ModelDirecciones from './components/ModelDirecciones'
 import UserContext from '../UserContext'
 import { notify } from 'react-notify-toast'
-import { API_URL, mapboxglAccessToken } from '../Config'
+import { mapboxglAccessToken } from '../Config'
 import ModelConfirmarEliminarDireccion from './components/ModelConfirmarEliminarDireccion'
 import ModalEditarDireccion from './components/ModalEditarDireccion'
 import mapboxgl from 'mapbox-gl'
@@ -17,7 +17,10 @@ export default () => {
 
   mapboxgl.accessToken = mapboxglAccessToken
 
-  useEffect(() => {}, [direcciones])
+  useEffect(() => {
+    const user = localStorage.getItem('fribar-user')
+    !user ? Router.push('/login') : ''
+  }, [direcciones])
 
   return (
     <>

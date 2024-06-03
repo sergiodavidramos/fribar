@@ -84,7 +84,10 @@ export default () => {
               'warning'
             )
       })
-      .catch((err) => notify.show(err.message, 'error'))
+      .catch((err) => {
+        console.log(err)
+        notify.show(err.message, 'error')
+      })
   }
   return (
     <>

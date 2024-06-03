@@ -35,7 +35,7 @@ export default () => {
                         },
                       }}
                     >
-                      <a href="shop_grid.html" className="category-item">
+                      <a className="category-item">
                         <div className="cate-img">
                           <img
                             src={GetImg(

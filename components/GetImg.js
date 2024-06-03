@@ -15,5 +15,5 @@ export default function GetImg(img, urlGetImg) {
         return img
       }
     }
-  } else return `${API_URL}/upload/user/no-img}`
+  } else return `${API_URL}/upload/user/no-img`
 }

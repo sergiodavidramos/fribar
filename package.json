@@ -14,6 +14,7 @@
   "dependencies": {
     "@algolia/autocomplete-core": "1.6.3",
     "@algolia/recommend": "4.20.0",
+    "@lottiefiles/react-lottie-player": "^3.5.3",
     "base-64": "^0.1.0",
     "expected-round": "^0.0.4",
     "loadjs": "^4.2.0",
@@ -27,6 +28,7 @@
     "react-native-web": "^0.12.3",
     "react-notify-toast": "^0.5.1",
     "search-insights": "2.11.0",
+    "socket.io-client": "^4.7.2",
     "styled-components": "^5.2.1"
   }
 }

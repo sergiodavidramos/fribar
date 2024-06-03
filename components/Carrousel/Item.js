@@ -48,7 +48,7 @@ export const Item = ({ producto }) => {
         <div className="offer-item-img">
           <div className="gambo-overlay"></div>
           <img
-            src={GetImg(producto.img[0], `${API_URL}/upload/user`)}
+            src={GetImg(producto.img[0], `${API_URL}/upload/producto`)}
             alt={producto.name}
             className="imgClass"
           />

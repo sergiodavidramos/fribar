@@ -8,7 +8,9 @@ import { notify } from 'react-notify-toast'
 import useAlgoliaInsights from '../UseAlgolia'
 import useGetFrecuentementeCompradosJuntos from '../UseFrecuentementeCompradosJuntos'
 import useGetProductosRelacionados from '../UseProductosRelacionados'
-export default ({ producto }) => {
+import ProductosRelacionados from './ProductosRelacionados'
+import Loader from '../Loader'
+export default ({ producto, productosDestacados }) => {
   const { addProductCar, likes, setLikes, token, user, signOut } =
     useContext(UserContext)
   const [unidades, setUnidades] = useState(1)
@@ -17,8 +19,9 @@ export default ({ producto }) => {
   const { sendProductoAgregadoCarrito, sendProductoVisto } =
     useAlgoliaInsights()
 
-  const { recomendaciones: productosCompradosJusntos } =
-    useGetFrecuentementeCompradosJuntos(producto._id)
+  // falta entrenar para que se cree un eindex y ser usado
+  //   const { recomendaciones: productosCompradosJusntos } =
+  //     useGetFrecuentementeCompradosJuntos(producto._id)
   const { recomendaciones: productosRelacionados } =
     useGetProductosRelacionados(producto._id)
   function agregarAlCarrito(producto, cantidad) {
@@ -71,7 +74,6 @@ export default ({ producto }) => {
       alert(error)
     }
   }
-
   useEffect(() => {
     sendProductoVisto(producto._id)
     const deta = producto.detail
@@ -426,170 +428,19 @@ export default ({ producto }) => {
                 <div className="col-lg-4 col-md-12">
                   <div className="pdpt-bg">
                     <div className="pdpt-title">
-                      <h4>More Like This</h4>
+                      <h4>Más como esto</h4>
                     </div>
                     <div className="pdpt-body scrollstyle_4">
-                      <div className="cart-item border_radius">
-                        <a
-                          href="http://gambolthemes.net/html-items/gambo_supermarket_demo/single_product_view.html"
-                          className="cart-product-img"
-                        >
-                          <img src="images/product/img-6.jpg" alt="" />
-                          <div className="offer-badge">4% OFF</div>
-                        </a>
-                        <div className="cart-text">
-                          <h4>Product Title Here</h4>
-                          <div className="cart-radio">
-                            <ul className="kggrm-now">
-                              <li>
-                                <input type="radio" id="k1" name="cart1" />
-                                <label htmlFor="k1">0.50</label>
-                              </li>
-                              <li>
-                                <input type="radio" id="k2" name="cart1" />
-                                <label htmlFor="k2">1kg</label>
-                              </li>
-                              <li>
-                                <input type="radio" id="k3" name="cart1" />
-                                <label htmlFor="k3">2kg</label>
-                              </li>
-                              <li>
-                                <input type="radio" id="k4" name="cart1" />
-                                <label htmlFor="k4">3kg</label>
-                              </li>
-                            </ul>
-                          </div>
-                          <div className="qty-group">
-                            <div className="quantity buttons_added">
-                              <input
-                                type="button"
-                                defaultValue="-"
-                                className="minus minus-btn"
-                              />
-                              <input
-                                type="number"
-                                step="1"
-                                name="quantity"
-                                defaultValue="1"
-                                className="input-text qty text"
-                              />
-                              <input
-                                type="button"
-                                defaultValue="+"
-                                className="plus plus-btn"
-                              />
-                            </div>
-                            <div className="cart-item-price">
-                              $12 <span>$15</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="cart-item border_radius">
-                        <a
-                          href="http://gambolthemes.net/html-items/gambo_supermarket_demo/single_product_view.html"
-                          className="cart-product-img"
-                        >
-                          <img src="images/product/img-2.jpg" alt="" />
-                          <div className="offer-badge">6% OFF</div>
-                        </a>
-                        <div className="cart-text">
-                          <h4>Product Title Here</h4>
-                          <div className="cart-radio">
-                            <ul className="kggrm-now">
-                              <li>
-                                <input type="radio" id="k5" name="cart2" />
-                                <label htmlFor="k5">0.50</label>
-                              </li>
-                              <li>
-                                <input type="radio" id="k6" name="cart2" />
-                                <label htmlFor="k6">1kg</label>
-                              </li>
-                              <li>
-                                <input type="radio" id="k7" name="cart2" />
-                                <label htmlFor="k7">2kg</label>
-                              </li>
-                            </ul>
-                          </div>
-                          <div className="qty-group">
-                            <div className="quantity buttons_added">
-                              <input
-                                type="button"
-                                defaultValue="-"
-                                className="minus minus-btn"
-                              />
-                              <input
-                                type="number"
-                                step="1"
-                                name="quantity"
-                                defaultValue="1"
-                                className="input-text qty text"
-                              />
-                              <input
-                                type="button"
-                                defaultValue="+"
-                                className="plus plus-btn"
-                              />
-                            </div>
-                            <div className="cart-item-price">
-                              $24 <span>$30</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="cart-item border_radius">
-                        <a
-                          href="http://gambolthemes.net/html-items/gambo_supermarket_demo/single_product_view.html"
-                          className="cart-product-img"
-                        >
-                          <img src="images/product/img-5.jpg" alt="" />
-                        </a>
-                        <div className="cart-text">
-                          <h4>Product Title Here</h4>
-                          <div className="cart-radio">
-                            <ul className="kggrm-now">
-                              <li>
-                                <input type="radio" id="k8" name="cart3" />
-                                <label htmlFor="k8">0.50</label>
-                              </li>
-                              <li>
-                                <input type="radio" id="k9" name="cart3" />
-                                <label htmlFor="k9">1kg</label>
-                              </li>
-                              <li>
-                                <input
-                                  type="radio"
-                                  id="k10"
-                                  name="cart3"
-                                />
-                                <label htmlFor="k10">1.50kg</label>
-                              </li>
-                            </ul>
-                          </div>
-                          <div className="qty-group">
-                            <div className="quantity buttons_added">
-                              <input
-                                type="button"
-                                defaultValue="-"
-                                className="minus minus-btn"
-                              />
-                              <input
-                                type="number"
-                                step="1"
-                                name="quantity"
-                                defaultValue="1"
-                                className="input-text qty text"
-                              />
-                              <input
-                                type="button"
-                                defaultValue="+"
-                                className="plus plus-btn"
-                              />
-                            </div>
-                            <div className="cart-item-price">$15</div>
-                          </div>
-                        </div>
-                      </div>
+                      {productosRelacionados.length > 0 &&
+                        productosRelacionados.map(
+                          (productRelation, index) => (
+                            <ProductosRelacionados
+                              key={index}
+                              productRelation={productRelation}
+                              index={index}
+                            />
+                          )
+                        )}
                     </div>
                   </div>
                 </div>
@@ -608,7 +459,15 @@ export default ({ producto }) => {
           </div>
         </div>
       )}
-      {/* <Destacados /> */}
+      {productosDestacados.length > 0 ? (
+        <Destacados
+          title="Principales Productos Destacados"
+          productos={productosDestacados}
+          url="/productos/destacados"
+        />
+      ) : (
+        <Loader />
+      )}
     </>
   )
 }

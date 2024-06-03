@@ -10,6 +10,7 @@ export default ({ categoria, params }) => {
   const [productos, setProductos] = useState([])
   const [page, setPage] = useState(1)
   const [sonTodos, setSonTodos] = useState(false)
+  const [ordenSeleccionado, setOrdenSeleccionado] = useState(false)
 
   const getProductosPorCategoria = async () => {
     const res = await fetch(
@@ -27,9 +28,11 @@ export default ({ categoria, params }) => {
       setSonTodos(false)
     }
   }
-  const getProductosPorPagina = async () => {
+  const getProductosPorPagina = async (orden = false) => {
     const res = await fetch(
-      `${API_URL}/productos/${categoria._id}?pagina=${page}`
+      `${API_URL}/productos/${categoria._id}?pagina=${page}&orden=${
+        orden ? orden : ''
+      }`
     )
     const pro = await res.json()
     if (pro.error)
@@ -44,10 +47,16 @@ export default ({ categoria, params }) => {
   }
   useEffect(() => {
     getProductosPorCategoria()
-  }, [categoria, params.nombreCategoria])
+  }, [params.nombreCategoria])
   useEffect(() => {
-    getProductosPorPagina()
-  }, [page])
+    getProductosPorPagina(ordenSeleccionado)
+  }, [page, ordenSeleccionado])
+  function cambiarOrden(orden) {
+    setProductos([])
+    setPage(1)
+    setOrdenSeleccionado(orden)
+    setSonTodos(false)
+  }
   return (
     <>
       <Head>
@@ -80,6 +89,9 @@ export default ({ categoria, params }) => {
                 page={page}
                 setPage={setPage}
                 sonTodos={sonTodos}
+                categoria={categoria.name}
+                idCategoria={categoria._id}
+                cambiarOrden={cambiarOrden}
               />
             </div>
           </div>

@@ -8,7 +8,16 @@ import Link from 'next/link'
 import { API_URL } from '../Config'
 import useAlgoliaInsights from '../UseAlgolia'
 
-export default ({ titulo, productos = [], page, setPage, sonTodos }) => {
+export default ({
+  titulo,
+  productos = [],
+  page,
+  setPage,
+  sonTodos,
+  categoria = false,
+  idCategoria = false,
+  cambiarOrden = false,
+}) => {
   const { addProductCar, likes, setLikes, token, user, signOut } =
     useContext(UserContext)
 
@@ -16,7 +25,6 @@ export default ({ titulo, productos = [], page, setPage, sonTodos }) => {
     useAlgoliaInsights()
 
   const [cantidad, setCantidad] = useState(0)
-  let totalFiltro = {}
   let cantidadAsignado = useRef(
     [...new Array(productos.length > 0 ? productos.length * 12 : 144)].map(
       () => React.createRef()
@@ -33,17 +41,16 @@ export default ({ titulo, productos = [], page, setPage, sonTodos }) => {
       parseFloat(cantidadAsignado.current[i].current.value) + 1
     setCantidad(cantidadAsignado.current[i].current.value)
   }
-  function updateLength({ valor, index }) {
+  function updateLength({ valor, index, tipoVenta }) {
     if (valor === '') {
-      cantidadAsignado.current[index].current.value = 1
+      cantidadAsignado.current[index].current.value =
+        tipoVenta === 'Unidad' ? 1 : 0.5
+    } else {
+      cantidadAsignado.current[index].current.value = parseFloat(valor)
+      setCantidad(cantidadAsignado.current[index].current.value)
     }
-    cantidadAsignado.current[index].current.value = parseFloat(valor)
-    setCantidad(cantidadAsignado.current[index].current.value)
   }
 
-  function handlerFiltroOrdenamiento(orden) {
-    totalFiltro.orden = orden
-  }
   function handlerFiltro(fil) {
     console.log(fil)
   }
@@ -105,7 +112,11 @@ export default ({ titulo, productos = [], page, setPage, sonTodos }) => {
 
   return (
     <>
-      <Filter handlerFiltro={handlerFiltro} />
+      <Filter
+        handlerFiltro={handlerFiltro}
+        nombreCategoria={categoria}
+        idCategoria={idCategoria}
+      />
       <div className="all-product-grid">
         <div className="container">
           <div className="row">
@@ -115,7 +126,7 @@ export default ({ titulo, productos = [], page, setPage, sonTodos }) => {
                   <h2>{titulo}</h2>
                 </div>
                 <a href="" className="filter-btn pull-bs-canvas-right">
-                  Filtros
+                  FILTROS
                 </a>
                 <div className="product-sort main-form">
                   <div className="ui selection dropdown vchrt-dropdown">
@@ -125,49 +136,47 @@ export default ({ titulo, productos = [], page, setPage, sonTodos }) => {
                       defaultValue="default"
                     />
                     <i className="dropdown icon d-icon"></i>
-                    <div className="text">
-                      Todos los productos y ordenar por:{' '}
-                    </div>
+                    <div className="text">Ordenar los productos por: </div>
                     <div className="menu" tabIndex={'-1'}>
                       <div
                         className="item"
                         data-value="0"
-                        onClick={() => handlerFiltroOrdenamiento(0)}
+                        onClick={() => cambiarOrden(0)}
                       >
                         Popularidad
                       </div>
                       <div
                         className="item"
                         data-value="1"
-                        onClick={() => handlerFiltroOrdenamiento(1)}
+                        onClick={() => cambiarOrden(1)}
                       >
                         Precio - De barato a caro
                       </div>
                       <div
                         className="item"
                         data-value="2"
-                        onClick={() => handlerFiltroOrdenamiento(2)}
+                        onClick={() => cambiarOrden(2)}
                       >
                         Precio - De caro a barato
                       </div>
                       <div
                         className="item"
                         data-value="3"
-                        onClick={() => handlerFiltroOrdenamiento(3)}
+                        onClick={() => cambiarOrden(3)}
                       >
                         Orden - Alfabético
                       </div>
                       <div
                         className="item"
                         data-value="4"
-                        onClick={() => handlerFiltroOrdenamiento(4)}
+                        onClick={() => cambiarOrden(4)}
                       >
                         Descuento - De mayor a menor
                       </div>
                       <div
                         className="item"
                         data-value="5"
-                        onClick={() => handlerFiltroOrdenamiento(5)}
+                        onClick={() => cambiarOrden(5)}
                       >
                         Descuento - De menor a mayor
                       </div>
@@ -265,6 +274,7 @@ export default ({ titulo, productos = [], page, setPage, sonTodos }) => {
                                 updateLength({
                                   valor: event.target.value,
                                   index: i,
+                                  tipoVenta: pro.tipoVenta,
                                 })
                               }
                             />

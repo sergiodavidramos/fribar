@@ -1,10 +1,107 @@
 import UserContext from '../UserContext'
-import { useContext } from 'react'
-
-export default ({ handlerFiltro }) => {
+import { useContext, useEffect, useState } from 'react'
+import { API_URL } from '../Config'
+export default ({
+  handlerFiltro,
+  totalFiltro,
+  nombreCategoria,
+  idCategoria = false,
+}) => {
   const { categorias } = useContext(UserContext)
-  const handlerEliminarFiltroCategoria = () => {}
+  const [infoProveedores, setInfoProveedores] = useState([])
+  const [infoPrecios, setInfoPrecios] = useState([])
+  const [infoDescuentos, setInfoDescuentos] = useState([])
 
+  const [checkedProveedor, setCheckedProveedor] = useState(true)
+  const [checkedPrecios, setCheckedPrecios] = useState(true)
+  const [checkedDescuentos, setCheckedDescuentos] = useState(true)
+
+  const [productosPorPrecio, setProductosPorPrecio] = useState([])
+  const [productosPorDescuento, setProductosPorDescuento] = useState([])
+  let prodPre = []
+  let prodDes = []
+
+  useEffect(() => {
+    if (idCategoria) {
+      categoriaSeleccionado(idCategoria)
+    }
+  }, [])
+  const categoriaSeleccionado = async (idCat) => {
+    try {
+      prodPre = []
+      prodDes = []
+      const res = await fetch(
+        `${API_URL}/productos/informacion/filtro?categoria=${idCat}`
+      )
+      const datos = await res.json()
+      if (datos.error) {
+        console.log(datos)
+        notify.show(
+          'Error al obtener la informacion del filtro',
+          'warning'
+        )
+      } else {
+        console.log('Prove', datos.body[0])
+        console.log('Precios', datos.body[1])
+        console.log('Descuentos', datos.body[2])
+        setInfoProveedores(datos.body[0])
+        for (let p of datos.body[1]) {
+          if (p._id <= 10) {
+            prodPre[0] = prodPre[0] ? prodPre[0] + p.count : p.count
+          }
+          if (p._id > 10 && p._id <= 20) {
+            prodPre[1] = prodPre[1] ? prodPre[1] + p.count : p.count
+          }
+          if (p._id > 20 && p._id <= 30) {
+            prodPre[2] = prodPre[2] ? prodPre[2] + p.count : p.count
+          }
+          if (p._id > 30 && p._id <= 40) {
+            prodPre[3] = prodPre[3] ? prodPre[3] + p.count : p.count
+          }
+          if (p._id > 40 && p._id <= 50) {
+            prodPre[4] = prodPre[4] ? prodPre[4] + p.count : p.count
+          }
+          if (p._id > 50) {
+            prodPre[5] = prodPre[5] ? prodPre[5] + p.count : p.count
+          }
+        }
+        for (let d of datos.body[2]) {
+          if (d._id <= 5 && d._id > 0) {
+            prodDes[0] = prodDes[0] ? prodDes[0] + d.count : d.count
+          }
+          if (d._id > 5 && d._id <= 10) {
+            prodDes[1] = prodDes[1] ? prodDes[1] + d.count : d.count
+          }
+          if (d._id > 10 && d._id <= 15) {
+            prodDes[2] = prodDes[2] ? prodDes[2] + d.count : d.count
+          }
+          if (d._id > 15 && d._id <= 20) {
+            prodDes[3] = prodDes[3] ? prodDes[3] + d.count : d.count
+          }
+          if (d._id > 20) {
+            prodDes[5] = prodDes[5] ? prodDes[5] + d.count : d.count
+          }
+        }
+        setProductosPorPrecio(prodPre)
+        setProductosPorDescuento(prodDes)
+
+        setInfoPrecios(datos.body[1])
+        setInfoDescuentos(datos.body[2])
+      }
+    } catch (error) {
+      alert(error)
+    }
+  }
+  const proveedorSeleccionado = (idProveedor) => {
+    if (checkedProveedor) {
+      console.log('IdProveedor Seleccionado', idProveedor)
+    }
+  }
+  const precioSeleccionado = (rangoPrecios) => {
+    if (checkedPrecios) {
+      console.log('Preco Seleccionado', rangoPrecios)
+    }
+  }
   return (
     <div className="bs-canvas bs-canvas-right position-fixed bg-cart h-100">
       <div className="bs-canvas-header side-cart-header p-3 ">
@@ -25,31 +122,24 @@ export default ({ handlerFiltro }) => {
           <div className="filter-item-body scrollstyle_4">
             <div className="cart-radio">
               <ul className="cte-select">
-                <li>
-                  <input
-                    type="radio"
-                    id="c0"
-                    name="category1"
-                    defaultChecked
-                    onClick={handlerEliminarFiltroCategoria}
-                  />
-                  <label htmlFor="c0">Toda las categorias</label>
-                </li>
                 {categorias.length > 0
                   ? categorias.map((categoria, index) => (
                       <li key={index}>
                         <input
+                          defaultChecked={
+                            categoria.name === nombreCategoria
+                              ? true
+                              : false
+                          }
                           type="radio"
                           id={`c${index + 1}`}
                           name="category1"
-                          //   defaultChecked={
-                          //     cate === categoria.name.toLowerCase() &&
-                          //     'checked'
-                          //   }
+                          onClick={() =>
+                            categoriaSeleccionado(categoria._id)
+                          }
                         />
                         <label htmlFor={`c${index + 1}`}>
                           {categoria.name}
-                          {/* {cate._id} */}
                         </label>
                       </li>
                     ))
@@ -77,143 +167,287 @@ export default ({ handlerFiltro }) => {
                 </div>
               </div>
               <div className="custom-control custom-checkbox pb2">
-                <input
-                  type="checkbox"
-                  className="custom-control-input"
-                  id="brand_1"
-                />
-                <label className="custom-control-label" htmlFor="brand_1">
-                  Nombre marca
-                </label>
+                {infoProveedores.length > 0 &&
+                  infoProveedores.map((prove, index) => (
+                    <div key={index}>
+                      <input
+                        type="checkbox"
+                        className="custom-control-input"
+                        id={`brand${index}`}
+                        onChange={() => {
+                          setCheckedProveedor(!checkedProveedor)
+                          proveedorSeleccionado(prove.idProveedor[0][0])
+                        }}
+                      />
+                      <label
+                        className="custom-control-label"
+                        htmlFor={`brand${index}`}
+                      >
+                        {prove.proveedores[0]}
+                      </label>
+                    </div>
+                  ))}
               </div>
             </div>
           </div>
         </div>
         <div className="filter-items">
           <div className="filtr-cate-title">
-            <h4>Precio</h4>
+            <h4>Precios</h4>
           </div>
           <div className="price-pack-item-body scrollstyle_4">
             <div className="brand-list">
-              <div className="custom-control custom-checkbox pb2">
-                <input
-                  type="checkbox"
-                  className="custom-control-input"
-                  id="price_1"
-                />
-                <label className="custom-control-label" htmlFor="price_1">
-                  Menos que: Bs 10 <span className="webproduct">(9)</span>
-                </label>
-              </div>
-              <div className="custom-control custom-checkbox pb2">
-                <input
-                  type="checkbox"
-                  className="custom-control-input"
-                  id="price_2"
-                />
-                <label className="custom-control-label" htmlFor="price_2">
-                  Bs 10 a Bs 15 <span className="webproduct">(8)</span>
-                </label>
-              </div>
-              <div className="custom-control custom-checkbox pb2">
-                <input
-                  type="checkbox"
-                  className="custom-control-input"
-                  id="price_3"
-                />
-                <label className="custom-control-label" htmlFor="price_3">
-                  Bs 10 a Bs 15 <span className="webproduct">(12)</span>
-                </label>
-              </div>
-              <div className="custom-control custom-checkbox pb2">
-                <input
-                  type="checkbox"
-                  className="custom-control-input"
-                  id="price_4"
-                />
-                <label className="custom-control-label" htmlFor="price_4">
-                  Bs 10 a Bs 15 <span className="webproduct">(4)</span>
-                </label>
-              </div>
-              <div className="custom-control custom-checkbox pb2">
-                <input
-                  type="checkbox"
-                  className="custom-control-input"
-                  id="price_5"
-                />
-                <label className="custom-control-label" htmlFor="price_5">
-                  Bs 10 a Bs 15 <span className="webproduct">(16)</span>
-                </label>
-              </div>
-              <div className="custom-control custom-checkbox pb2">
-                <input
-                  type="checkbox"
-                  className="custom-control-input"
-                  id="price_6"
-                />
-                <label className="custom-control-label" htmlFor="price_6">
-                  Bs 10 a Bs 15 <span className="webproduct">(18)</span>
-                </label>
-              </div>
-              <div className="custom-control custom-checkbox pb2">
-                <input
-                  type="checkbox"
-                  className="custom-control-input"
-                  id="price_7"
-                />
-                <label className="custom-control-label" htmlFor="price_7">
-                  Más que Bs 50 <span className="webproduct">(25)</span>
-                </label>
-              </div>
+              {productosPorPrecio[0] && (
+                <div className="custom-control custom-checkbox pb2">
+                  <input
+                    type="checkbox"
+                    className="custom-control-input"
+                    id={`price1`}
+                    onChange={() => {
+                      precioSeleccionado([0, 10])
+                      setCheckedPrecios(!checkedPrecios)
+                    }}
+                  />
+                  <label
+                    className="custom-control-label"
+                    htmlFor={`price1`}
+                  >
+                    Menos que: 10 Bs.
+                    <span className="webproduct">
+                      ({productosPorPrecio[0] ? productosPorPrecio[0] : 0})
+                    </span>
+                  </label>
+                </div>
+              )}
+              {productosPorPrecio[1] && (
+                <div className="custom-control custom-checkbox pb2">
+                  <input
+                    type="checkbox"
+                    className="custom-control-input"
+                    id={`price2`}
+                    onChange={() => {
+                      precioSeleccionado([9, 20])
+                      setCheckedPrecios(!checkedPrecios)
+                    }}
+                  />
+                  <label
+                    className="custom-control-label"
+                    htmlFor={`price2`}
+                  >
+                    De: 10 Bs. a 20 Bs.
+                    <span className="webproduct">
+                      ({productosPorPrecio[1] ? productosPorPrecio[1] : 0})
+                    </span>
+                  </label>
+                </div>
+              )}
+              {productosPorPrecio[2] && (
+                <div className="custom-control custom-checkbox pb2">
+                  <input
+                    type="checkbox"
+                    className="custom-control-input"
+                    id={`price3`}
+                    onChange={() => {
+                      precioSeleccionado([19, 30])
+                      setCheckedPrecios(!checkedPrecios)
+                    }}
+                  />
+                  <label
+                    className="custom-control-label"
+                    htmlFor={`price3`}
+                  >
+                    De: 20 Bs. a 30 Bs.
+                    <span className="webproduct">
+                      ({productosPorPrecio[2] ? productosPorPrecio[2] : 0})
+                    </span>
+                  </label>
+                </div>
+              )}
+              {productosPorPrecio[3] && (
+                <div className="custom-control custom-checkbox pb2">
+                  <input
+                    type="checkbox"
+                    className="custom-control-input"
+                    id={`price4`}
+                    onChange={() => {
+                      precioSeleccionado([29, 40])
+                      setCheckedPrecios(!checkedPrecios)
+                    }}
+                  />
+                  <label
+                    className="custom-control-label"
+                    htmlFor={`price4`}
+                  >
+                    De: 30 Bs. a 40 Bs.
+                    <span className="webproduct">
+                      ({productosPorPrecio[3] ? productosPorPrecio[3] : 0})
+                    </span>
+                  </label>
+                </div>
+              )}
+              {productosPorPrecio[4] && (
+                <div className="custom-control custom-checkbox pb2">
+                  <input
+                    type="checkbox"
+                    className="custom-control-input"
+                    id={`price5`}
+                    onChange={() => {
+                      precioSeleccionado([39, 50])
+                      setCheckedPrecios(!checkedPrecios)
+                    }}
+                  />
+                  <label
+                    className="custom-control-label"
+                    htmlFor={`price5`}
+                  >
+                    De: 40 Bs. a 50 Bs.
+                    <span className="webproduct">
+                      ({productosPorPrecio[4] ? productosPorPrecio[4] : 0})
+                    </span>
+                  </label>
+                </div>
+              )}
+              {productosPorPrecio[5] && (
+                <div className="custom-control custom-checkbox pb2">
+                  <input
+                    type="checkbox"
+                    className="custom-control-input"
+                    id={`price6`}
+                    onChange={() => {
+                      precioSeleccionado([49, 1000])
+                      setCheckedPrecios(!checkedPrecios)
+                    }}
+                  />
+                  <label
+                    className="custom-control-label"
+                    htmlFor={`price6`}
+                  >
+                    Mas de: 50 Bs.
+                    <span className="webproduct">
+                      ({productosPorPrecio[5] ? productosPorPrecio[5] : 0})
+                    </span>
+                  </label>
+                </div>
+              )}
             </div>
           </div>
         </div>
         <div className="filter-items">
           <div className="filtr-cate-title">
-            <h4>Descuento</h4>
+            <h4>Descuentos</h4>
           </div>
           <div className="offer-item-body scrollstyle_4">
             <div className="brand-list">
-              <div className="custom-control custom-checkbox pb2">
-                <input
-                  type="checkbox"
-                  className="custom-control-input"
-                  id="offer_1"
-                />
-                <label className="custom-control-label" htmlFor="offer_1">
-                  2% - 5% <span className="webproduct">(9)</span>
-                </label>
-              </div>
-              <div className="custom-control custom-checkbox pb2">
-                <input
-                  type="checkbox"
-                  className="custom-control-input"
-                  id="offer_2"
-                />
-                <label className="custom-control-label" htmlFor="offer_2">
-                  6% - 10% <span className="webproduct">(5)</span>
-                </label>
-              </div>
-              <div className="custom-control custom-checkbox pb2">
-                <input
-                  type="checkbox"
-                  className="custom-control-input"
-                  id="offer_3"
-                />
-                <label className="custom-control-label" htmlFor="offer_3">
-                  11% - 15% <span className="webproduct">(11)</span>
-                </label>
-              </div>
-              <div className="custom-control custom-checkbox pb2">
-                <input
-                  type="checkbox"
-                  className="custom-control-input"
-                  id="offer_4"
-                />
-                <label className="custom-control-label" htmlFor="offer_4">
-                  16% - 25% <span className="webproduct">(27)</span>
-                </label>
-              </div>
+              {productosPorDescuento[0] && (
+                <div className="custom-control custom-checkbox pb2">
+                  <input
+                    type="checkbox"
+                    className="custom-control-input"
+                    id="offer_1"
+                  />
+                  <label
+                    className="custom-control-label"
+                    htmlFor="offer_1"
+                  >
+                    Menos que: 5%{' '}
+                    <span className="webproduct">
+                      (
+                      {productosPorDescuento[0]
+                        ? productosPorDescuento[0]
+                        : 0}
+                      )
+                    </span>
+                  </label>
+                </div>
+              )}
+              {productosPorDescuento[1] && (
+                <div className="custom-control custom-checkbox pb2">
+                  <input
+                    type="checkbox"
+                    className="custom-control-input"
+                    id="offer_2"
+                  />
+                  <label
+                    className="custom-control-label"
+                    htmlFor="offer_2"
+                  >
+                    5% - 10%{' '}
+                    <span className="webproduct">
+                      (
+                      {productosPorDescuento[1]
+                        ? productosPorDescuento[1]
+                        : 0}
+                      )
+                    </span>
+                  </label>
+                </div>
+              )}
+              {productosPorDescuento[2] && (
+                <div className="custom-control custom-checkbox pb2">
+                  <input
+                    type="checkbox"
+                    className="custom-control-input"
+                    id="offer_3"
+                  />
+                  <label
+                    className="custom-control-label"
+                    htmlFor="offer_3"
+                  >
+                    10% - 15%{' '}
+                    <span className="webproduct">
+                      (
+                      {productosPorDescuento[2]
+                        ? productosPorDescuento[2]
+                        : 0}
+                      )
+                    </span>
+                  </label>
+                </div>
+              )}
+              {productosPorDescuento[3] && (
+                <div className="custom-control custom-checkbox pb2">
+                  <input
+                    type="checkbox"
+                    className="custom-control-input"
+                    id="offer_4"
+                  />
+                  <label
+                    className="custom-control-label"
+                    htmlFor="offer_4"
+                  >
+                    15% - 20%{' '}
+                    <span className="webproduct">
+                      (
+                      {productosPorDescuento[3]
+                        ? productosPorDescuento[3]
+                        : 0}
+                      )
+                    </span>
+                  </label>
+                </div>
+              )}
+              {productosPorDescuento[4] && (
+                <div className="custom-control custom-checkbox pb2">
+                  <input
+                    type="radio"
+                    className="custom-control-input"
+                    id="offer_5"
+                  />
+                  <label
+                    className="custom-control-label"
+                    htmlFor="offer_5"
+                  >
+                    Mayor al: 20%{' '}
+                    <span className="webproduct">
+                      (
+                      {productosPorDescuento[4]
+                        ? productosPorDescuento[4]
+                        : 0}
+                      )
+                    </span>
+                  </label>
+                </div>
+              )}
             </div>
           </div>
         </div>

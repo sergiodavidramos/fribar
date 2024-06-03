@@ -140,7 +140,7 @@ export default () => {
                           {pedido.detallePedido.detalle.map((d) => {
                             subTotal += d.subTotal
                           })}
-                          <span>{subTotal} Bs.</span>
+                          <span>{subTotal.toFixed(2)} Bs.</span>
                         </div>
                         <div className="cart-total-dil pt-3">
                           <h4>Delivery Charges</h4>
@@ -153,7 +153,7 @@ export default () => {
                       </div>
                       <div className="main-total-cart pl-0 pr-0 pb-0 border-bottom-0">
                         <h2>Total</h2>
-                        <span>{pedido.total} Bs.</span>
+                        <span>{pedido.total.toFixed(2)} Bs.</span>
                       </div>
                     </div>
                   </div>
