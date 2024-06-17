@@ -112,7 +112,7 @@ export default () => {
 
       setPedido(banPedidos)
       if (Notification.permission === 'granted') {
-        if (estadoPedido.state === 2) {
+        if (estadoPedido.state) {
           new Notification('Su pedido esta en Camino', {
             // icon: '../../public/img/logo-pantalla-pequeña.svg',
             body: 'Preparate para recibir tu pedido...',
