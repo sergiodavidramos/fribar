@@ -114,7 +114,7 @@ export default () => {
         switch (estadoPedido.state) {
           case 0:
             notificacion = new Notification('Su pedido fue recibido ☺', {
-              icon: '../../public/img/logo-pantalla-pequeña.svg',
+              icon: '/public/img/logo-pantalla-pequeña.svg',
               body: 'Gracias por su preferencia',
             })
             break
@@ -122,32 +122,32 @@ export default () => {
             notificacion = new Notification(
               'Su pedido esta ciendo Preparado',
               {
-                icon: '../../public/img/logo-pantalla-pequeña.svg',
+                icon: '/public/img/logo-pantalla-pequeña.svg',
                 body: 'En unos minutito su pedido estara listo',
               }
             )
             break
           case 2:
             notificacion = new Notification('Su pedido esta en Camino', {
-              icon: '../../public/img/logo-pantalla-pequeña.svg',
+              icon: '/public/img/logo-pantalla-pequeña.svg',
               body: 'Preparate para recibir tu pedido...',
             })
             break
           case 3:
             notificacion = new Notification('Su pedido fue entregado', {
-              icon: '../../public/img/logo-pantalla-pequeña.svg',
+              icon: '/public/img/logo-pantalla-pequeña.svg',
               body: 'Buen provecho! y gracias por su preferencia',
             })
             break
           case 4:
             notificacion = new Notification('Su pedido fue Cancelado', {
-              icon: '../../public/img/logo-pantalla-pequeña.svg',
+              icon: '/public/img/logo-pantalla-pequeña.svg',
               body: 'Lo sentimos no pudimos procesar su pedido',
             })
             break
         }
         notificacion.onclick = function () {
-          window.open('http://localhost:3000/perfil/pedidos')
+          window.open('https://www.fribar.bo/perfil/pedidos')
         }
       }
       setPedido(banPedidos)
