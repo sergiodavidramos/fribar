@@ -110,70 +110,82 @@ export default () => {
         }
       }
       if (Notification.permission === 'granted') {
-        switch (estadoPedido.state) {
-          case 0:
-            const notificacion0 = new Notification(
-              'Su pedido fue recibido ☺',
-              {
-                icon: '../../public/img/logo-pantalla-pequeña.svg',
-                body: 'Gracias por su preferencia',
-              }
-            )
-            notificacion0.onclick = function () {
-              window.open('https://www.fribar.bo/perfil/pedidos')
+        if (estadoPedido.state === 2) {
+          const notificacion2 = new Notification(
+            'Su pedido esta en Camino',
+            {
+              icon: '../../public/img/logo-pantalla-pequeña.svg',
+              body: 'Preparate para recibir tu pedido...',
             }
-            break
-          case 1:
-            const notificacion1 = new Notification(
-              'Su pedido esta ciendo Preparado',
-              {
-                icon: '../../public/img/logo-pantalla-pequeña.svg',
-                body: 'En unos minutito su pedido estara listo',
-              }
-            )
-            notificacion1.onclick = function () {
-              window.open('https://www.fribar.bo/perfil/pedidos')
-            }
-            break
-          case 2:
-            const notificacion2 = new Notification(
-              'Su pedido esta en Camino',
-              {
-                icon: '../../public/img/logo-pantalla-pequeña.svg',
-                body: 'Preparate para recibir tu pedido...',
-              }
-            )
-            notificacion2.onclick = function () {
-              window.open('https://www.fribar.bo/perfil/pedidos')
-            }
-            break
-          case 3:
-            const notificacion3 = new Notification(
-              'Su pedido fue entregado',
-              {
-                icon: '../../public/img/logo-pantalla-pequeña.svg',
-                body: 'Buen provecho! y gracias por su preferencia',
-              }
-            )
-            notificacion3.onclick = function () {
-              window.open('https://www.fribar.bo/perfil/pedidos')
-            }
-            break
-          case 4:
-            const notificacion4 = new Notification(
-              'Su pedido fue Cancelado',
-              {
-                icon: '../../public/img/logo-pantalla-pequeña.svg',
-                body: 'Lo sentimos no pudimos procesar su pedido',
-              }
-            )
-            notificacion4.onclick = function () {
-              window.open('https://www.fribar.bo/perfil/pedidos')
-            }
-            break
-          default:
-            break
+          )
+          notificacion2.onclick = function () {
+            window.open('https://www.fribar.bo/perfil/pedidos')
+          }
         }
+        // switch (estadoPedido.state) {
+        //   case 0:
+        //     const notificacion0 = new Notification(
+        //       'Su pedido fue recibido ☺',
+        //       {
+        //         icon: '../../public/img/logo-pantalla-pequeña.svg',
+        //         body: 'Gracias por su preferencia',
+        //       }
+        //     )
+        //     notificacion0.onclick = function () {
+        //       window.open('https://www.fribar.bo/perfil/pedidos')
+        //     }
+        //     break
+        //   case 1:
+        //     const notificacion1 = new Notification(
+        //       'Su pedido esta ciendo Preparado',
+        //       {
+        //         icon: '../../public/img/logo-pantalla-pequeña.svg',
+        //         body: 'En unos minutito su pedido estara listo',
+        //       }
+        //     )
+        //     notificacion1.onclick = function () {
+        //       window.open('https://www.fribar.bo/perfil/pedidos')
+        //     }
+        //     break
+        //   case 2:
+        //     const notificacion2 = new Notification(
+        //       'Su pedido esta en Camino',
+        //       {
+        //         icon: '../../public/img/logo-pantalla-pequeña.svg',
+        //         body: 'Preparate para recibir tu pedido...',
+        //       }
+        //     )
+        //     notificacion2.onclick = function () {
+        //       window.open('https://www.fribar.bo/perfil/pedidos')
+        //     }
+        //     break
+        //   case 3:
+        //     const notificacion3 = new Notification(
+        //       'Su pedido fue entregado',
+        //       {
+        //         icon: '../../public/img/logo-pantalla-pequeña.svg',
+        //         body: 'Buen provecho! y gracias por su preferencia',
+        //       }
+        //     )
+        //     notificacion3.onclick = function () {
+        //       window.open('https://www.fribar.bo/perfil/pedidos')
+        //     }
+        //     break
+        //   case 4:
+        //     const notificacion4 = new Notification(
+        //       'Su pedido fue Cancelado',
+        //       {
+        //         icon: '../../public/img/logo-pantalla-pequeña.svg',
+        //         body: 'Lo sentimos no pudimos procesar su pedido',
+        //       }
+        //     )
+        //     notificacion4.onclick = function () {
+        //       window.open('https://www.fribar.bo/perfil/pedidos')
+        //     }
+        //     break
+        //   default:
+        //     break
+        // }
       }
       setPedido(banPedidos)
     })
