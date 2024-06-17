@@ -30,6 +30,15 @@ const Home = ({
       getProductosCategoria(categoriaAletorio._id)
     }
   }, [categorias])
+  useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('/service-worker.js')
+        .then((registration) =>
+          console.log('scope is: ', registration.scope)
+        )
+    }
+  }, [])
 
   async function getProductosCategoria(idCategoria) {
     if (idCategoria) {

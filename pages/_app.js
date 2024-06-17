@@ -19,6 +19,7 @@ import { API_URL } from '../components/Config'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import expectedRound from 'expected-round'
 import si from 'search-insights'
+import { useEffect } from 'react'
 export default class MyApp extends App {
   constructor(props) {
     super(props)
@@ -126,7 +127,6 @@ export default class MyApp extends App {
     this.getCiudades()
     this.getCategorias()
   }
-
   addProductCar = (p, c) => {
     let ban = false
     if (this.state.carrito.length > 0) {
@@ -323,7 +323,6 @@ export default class MyApp extends App {
   }
   render() {
     const { Component, pageProps } = this.props
-
     return (
       <>
         <Head>
