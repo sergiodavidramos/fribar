@@ -6,6 +6,7 @@ import UserContext from './UserContext'
 import { API_URL } from './Config'
 import { notify } from 'react-notify-toast'
 import useAlgoliaInsights from './UseAlgolia'
+import Router from 'next/router'
 
 export default ({ title, productos, url, categoriaAleatorio = false }) => {
   const { addProductCar, likes, setLikes, token, user, signOut } =
@@ -50,18 +51,26 @@ export default ({ title, productos, url, categoriaAleatorio = false }) => {
     else {
       addProductCar(producto, cantidad)
       sendProductoAgregadoCarrito(producto._id)
-      notify.show('🛒 Agregado al Carrito 🛒', 'success', 2)
+      notify.show('🛒 Agregado al Carrito 🛒', 'success')
     }
   }
   function addLiked(idProducto) {
-    if (likes.includes(idProducto)) {
-      const resultado = likes.filter((like) => like != idProducto)
-      setLikes(resultado)
-      actualizarLikedUser(resultado)
+    if (user) {
+      if (likes.includes(idProducto)) {
+        const resultado = likes.filter((like) => like != idProducto)
+        setLikes(resultado)
+        actualizarLikedUser(resultado)
+      } else {
+        setLikes(likes.concat(idProducto))
+        actualizarLikedUser(likes.concat(idProducto))
+        sendProductoVisto(idProducto)
+      }
     } else {
-      setLikes(likes.concat(idProducto))
-      actualizarLikedUser(likes.concat(idProducto))
-      sendProductoVisto(idProducto)
+      Router.push('/login')
+      notify.show(
+        'Por favor inicie sesión primero para agregar sus favoritos',
+        'warning'
+      )
     }
   }
   async function actualizarLikedUser(likes) {

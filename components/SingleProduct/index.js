@@ -10,6 +10,7 @@ import useGetFrecuentementeCompradosJuntos from '../UseFrecuentementeCompradosJu
 import useGetProductosRelacionados from '../UseProductosRelacionados'
 import ProductosRelacionados from './ProductosRelacionados'
 import Loader from '../Loader'
+import Router from 'next/router'
 export default ({ producto, productosDestacados }) => {
   const { addProductCar, likes, setLikes, token, user, signOut } =
     useContext(UserContext)
@@ -46,13 +47,21 @@ export default ({ producto, productosDestacados }) => {
     sendProductoAgregadoCarrito(producto._id)
   }
   function addLiked(idProducto) {
-    if (likes.includes(idProducto)) {
-      const resultado = likes.filter((like) => like != idProducto)
-      setLikes(resultado)
-      actualizarLikedUser(resultado)
+    if (user) {
+      if (likes.includes(idProducto)) {
+        const resultado = likes.filter((like) => like != idProducto)
+        setLikes(resultado)
+        actualizarLikedUser(resultado)
+      } else {
+        setLikes(likes.concat(idProducto))
+        actualizarLikedUser(likes.concat(idProducto))
+      }
     } else {
-      setLikes(likes.concat(idProducto))
-      actualizarLikedUser(likes.concat(idProducto))
+      Router.push('/login')
+      notify.show(
+        'Por favor inicie sesión primero para agregar sus favoritos',
+        'warning'
+      )
     }
   }
   async function actualizarLikedUser(likes) {

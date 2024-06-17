@@ -1,6 +1,6 @@
-export default ({ id, nombre, setCiudad }) => {
+export default ({ id, nombre, lat, lon, setCiudad }) => {
   const handlerSetCiudad = () => {
-    setCiudad({ _id: id, nombre })
+    setCiudad({ _id: id, nombre, lat, lon })
   }
   return (
     <div className="item channel_item" onClick={handlerSetCiudad}>

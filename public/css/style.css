@@ -5311,14 +5311,14 @@ textarea {
 }
 
 .custom-file-input:lang(en) ~ .custom-file-label::after {
-  content: 'Upload Files' !important;
+  content: 'Subir imagen' !important;
 }
 
 .custom-file-label::after {
   height: calc(1.5em + 0.75rem + 1px) !important;
   padding: 0.4rem 0.75rem !important;
   color: #fff !important;
-  content: 'Upload Files' !important;
+  content: 'Subir imagen' !important;
   background-color: #f55d2c !important;
   border-radius: 0 5px 5px 0 !important;
 }
@@ -6782,4 +6782,18 @@ textarea {
   border-radius: 50%;
   background-repeat: no-repeat;
   background-position: center;
+}
+.add-cate-img-1 {
+  border: 1px solid #efefef;
+  border-radius: 3px;
+  text-align: center;
+  background: #f9f9f9;
+  width: 80px;
+  height: 80px;
+  margin-top: 17px;
+  padding: 3px;
+}
+
+.add-cate-img-1 img {
+  width: 100%;
 }

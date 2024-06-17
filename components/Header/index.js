@@ -142,6 +142,8 @@ export default () => {
                       key={ciudad._id}
                       id={ciudad._id}
                       nombre={ciudad.nombre}
+                      lat={ciudad.lat}
+                      lon={ciudad.lon}
                       setCiudad={setCiudad}
                     />
                   ))}
@@ -172,7 +174,7 @@ export default () => {
                 </li>
                 <li>
                   <Link href={'/perfil/likes'}>
-                    <a className="option_links" title="Wishlist">
+                    <a className="option_links" title="Favoritos">
                       <i className="uil uil-heart icon_wishlist"></i>
                       {user && (
                         <span className="noti_count1">{likes.length}</span>

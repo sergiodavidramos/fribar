@@ -4,7 +4,7 @@ import { API_URL } from '../../Config'
 import { notify } from 'react-notify-toast'
 
 export default ({ abrirModal, mapboxgl }) => {
-  const { token, direcciones, setDirecciones, user, signOut } =
+  const { token, direcciones, setDirecciones, user, signOut, ciudad } =
     useContext(UserContext)
   const [otraDireccion, setOtraDireccion] = useState(false)
   const [nombreDireccionSelect, setNombreDireccionSelect] =
@@ -156,8 +156,51 @@ export default ({ abrirModal, mapboxgl }) => {
         setbanderaLat(ubicacion.coords.latitude)
       }
       const onErrorDeUbicacion = (err) => {
-        console.log('Error obteniendo ubicación: ', err)
-        return notify.show('Error al obtener la ubicacion', 'error', 5000)
+        if (ciudad.lat) {
+          var geolocate = new mapboxgl.GeolocateControl()
+          var map = new mapboxgl.Map({
+            container: mapContainer.current,
+            projection: 'globe',
+            style: 'mapbox://styles/mapbox/standard-beta',
+            center: [ciudad.lon, ciudad.lat],
+            zoom: 0,
+            marker: [ciudad.lon, ciudad.lat],
+          })
+          map.on('load', function () {
+            map.resize()
+            map.flyTo({
+              center: [ciudad.lon, ciudad.lat],
+              zoom: 15,
+              duration: 5000, // Animate over 12 seconds
+              essential: true,
+            })
+
+            const marker = new mapboxgl.Marker({
+              draggable: true,
+            })
+              .setLngLat([ciudad.lon, ciudad.lat])
+              .addTo(map)
+
+            geolocate.on('geolocate', function (e) {
+              var lon = e.coords.lon
+              var lat = e.coords.lat
+              marker.setLngLat([lon, lat])
+              setBanderaLng(lon)
+              setbanderaLat(lat)
+            })
+            obtenerUbicacionArrastrar(marker)
+          })
+          map.addControl(geolocate)
+
+          map.addControl(new mapboxgl.FullscreenControl())
+          setBanderaLng(ciudad.lon)
+          setbanderaLat(ciudad.lat)
+        }
+        return notify.show(
+          'No pude obtener tu ubicación, permita el acceso para obtener su ubición exacta',
+          'warning',
+          7000
+        )
       }
       const opcionesDeSolicitud = {
         enableHighAccuracy: true, // Alta precisión
@@ -181,7 +224,6 @@ export default ({ abrirModal, mapboxgl }) => {
       setbanderaLat(lnglat.lat)
     })
   }
-
   return (
     // <!-- Add Address Model Start-->
     <div
@@ -211,10 +253,12 @@ export default ({ abrirModal, mapboxgl }) => {
               <div className="checout-address-step">
                 <div className="row">
                   <div className="col-lg-12">
-                    <div
-                      ref={mapContainer}
-                      className="map-container"
-                    ></div>
+                    <div ref={mapContainer} className="map-container">
+                      <h2 style={{ color: 'red' }}>
+                        Por favor permita el acceso a su ubicación o
+                        seleccione una ciudad, para mostrar el mapa...
+                      </h2>
+                    </div>
                     {/* <!-- Multiple Radios (inline) --> */}
                     <div className="form-group">
                       <div className="product-radio">
@@ -299,14 +343,14 @@ export default ({ abrirModal, mapboxgl }) => {
                           <div className="col-lg-12 col-md-12">
                             <div className="form-group">
                               <label className="control-label">
-                                Refencia / Indicacione para la entrega *
+                                Refencia / Indicaciones para la entrega *
                               </label>
                               <input
                                 ref={inputDetalleDirecion}
                                 id="street"
                                 name="street"
                                 type="textarea"
-                                placeholder="Referencia"
+                                placeholder="Ej: Casa color blanco con pueta roja"
                                 className="form-control input-md"
                                 required
                               />

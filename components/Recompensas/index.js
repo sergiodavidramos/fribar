@@ -14,6 +14,13 @@ export default () => (
                 </h4>
               </div>
             </div>
+            <div className="col-lg-12 col-md-12">
+              <div className="pdpt-bg">
+                <div className="main-title-tab">
+                  <h4>Aun no hay recompensas registradas</h4>
+                </div>
+              </div>
+            </div>
             {/* <div className="col-lg-12 col-md-12">
               <div className="pdpt-bg">
                 <ul className="reward-body-all">

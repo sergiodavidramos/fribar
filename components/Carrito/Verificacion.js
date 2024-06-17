@@ -95,12 +95,47 @@ export const Verificacion = ({
           else {
             setCodigoVerificado(true)
             notify.show('Codigo verificado con exito!', 'success')
+            editarNUmeroVerificado()
           }
         })
         .catch((error) => {
           notify.show('Error en el servidor', 'error')
         })
     }
+  }
+  function editarNUmeroVerificado() {
+    fetch(`${API_URL}/user/${user._id}`, {
+      method: 'PATCH',
+      body: JSON.stringify({
+        numeroCelularVerificado: true,
+      }),
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => {
+        if (res.status === 401) signOut()
+        return res.json()
+      })
+      .then((data) => {
+        if (data.error) {
+          console.log(data)
+          notify.show(
+            'Error al actualizar o ya hay un usuario registrado con este numero',
+            'error',
+            2000
+          )
+        } else {
+          console.log(data)
+          setUser(data.body)
+        }
+      })
+      .catch((error) => {
+        {
+          console.log('---->', error)
+        }
+      })
   }
   return (
     <div className="checkout-step">
@@ -179,42 +214,53 @@ export const Verificacion = ({
             </div>
             <div className="otp-verifaction container">
               <div className="row">
-                <div className="col-lg-12">
+                {user.numeroCelularVerificado ? (
                   <div className="form-group mb-0">
                     <label className="control-label">
-                      Introduzca el código y click en Siguiente.
+                      Su número telefonico ya fue verificado
                     </label>
-                    <ul style={{ display: 'flex' }}>
-                      <li>
-                        <input
-                          id="code[1]"
-                          name="number"
-                          type="text"
-                          value={valueCode}
-                          onChange={handlerChangeCode}
-                          placeholder="Codigo"
-                          className="form-control date-now"
-                          required
-                        />
-                      </li>
-                      {!codigoVerificado && (
-                        <li
-                          style={{
-                            marginLeft: '10px',
-                          }}
-                        >
-                          <button
-                            className="collapsed ml-auto next-btn16 hover-btn"
-                            style={{ padding: '2px 3px', height: '35px' }}
-                            onClick={handlerSubmitVerificarCodigo}
-                          >
-                            Verificar codigo
-                          </button>
-                        </li>
-                      )}
-                    </ul>
                   </div>
-                </div>
+                ) : (
+                  <div className="col-lg-12">
+                    <div className="form-group mb-0">
+                      <label className="control-label">
+                        Introduzca el código y click en Verificar codigo.
+                      </label>
+                      <ul style={{ display: 'flex' }}>
+                        <li>
+                          <input
+                            id="code[1]"
+                            name="number"
+                            type="text"
+                            value={valueCode}
+                            onChange={handlerChangeCode}
+                            placeholder="Codigo"
+                            className="form-control date-now"
+                            required
+                          />
+                        </li>
+                        {!codigoVerificado && (
+                          <li
+                            style={{
+                              marginLeft: '10px',
+                            }}
+                          >
+                            <button
+                              className="collapsed ml-auto next-btn16 hover-btn"
+                              style={{
+                                padding: '2px 3px',
+                                height: '35px',
+                              }}
+                              onClick={handlerSubmitVerificarCodigo}
+                            >
+                              Verificar codigo
+                            </button>
+                          </li>
+                        )}
+                      </ul>
+                    </div>
+                  </div>
+                )}
               </div>
               <div className="row">
                 <div className="col-lg-12 col-md-12">
@@ -223,20 +269,23 @@ export const Verificacion = ({
                       className="address-btns"
                       style={{ marginTop: '10px' }}
                     >
-                      <button
-                        className="save-btn14 hover-btn"
-                        onClick={handlerMandarCode}
-                        style={{
-                          padding: '9px 10px',
-                          height: 'auto',
-                          marginRight: '10px',
-                        }}
-                      >
-                        {codigoEnviado
-                          ? 'Volver a enviar el código a mi numero'
-                          : 'Enviar código a mi numero'}
-                      </button>
-                      {codigoVerificado && (
+                      {!user.numeroCelularVerificado && (
+                        <button
+                          className="save-btn14 hover-btn"
+                          onClick={handlerMandarCode}
+                          style={{
+                            padding: '9px 10px',
+                            height: 'auto',
+                            marginRight: '10px',
+                          }}
+                        >
+                          {codigoEnviado
+                            ? 'Volver a enviar el código a mi numero'
+                            : 'Enviar código a mi numero'}
+                        </button>
+                      )}
+                      {(codigoVerificado ||
+                        user.numeroCelularVerificado) && (
                         <button
                           id="botonSiguiente"
                           className="collapsed ml-auto next-btn16 hover-btn"

@@ -3,10 +3,12 @@ import { API_URL } from '../../Config'
 import { useContext } from 'react'
 import UserContext from '../../UserContext'
 import Loader from '../../Loader'
+import ModelEditarPerfil from './ModelEditarPerfil'
 export default () => {
   const { user } = useContext(UserContext)
   return (
     <>
+      <ModelEditarPerfil user={user} />
       {user ? (
         <div className="dashboard-group">
           <div className="container">
@@ -27,7 +29,10 @@ export default () => {
                   </div>
                   <h4>{user.idPersona.nombre_comp}</h4>
                   <p>
-                    <a href={''}>
+                    <a
+                      data-toggle="modal"
+                      data-target="#editarPerfil_model"
+                    >
                       Editar Perfil:
                       <i className="uil uil-edit"></i>
                     </a>

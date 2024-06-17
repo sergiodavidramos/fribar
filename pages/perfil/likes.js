@@ -14,14 +14,16 @@ export default () => {
     !user ? Router.push('/login') : ''
   }, [])
   return (
-    <>
-      <Header />
-      <div className="wrapper">
-        <Breadcrumb />
-        <BanerPerfil />
-        <Likes />
-      </div>
-      <Footer />
-    </>
+    user && (
+      <>
+        <Header />
+        <div className="wrapper">
+          <Breadcrumb />
+          <BanerPerfil />
+          <Likes />
+        </div>
+        <Footer />
+      </>
+    )
   )
 }

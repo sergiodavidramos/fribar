@@ -7,6 +7,7 @@ import { mapboxglAccessToken } from '../Config'
 import ModelConfirmarEliminarDireccion from './components/ModelConfirmarEliminarDireccion'
 import ModalEditarDireccion from './components/ModalEditarDireccion'
 import mapboxgl from 'mapbox-gl'
+import Router from 'next/router'
 export default () => {
   const [abrirModal, setAbrilModal] = useState(false)
   const { direcciones, setDirecciones, token, user } =

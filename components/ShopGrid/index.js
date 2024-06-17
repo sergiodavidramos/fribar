@@ -7,7 +7,7 @@ import { notify } from 'react-notify-toast'
 import Link from 'next/link'
 import { API_URL } from '../Config'
 import useAlgoliaInsights from '../UseAlgolia'
-
+import Router from 'next/router'
 export default ({
   titulo,
   productos = [],
@@ -78,14 +78,22 @@ export default ({
     }
   }
   function addLiked(idProducto) {
-    if (likes.includes(idProducto)) {
-      const resultado = likes.filter((like) => like != idProducto)
-      setLikes(resultado)
-      actualizarLikedUser(resultado)
+    if (user) {
+      if (likes.includes(idProducto)) {
+        const resultado = likes.filter((like) => like != idProducto)
+        setLikes(resultado)
+        actualizarLikedUser(resultado)
+      } else {
+        setLikes(likes.concat(idProducto))
+        actualizarLikedUser(likes.concat(idProducto))
+        sendProductoVisto(idProducto)
+      }
     } else {
-      setLikes(likes.concat(idProducto))
-      actualizarLikedUser(likes.concat(idProducto))
-      sendProductoVisto(idProducto)
+      Router.push('/login')
+      notify.show(
+        'Por favor inicie sesión primero para agregar sus favoritos',
+        'warning'
+      )
     }
   }
   async function actualizarLikedUser(likes) {
