@@ -93,6 +93,7 @@ export default () => {
     setPage(page + 1)
   }
   async function socketInitializer(id) {
+    navigator.serviceWorker.register('sw.js')
     socket = io(API_URL, {
       transports: ['websocket'],
     })
@@ -111,15 +112,12 @@ export default () => {
       }
 
       setPedido(banPedidos)
+
       if (Notification.permission === 'granted') {
         if (estadoPedido.state) {
-          new Notification('Su pedido esta en Camino', {
-            // icon: '../../public/img/logo-pantalla-pequeña.svg',
-            body: 'Preparate para recibir tu pedido...',
+          navigator.serviceWorker.ready.then(function (registration) {
+            registration.showNotification('Esta es la notificacion')
           })
-          //   notificacion2.onclick = function () {
-          //     window.open('https://www.fribar.bo/perfil/pedidos')
-          //   }
         }
         // switch (estadoPedido.state) {
         //   case 0:
