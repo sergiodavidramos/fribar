@@ -114,7 +114,7 @@ export default () => {
       if (Notification.permission === 'granted') {
         if (estadoPedido.state === 2) {
           new Notification('Su pedido esta en Camino', {
-            icon: '../../public/img/logo-pantalla-pequeña.svg',
+            // icon: '../../public/img/logo-pantalla-pequeña.svg',
             body: 'Preparate para recibir tu pedido...',
           })
           //   notificacion2.onclick = function () {
