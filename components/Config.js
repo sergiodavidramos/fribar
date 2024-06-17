@@ -1,5 +1,5 @@
-export const API_URL = 'http://localhost:3001'
-// export const API_URL = 'http://api.fribar.bo'
+// export const API_URL = 'http://localhost:3001'
+export const API_URL = 'http://api.fribar.bo'
 export const TOKENMAP =
   'pk.eyJ1Ijoic2VyZ2lvZGF2aWRyYW1vcyIsImEiOiJjbHd4aXk2cXYxYmJjMmlxOG5vZzFhZXd6In0.WeivWc5R1Kd71f64GUts0Q'
 export const mapboxglAccessToken =
