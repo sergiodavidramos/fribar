@@ -109,18 +109,17 @@ export default () => {
           banPedidos[i].state = estadoPedido.state
         }
       }
+
+      setPedido(banPedidos)
       if (Notification.permission === 'granted') {
         if (estadoPedido.state === 2) {
-          const notificacion2 = new Notification(
-            'Su pedido esta en Camino',
-            {
-              //   icon: '../../public/img/logo-pantalla-pequeña.svg',
-              body: 'Preparate para recibir tu pedido...',
-            }
-          )
-          notificacion2.onclick = function () {
-            window.open('https://www.fribar.bo/perfil/pedidos')
-          }
+          new Notification('Su pedido esta en Camino', {
+            icon: '../../public/img/logo-pantalla-pequeña.svg',
+            body: 'Preparate para recibir tu pedido...',
+          })
+          //   notificacion2.onclick = function () {
+          //     window.open('https://www.fribar.bo/perfil/pedidos')
+          //   }
         }
         // switch (estadoPedido.state) {
         //   case 0:
@@ -187,7 +186,6 @@ export default () => {
         //     break
         // }
       }
-      setPedido(banPedidos)
     })
 
     // socket.on('disconnect', () => {
