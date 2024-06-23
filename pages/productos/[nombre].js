@@ -7,10 +7,6 @@ import Breadcrumb from '../../components/Breadcrumb'
 import Footer from '../../components/Footer'
 import Loader from '../../components/Loader'
 export default ({ producto, productosDestacados }) => {
-  const [productoSimple, setProductoSimple] = useState(false)
-  useEffect(() => {
-    setProductoSimple(producto)
-  }, [producto])
   return (
     <>
       <Header />
@@ -18,7 +14,7 @@ export default ({ producto, productosDestacados }) => {
         <Breadcrumb />
         {producto ? (
           <SingleProduct
-            producto={productoSimple}
+            producto={producto}
             productosDestacados={productosDestacados}
           />
         ) : (
