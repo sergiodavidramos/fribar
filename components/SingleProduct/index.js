@@ -85,8 +85,6 @@ export default ({ producto, productosDestacados }) => {
   }
   useEffect(() => {
     sendProductoVisto(producto._id)
-    const deta = producto.detail
-    document.querySelector('#infoProduct').innerHTML = deta
   }, [producto.name])
   return (
     <>
@@ -459,7 +457,18 @@ export default ({ producto, productosDestacados }) => {
                       <h4>Detalles del Producto</h4>
                     </div>
                     <div className="pdpt-body scrollstyle_4">
-                      <div className="pdct-dts-1" id="infoProduct"></div>
+                      <div className="pdct-dts-1" id="infoProduct">
+                        <div className="pdct-dt-step">
+                          <h4>Descripción</h4>
+                          <div className="product_attr">
+                            {producto.detail}
+                          </div>
+                        </div>
+                        <div className="pdct-dt-step">
+                          <h4>Vendedor</h4>
+                          <div className="product_attr">Fribar</div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
