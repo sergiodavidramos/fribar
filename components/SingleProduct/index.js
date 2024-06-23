@@ -11,7 +11,6 @@ import useGetProductosRelacionados from '../UseProductosRelacionados'
 import ProductosRelacionados from './ProductosRelacionados'
 import Loader from '../Loader'
 import Router from 'next/router'
-import loadjs from 'loadjs'
 export default ({ producto, productosDestacados }) => {
   const { addProductCar, likes, setLikes, token, user, signOut } =
     useContext(UserContext)
@@ -85,11 +84,6 @@ export default ({ producto, productosDestacados }) => {
     }
   }
   useEffect(() => {
-    loadjs('/js/jquery-3.3.1.min.js', () => {
-      loadjs('/vendor/OwlCarousel/owl.carousel.js', () => {
-        loadjs('/js/product.thumbnail.slider.js', () => {})
-      })
-    })
     sendProductoVisto(producto._id)
   }, [producto.name])
   return (

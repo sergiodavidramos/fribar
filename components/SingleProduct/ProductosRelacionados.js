@@ -82,31 +82,28 @@ export default ({ productRelation, index }) => {
   }
   return (
     <div className="cart-item border_radius">
-      <Link
-        href={{
-          pathname: '/productos/[nombre]',
-          query: {
-            nombre: productRelation.name.toLowerCase().replace(/ /g, '-'),
-          },
-        }}
+      <a
+        href={`/productos/${productRelation.name
+          .toLowerCase()
+          .replace(/ /g, '-')}`}
+        className="cart-product-img"
       >
-        <a className="cart-product-img">
-          <img
-            src={GetImg(
-              productRelation.img[0],
-              `${API_URL}/upload/producto`
-            )}
-            alt={productRelation.name}
-          />
-          {productRelation.descuento > 0 ? (
-            <div className="offer-badge">
-              {`${producto.descuento}% Desct`}
-            </div>
-          ) : (
-            ''
+        <img
+          src={GetImg(
+            productRelation.img[0],
+            `${API_URL}/upload/producto`
           )}
-        </a>
-      </Link>
+          alt={productRelation.name}
+        />
+        {productRelation.descuento > 0 ? (
+          <div className="offer-badge">
+            {`${producto.descuento}% Desct`}
+          </div>
+        ) : (
+          ''
+        )}
+      </a>
+
       <div className="cart-text">
         <h4>{productRelation.name}</h4>
         <div className="cart-radio">
