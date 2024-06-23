@@ -207,7 +207,7 @@ export default () => {
                 </ul>
               </div>
               <div className="copyright-text">
-                <i className="uil uil-copyright"></i>Copyright 2023{' '}
+                <i className="uil uil-copyright"></i>Copyright 2024{' '}
                 <b>Fribar</b> . Todos los derechos reservados
               </div>
             </div>
