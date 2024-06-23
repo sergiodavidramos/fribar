@@ -87,7 +87,7 @@ export default ({ producto, productosDestacados }) => {
     sendProductoVisto(producto._id)
     const deta = producto.detail
     document.querySelector('#infoProduct').innerHTML = deta
-  }, [producto])
+  }, [producto.name])
   return (
     <>
       {/* <IconBar /> */}
