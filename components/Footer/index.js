@@ -4,14 +4,12 @@ import { LoadFile } from '../../components/LoadFile'
 import UserContext from '../UserContext'
 import { useContext } from 'react'
 import Link from 'next/link'
-
-// import { scr } from 'react-script-tag'
 export default () => {
   const { categorias, ciudades } = useContext(UserContext)
   const router = useRouter()
   useEffect(() => {
     LoadFile()
-  }, [router])
+  }, [])
   return (
     <footer className="footer">
       <div className="footer-first-row">

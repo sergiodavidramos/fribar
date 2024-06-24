@@ -13,10 +13,10 @@ $(document).ready(function () {
       dots: false,
       loop: true,
       responsiveRefreshRate: 200,
-      //   navText: [
-      //     "<i class='uil uil-angle-left'></i>",
-      //     "<i class='uil uil-angle-right'></i>",
-      //   ],
+      navText: [
+        "<i class='uil uil-angle-left'></i>",
+        "<i class='uil uil-angle-right'></i>",
+      ],
     })
     .on('changed.owl.carousel', syncPosition)
 
