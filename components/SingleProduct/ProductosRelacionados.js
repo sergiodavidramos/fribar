@@ -101,7 +101,7 @@ export default ({ productRelation, index }) => {
           />
           {productRelation.descuento > 0 ? (
             <div className="offer-badge">
-              {`${producto.descuento}% Desct`}
+              {`${productRelation.descuento}% Desct`}
             </div>
           ) : (
             ''
