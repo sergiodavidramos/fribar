@@ -142,7 +142,7 @@ export default ({ title, productos, url, categoriaAleatorio = false }) => {
                     >
                       <div className="item">
                         <div className="product-item">
-                          {/* <Link
+                          <Link
                             href={{
                               pathname: '/productos/[nombre]',
                               query: {
@@ -151,36 +151,31 @@ export default ({ title, productos, url, categoriaAleatorio = false }) => {
                                   .replace(/ /g, '-'),
                               },
                             }}
-                          > */}
-                          <a
-                            href={`/productos/${pro.name
-                              .toLowerCase()
-                              .replace(/ /g, '-')}`}
-                            className="product-img"
                           >
-                            <img
-                              src={GetImg(
-                                pro.img[0],
-                                `${API_URL}/upload/producto`
-                              )}
-                              alt={pro.name}
-                            />
-                            <div className="product-absolute-options">
-                              {pro.descuento > 0 && (
-                                <span className="offer-badge-1">
-                                  {pro.descuento}% de descuento
-                                </span>
-                              )}
-                              <span
-                                className={`like-icon ${
-                                  likes.includes(pro._id) ? 'liked' : ''
-                                }`}
-                                title="wishlist"
-                                onClick={() => addLiked(pro._id)}
-                              ></span>
-                            </div>
-                          </a>
-                          {/* </Link> */}
+                            <a className="product-img">
+                              <img
+                                src={GetImg(
+                                  pro.img[0],
+                                  `${API_URL}/upload/producto`
+                                )}
+                                alt={pro.name}
+                              />
+                              <div className="product-absolute-options">
+                                {pro.descuento > 0 && (
+                                  <span className="offer-badge-1">
+                                    {pro.descuento}% de descuento
+                                  </span>
+                                )}
+                                <span
+                                  className={`like-icon ${
+                                    likes.includes(pro._id) ? 'liked' : ''
+                                  }`}
+                                  title="wishlist"
+                                  onClick={() => addLiked(pro._id)}
+                                ></span>
+                              </div>
+                            </a>
+                          </Link>
                           <div className="product-text-dt">
                             {pro.stock > 0 ? (
                               <p>
