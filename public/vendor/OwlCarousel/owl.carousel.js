@@ -3388,8 +3388,8 @@
   Navigation.Defaults = {
     nav: false,
     navText: [
-      // '<span aria-label="' + 'Previous' + '">&#x2190;</span>',
-      // '<span aria-label="' + 'Next' + '">&#x2192;</span>',
+      '<span aria-label="' + 'Previous' + '">&#x2190;</span>',
+      '<span aria-label="' + 'Next' + '">&#x2192;</span>',
     ],
     navSpeed: false,
     navElement: 'button type="button" role="presentation"',
@@ -3397,9 +3397,9 @@
     navContainerClass: 'owl-nav',
     navClass: ['owl-prev', 'owl-next'],
     slideBy: 1,
-    dotClass: false,
-    dotsClass: false,
-    dots: false,
+    dotClass: 'owl-dot',
+    dotsClass: 'owl-dots',
+    dots: true,
     dotsEach: false,
     dotsData: false,
     dotsSpeed: false,
