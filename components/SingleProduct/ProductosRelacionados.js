@@ -5,6 +5,7 @@ import UserContext from '../UserContext'
 import useAlgoliaInsights from '../UseAlgolia'
 import { notify } from 'react-notify-toast'
 import { API_URL } from '../Config'
+import expectedRound from 'expected-round'
 
 let radioCantidad = []
 export default ({ productRelation, index }) => {
@@ -242,7 +243,19 @@ export default ({ productRelation, index }) => {
             />
           </div>
           <div className="cart-item-price">
-            $12 <span>$15</span>
+            Bs{' '}
+            {expectedRound
+              .round10(
+                productRelation.precioVenta -
+                  (productRelation.descuento *
+                    productRelation.precioVenta) /
+                    100,
+                -1
+              )
+              .toFixed(2)}
+            {productRelation.descuento > 0 && (
+              <span> Bs {productRelation.precioVenta.toFixed(2)}</span>
+            )}
           </div>
           <span className="cart-icon">
             <i
