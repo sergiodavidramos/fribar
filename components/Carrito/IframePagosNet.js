@@ -12,7 +12,7 @@ const IframePagosNet = ({
 }) => {
   let red = false
   if (nombreDireccion) {
-    red = `https://wwww.fribar.bo/redireccionar?datos=${tipoPago}_${infoPago}_${sucursalAsignado}_${tiempoEstimado}_${idDireccion}_${nombreDireccion.replace(
+    red = `https://www.fribar.bo/redireccionar?datos=${tipoPago}_${infoPago}_${sucursalAsignado}_${tiempoEstimado}_${idDireccion}_${nombreDireccion.replace(
       / /g,
       '-'
     )}_${nombreCiudad}_${refDireccion.replace(/ /g, '-')}_${costoEnvio}`
