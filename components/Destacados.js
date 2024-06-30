@@ -177,12 +177,14 @@ export default ({ title, productos, url, categoriaAleatorio = false }) => {
                             </a>
                           </Link>
                           <div className="product-text-dt">
-                            {pro.stock > 0 ? (
+                            {pro.stock > 1 ? (
                               <p>
                                 Disponible<span>(En Stock)</span>
                               </p>
                             ) : (
-                              <p style={{ color: 'red' }}>
+                              <p
+                                style={{ color: 'red', fontSize: '20px' }}
+                              >
                                 No disponible<span>(En Stock)</span>
                               </p>
                             )}
@@ -238,20 +240,22 @@ export default ({ title, productos, url, categoriaAleatorio = false }) => {
                                   onClick={() => sumarCantidad(index)}
                                 />
                               </div>
-                              <span className="cart-icon">
-                                <i
-                                  className="uil uil-shopping-cart-alt"
-                                  onClick={() =>
-                                    handlerAgregarAlCarrito(
-                                      pro,
-                                      parseFloat(
-                                        cantidadAsignado.current[index]
-                                          .current.value
+                              {pro.stock > 1 && (
+                                <span className="cart-icon">
+                                  <i
+                                    className="uil uil-shopping-cart-alt"
+                                    onClick={() =>
+                                      handlerAgregarAlCarrito(
+                                        pro,
+                                        parseFloat(
+                                          cantidadAsignado.current[index]
+                                            .current.value
+                                        )
                                       )
-                                    )
-                                  }
-                                ></i>
-                              </span>
+                                    }
+                                  ></i>
+                                </span>
+                              )}
                               {/* {cantidadAsignado.current[index].current &&
                                 (parseFloat(
                                   cantidadAsignado.current[index].current

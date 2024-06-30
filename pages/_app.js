@@ -40,6 +40,7 @@ export default class MyApp extends App {
       likes: [],
       costoEnvio: 0,
       direccionEnvio: false,
+      generarQR: 100,
     }
   }
   getMovimientos = (token) => {
@@ -321,6 +322,12 @@ export default class MyApp extends App {
       likes: likes,
     })
   }
+  setGenerarQR = () => {
+    this.setState({
+      generarQR: Math.floor(Math.random() * 99),
+    })
+  }
+
   render() {
     const { Component, pageProps } = this.props
     return (
@@ -353,6 +360,7 @@ export default class MyApp extends App {
               costoEnvio: this.state.costoEnvio,
               direccionEnvio: this.state.direccionEnvio,
               likes: this.state.likes,
+              generarQR: this.state.generarQR,
               signIn: this.signIn,
               signOut: this.signOut,
               setUser: this.setUser,
@@ -369,6 +377,7 @@ export default class MyApp extends App {
               setDireccionEnvio: this.setDireccionEnvio,
               setLikes: this.setLikes,
               limpiasCarrito: this.limpiasCarrito,
+              setGenerarQR: this.setGenerarQR,
             }}
           >
             <Component {...pageProps} />

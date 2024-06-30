@@ -240,7 +240,7 @@ export default ({
                             Disponible<span>(En Stock)</span>
                           </p>
                         ) : (
-                          <p style={{ color: 'red' }}>
+                          <p style={{ color: 'red', fontSize: '20px' }}>
                             No disponible<span>(En Stock)</span>
                           </p>
                         )}
@@ -304,22 +304,23 @@ export default ({
                                   </p>
                                 </span>
                               ) : ( */}
-                          {cantidadAsignado.current[i] && (
-                            <span className="cart-icon">
-                              <i
-                                className="uil uil-shopping-cart-alt"
-                                onClick={() =>
-                                  handlerAgregarAlCarrito(
-                                    pro,
-                                    parseFloat(
-                                      cantidadAsignado.current[i].current
-                                        .value
+                          {cantidadAsignado.current[i] &&
+                            pro.stock > 1 && (
+                              <span className="cart-icon">
+                                <i
+                                  className="uil uil-shopping-cart-alt"
+                                  onClick={() =>
+                                    handlerAgregarAlCarrito(
+                                      pro,
+                                      parseFloat(
+                                        cantidadAsignado.current[i].current
+                                          .value
+                                      )
                                     )
-                                  )
-                                }
-                              ></i>
-                            </span>
-                          )}
+                                  }
+                                ></i>
+                              </span>
+                            )}
                           {/* ))
                             : ''} */}
                         </div>

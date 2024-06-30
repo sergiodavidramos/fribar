@@ -269,7 +269,7 @@ export const Verificacion = ({
                       className="address-btns"
                       style={{ marginTop: '10px' }}
                     >
-                      {!user.numeroCelularVerificado && (
+                      {!user.numeroCelularVerificado && user.phone && (
                         <button
                           className="save-btn14 hover-btn"
                           onClick={handlerMandarCode}

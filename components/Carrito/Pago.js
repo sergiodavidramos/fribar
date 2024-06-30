@@ -1,11 +1,10 @@
-import Link from 'next/link'
 import { API_URL, TOKENMAP } from '../Config'
 import { useContext, useEffect, useState } from 'react'
 import UserContext from '../UserContext'
 import { notify } from 'react-notify-toast'
 import Loader from '../Loader'
 import { useRouter } from 'next/router'
-import GetImg from '../GetImg'
+import IframePagosNet from './IframePagosNet'
 export const Pago = () => {
   const {
     carrito,
@@ -16,18 +15,25 @@ export const Pago = () => {
     totalConDescuneto,
     costoEnvio,
     limpiasCarrito,
+    generarQR,
+    setGenerarQR,
+    ciudad,
   } = useContext(UserContext)
 
-  const [tipoPago, setTipoPago] = useState(false)
+  const [tipoPago, setTipoPago] = useState(true)
   const [sucursalAsignado, setSucursalAsignado] = useState(false)
   const [tiempoEstimadoEntrega, setTiempoEstimadoEntrega] = useState(0)
   const [stateButton, setStateButton] = useState(false)
-  const [estadoQr, setEstadoQR] = useState(false)
   const [sucursales, setSucursales] = useState([])
+  const [infoPago, setInfoPago] = useState(false)
+  const [infoPagoTarjeta, setInfoPagoTarjeta] = useState(false)
+  const [estadoBoton, setEstadoBoton] = useState(false)
 
   const router = useRouter()
 
   useEffect(() => {
+    // window.top.location.href = 'http://www.fribar.bo'
+
     getSucursales()
   }, [])
   useEffect(() => {
@@ -35,6 +41,14 @@ export const Pago = () => {
       eleccionSucursales()
     }
   }, [direccionEnvio])
+  useEffect(() => {
+    if (tipoPago === 2) {
+      generarTarjeta()
+    }
+    if (tipoPago === 3) {
+      generarQr()
+    }
+  }, [totalConDescuneto, generarQR])
 
   const getSucursales = async () => {
     let indexSucursal = []
@@ -94,7 +108,7 @@ export const Pago = () => {
       setSucursalAsignado(sucElegido._id)
       setTiempoEstimadoEntrega(tiempo)
     } else {
-      setSucursalAsignado(sucursales[0]._id)
+      setSucursalAsignado(sucursales.length > 0 ? sucursales[0]._id : '')
       setTiempoEstimadoEntrega(30)
     }
   }
@@ -125,6 +139,7 @@ export const Pago = () => {
             tipoPago: 'Contra Entrega',
             direccion: direccionEnvio._id,
             detalleVenta: mandarDetalle,
+            estadoPago: false,
           }),
           headers: {
             Authorization: `Bearer ${token}`,
@@ -169,150 +184,82 @@ export const Pago = () => {
             )
           })
         break
-      case 2:
-        notify.show(
-          'Se envio el Pedido por favor espere la confirmacion 😊',
-          'success'
-        )
-        const mandarDetalle2 = []
-        for (let j = 0; j < carrito.length; j++) {
-          mandarDetalle2.push({
-            producto: carrito[j]._id,
-            cantidad: cantidades[j],
-            tipoVenta: carrito[j].tipoVenta,
-            precioVenta: carrito[j].precioVenta,
-            descuento: carrito[j].descuento,
-            idSucursal: sucursalAsignado,
-          })
-        }
-
-        fetch(`${API_URL}/pedido`, {
-          method: 'POST',
-          body: JSON.stringify({
-            idSucursal: sucursalAsignado,
-            duracionEstimadaEntrega: tiempoEstimadoEntrega,
-            tipoPago: 'Tarjeta',
-            direccion: direccionEnvio._id,
-            detalleVenta: mandarDetalle2,
-          }),
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        })
-          .then((res) => {
-            if (res.error)
-              notify.show('Error al registrar el pedido 😓', 'error')
-            return res.json()
-          })
-          .then((resPedido) => {
-            setStateButton(false)
-            router.push({
-              pathname: '/pedido-realizado',
-              query: {
-                direccion: direccionEnvio.direccion,
-                referenciaDireccion: direccionEnvio.referencia,
-                tiempoEstimado: tiempoEstimadoEntrega,
-                numeroTel: user.phone,
-                correo: user.email,
-                pago: 'Tarjeta',
-                total: totalConDescuneto + costoEnvio,
-                estadoPago: false,
-                idPedido: resPedido.body._id,
-              },
-            })
-            limpiasCarrito()
-          })
-          .catch((error) => {
-            notify.show(
-              'Error al registrar el pedido contra entrega',
-              'error'
-            )
-            setStateButton(false)
-          })
-        break
-      case 3:
-        if (estadoQr) {
-          notify.show(
-            'Se envio el Pedido por favor espere la confirmacion 😊',
-            'success'
-          )
-          const mandarDetalle3 = []
-          for (let j = 0; j < carrito.length; j++) {
-            mandarDetalle3.push({
-              producto: carrito[j]._id,
-              cantidad: cantidades[j],
-              tipoVenta: carrito[j].tipoVenta,
-              precioVenta: carrito[j].precioVenta,
-              descuento: carrito[j].descuento,
-              idSucursal: sucursalAsignado,
-            })
-          }
-
-          fetch(`${API_URL}/pedido`, {
-            method: 'POST',
-            body: JSON.stringify({
-              idSucursal: sucursalAsignado,
-              duracionEstimadaEntrega: tiempoEstimadoEntrega,
-              tipoPago: 'Codigo QR',
-              direccion: direccionEnvio._id,
-              detalleVenta: mandarDetalle3,
-            }),
-            headers: {
-              Authorization: `Bearer ${token}`,
-              'Content-Type': 'application/json',
-            },
-          })
-            .then((res) => {
-              if (res.error)
-                notify.show('Error al registrar el pedido 😓', 'error')
-              return res.json()
-            })
-            .then((resPedido) => {
-              setStateButton(false)
-              router.push({
-                pathname: '/pedido-realizado',
-                query: {
-                  direccion: direccionEnvio.direccion,
-                  referenciaDireccion: direccionEnvio.referencia,
-                  tiempoEstimado: tiempoEstimadoEntrega,
-                  numeroTel: user.phone,
-                  correo: user.email,
-                  pago: 'Codigo QR',
-                  total: totalConDescuneto + costoEnvio,
-                  estadoPago: false,
-                  idPedido: resPedido.body._id,
-                },
-              })
-              limpiasCarrito()
-            })
-            .catch((error) => {
-              notify.show(
-                'Error al registrar el pedido contra entrega',
-                'error'
-              )
-              setStateButton(false)
-            })
-        } else {
-          notify.show(
-            'El monto generado con el codigo QR aun no se cancelo',
-            'warning',
-            5000
-          )
-          setStateButton(false)
-        }
-        break
-
       default:
         notify.show('Por favor selecciona un metodo de pago', 'warning')
         setStateButton(false)
     }
   }
-  const handlerEstadoQr = () => {
-    setTipoPago(3)
-    setTimeout(() => {
-      setEstadoQR(true)
-    }, 25000)
+  const generarQr = async () => {
+    const pago = await fetch(`${API_URL}/pedido/pago-electronico/qr`, {
+      method: 'POST',
+      body: JSON.stringify({
+        total: totalConDescuneto + costoEnvio,
+        generarQR: generarQR,
+      }),
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    })
+    const resPago = await pago.json()
+    if (resPago.error) {
+      console.log('ERROR--->', resPago)
+      notify.show(
+        'Error al generar QR por favor seleccione otro metodo de pago'
+      )
+    } else {
+      if (resPago.body.codigoError === 0) {
+        setInfoPago(resPago.body.idTransaccion)
+      } else {
+        if (resPago.body.descripcionError === 'Recaudacion duplicada') {
+          setInfoPago(false)
+        }
+      }
+    }
+  }
+  const generarTarjeta = async () => {
+    const pago = await fetch(
+      `${API_URL}/pedido/pago-electronico/tarjeta`,
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          total: totalConDescuneto + costoEnvio,
+          generarQR: generarQR,
+          ciudad: ciudad.nombre,
+          direccion: direccionEnvio.direccion,
+        }),
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    )
+    const resPago = await pago.json()
+    if (resPago.error) {
+      console.log('ERROR--->', resPago)
+      notify.show(
+        'Error al generar QR por favor seleccione otro metodo de pago'
+      )
+    } else {
+      if (resPago.body.codigoError === 0) {
+        setInfoPagoTarjeta(resPago.body.idTransaccion)
+      } else {
+        if (resPago.body.descripcionError === 'Recaudacion duplicada') {
+          console.log('ENTRE AL ERROR ', resPago.body)
+          setInfoPagoTarjeta(false)
+        }
+      }
+    }
+  }
+  const handlerGenerarQR = () => {
+    setEstadoBoton(true)
+    setGenerarQR()
+    setEstadoBoton(false)
+  }
+  const handlerGenerarPagoTarjeta = () => {
+    setEstadoBoton(true)
+    setGenerarQR()
+    setEstadoBoton(false)
   }
   return (
     <div className="checkout-step">
@@ -384,7 +331,10 @@ export const Pago = () => {
                           name="paymentmethod"
                           type="radio"
                           data-minimum="50.0"
-                          onClick={() => setTipoPago(2)}
+                          onClick={() => {
+                            setTipoPago(2)
+                            if (infoPagoTarjeta === false) generarTarjeta()
+                          }}
                         />
                         <label htmlFor="card1" className="radio-label_1">
                           Tarjeta de credito / debito
@@ -399,7 +349,10 @@ export const Pago = () => {
                           name="paymentmethod"
                           type="radio"
                           data-minimum="50.0"
-                          onClick={handlerEstadoQr}
+                          onClick={() => {
+                            setTipoPago(3)
+                            if (infoPago === false) generarQr()
+                          }}
                         />
                         <label
                           htmlFor="cashondelivery1"
@@ -411,45 +364,71 @@ export const Pago = () => {
                     </li>
                   </ul>
                 </div>
+
                 <div
                   className="form-group return-departure-dts"
                   data-method="cashondelivery"
                 >
                   <div className="row">
                     <div className="col-lg-12">
-                      <div className="pymnt_title">
-                        <h4>
-                          Codigo QR - Estado:
-                          {!estadoQr ? (
-                            <strong style={{ color: 'red' }}>
-                              {' '}
-                              No Cancelado
-                            </strong>
-                          ) : (
-                            <strong style={{ color: 'green' }}>
-                              {' '}
-                              Cancelado
-                            </strong>
-                          )}
-                        </h4>
-                        <img
-                          src={GetImg('qr.png', `${API_URL}/upload/qr`)}
-                          alt={'Codigo QR'}
+                      {tipoPago === 3 && infoPago ? (
+                        <IframePagosNet
+                          infoPago={infoPago}
+                          url="https://test.sintesis.com.bo/iframe-simple-pagosnet/#/payQr"
+                          tipoPago="qr"
+                          sucursalAsignado={sucursalAsignado}
+                          tiempoEstimado={tiempoEstimadoEntrega}
+                          idDireccion={direccionEnvio._id}
+                          nombreDireccion={direccionEnvio.direccion}
+                          refDireccion={direccionEnvio.referencia}
+                          nombreCiudad={ciudad.nombre}
+                          costoEnvio={costoEnvio}
                         />
-                        {/* <Loader /> */}
-                        {/* <p>
-                       
-                        </p> */}
-                      </div>
+                      ) : (
+                        <button
+                          type="button"
+                          title="Generar nuevo QR"
+                          className="next-btn16 hover-btn"
+                          onClick={handlerGenerarQR}
+                          disabled={estadoBoton}
+                        >
+                          Generar codigo QR
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>
+
                 <div
                   className="form-group return-departure-dts"
                   data-method="card"
                 >
                   <div className="row">
-                    <div className="col-lg-12">
+                    {tipoPago === 2 && infoPagoTarjeta ? (
+                      <IframePagosNet
+                        infoPago={infoPagoTarjeta}
+                        url="https://test.sintesis.com.bo/payment-cybersource/#/cybersource"
+                        tipoPago="tarjeta"
+                        sucursalAsignado={sucursalAsignado}
+                        tiempoEstimado={tiempoEstimadoEntrega}
+                        idDireccion={direccionEnvio._id}
+                        nombreDireccion={direccionEnvio.direccion}
+                        refDireccion={direccionEnvio.referencia}
+                        nombreCiudad={ciudad.nombre}
+                        costoEnvio={costoEnvio}
+                      />
+                    ) : (
+                      <button
+                        type="button"
+                        title="Generar nuevo QR"
+                        className="next-btn16 hover-btn"
+                        onClick={handlerGenerarPagoTarjeta}
+                        disabled={estadoBoton}
+                      >
+                        Generar pago con Tarjeta
+                      </button>
+                    )}
+                    {/* <div className="col-lg-12">
                       <div className="pymnt_title mb-4">
                         <h4>Tarjeta de credito / debito</h4>
                       </div>
@@ -554,7 +533,7 @@ export const Pago = () => {
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
 
@@ -563,15 +542,17 @@ export const Pago = () => {
                     <Loader />
                   </div>
                 ) : (
-                  <button
-                    type="button"
-                    title="Click para confirmar pedido"
-                    className="next-btn16 hover-btn"
-                    disabled={stateButton}
-                    onClick={handlerPedido}
-                  >
-                    Confirmar pedido
-                  </button>
+                  tipoPago === 1 && (
+                    <button
+                      type="button"
+                      title="Click para confirmar pedido"
+                      className="next-btn16 hover-btn"
+                      disabled={stateButton}
+                      onClick={handlerPedido}
+                    >
+                      Confirmar pedido
+                    </button>
+                  )
                 )}
               </div>
             </div>
