@@ -149,6 +149,18 @@ export default () => {
           content="1089002507424-cilko1bfs2h6ka5injmj8r0nuaev4ne9.apps.googleusercontent.com"
         ></meta>
         <script src="https://apis.google.com/js/api:client.js"></script>
+        <meta
+          name="viewport"
+          content="width=device-width,height=device-height,initial-scale=1,maximum-scale=1"
+        />
+        <meta
+          name="keywords"
+          content="Regístrate, carnicería online, compra carne fresca, ecommerce de carne, productos de primera necesidad, alimentos básicos, artículos esenciales, cortes premium, carne de calidad, entrega a domicilio, minimarket online, supermercado en línea, tienda de comestibles, productos frescos, carne a domicilio, tienda online de alimentos, pagos online"
+        />
+        <meta
+          name="description"
+          content="Regístrate en Fribar, tu ecommerce de confianza para productos de minimarket y carnicería. Accede a tu cuenta para gestionar tus pedidos, ver el historial de compras y disfrutar de ofertas exclusivas en carnes frescas y productos esenciales. ¡Compra fácil y rápido!"
+        />
       </Head>
       <Header />
       <div className="sign-inup">

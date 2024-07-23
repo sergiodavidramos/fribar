@@ -73,6 +73,7 @@ export default class MyApp extends App {
     fetch(`${API_URL}/ciudad`)
       .then((res) => res.json())
       .then((data) => {
+        if (data.body.length === 1) this.setCiudad(data.body[0])
         this.setState({ ciudades: data.body })
       })
       .catch((err) => notify.show(err.message, 'error'))
@@ -91,6 +92,7 @@ export default class MyApp extends App {
     const modoNoche = localStorage.getItem('gmtNightMode')
     const direcciones = localStorage.getItem('user-direcciones')
     const likes = localStorage.getItem('user-likes')
+    const ciudad = localStorage.getItem('fribar-ciudad')
     if (user && token) {
       const usuario = JSON.parse(user)
       si('setAuthenticatedUserToken', user._id)
@@ -100,7 +102,13 @@ export default class MyApp extends App {
         token,
         direcciones: usuario.direccion,
         likes: usuario.favoritos,
+        ciudad: JSON.parse(ciudad),
       })
+      if (ciudad !== null) {
+        this.setState({
+          ciudad: JSON.parse(ciudad),
+        })
+      }
     }
     if (cantidades && productos) {
       const pro = JSON.parse(productos)
@@ -334,7 +342,6 @@ export default class MyApp extends App {
       <>
         <Head>
           <script src="https://apis.google.com/js/platform.js" async />
-
           <link
             href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap"
             rel="stylesheet"

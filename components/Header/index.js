@@ -25,7 +25,6 @@ export default () => {
     likes,
   } = useContext(UserContext)
   useEffect(() => {
-    if (!('localStorage' in window)) return
     var nightMode = localStorage.getItem('gmtNightMode')
     if (nightMode) {
       document.documentElement.className += ' night-mode'
@@ -33,32 +32,34 @@ export default () => {
     if (!navigator.geolocation) {
       notify.show('No se pudo obtener la ubicacion', 'error')
     } else {
-      navigator.geolocation.getCurrentPosition(
-        (p) => mostrarUbicacion(p, setCiudad),
-        function (error) {
-          // El segundo parámetro es la función de error
-          switch (error.code) {
-            case error.PERMISSION_DENIED:
-              notify.show(
-                'Por favor asigname el permiso para obtener tu ubición.',
-                'warning',
-                5000
-              )
-              break
-            case error.POSITION_UNAVAILABLE:
-              // La ubicación no está disponible.
-              break
-            case error.TIMEOUT:
-              // Se ha excedido el tiempo para obtener la ubicación.
-              break
-            case error.UNKNOWN_ERROR:
-              // Un error desconocido.
-              break
+      if (Object.keys(ciudad).length <= 0) {
+        navigator.geolocation.getCurrentPosition(
+          (p) => mostrarUbicacion(p, setCiudad),
+          function (error) {
+            // El segundo parámetro es la función de error
+            switch (error.code) {
+              case error.PERMISSION_DENIED:
+                notify.show(
+                  'Por favor asigname el permiso para obtener tu ubición para un mejor servicio.',
+                  'warning',
+                  5000
+                )
+                break
+              case error.POSITION_UNAVAILABLE:
+                // La ubicación no está disponible.
+                break
+              case error.TIMEOUT:
+                // Se ha excedido el tiempo para obtener la ubicación.
+                break
+              case error.UNKNOWN_ERROR:
+                // Un error desconocido.
+                break
+            }
           }
-        }
-      )
+        )
+      }
     }
-  }, [ciudades, cantidades])
+  }, [ciudades])
 
   function mostrarUbicacion(ubicacion, setCiudad) {
     fetch(
@@ -72,6 +73,13 @@ export default () => {
               (ciudad) => ciudad.nombre === re.features[0].context[1].text
             )
           ) {
+            console.log(
+              'en el IF',
+              ciudades.find(
+                (ciudad) =>
+                  ciudad.nombre === re.features[0].context[1].text
+              )
+            )
             setCiudad(
               ciudades.find(
                 (ciudad) =>
@@ -92,11 +100,9 @@ export default () => {
   return (
     <>
       <Notifications />
-      <Head></Head>
       <ModelCategory />
       <SearchModel />
       <CartSidebar />
-      <div id="map"></div>
       <header className="header clearfix">
         <div className="top-header-group">
           <div className="top-header">
@@ -136,6 +142,7 @@ export default () => {
                     : ciudad.nombre}
                 </div>
                 <i className="uil uil-angle-down icon__14"></i>
+
                 <div className="menu dropdown_loc" tabIndex="-1">
                   {ciudades.map((ciudad) => (
                     <Location
@@ -194,7 +201,7 @@ export default () => {
                 className="category_drop hover-btn"
                 data-toggle="modal"
                 data-target="#category_model"
-                title="Categories"
+                title="Categorias"
                 onClick={() => setModelCategory(true)}
               >
                 <i className="uil uil-apps"></i>
@@ -208,7 +215,7 @@ export default () => {
                 className="cate__btn"
                 data-toggle="modal"
                 data-target="#category_model"
-                title="Categories"
+                title="Categorias"
               >
                 <i className="uil uil-apps"></i>
               </a>

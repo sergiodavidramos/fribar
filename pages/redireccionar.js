@@ -5,6 +5,7 @@ import UserContext from '../components/UserContext'
 import { API_URL, TOKENMAP } from '../components/Config'
 import Loader from '../components/Loader'
 import IframePagosNet from '../components/Carrito/IframePagosNet'
+import { Head } from 'next/document'
 export default () => {
   const {
     user,
@@ -254,6 +255,9 @@ export default () => {
   }
   return (
     <>
+      <Head>
+        <meta name="robots" content="noindex,nofollow" />
+      </Head>
       {volverGenerarPago && infoPago === false ? (
         <div className="container">
           <div className="row justify-content-center">

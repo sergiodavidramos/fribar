@@ -42,7 +42,7 @@ export default () => {
                               cate.img,
                               `${API_URL}/upload/categoria`
                             )}
-                            alt={cate.description}
+                            alt={cate.name}
                           />
                         </div>
                         <h4>{cate.name}</h4>

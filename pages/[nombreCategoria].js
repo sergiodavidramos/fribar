@@ -60,7 +60,14 @@ export default ({ categoria, params }) => {
   return (
     <>
       <Head>
-        <title>{categoria.name}</title>
+        <title>Fribar-{categoria.name}</title>
+        <meta charSet="utf-8" />
+        <meta
+          name="viewport"
+          content="width=device-width,height=device-height,initial-scale=1,maximum-scale=1"
+        />
+        <meta name="format-detection" content="telephone=no"></meta>
+
         <meta charSet="utf-8" />
         <meta
           name="viewport"
@@ -69,13 +76,18 @@ export default ({ categoria, params }) => {
         <meta name="format-detection" content="telephone=no"></meta>
         <meta
           name="keywords"
-          content="themeforest, theme, html, template"
+          content="carnicería online, compra carne fresca, ecommerce de carne, productos de primera necesidad, alimentos básicos, artículos esenciales, cortes premium, carne de calidad, entrega a domicilio, minimarket online, supermercado en línea, tienda de comestibles, productos frescos, carne a domicilio, tienda online de alimentos, pagos online"
         />
+        <meta name="description" content={categoria.description} />
+
+        <meta property="og:title" content={categoria.name} />
+        <meta property="og:type" content="website" />
+        <meta property="og:description" content={categoria.description} />
+
         <meta
-          name="description"
-          content="themeforest, theme, html, template"
+          property="og:image"
+          content={`${API_URL}/upload/facebookAds/facebookAdsPrincipal.png`}
         />
-        <meta property="og:title" content="My page title" key="title" />
       </Head>
       <Header />
       <div className="wrapper">

@@ -42,7 +42,13 @@ export default ({ productosNuevos }) => {
   return (
     <>
       <Head>
-        <title>Productos nuevos</title>
+        <title>Fribar:Productos nuevos</title>
+        <meta charSet="utf-8" />
+        <meta
+          name="viewport"
+          content="width=device-width,height=device-height,initial-scale=1,maximum-scale=1"
+        />
+        <meta name="format-detection" content="telephone=no"></meta>
         <meta charSet="utf-8" />
         <meta
           name="viewport"
@@ -51,13 +57,23 @@ export default ({ productosNuevos }) => {
         <meta name="format-detection" content="telephone=no"></meta>
         <meta
           name="keywords"
-          content="themeforest, theme, html, template"
+          content="carnicería online, compra carne fresca, ecommerce de carne, productos de primera necesidad, alimentos básicos, artículos esenciales, cortes premium, carne de calidad, entrega a domicilio, minimarket online, supermercado en línea, tienda de comestibles, productos frescos, carne a domicilio, tienda online de alimentos, pagos online"
         />
         <meta
           name="description"
-          content="themeforest, theme, html, template"
+          content="Todos los productos, tu ecommerce de confianza para carne fresca tanto de res, pollo, cerdo. Disfruta de nuestra selección de cortes premium, alimentos básicos y artículos esenciales, con entrega rápida y segura. Calidad garantizada a precios competitivos. ¡Haz tu pedido hoy!"
         />
-        <meta property="og:title" content="My page title" key="title" />
+        <meta property="og:title" content="Lo mejor en carnes - Fribar" />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:description"
+          content="Descubre Fribar, tu ecommerce de confianza para carne fresca y productos de primera necesidad. Ofrecemos cortes premium, alimentos básicos y artículos esenciales con entrega rápida y segura. Calidad garantizada a precios competitivos. ¡Haz tu pedido hoy!"
+        />
+
+        <meta
+          property="og:image"
+          content={`${API_URL}/upload/facebookAds/facebookAdsPrincipal.png`}
+        />
       </Head>
       <Header />
       <div className="wrapper">

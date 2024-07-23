@@ -214,7 +214,7 @@ export default () => {
                   </div>
                 </div>
 
-                {pedidos.length > 0 ? (
+                {!pedidos.length > 0 ? (
                   <div className="col-lg-12 col-md-12">
                     {pedidos.map((pedidoCliente, index) => (
                       <div className="pdpt-bg" key={index}>
@@ -445,7 +445,6 @@ export default () => {
                   </div>
                 ) : (
                   <>
-                    <Loader />
                     <div className="col-lg-12 col-md-12">
                       <div className="pdpt-bg">
                         <div className="pdpt-title">

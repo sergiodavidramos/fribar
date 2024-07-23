@@ -6,9 +6,33 @@ import { API_URL } from '../../components/Config'
 import Breadcrumb from '../../components/Breadcrumb'
 import Footer from '../../components/Footer'
 import Loader from '../../components/Loader'
+import Head from 'next/head'
 export default ({ producto, productosDestacados }) => {
   return (
     <>
+      <Head>
+        <meta charSet="utf-8" />
+        <title>Fribar: {producto.name}</title>
+        <meta
+          name="viewport"
+          content="width=device-width,height=device-height,initial-scale=1,maximum-scale=1"
+        />
+        <meta name="format-detection" content="telephone=no"></meta>
+        <meta
+          name="keywords"
+          content="carnicería online, compra carne fresca, ecommerce de carne, productos de primera necesidad, alimentos básicos, artículos esenciales, cortes premium, carne de calidad, entrega a domicilio, minimarket online, supermercado en línea, tienda de comestibles, productos frescos, carne a domicilio, tienda online de alimentos, pagos online"
+        />
+        <meta name="description" content={producto.detail} />
+
+        <meta property="og:title" content={producto.detail} />
+        <meta property="og:type" content="website" />
+        <meta property="og:description" content={producto.detail} />
+
+        <meta
+          property="og:image"
+          content={`${API_URL}/upload/facebookAds/facebookAdsPrincipal.png`}
+        />
+      </Head>
       <Header />
       <div className="wrapper">
         <Breadcrumb />

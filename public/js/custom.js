@@ -60,6 +60,10 @@ String.prototype.getDecimals ||
       $(this).toggleClass('liked')
       $(this).children('.like-icon').toggleClass('liked')
     })
+
+    // PRUEBA MODAL abierto
+    $('#aviso_model').modal('toggle')
+    $('#aviso_model').modal({ backdrop: 'static', keyboard: false })
   })
 
 // menu script //

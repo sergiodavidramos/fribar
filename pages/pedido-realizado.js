@@ -3,6 +3,7 @@ import Footer from '../components/Footer'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Loader from '../components/Loader'
+import Head from 'next/head'
 export default () => {
   const router = useRouter()
 
@@ -20,6 +21,9 @@ export default () => {
 
   return (
     <>
+      <Head>
+        <meta name="robots" content="noindex,nofollow" />
+      </Head>
       <Header />
       <div className="wrapper">
         <div className="gambo-Breadcrumb">

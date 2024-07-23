@@ -18,7 +18,6 @@ export default () => {
   }, [])
   return (
     <>
-      <Head></Head>
       <Header />
       <div className="wrapper">
         <Breadcrumb />
