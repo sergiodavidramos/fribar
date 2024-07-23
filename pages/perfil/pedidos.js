@@ -7,7 +7,11 @@ import { useEffect } from 'react'
 
 export default () => {
   useEffect(() => {
-    Notification.requestPermission().then((resultado) => {})
+    if (navigator.userAgent.match(/FBAN|FBAV/i)) {
+      // Facebook in-app browser detected
+    } else {
+      Notification.requestPermission().then((resultado) => {})
+    }
   }, [])
   return (
     <>
