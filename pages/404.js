@@ -2,7 +2,7 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import { LoadFile } from '../components/LoadFile'
 import { useEffect, useState } from 'react'
-import { Head } from 'next/document'
+import Head from 'next/head'
 export default function Custom404() {
   const [ModoNoche, SetModoNoche] = useState(false)
   useEffect(() => {
@@ -12,7 +12,7 @@ export default function Custom404() {
   return (
     <>
       <Head>
-        <meta name="robots" content="noindex,nofollow" />
+        <meta name="robots" content="noindex, nofollow" />
       </Head>
       <Header />
       <div className={ModoNoche ? 'main-noche' : 'main'}>
