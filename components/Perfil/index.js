@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import MenuLef from './components/MenuLef'
 
-export default ({ user }) => (
+export default ({ user, pedidos }) => (
   <div className="">
     <div className="container">
       <div className="row">
@@ -63,24 +63,53 @@ export default ({ user }) => (
                     <h4>Mis Pedidos</h4>
                   </div>
                   <div className="ddsh-body">
-                    <h2>0 Pedidos Recientes</h2>
+                    <h2>{pedidos.length} Pedidos Recientes</h2>
                     <ul className="order-list-145">
-                      {/* <li>
-                        <div className="smll-history">
-                          <div className="order-title">
-                            2 Items{' '}
-                            <span
-                              data-inverted=""
-                              data-tooltip="2kg broccoli, 1kg Apple"
-                              data-position="top center"
-                            >
-                              ?
-                            </span>
-                          </div>
-                          <div className="order-status">On the way</div>
-                          <p>$22</p>
-                        </div>
-                      </li> */}
+                      {pedidos.length > 0 &&
+                        pedidos.map((pedido, index) => (
+                          <li>
+                            <div className="smll-history">
+                              <div className="order-title">
+                                {pedido.detallePedido.detalle.length} Items{' '}
+                                <span
+                                  data-inverted=""
+                                  data-tooltip={pedido.detallePedido.detalle.map(
+                                    (d) => ' ' + d.producto.name
+                                  )}
+                                  data-position="top center"
+                                >
+                                  ?
+                                </span>
+                              </div>
+                              {pedido.state === 0 && (
+                                <div className="order-status">
+                                  Pendiente
+                                </div>
+                              )}
+                              {pedido.state === 1 && (
+                                <div className="order-status">
+                                  Preparando
+                                </div>
+                              )}
+                              {pedido.state === 2 && (
+                                <div className="order-status">
+                                  En camino
+                                </div>
+                              )}
+                              {pedido.state === 3 && (
+                                <div className="order-status">
+                                  Entregado
+                                </div>
+                              )}
+                              {pedido.state === 4 && (
+                                <div className="order-status">
+                                  Cancelado
+                                </div>
+                              )}
+                              <p>{pedido.total} Bs.</p>
+                            </div>
+                          </li>
+                        ))}
                     </ul>
                   </div>
                   <Link href={'/perfil/pedidos'}>

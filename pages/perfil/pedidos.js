@@ -10,6 +10,7 @@ export default () => {
     if (navigator.userAgent.match(/FBAN|FBAV/i)) {
       // Facebook in-app browser detected
     } else {
+      // Not using the Facebook in-app browser
       Notification.requestPermission().then((resultado) => {})
     }
   }, [])

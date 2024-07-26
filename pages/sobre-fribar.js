@@ -46,7 +46,7 @@ const nobreNosotros = () => {
                     ofreciendo siempre productos de excelente calidad, al
                     mejor precio, con tiendas amplias, cómodas y modernas,
                     que brinden seguridad y confianza a nuestros clientes
-                    que son nuestra razón de ser. Asimismo, nos
+                    que son nuestra razón de ser. Asi mismo, nos
                     visualizamos desarrollando talentos y habilidades en
                     nuestros colaboradores, en un ambiente laboral de
                     excelencia, motivados por satisfacer continuamente las
@@ -154,8 +154,8 @@ const nobreNosotros = () => {
                     <i className="uil uil-money-bill"></i>
                   </div>
                   <h4>
-                    Seleccione la opción de pago adecuada (Efectivo,
-                    Master, visa, Tarjeta de crédito,Paypal)
+                    Seleccione la opción de pago adecuada (Efectivo contra
+                    entrega, Tarjeta de crédito/debito, QR)
                   </h4>
                 </div>
               </div>

@@ -25,13 +25,37 @@ const nobreNosotros = () => {
       })
   }, [])
 
-  function handlerSubmit(event) {
+  async function handlerSubmit(event) {
     let target = event.target
     event.preventDefault()
-    target[0].value = ''
-    target[1].value = ''
-    target[2].value = ''
-    notify.show('Petición Enviada', 'success')
+    try {
+      const res = await fetch(`${API_URL}/solicitud`, {
+        method: 'POST',
+        body: JSON.stringify({
+          nombreCliente: target[0].value,
+          correoCliente: target[1].value,
+          mensaje: target[2].value,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      const resSoli = await res.json()
+      if (resSoli.error) {
+        notify.show('Intentelo mas tarde', 'error')
+      } else {
+        target[0].value = ''
+        target[1].value = ''
+        target[2].value = ''
+        notify.show('Petición enviada gracias por tu solicitud', 'success')
+      }
+    } catch (error) {
+      notify.show(
+        'Lo sentimos no pudimos enviar tu solicitud intentelo mas tarde',
+        'error'
+      )
+      console.log(error)
+    }
   }
   return (
     <>

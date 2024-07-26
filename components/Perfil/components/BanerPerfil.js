@@ -1,11 +1,28 @@
 import GetImg from '../../GetImg'
 import { API_URL } from '../../Config'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import UserContext from '../../UserContext'
-import Loader from '../../Loader'
 import ModelEditarPerfil from './ModelEditarPerfil'
 export default () => {
-  const { user } = useContext(UserContext)
+  const { user, token, signOut } = useContext(UserContext)
+  const [putos, setPunto] = useState(0)
+  useEffect(() => {
+    if ((token, user))
+      fetch(`${API_URL}/person?id=${user.idPersona._id}`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Constent-Type': 'application/json',
+        },
+      })
+        .then((res) => {
+          if (res.status === 401) signOut()
+          return res.json()
+        })
+        .then((infoPerson) => {
+          setPunto(infoPerson.body.persons[0].puntos)
+        })
+  }, [token])
   return (
     <>
       <ModelEditarPerfil user={user} />
@@ -39,7 +56,7 @@ export default () => {
                   </p>
                   <div className="earn-points">
                     <img src="/img/Dollar.svg" alt="" />
-                    Puntos : <span>{user.idPersona.puntos}</span>
+                    Puntos : <span>{putos}</span>
                   </div>
                 </div>
               </div>

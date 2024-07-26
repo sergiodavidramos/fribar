@@ -29,14 +29,17 @@ export default () => {
             <div className="col-md-6 col-sm-6">
               <ul className="call-email-alt">
                 <li>
-                  <a href="#" className="callemail">
-                    <i className="uil uil-dialpad-alt"></i>68386715
+                  <a
+                    href="https://wa.me/59174231490"
+                    className="callemail"
+                  >
+                    <i className="uil uil-dialpad-alt"></i>74231490
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="callemail">
+                  <a href="mailto:team@fribar.bo" className="callemail">
                     <i className="uil uil-envelope-alt"></i>
-                    info@fribar.bo
+                    team@fribar.bo
                   </a>
                 </li>
               </ul>
@@ -45,17 +48,26 @@ export default () => {
               <div className="social-links-footer">
                 <ul>
                   <li>
-                    <a href="">
+                    <a
+                      href="https://www.facebook.com/fribarbolivia/"
+                      target="_blank"
+                    >
                       <i className="fab fa-facebook-f"></i>
                     </a>
                   </li>
                   <li>
-                    <a href="">
+                    <a
+                      href="https://www.instagram.com/fribarbolivia/"
+                      target="_blank"
+                    >
                       <i className="fab fa-instagram"></i>
                     </a>
                   </li>
                   <li>
-                    <a href="">
+                    <a
+                      href="https://www.tiktok.com/@fribarbolivia"
+                      target="_blank"
+                    >
                       <i className="fab fa-tiktok"></i>
                     </a>
                   </li>
