@@ -76,8 +76,8 @@ export default () => {
       .then((res) => res.json())
       .then((response) => {
         response.error
-          ? notify.show(response.body.message, 'warning')
-          : console.log(response)
+          ? notify.show(response.body, 'warning')
+          : console.log('EL ERROR', response)
         // setUser(response)
       })
       .catch((err) => {
@@ -180,7 +180,7 @@ export default () => {
                         <div className="container-face">
                           <FacebookLogin
                             appId="333033351546623"
-                            autoLoad={true}
+                            autoLoad={false}
                             onClick={componentClicked}
                             callback={responseFacebook}
                             cssClass="btn btn-lg btn-facebook"
