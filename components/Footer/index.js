@@ -160,7 +160,7 @@ export default () => {
             </div>
             <div className="col-lg-3 col-md-6 col-sm-6">
               <div className="second-row-item-app">
-                <h4>Método de pago</h4>
+                <h4>Métodos de pago</h4>
                 <div className="footer-payments">
                   <ul id="paypal-gateway" className="financial-institutes">
                     <li className="financial-institutes__logo">
@@ -217,13 +217,19 @@ export default () => {
               <div className="footer-bottom-links">
                 <ul>
                   <li>
-                    <a href="">política de privacidad</a>
+                    <Link href={'/politicas-de-privacidad'}>
+                      <a>Política de privacidad</a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="">Términos y condiciones</a>
+                    <Link href={'/terminos-condiciones'}>
+                      <a>Términos y condiciones</a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="">Política de reembolso y devolución</a>
+                    <Link href={'/politicas-reembolso-devolucion'}>
+                      <a>Política de reembolso y devolución</a>
+                    </Link>
                   </li>
                 </ul>
               </div>
