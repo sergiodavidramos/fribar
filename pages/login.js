@@ -88,7 +88,25 @@ export default () => {
 
   useEffect(() => {
     startApp()
-    // LoadFile()
+    window.fbAsyncInit = function () {
+      FB.init({
+        appId: '333033351546623',
+        xfbml: true,
+        version: 'v20.0',
+      })
+      FB.AppEvents.logPageView()
+    }
+    ;(function (d, s, id) {
+      var js,
+        fjs = d.getElementsByTagName(s)[0]
+      if (d.getElementById(id)) {
+        return
+      }
+      js = d.createElement(s)
+      js.id = id
+      js.src = 'https://connect.facebook.net/en_US/sdk.js'
+      fjs.parentNode.insertBefore(js, fjs)
+    })(document, 'script', 'facebook-jssdk')
   }, [])
   function handlerSubmit() {
     event.preventDefault()
@@ -159,13 +177,14 @@ export default () => {
                         </button>
                         <div className="container-face">
                           <FacebookLogin
-                            appId="284295679548568"
-                            autoLoad={false}
+                            appId="333033351546623"
+                            autoLoad={true}
                             onClick={componentClicked}
                             callback={responseFacebook}
                             cssClass="btn btn-lg btn-facebook"
                             icon="fab fa-facebook-f mr-2"
                             textButton="Inicia sesión con Facebook"
+                            fields="name,email,picture"
                           />
                         </div>
                       </main>
