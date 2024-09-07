@@ -249,7 +249,7 @@ export default class MyApp extends App {
       direccionEnvio: direccion,
     })
   }
-  signIn = (user, token) => {
+  signIn = (user, token, pagoSeguro = false) => {
     si('setAuthenticatedUserToken', user._id)
     const direcciones = user.direccion
     const likes = user.favoritos
@@ -268,7 +268,8 @@ export default class MyApp extends App {
       })
     }
     this.setState({ user, token }, () => {
-      Router.push('/')
+      if (pagoSeguro) Router.push('/pago-seguro')
+      else Router.push('/')
     })
   }
   signInCompra = (user, token) => {

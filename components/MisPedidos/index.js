@@ -293,7 +293,8 @@ export default () => {
                             >
                               <div
                                 className={`bs-wizard-step ${
-                                  pedidoCliente.state >= 0
+                                  pedidoCliente.state >= 0 &&
+                                  pedidoCliente.state != 4
                                     ? 'complete'
                                     : 'disabled'
                                 }`}
@@ -319,7 +320,8 @@ export default () => {
                               </div>
                               <div
                                 className={`bs-wizard-step ${
-                                  pedidoCliente.state >= 1
+                                  pedidoCliente.state >= 1 &&
+                                  pedidoCliente.state != 4
                                     ? 'complete'
                                     : 'disabled'
                                 }`}
@@ -345,7 +347,8 @@ export default () => {
                               </div>
                               <div
                                 className={`bs-wizard-step ${
-                                  pedidoCliente.state >= 2
+                                  pedidoCliente.state >= 2 &&
+                                  pedidoCliente.state != 4
                                     ? 'complete'
                                     : 'disabled'
                                 }`}
@@ -379,7 +382,8 @@ export default () => {
                               </div>
                               <div
                                 className={`bs-wizard-step ${
-                                  pedidoCliente.state >= 3
+                                  pedidoCliente.state >= 3 &&
+                                  pedidoCliente.state != 4
                                     ? 'complete'
                                     : 'disabled'
                                 }`}
@@ -393,10 +397,22 @@ export default () => {
                                 <a className="bs-wizard-dot"></a>
                               </div>
                             </div>
-                            <h5 style={{ textAlign: 'center' }}>
-                              👆<br></br>
-                              Click en los puntos para hacer seguimiento
-                            </h5>
+                            {pedidoCliente.state == 4 ? (
+                              <h5
+                                style={{
+                                  textAlign: 'center',
+                                  color: 'red',
+                                }}
+                              >
+                                Pedido Cancelado
+                              </h5>
+                            ) : (
+                              <h5 style={{ textAlign: 'center' }}>
+                                👆
+                                <br />
+                                Click en los puntos para hacer seguimiento
+                              </h5>
+                            )}
                           </div>
                           {/* <div className="alert-offer">
                           <img src="/img/ribbon.svg" alt="" />
@@ -404,22 +420,31 @@ export default () => {
                           Market wallet 6-12 hours of delivery.
                         </div> */}
                           <div className="call-bill">
-                            <div className="delivery-man">
-                              Chico de la entrega -{' '}
-                              <a href="#">
-                                <i className="uil uil-phone"></i> Llamanos
-                              </a>
-                            </div>
-                            <div className="order-bill-slip">
-                              <a
-                                href={`/factura/${pedidoCliente._id}`}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="bill-btn5 hover-btn"
-                              >
-                                Ver Factura
-                              </a>
-                            </div>
+                            {pedidoCliente.repartidor && (
+                              <div className="delivery-man">
+                                Delivery asignado para la entrega : 👉
+                                {` ${pedidoCliente.repartidor}`}
+                                <a
+                                  href={`https://wa.me/591${pedidoCliente.numeroRepartidor}`}
+                                  target="_blank"
+                                >
+                                  <i className="uil uil-phone"></i> Llamar
+                                  al repartidor
+                                </a>
+                              </div>
+                            )}
+                            {pedidoCliente.state !== 4 && (
+                              <div className="order-bill-slip">
+                                <a
+                                  href={`/factura/${pedidoCliente._id}`}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  className="bill-btn5 hover-btn"
+                                >
+                                  Ver Factura
+                                </a>
+                              </div>
+                            )}
                           </div>
                         </div>
                       </div>

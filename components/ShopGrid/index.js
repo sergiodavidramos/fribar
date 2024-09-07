@@ -17,6 +17,7 @@ export default ({
   categoria = false,
   idCategoria = false,
   cambiarOrden = false,
+  ofertas = false,
 }) => {
   const { addProductCar, likes, setLikes, token, user, signOut } =
     useContext(UserContext)
@@ -30,15 +31,15 @@ export default ({
       () => React.createRef()
     )
   )
-  function restarCantidad(i) {
+  function restarCantidad(i, tipoVenta) {
     if (parseFloat(cantidadAsignado.current[i].current.value) > 1)
       cantidadAsignado.current[i].current.value =
-        parseFloat(cantidadAsignado.current[i].current.value) - 1
+        parseFloat(cantidadAsignado.current[i].current.value) - tipoVenta
     setCantidad(cantidadAsignado.current[i].current.value)
   }
-  function sumarCantidad(i) {
+  function sumarCantidad(i, tipoVenta) {
     cantidadAsignado.current[i].current.value =
-      parseFloat(cantidadAsignado.current[i].current.value) + 1
+      parseFloat(cantidadAsignado.current[i].current.value) + tipoVenta
     setCantidad(cantidadAsignado.current[i].current.value)
   }
   function updateLength({ valor, index, tipoVenta }) {
@@ -136,61 +137,66 @@ export default ({
                 <a href="" className="filter-btn pull-bs-canvas-right">
                   FILTROS
                 </a>
-                <div className="product-sort main-form">
-                  <div className="ui selection dropdown vchrt-dropdown">
-                    <input
-                      name="gender"
-                      type="hidden"
-                      defaultValue="default"
-                    />
-                    <i className="dropdown icon d-icon"></i>
-                    <div className="text">Ordenar los productos por: </div>
-                    <div className="menu" tabIndex={'-1'}>
-                      <div
-                        className="item"
-                        data-value="0"
-                        onClick={() => cambiarOrden(0)}
-                      >
-                        Popularidad
+
+                {ofertas !== true && (
+                  <div className="product-sort main-form">
+                    <div className="ui selection dropdown vchrt-dropdown">
+                      <input
+                        name="gender"
+                        type="hidden"
+                        defaultValue="default"
+                      />
+                      <i className="dropdown icon d-icon"></i>
+                      <div className="text">
+                        Ordenar los productos por:{' '}
                       </div>
-                      <div
-                        className="item"
-                        data-value="1"
-                        onClick={() => cambiarOrden(1)}
-                      >
-                        Precio - De barato a caro
-                      </div>
-                      <div
-                        className="item"
-                        data-value="2"
-                        onClick={() => cambiarOrden(2)}
-                      >
-                        Precio - De caro a barato
-                      </div>
-                      <div
-                        className="item"
-                        data-value="3"
-                        onClick={() => cambiarOrden(3)}
-                      >
-                        Orden - Alfabético
-                      </div>
-                      <div
-                        className="item"
-                        data-value="4"
-                        onClick={() => cambiarOrden(4)}
-                      >
-                        Descuento - De mayor a menor
-                      </div>
-                      <div
-                        className="item"
-                        data-value="5"
-                        onClick={() => cambiarOrden(5)}
-                      >
-                        Descuento - De menor a mayor
+                      <div className="menu" tabIndex={'-1'}>
+                        <div
+                          className="item"
+                          data-value="0"
+                          onClick={() => cambiarOrden(0)}
+                        >
+                          Popularidad
+                        </div>
+                        <div
+                          className="item"
+                          data-value="1"
+                          onClick={() => cambiarOrden(1)}
+                        >
+                          Precio - De barato a caro
+                        </div>
+                        <div
+                          className="item"
+                          data-value="2"
+                          onClick={() => cambiarOrden(2)}
+                        >
+                          Precio - De caro a barato
+                        </div>
+                        <div
+                          className="item"
+                          data-value="3"
+                          onClick={() => cambiarOrden(3)}
+                        >
+                          Orden - Alfabético
+                        </div>
+                        <div
+                          className="item"
+                          data-value="4"
+                          onClick={() => cambiarOrden(4)}
+                        >
+                          Descuento - De mayor a menor
+                        </div>
+                        <div
+                          className="item"
+                          data-value="5"
+                          onClick={() => cambiarOrden(5)}
+                        >
+                          Descuento - De menor a mayor
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </div>
@@ -266,7 +272,12 @@ export default ({
                               type="button"
                               defaultValue="-"
                               className="minus minus-btn"
-                              onClick={() => restarCantidad(i)}
+                              onClick={() =>
+                                restarCantidad(
+                                  i,
+                                  pro.tipoVenta === 'Unidad' ? 1 : 0.5
+                                )
+                              }
                             />
                             <input
                               type="number"
@@ -290,9 +301,17 @@ export default ({
                               type="button"
                               defaultValue="+"
                               className="plus plus-btn"
-                              onClick={() => sumarCantidad(i)}
+                              onClick={() =>
+                                sumarCantidad(
+                                  i,
+                                  pro.tipoVenta === 'Unidad' ? 1 : 0.5
+                                )
+                              }
                             />
                           </div>
+                          <strong style={{ marginLeft: '10px' }}>
+                            {pro.tipoVenta === 'Unidad' ? 'Uds.' : 'Kgs.'}
+                          </strong>
                           {/* {cantidadAsignado.current[i]
                             ? cantidadAsignado.current[i].current &&
                               (parseFloat(

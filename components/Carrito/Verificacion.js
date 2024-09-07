@@ -150,7 +150,9 @@ export const Verificacion = ({
             // aria-expanded="true"
             // aria-controls="collapseOne"
           >
-            Verificación de número telefónico
+            {user
+              ? 'Verificación de número telefónico'
+              : 'Debe iniciar sesión para continuar'}
           </button>
         </h4>
       </div>

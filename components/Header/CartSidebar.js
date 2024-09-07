@@ -59,12 +59,18 @@ export default () => {
         }
       })
   }, [totalConDescuneto, total, carrito])
-  function cambiarValor(valor, index) {
-    cantidadAsignado.current[index].current.value = parseFloat(valor)
-    cantidades[index] = parseFloat(valor)
-    setCantidades(cantidades, carrito)
+  function cambiarValor(valor, index, tipoVenta) {
+    if (valor === '') {
+      cantidadAsignado.current[index].current.value =
+        tipoVenta === 'Unidad' ? 1 : 0.5
+    } else {
+      cantidadAsignado.current[index].current.value = parseFloat(valor)
+      cantidades[index] = parseFloat(valor)
+      setCantidades(cantidades, carrito)
+    }
   }
   function sumarCantidad(i) {
+    const valorMinimo = carrito[i].tipoVenta === 'Unidad' ? 1 : 0.5
     if (radioCantidad[i]) {
       cantidadAsignado.current[i].current.value =
         parseFloat(cantidadAsignado.current[i].current.value) +
@@ -73,7 +79,7 @@ export default () => {
       setCantidades(cantidades, carrito)
     } else
       cantidadAsignado.current[i].current.value =
-        parseFloat(cantidadAsignado.current[i].current.value) + 1
+        parseFloat(cantidadAsignado.current[i].current.value) + valorMinimo
     cantidades[i] = parseFloat(cantidadAsignado.current[i].current.value)
     setCantidades(cantidades, carrito)
   }
@@ -248,7 +254,7 @@ export default () => {
                               }}
                             />
                             <label htmlFor={`${producto._id}-p7`}>
-                              2kg
+                              2kgs
                             </label>
                           </li>
                           <li>
@@ -261,7 +267,7 @@ export default () => {
                               }}
                             />
                             <label htmlFor={`${producto._id}-p8`}>
-                              3kg
+                              3kgs
                             </label>
                           </li>
                         </ul>
@@ -279,13 +285,17 @@ export default () => {
                           ref={cantidadAsignado.current[index]}
                           type="number"
                           step="1"
+                          min={
+                            producto.tipoVenta === 'Unidad' ? '1' : '0.5'
+                          }
                           name="quantity"
                           defaultValue={cantidades[index]}
                           className="input-text qty text"
                           onChange={(event) =>
                             cambiarValor(
-                              parseFloat(event.target.value),
-                              index
+                              event.target.value,
+                              index,
+                              producto.tipoVenta
                             )
                           }
                         />

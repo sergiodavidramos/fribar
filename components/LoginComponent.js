@@ -35,7 +35,7 @@ export const LoginComponent = () => {
 
   const setUserLogin = (userResponse) => {
     if (userResponse.body.usuario.status !== false) {
-      signIn(userResponse.body.usuario, userResponse.body.token)
+      signIn(userResponse.body.usuario, userResponse.body.token, true)
     } else
       notify.show(
         'Su cuenta no tiene permisos para ingresar al sistema',
@@ -108,7 +108,28 @@ export const LoginComponent = () => {
 
   useEffect(() => {
     startApp()
-  }, [])
+    if (window.FB) {
+      window.fbAsyncInit = function () {
+        FB.init({
+          appId: '333033351546623',
+          xfbml: true,
+          version: 'v20.0',
+        })
+        FB.AppEvents.logPageView()
+      }
+      ;(function (d, s, id) {
+        var js,
+          fjs = d.getElementsByTagName(s)[0]
+        if (d.getElementById(id)) {
+          return
+        }
+        js = d.createElement(s)
+        js.id = id
+        js.src = 'https://connect.facebook.net/en_US/sdk.js'
+        fjs.parentNode.insertBefore(js, fjs)
+      })(document, 'script', 'facebook-jssdk')
+    }
+  })
   return (
     <>
       <Notifications />
@@ -129,7 +150,7 @@ export const LoginComponent = () => {
                       </button>
                       <div className="container-face">
                         <FacebookLogin
-                          appId="284295679548568"
+                          appId="333033351546623"
                           autoLoad={false}
                           onClick={componentClicked}
                           callback={responseFacebook}
@@ -187,8 +208,8 @@ export const LoginComponent = () => {
               </div>
             </div>
             <div className="copyright-text text-center mt-3">
-              <i className="uil uil-copyright"></i>Copyright 2020{' '}
-              <b>FriFolly</b> . Todos los derechos reservados
+              <i className="uil uil-copyright"></i>Copyright 2024{' '}
+              <b>Fribar</b> . Todos los derechos reservados
             </div>
           </div>
         </div>

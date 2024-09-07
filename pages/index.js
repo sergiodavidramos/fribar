@@ -11,22 +11,31 @@ import { API_URL } from '../components/Config'
 import UserContext from '../components/UserContext'
 import { notify } from 'react-notify-toast'
 import Loader from '../components/Loader'
+import Link from 'next/link'
+import PedidoPendiente from '../components/PedidoPendiente'
 
 const Home = ({
   productosDescuento,
   productosDestacados,
   productosNuevos,
+  ofertas,
 }) => {
   let categoriaAletorio
   const { categorias } = useContext(UserContext)
   const [localCategoria, setLocalCategoria] = useState(false)
   const [productosCategoria, setProductosCategoria] = useState([])
+  const [pedidos, setPedido] = useState([])
+
   useEffect(() => {
+    const token = localStorage.getItem('fribar-token')
     if (categorias.length > 0) {
       categoriaAletorio =
         categorias[Math.floor(Math.random() * categorias.length)]
       setLocalCategoria(categoriaAletorio)
       getProductosCategoria(categoriaAletorio._id)
+    }
+    if (token) {
+      getMisPedidos(token)
     }
   }, [categorias])
   useEffect(() => {
@@ -54,6 +63,25 @@ const Home = ({
       } else {
         setProductosCategoria(pro.body)
       }
+    }
+  }
+  async function getMisPedidos(token) {
+    const res = await fetch(
+      `${API_URL}/pedido/detalle/cliente/id?pagina=1`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Constent-Type': 'application/json',
+        },
+      }
+    )
+    const resPedidos = await res.json()
+    if (resPedidos.error) {
+      notify.show('Error al obtener tus pedidos', 'warning')
+      setPedido([])
+    } else {
+      setPedido(resPedidos.body)
     }
   }
 
@@ -92,6 +120,8 @@ const Home = ({
       <Header />
       <div className="wrapper">
         <Carrousel productosDescuento={productosDescuento} />
+
+        {pedidos.length > 0 && <PedidoPendiente pedidos={pedidos} />}
         <Categories />
         {productosDestacados.length > 0 ? (
           <Destacados
@@ -102,8 +132,8 @@ const Home = ({
         ) : (
           <Loader />
         )}
-        {/* <MejoresValores /> */}
 
+        {ofertas.length > 0 && <MejoresValores ofertas={ofertas} />}
         {localCategoria &&
           (productosCategoria.length > 0 ? (
             <Destacados
@@ -142,15 +172,18 @@ export async function getStaticProps() {
     const resProductosNuevos = await fetch(
       `${API_URL}/productos?desde=0&limite=8`
     )
+    const resOfertas = await fetch(`${API_URL}/offers?state=true`)
     const proDescuento = await resProductosDescuento.json()
     const proDestacados = await resProductosDestacados.json()
     const proNuevos = await resProductosNuevos.json()
+    const ofertas = await resOfertas.json()
     if (proDescuento.error)
       return {
         props: {
           productosDescuento: [],
           productosDestacados: proDestacados.body,
           productosNuevos: proNuevos.body[0],
+          ofertas: ofertas.body,
         },
       }
     if (proDestacados.error)
@@ -158,6 +191,7 @@ export async function getStaticProps() {
         props: {
           productosDescuento: proDescuento.body,
           productosNuevos: proNuevos.body[0],
+          ofertas: ofertas.body,
           productosDestacados: [],
         },
       }
@@ -166,7 +200,17 @@ export async function getStaticProps() {
         props: {
           productosDescuento: proDescuento.body,
           productosDestacados: proDestacados.body,
+          ofertas: ofertas.body,
           productosNuevos: [],
+        },
+      }
+    if (ofertas.error)
+      return {
+        props: {
+          productosDescuento: proDescuento.body,
+          productosDestacados: proDestacados.body,
+          productosNuevos: proNuevos.body[0],
+          ofertas: [],
         },
       }
     return {
@@ -174,6 +218,7 @@ export async function getStaticProps() {
         productosDescuento: proDescuento.body,
         productosDestacados: proDestacados.body,
         productosNuevos: proNuevos.body[0],
+        ofertas: ofertas.body,
       },
     }
   } catch (error) {
@@ -182,6 +227,7 @@ export async function getStaticProps() {
         productosDescuento: [],
         productosDestacados: [],
         productosNuevos: [],
+        ofertas: [],
       },
     }
   }

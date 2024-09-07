@@ -63,7 +63,6 @@ String.prototype.getDecimals ||
 
     // PRUEBA MODAL abierto
     $('#aviso_model').modal('toggle')
-    $('#aviso_model').modal({ backdrop: 'static', keyboard: false })
   })
 
 // menu script //

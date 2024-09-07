@@ -9,7 +9,7 @@ import Router from 'next/router'
 import { API_URL } from '../../components/Config'
 
 export default () => {
-  const { user, token } = useContext(UserContext)
+  const { user, token, signOut } = useContext(UserContext)
   const [pedidos, setPedido] = useState([])
   useEffect(() => {
     const user = localStorage.getItem('fribar-user')

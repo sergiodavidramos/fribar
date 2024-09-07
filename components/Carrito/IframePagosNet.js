@@ -20,7 +20,7 @@ const IframePagosNet = ({
   return (
     red && (
       <iframe
-        src={`${url}?entidad=903&ref=${infoPago}&red=${red}`}
+        src={`${url}?entidad=360&ref=${infoPago}&red=${red}`}
         scrolling="auto"
         width="100%"
         height="500px"

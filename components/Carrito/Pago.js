@@ -374,7 +374,7 @@ export const Pago = () => {
                       {tipoPago === 3 && infoPago ? (
                         <IframePagosNet
                           infoPago={infoPago}
-                          url="https://test.sintesis.com.bo/iframe-simple-pagosnet/#/payQr"
+                          url="https://web.sintesis.com.bo/iframe-simple-pagosnet/#/payQr"
                           tipoPago="qr"
                           sucursalAsignado={sucursalAsignado}
                           tiempoEstimado={tiempoEstimadoEntrega}
@@ -407,7 +407,7 @@ export const Pago = () => {
                     {tipoPago === 2 && infoPagoTarjeta ? (
                       <IframePagosNet
                         infoPago={infoPagoTarjeta}
-                        url="https://test.sintesis.com.bo/payment-cybersource/#/cybersource"
+                        url="https://web.sintesis.com.bo/payment-cybersource/#/cybersource"
                         tipoPago="tarjeta"
                         sucursalAsignado={sucursalAsignado}
                         tiempoEstimado={tiempoEstimadoEntrega}

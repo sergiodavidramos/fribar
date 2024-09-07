@@ -4,6 +4,7 @@ import Footer from '../../components/Footer'
 import Breadcrumb from '../../components/Breadcrumb'
 import { API_URL } from '../../components/Config'
 import ShopGrid from '../../components/ShopGrid'
+import GetImg from '../../components/GetImg'
 export default ({ oferta }) => {
   return (
     <>
@@ -17,13 +18,19 @@ export default ({ oferta }) => {
         <meta name="format-detection" content="telephone=no"></meta>
         <meta
           name="keywords"
-          content="themeforest, theme, html, template"
+          content="ofertas carne fresca, ecommerce de carne, ofertas en productos de primera necesidad, ofertas en alimentos básicos, ofertas en artículos esenciales,ofertas en cortes premium, ofertas en carne de calidad, entrega a domicilio, minimarket online, supermercado en línea, tienda de comestibles, productos frescos, carne a domicilio, tienda online de alimentos, pagos online"
         />
+        <meta name="description" content={oferta.description} />
+
+        <meta property="og:title" content={oferta.titulo} />
+        <meta property="og:url" content="https://www.fribar.bo" />
+        <meta property="og:type" content="website" />
+        <meta property="og:description" content={oferta.description} />
+
         <meta
-          name="description"
-          content="themeforest, theme, html, template"
+          property="og:image"
+          content={GetImg(oferta.img, `${API_URL}/upload/oferta`)}
         />
-        <meta property="og:title" content="My page title" key="title" />
       </Head>
       <Header />
       <div className="wrapper">
@@ -35,6 +42,7 @@ export default ({ oferta }) => {
                 titulo={oferta.titulo}
                 productos={oferta.productos}
                 sonTodos={true}
+                ofertas={true}
               />
             </div>
           </div>

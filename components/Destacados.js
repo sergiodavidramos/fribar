@@ -22,15 +22,15 @@ export default ({ title, productos, url, categoriaAleatorio = false }) => {
     )
   )
 
-  function restarCantidad(i) {
+  function restarCantidad(i, tipoVenta) {
     if (parseFloat(cantidadAsignado.current[i].current.value) > 1)
       cantidadAsignado.current[i].current.value =
-        parseFloat(cantidadAsignado.current[i].current.value) - 1
+        parseFloat(cantidadAsignado.current[i].current.value) - tipoVenta
     setCantidad(cantidadAsignado.current[i].current.value)
   }
-  function sumarCantidad(i) {
+  function sumarCantidad(i, tipoVenta) {
     cantidadAsignado.current[i].current.value =
-      parseFloat(cantidadAsignado.current[i].current.value) + 1
+      parseFloat(cantidadAsignado.current[i].current.value) + tipoVenta
     setCantidad(cantidadAsignado.current[i].current.value)
   }
   function updateLength({ valor, index, tipoVenta }) {
@@ -205,17 +205,27 @@ export default ({ title, productos, url, categoriaAleatorio = false }) => {
                                 </span>
                               )}
                             </div>
+
                             <div className="qty-cart">
                               <div className="quantity buttons_added">
                                 <input
                                   type="button"
                                   defaultValue="-"
                                   className="minus minus-btn"
-                                  onClick={() => restarCantidad(index)}
+                                  onClick={() =>
+                                    restarCantidad(
+                                      index,
+                                      pro.tipoVenta === 'Unidad' ? 1 : 0.5
+                                    )
+                                  }
                                 />
                                 <input
                                   type="number"
-                                  step="1"
+                                  step={
+                                    pro.tipoVenta === 'Unidad'
+                                      ? '1'
+                                      : '0.5'
+                                  }
                                   min={
                                     pro.tipoVenta === 'Unidad'
                                       ? '1'
@@ -237,9 +247,20 @@ export default ({ title, productos, url, categoriaAleatorio = false }) => {
                                   type="button"
                                   defaultValue="+"
                                   className="plus plus-btn"
-                                  onClick={() => sumarCantidad(index)}
+                                  onClick={() =>
+                                    sumarCantidad(
+                                      index,
+                                      pro.tipoVenta === 'Unidad' ? 1 : 0.5
+                                    )
+                                  }
                                 />
                               </div>
+
+                              <strong style={{ marginLeft: '10px' }}>
+                                {pro.tipoVenta === 'Unidad'
+                                  ? 'Uds.'
+                                  : 'Kgs.'}
+                              </strong>
                               {pro.stock > 1 && (
                                 <span className="cart-icon">
                                   <i

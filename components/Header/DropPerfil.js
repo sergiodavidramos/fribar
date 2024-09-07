@@ -65,9 +65,9 @@ export const DropPerfil = () => {
             <i className="uil uil-heart icon__1"></i>Mi lista de deseos
           </a>
         </Link>
-        <Link href="/perfil/mibilletera">
+        <Link href="/perfil/recompensas">
           <a className="item channel_item">
-            <i className="uil uil-usd-circle icon__1"></i>Mi billetera
+            <i className="uil uil-usd-circle icon__1"></i>Mis recompensas
           </a>
         </Link>
 

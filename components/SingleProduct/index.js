@@ -355,6 +355,11 @@ export default ({ producto, productosDestacados }) => {
                                   </div>
                                 </div>
                               </li>
+                              <strong style={{ marginLeft: '10px' }}>
+                                {producto.tipoVenta === 'Unidad'
+                                  ? 'Uds.'
+                                  : 'Kgs.'}
+                              </strong>
                               <li>
                                 <span
                                   className={`like-icon save-icon ${

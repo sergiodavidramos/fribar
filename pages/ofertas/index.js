@@ -42,13 +42,25 @@ export default () => {
         <meta name="format-detection" content="telephone=no"></meta>
         <meta
           name="keywords"
-          content="themeforest, theme, html, template"
+          content="ofertas carne fresca, ecommerce de carne, ofertas en productos de primera necesidad, ofertas en alimentos básicos, ofertas en artículos esenciales,ofertas en cortes premium, ofertas en carne de calidad, entrega a domicilio, minimarket online, supermercado en línea, tienda de comestibles, productos frescos, carne a domicilio, tienda online de alimentos, pagos online"
         />
         <meta
           name="description"
-          content="themeforest, theme, html, template"
+          content="Bienvenido a Fribar, tu ecommerce de confianza para carne fresca tanto de res, pollo, cerdo. Disfruta de nuestra selección de cortes premium, alimentos básicos y artículos esenciales, con entrega rápida y segura. Calidad garantizada a precios competitivos. ¡Haz tu pedido hoy!"
         />
-        <meta property="og:title" content="My page title" key="title" />
+
+        <meta property="og:title" content="Ofertas - Fribar" />
+        <meta property="og:url" content="https://www.fribar.bo" />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:description"
+          content="Ofertas Fribar, Las mejores ofertas en carne fresca y productos de primera necesidad. Ofrecemos cortes premium, alimentos básicos y artículos esenciales con entrega rápida y segura. Calidad garantizada a precios competitivos. ¡Haz tu pedido hoy!"
+        />
+
+        <meta
+          property="og:image"
+          content={`${API_URL}/upload/facebookAds/facebookAdsPrincipal.png`}
+        />
       </Head>
       <Header />
       <div className="wrapper">
