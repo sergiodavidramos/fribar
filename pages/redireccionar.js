@@ -65,7 +65,7 @@ export default () => {
             estadoPago: true,
           }),
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${datosTransaccion[9]}`,
             'Content-Type': 'application/json',
           },
         })
@@ -126,7 +126,7 @@ export default () => {
             estadoPago: true,
           }),
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${datosTransaccion[9]}`,
             'Content-Type': 'application/json',
           },
         })
@@ -183,7 +183,7 @@ export default () => {
         generarQR: generarQR,
       }),
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${datosTransaccion[9]}`,
         'Content-Type': 'application/json',
       },
     })
@@ -217,7 +217,7 @@ export default () => {
           direccion: direccion,
         }),
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${datosTransaccion[9]}`,
           'Content-Type': 'application/json',
         },
       }
@@ -306,6 +306,7 @@ export default () => {
           refDireccion={refDireccion}
           nombreCiudad={ciudad.nombre}
           costoEnvio={costoEnvio}
+          token={token}
         />
       ) : (
         <IframePagosNet
@@ -319,6 +320,7 @@ export default () => {
           refDireccion={refDireccion}
           nombreCiudad={ciudad}
           costoEnvio={costoEnvio}
+          token={token}
         />
       )}
     </>
