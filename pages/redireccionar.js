@@ -2,8 +2,7 @@ import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import { notify } from 'react-notify-toast'
 import UserContext from '../components/UserContext'
-import { API_URL, TOKENMAP } from '../components/Config'
-import Loader from '../components/Loader'
+import { API_URL } from '../components/Config'
 import IframePagosNet from '../components/Carrito/IframePagosNet'
 import Head from 'next/head'
 export default () => {
@@ -298,7 +297,7 @@ export default () => {
       ) : tipoPago === 'qr' ? (
         <IframePagosNet
           infoPago={infoPago}
-          url="https://test.sintesis.com.bo/iframe-simple-pagosnet/#/payQr"
+          url="https://web.sintesis.com.bo/iframe-simple-pagosnet/#/payQr"
           tipoPago="qr"
           sucursalAsignado={sucursalAsignado}
           tiempoEstimado={tiempoEstimado}
@@ -311,7 +310,7 @@ export default () => {
       ) : (
         <IframePagosNet
           infoPago={infoPago}
-          url="https://test.sintesis.com.bo/payment-cybersource/#/cybersource"
+          url="https://web.sintesis.com.bo/payment-cybersource/#/cybersource"
           tipoPago="tarjeta"
           sucursalAsignado={sucursalAsignado}
           tiempoEstimado={tiempoEstimado}

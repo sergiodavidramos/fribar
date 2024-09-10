@@ -205,7 +205,8 @@ export const Pago = () => {
     if (resPago.error) {
       console.log('ERROR--->', resPago)
       notify.show(
-        'Error al generar QR por favor seleccione otro metodo de pago'
+        'Error al generar QR por favor seleccione otro metodo de pago',
+        'error'
       )
     } else {
       if (resPago.body.codigoError === 0) {
@@ -238,7 +239,8 @@ export const Pago = () => {
     if (resPago.error) {
       console.log('ERROR--->', resPago)
       notify.show(
-        'Error al generar QR por favor seleccione otro metodo de pago'
+        'Error al generar Tarjeta por favor seleccione otro metodo de pago',
+        'error'
       )
     } else {
       if (resPago.body.codigoError === 0) {
