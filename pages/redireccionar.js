@@ -68,7 +68,7 @@ export default () => {
             estadoPago: true,
           }),
           headers: {
-            Authorization: `Bearer ${datosTransaccion[9]}`,
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
         })
@@ -129,7 +129,7 @@ export default () => {
             estadoPago: true,
           }),
           headers: {
-            Authorization: `Bearer ${datosTransaccion[9]}`,
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
         })
