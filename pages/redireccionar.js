@@ -36,6 +36,7 @@ export default () => {
   const { datos, success } = router.query
   useEffect(() => {
     const datosTransaccion = datos ? datos.split('_') : []
+    console.log('ESTADO TRANSACCION----->', success)
     if (success === 'true' && datos) {
       if (datosTransaccion[0] === 'qr') {
         notify.show(
