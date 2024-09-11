@@ -36,7 +36,7 @@ export default () => {
   const { datos, success } = router.query
   useEffect(() => {
     const datosTransaccion = datos ? datos.split('_') : []
-    if ((success === 'true' && datos, token)) {
+    if (success == 'true' && datosTransaccion.length > 0 && token) {
       console.log('ESTADO TRANSACCION----->', success)
       console.log('DATOS TRANSACCION----->', datosTransaccion)
       console.log('TOKEN TRANSACCION----->', token)
