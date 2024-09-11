@@ -25,6 +25,7 @@ const IframePagosNet = ({
         width="100%"
         height="500px"
         border="0"
+        target="_parent"
       ></iframe>
     )
   )
