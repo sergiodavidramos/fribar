@@ -183,7 +183,7 @@ export default () => {
         generarQR: generarQR,
       }),
       headers: {
-        Authorization: `Bearer ${datosTransaccion[9]}`,
+        Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
     })
@@ -217,7 +217,7 @@ export default () => {
           direccion: direccion,
         }),
         headers: {
-          Authorization: `Bearer ${datosTransaccion[9]}`,
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
       }
@@ -306,7 +306,6 @@ export default () => {
           refDireccion={refDireccion}
           nombreCiudad={ciudad.nombre}
           costoEnvio={costoEnvio}
-          token={token}
         />
       ) : (
         <IframePagosNet
@@ -320,7 +319,6 @@ export default () => {
           refDireccion={refDireccion}
           nombreCiudad={ciudad}
           costoEnvio={costoEnvio}
-          token={token}
         />
       )}
     </>

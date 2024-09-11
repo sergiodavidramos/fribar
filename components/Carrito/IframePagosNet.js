@@ -9,19 +9,14 @@ const IframePagosNet = ({
   refDireccion,
   nombreCiudad,
   costoEnvio,
-  token,
 }) => {
   let red = false
   if (nombreDireccion) {
-    red = `https://www.fribar.bo/redireccionar?datos=${tipoPago}_${infoPago}_${sucursalAsignado}_${tiempoEstimado}_${idDireccion}_${nombreDireccion.replace(
+    red = `https://fribar.bo/redireccionar?datos=${tipoPago}_${infoPago}_${sucursalAsignado}_${tiempoEstimado}_${idDireccion}_${nombreDireccion.replace(
       / /g,
       '-'
-    )}_${nombreCiudad}_${refDireccion.replace(
-      / /g,
-      '-'
-    )}_${costoEnvio}_${token}`
+    )}_${nombreCiudad}_${refDireccion.replace(/ /g, '-')}_${costoEnvio}`
   }
-
   return (
     red && (
       <iframe
