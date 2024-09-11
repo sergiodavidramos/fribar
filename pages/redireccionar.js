@@ -36,8 +36,10 @@ export default () => {
   const { datos, success } = router.query
   useEffect(() => {
     const datosTransaccion = datos ? datos.split('_') : []
-    console.log('ESTADO TRANSACCION----->', success)
-    if (success === 'true' && datos) {
+    if ((success === 'true' && datos, token)) {
+      console.log('ESTADO TRANSACCION----->', success)
+      console.log('DATOS TRANSACCION----->', datosTransaccion)
+      console.log('TOKEN TRANSACCION----->', token)
       if (datosTransaccion[0] === 'qr') {
         notify.show(
           'Se envio el Pedido gracias por su compra 😊',
@@ -174,7 +176,7 @@ export default () => {
       }
       setVolverGenerarPago(true)
     }
-  }, [success, datos])
+  }, [success, datos, token])
 
   const generarQr = async () => {
     const pago = await fetch(`${API_URL}/pedido/pago-electronico/qr`, {
