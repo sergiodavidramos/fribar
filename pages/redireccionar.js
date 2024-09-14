@@ -148,20 +148,29 @@ export default () => {
             return res.json()
           })
           .then((resPedido) => {
-            router.push({
-              pathname: '/pedido-realizado',
-              query: {
-                direccion: datosTransaccion[5],
-                referenciaDireccion: datosTransaccion[7],
-                tiempoEstimado: parseInt(datosTransaccion[3]),
-                numeroTel: user.phone,
-                correo: user.email,
-                pago: 'Tarjeta',
-                total: totalConDescuneto + parseInt(datosTransaccion[8]),
-                estadoPago: true,
-                idPedido: resPedido.body._id,
-              },
-            })
+            window.top.location.href = `https://fribar.bo/pedido-realizado?direccion=${
+              datosTransaccion[5]
+            }&referenciaDireccion=${
+              datosTransaccion[7]
+            }&tiempoEstimado=${parseInt(datosTransaccion[3])}&numeroTel=${
+              user.phone
+            }&correo=${user.email}&pago=Tarjeta&total=${
+              totalConDescuneto + parseInt(datosTransaccion[8])
+            }&estadoPago=true&idPedido=${resPedido.body._id}`
+            // router.push({
+            //   pathname: '/pedido-realizado',
+            //   query: {
+            //     direccion: datosTransaccion[5],
+            //     referenciaDireccion: datosTransaccion[7],
+            //     tiempoEstimado: parseInt(datosTransaccion[3]),
+            //     numeroTel: user.phone,
+            //     correo: user.email,
+            //     pago: 'Tarjeta',
+            //     total: totalConDescuneto + parseInt(datosTransaccion[8]),
+            //     estadoPago: true,
+            //     idPedido: resPedido.body._id,
+            //   },
+            // })
             limpiasCarrito()
           })
           .catch((error) => {
@@ -288,7 +297,7 @@ export default () => {
                 title="Volver a codigo QR"
                 className="next-btn16 hover-btn"
                 onClick={() =>
-                  (window.top.location.href = `https://www.fribar.bo/pedido-realizado?direccion=${
+                  (window.top.location.href = `https://fribar.bo/pedido-realizado?direccion=${
                     datosTransaccion[5]
                   }&referenciaDireccion=${
                     datosTransaccion[7]
