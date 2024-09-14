@@ -38,7 +38,9 @@ export default ({
 
   function resizeMapEditar() {
     try {
-      var geolocate = new mapboxgl.GeolocateControl()
+      var geolocate = new mapboxgl.GeolocateControl({
+        showUserLocation: false,
+      })
       var map = new mapboxgl.Map({
         container: mapContainer.current,
         projection: 'globe',
@@ -64,6 +66,9 @@ export default ({
         geolocate.on('geolocate', function (e) {
           var lon = e.coords.longitude
           var lat = e.coords.latitude
+          marker.setLngLat([lon, lat])
+          setBanderaLng(lon)
+          setbanderaLat(lat)
         })
         map.addControl(geolocate)
         obtenerUbicacionArrastrar(marker)

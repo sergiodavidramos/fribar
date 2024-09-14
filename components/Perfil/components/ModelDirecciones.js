@@ -12,6 +12,7 @@ export default ({ abrirModal, mapboxgl }) => {
 
   const [banderaLng, setBanderaLng] = useState(null)
   const [banderaLat, setbanderaLat] = useState(null)
+  const [permisoUbicacion, setPermisoUbucacion] = useState(false)
 
   const mapContainer = useRef(null)
 
@@ -107,7 +108,10 @@ export default ({ abrirModal, mapboxgl }) => {
         )
       }
       const onUbicacionConcedida = (ubicacion) => {
-        var geolocate = new mapboxgl.GeolocateControl()
+        setPermisoUbucacion(true)
+        var geolocate = new mapboxgl.GeolocateControl({
+          showUserLocation: false,
+        })
         var map = new mapboxgl.Map({
           container: mapContainer.current,
           projection: 'globe',
@@ -156,8 +160,11 @@ export default ({ abrirModal, mapboxgl }) => {
         setbanderaLat(ubicacion.coords.latitude)
       }
       const onErrorDeUbicacion = (err) => {
+        setPermisoUbucacion(false)
         if (ciudad.lat) {
-          var geolocate = new mapboxgl.GeolocateControl()
+          var geolocate = new mapboxgl.GeolocateControl({
+            showUserLocation: false,
+          })
           var map = new mapboxgl.Map({
             container: mapContainer.current,
             projection: 'globe',
@@ -235,7 +242,14 @@ export default ({ abrirModal, mapboxgl }) => {
     >
       <div className="modal-dialog category-area" role="document">
         <div className="category-area-inner">
-          <div className="modal-header">
+          <div className="modal-header" style={{ alignItems: 'end' }}>
+            <center>
+              <p className="h7">
+                {permisoUbicacion
+                  ? 'Arrastre el marcador hacia su ubicación exacta'
+                  : 'Habilita el acceso a su ubicación para obtener su ubicacion exacta, o arrastre el marcador hacia su ubicación'}
+              </p>
+            </center>
             <button
               type="button"
               className="close btn-close"
@@ -384,6 +398,12 @@ export default ({ abrirModal, mapboxgl }) => {
           {`
             .map-container {
               height: 300px;
+            }
+
+            .h7 {
+              color: #ffffff;
+              font-size: 16px;
+              margin: 0;
             }
           `}
         </style>

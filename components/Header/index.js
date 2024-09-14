@@ -73,13 +73,6 @@ export default () => {
               (ciudad) => ciudad.nombre === re.features[0].context[1].text
             )
           ) {
-            console.log(
-              'en el IF',
-              ciudades.find(
-                (ciudad) =>
-                  ciudad.nombre === re.features[0].context[1].text
-              )
-            )
             setCiudad(
               ciudades.find(
                 (ciudad) =>
