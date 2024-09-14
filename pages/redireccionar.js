@@ -270,42 +270,79 @@ export default () => {
         <meta name="robots" content="noindex, nofollow" />
       </Head>
       {volverGenerarPago && infoPago === false ? (
-        <div className="container">
-          <div className="row justify-content-center">
-            <h4
-              style={{
-                color: 'red',
-                marginTop: '15px',
-                width: '100%',
-                textAlign: 'center',
-              }}
-            >
-              No se pudo realizar el pago.
-            </h4>
-
-            {tipoPago === 'qr' ? (
+        success === 'true' ? (
+          <div className="container">
+            <div className="row justify-content-center">
+              <h4
+                style={{
+                  color: 'green',
+                  marginTop: '15px',
+                  width: '100%',
+                  textAlign: 'center',
+                }}
+              >
+                Pago realizado con exito!
+              </h4>
               <button
                 type="button"
                 title="Volver a codigo QR"
                 className="next-btn16 hover-btn"
-                onClick={() => handlerGenerarQr()}
-                disabled={estadoBoton}
+                onClick={() =>
+                  (window.top.location.href = `https://www.fribar.bo/pedido-realizado?direccion=${
+                    datosTransaccion[5]
+                  }&referenciaDireccion=${
+                    datosTransaccion[7]
+                  }&tiempoEstimado=${parseInt(
+                    datosTransaccion[3]
+                  )}&numeroTel=${user.phone}&correo=${
+                    user.email
+                  }&pago=Codigo%20QR&total=${
+                    totalConDescuneto + parseInt(datosTransaccion[8])
+                  }&estadoPago=true&idPedido=${resPedido.body._id}`)
+                }
               >
-                Generar nuevo codigo QR
+                Ir a siguiente paso
               </button>
-            ) : (
-              <button
-                type="button"
-                title="Volver a pago con tarjeta"
-                className="next-btn16 hover-btn"
-                onClick={() => handlerGenerarTargeta()}
-                disabled={estadoBoton}
-              >
-                Generar nuevo pago
-              </button>
-            )}
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="container">
+            <div className="row justify-content-center">
+              <h4
+                style={{
+                  color: 'red',
+                  marginTop: '15px',
+                  width: '100%',
+                  textAlign: 'center',
+                }}
+              >
+                No se pudo realizar el pago.
+              </h4>
+
+              {tipoPago === 'qr' ? (
+                <button
+                  type="button"
+                  title="Volver a codigo QR"
+                  className="next-btn16 hover-btn"
+                  onClick={() => handlerGenerarQr()}
+                  disabled={estadoBoton}
+                >
+                  Generar nuevo codigo QR
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  title="Volver a pago con tarjeta"
+                  className="next-btn16 hover-btn"
+                  onClick={() => handlerGenerarTargeta()}
+                  disabled={estadoBoton}
+                >
+                  Generar nuevo pago
+                </button>
+              )}
+            </div>
+          </div>
+        )
       ) : tipoPago === 'qr' ? (
         <IframePagosNet
           infoPago={infoPago}

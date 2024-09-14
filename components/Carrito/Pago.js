@@ -418,6 +418,7 @@ export const Pago = () => {
                         refDireccion={direccionEnvio.referencia}
                         nombreCiudad={ciudad.nombre}
                         costoEnvio={costoEnvio}
+                        token={token}
                       />
                     ) : (
                       <button
