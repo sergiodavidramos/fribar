@@ -18,9 +18,10 @@ export const Pago = () => {
     generarQR,
     setGenerarQR,
     ciudad,
+    signOut,
   } = useContext(UserContext)
 
-  const [tipoPago, setTipoPago] = useState(true)
+  const [tipoPago, setTipoPago] = useState(0)
   const [sucursalAsignado, setSucursalAsignado] = useState(false)
   const [tiempoEstimadoEntrega, setTiempoEstimadoEntrega] = useState(0)
   const [stateButton, setStateButton] = useState(false)
@@ -32,8 +33,6 @@ export const Pago = () => {
   const router = useRouter()
 
   useEffect(() => {
-    // window.top.location.href = 'http://www.fribar.bo'
-
     getSucursales()
   }, [])
   useEffect(() => {
@@ -48,7 +47,7 @@ export const Pago = () => {
     if (tipoPago === 3) {
       generarQr()
     }
-  }, [totalConDescuneto, generarQR])
+  }, [totalConDescuneto, generarQR, tipoPago])
 
   const getSucursales = async () => {
     let indexSucursal = []
@@ -67,6 +66,10 @@ export const Pago = () => {
               },
             }
           )
+          if (res.status === 401) {
+            notify.show('Cuenta Bloqueada', 'error')
+            signOut()
+          }
           const productoEncontrado = await res.json()
           if (productoEncontrado.body.length <= 0) {
             indexSucursal.push(s)
@@ -244,6 +247,7 @@ export const Pago = () => {
       )
     } else {
       if (resPago.body.codigoError === 0) {
+        console.log('entre al pago con tarjeta REALIZADO EXITOSAMENTO')
         setInfoPagoTarjeta(resPago.body.idTransaccion)
       } else {
         if (resPago.body.descripcionError === 'Recaudacion duplicada') {
@@ -334,7 +338,9 @@ export const Pago = () => {
                           type="radio"
                           data-minimum="50.0"
                           onClick={() => {
+                            console.log(tipoPago)
                             setTipoPago(2)
+                            console.log(tipoPago)
                             if (infoPagoTarjeta === false) generarTarjeta()
                           }}
                         />
@@ -431,115 +437,8 @@ export const Pago = () => {
                         Generar pago con Tarjeta
                       </button>
                     )}
-                    {/* <div className="col-lg-12">
-                      <div className="pymnt_title mb-4">
-                        <h4>Tarjeta de credito / debito</h4>
-                      </div>
-                    </div>
-                    <div className="col-lg-6">
-                      <div className="form-group mt-1">
-                        <label className="control-label">
-                          Nombre Titular*
-                        </label>
-                        <div className="ui search focus">
-                          <div className="ui left icon input swdh11 swdh19">
-                            <input
-                              className="prompt srch_explore"
-                              type="text"
-                              name="holdername"
-                              defaultValue=""
-                              id="holder[name]"
-                              required
-                              maxLength="64"
-                              placeholder="Nombre del titular"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-lg-6">
-                      <div className="form-group mt-1">
-                        <label className="control-label">
-                          Numero de tarjeta*
-                        </label>
-                        <div className="ui search focus">
-                          <div className="ui left icon input swdh11 swdh19">
-                            <input
-                              className="prompt srch_explore"
-                              type="text"
-                              name="cardnumber"
-                              defaultValue=""
-                              id="card[number]"
-                              required
-                              maxLength="64"
-                              placeholder="Número de tarjeta"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-lg-4">
-                      <div className="form-group mt-1">
-                        <label className="control-label">
-                          Mes de expiracion*
-                        </label>
-                        <select
-                          className="ui fluid search dropdown form-dropdown"
-                          name="card[expire-month]"
-                        >
-                          <option value="">Mes</option>
-                          <option value="1">Enero</option>
-                          <option value="2">Febrero</option>
-                          <option value="3">Marzo</option>
-                          <option value="4">Abril</option>
-                          <option value="5">Mayo</option>
-                          <option value="6">Junio</option>
-                          <option value="7">Julio</option>
-                          <option value="8">Agosto</option>
-                          <option value="9">Septiembre</option>
-                          <option value="10">Octubre</option>
-                          <option value="11">Noviembre</option>
-                          <option value="12">Diciembre</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div className="col-lg-4">
-                      <div className="form-group mt-1">
-                        <label className="control-label">
-                          Año de expiracion*
-                        </label>
-                        <div className="ui search focus">
-                          <div className="ui left icon input swdh11 swdh19">
-                            <input
-                              className="prompt srch_explore"
-                              type="text"
-                              name="card[expire-year]"
-                              maxLength="4"
-                              placeholder="Año"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-lg-4">
-                      <div className="form-group mt-1">
-                        <label className="control-label">CVV*</label>
-                        <div className="ui search focus">
-                          <div className="ui left icon input swdh11 swdh19">
-                            <input
-                              className="prompt srch_explore"
-                              name="card[cvc]"
-                              maxLength="3"
-                              placeholder="CVV"
-                              required
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div> */}
                   </div>
                 </div>
-
                 {stateButton ? (
                   <div>
                     <Loader />

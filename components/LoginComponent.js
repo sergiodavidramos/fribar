@@ -10,8 +10,6 @@ export const LoginComponent = () => {
   const { signIn } = useContext(UserContext)
   function handlerSubmit() {
     event.preventDefault()
-    console.log(event.target[0].value)
-    console.log(event.target[1].value)
     let headers = new Headers()
     headers.append(
       'Authorization',
@@ -38,7 +36,7 @@ export const LoginComponent = () => {
       signIn(userResponse.body.usuario, userResponse.body.token, true)
     } else
       notify.show(
-        'Su cuenta no tiene permisos para ingresar al sistema',
+        'Su cuenta no tiene permisos para ingresar al sistema o fue Bloqueada',
         'warning'
       )
   }

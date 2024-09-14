@@ -268,8 +268,10 @@ export default class MyApp extends App {
       })
     }
     this.setState({ user, token }, () => {
-      if (pagoSeguro) Router.push('/pago-seguro')
-      else Router.push('/')
+      if (!pagoSeguro) Router.push('/')
+      else {
+        Router.reload()
+      }
     })
   }
   signInCompra = (user, token) => {

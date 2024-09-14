@@ -78,29 +78,31 @@ export default () => {
             return res.json()
           })
           .then((resPedido) => {
-            window.top.location.href = `https://www.fribar.bo/pedido-realizado?direccion=${
-              datosTransaccion[5]
-            }&referenciaDireccion=${
-              datosTransaccion[7]
-            }&tiempoEstimado=${parseInt(datosTransaccion[3])}&numeroTel=${
-              user.phone
-            }&correo=${user.email}&pago=Codigo%20QR&total=${
-              totalConDescuneto + parseInt(datosTransaccion[8])
-            }&estadoPago=true&idPedido=${resPedido.body._id}`
-            // router.push({
-            //   pathname: '/pedido-realizado',
-            //   query: {
-            //     direccion: datosTransaccion[5],
-            //     referenciaDireccion: datosTransaccion[7],
-            //     tiempoEstimado: parseInt(datosTransaccion[3]),
-            //     numeroTel: user.phone,
-            //     correo: user.email,
-            //     pago: 'Codigo QR',
-            //     total: totalConDescuneto + costoEnvio,
-            //     estadoPago: true,
-            //     idPedido: resPedido.body._id,
-            //   },
-            // })
+            // window.top.location.href = `https://fribar.bo/pedido-realizado?direccion=${
+            //   datosTransaccion[5]
+            // }&referenciaDireccion=${
+            //   datosTransaccion[7]
+            // }&tiempoEstimado=${parseInt(datosTransaccion[3])}&numeroTel=${
+            //   user.phone
+            // }&correo=${user.email}&pago=Codigo%20QR&total=${
+            //   totalConDescuneto + parseInt(datosTransaccion[8])
+            // }&estadoPago=true&idPedido=${
+            //   resPedido.body._id
+            // }&token=${token}`
+            router.push({
+              pathname: '/pedido-realizado',
+              query: {
+                direccion: datosTransaccion[5],
+                referenciaDireccion: datosTransaccion[7],
+                tiempoEstimado: parseInt(datosTransaccion[3]),
+                numeroTel: user.phone,
+                correo: user.email,
+                pago: 'Codigo QR',
+                total: totalConDescuneto + costoEnvio,
+                estadoPago: true,
+                idPedido: resPedido.body._id,
+              },
+            })
             limpiasCarrito()
           })
           .catch((error) => {
