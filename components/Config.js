@@ -8,4 +8,4 @@ export const mapboxglAccessToken =
 //   algolia
 export const ALGOLIA_APP_ID = 'K9MSGVQYEM'
 export const ALGOLIA_API_KEY = '6b57262b848e9e0af7d131f440101ca1'
-export const ALGOLIA_INDEX_NAME = 'indiceFribar'
+export const ALGOLIA_INDEX_NAME = 'indiceFribarProduccion'
