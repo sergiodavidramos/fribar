@@ -177,7 +177,7 @@ export default ({ title, productos, url, categoriaAleatorio = false }) => {
                             </a>
                           </Link>
                           <div className="product-text-dt">
-                            {pro.stock > 1 ? (
+                            {pro.stock >= 0.5 ? (
                               <p>
                                 Disponible<span>(En Stock)</span>
                               </p>
@@ -261,7 +261,7 @@ export default ({ title, productos, url, categoriaAleatorio = false }) => {
                                   ? 'Uds.'
                                   : 'Kgs.'}
                               </strong>
-                              {pro.stock > 1 && (
+                              {pro.stock >= 0.5 && (
                                 <span className="cart-icon">
                                   <i
                                     className="uil uil-shopping-cart-alt"

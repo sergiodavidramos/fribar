@@ -143,7 +143,7 @@ export default () => {
                           <span>{subTotal.toFixed(2)} Bs.</span>
                         </div>
                         <div className="cart-total-dil pt-3">
-                          <h4>Delivery Charges</h4>
+                          <h4>Precio de envio</h4>
                           <span>
                             {pedido.costoDelivery === 0
                               ? 'Gratis'

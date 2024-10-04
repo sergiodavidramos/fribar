@@ -273,6 +273,7 @@ export default () => {
                         </ul>
                       )}
                     </div>
+
                     <div className="qty-group">
                       <div className="quantity buttons_added">
                         <input
@@ -281,6 +282,7 @@ export default () => {
                           className="minus minus-btn"
                           onClick={() => restarCantidad(index)}
                         />
+
                         <input
                           ref={cantidadAsignado.current[index]}
                           type="number"
@@ -288,6 +290,7 @@ export default () => {
                           min={
                             producto.tipoVenta === 'Unidad' ? '1' : '0.5'
                           }
+                          max={producto.stock}
                           name="quantity"
                           defaultValue={cantidades[index]}
                           className="input-text qty text"
@@ -299,12 +302,14 @@ export default () => {
                             )
                           }
                         />
-                        <input
-                          type="button"
-                          defaultValue="+"
-                          className="plus plus-btn"
-                          onClick={() => sumarCantidad(index)}
-                        />
+                        {cantidades[index] < producto.stock && (
+                          <input
+                            type="button"
+                            defaultValue="+"
+                            className="plus plus-btn"
+                            onClick={() => sumarCantidad(index)}
+                          />
+                        )}
                       </div>
                       <div className="cart-item-price">
                         Bs{' '}
@@ -339,7 +344,6 @@ export default () => {
                         )}
                       </div>
                     </div>
-
                     <button
                       type="button"
                       className="cart-close-btn"

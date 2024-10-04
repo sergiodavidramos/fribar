@@ -324,7 +324,7 @@ export default ({
                                 </span>
                               ) : ( */}
                           {cantidadAsignado.current[i] &&
-                            pro.stock > 1 && (
+                            pro.stock > 0 && (
                               <span className="cart-icon">
                                 <i
                                   className="uil uil-shopping-cart-alt"

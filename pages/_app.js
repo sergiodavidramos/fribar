@@ -141,16 +141,24 @@ export default class MyApp extends App {
     if (this.state.carrito.length > 0) {
       this.state.carrito.find((producto, index) => {
         if (producto._id === p._id) {
-          this.state.cantidadProducto[index] =
-            this.state.cantidadProducto[index] + c
           ban = true
-          localStorage.setItem(
-            'fribar-cantidades',
-            JSON.stringify(this.state.cantidadProducto)
-          )
-          this.setState({
-            cantidadProducto: this.state.cantidadProducto,
-          })
+          if (producto.stock < this.state.cantidadProducto[index] + c) {
+            notify.show(
+              `Lo siento solo tengo ${producto.stock} en Stock de ${producto.name} 🥺`,
+              'warning'
+            )
+          } else {
+            this.state.cantidadProducto[index] =
+              this.state.cantidadProducto[index] + c
+            ban = true
+            localStorage.setItem(
+              'fribar-cantidades',
+              JSON.stringify(this.state.cantidadProducto)
+            )
+            this.setState({
+              cantidadProducto: this.state.cantidadProducto,
+            })
+          }
         }
       })
       if (!ban) {
@@ -186,6 +194,7 @@ export default class MyApp extends App {
       JSON.parse(localStorage.getItem('fribar-cantidades'))
     )
   }
+
   setCantidades = (cantidades, productos) => {
     this.setState({ cantidadProducto: cantidades })
     localStorage.setItem('fribar-cantidades', JSON.stringify(cantidades))
