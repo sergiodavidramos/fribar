@@ -134,150 +134,162 @@ export default ({ title, productos, url, categoriaAleatorio = false }) => {
                     width: '2360px',
                   }}
                 >
-                  {productos.map((pro, index) => (
-                    <div
-                      className="owl-item active"
-                      style={{ width: '285px', marginRight: '10px' }}
-                      key={index}
-                    >
-                      <div className="item">
-                        <div className="product-item">
-                          <Link
-                            href={{
-                              pathname: '/productos/[nombre]',
-                              query: {
-                                nombre: pro.name
-                                  .toLowerCase()
-                                  .replace(/ /g, '-'),
-                              },
-                            }}
-                          >
-                            <a className="product-img">
-                              <img
-                                src={GetImg(
-                                  pro.img[0],
-                                  `${API_URL}/upload/producto`
-                                )}
-                                alt={pro.name}
-                              />
-                              <div className="product-absolute-options">
-                                {pro.descuento > 0 && (
-                                  <span className="offer-badge-1">
-                                    {pro.descuento}% de descuento
-                                  </span>
-                                )}
-                                <span
-                                  className={`like-icon ${
-                                    likes.includes(pro._id) ? 'liked' : ''
-                                  }`}
-                                  title="wishlist"
-                                  onClick={() => addLiked(pro._id)}
-                                ></span>
-                              </div>
-                            </a>
-                          </Link>
-                          <div className="product-text-dt">
-                            {pro.stock >= 0.5 ? (
-                              <p>
-                                Disponible<span>(En Stock)</span>
-                              </p>
-                            ) : (
-                              <p
-                                style={{ color: 'red', fontSize: '20px' }}
+                  {productos.map(
+                    (pro, index) =>
+                      pro.ventaOnline === true && (
+                        <div
+                          className="owl-item active"
+                          style={{ width: '285px', marginRight: '10px' }}
+                          key={index}
+                        >
+                          <div className="item">
+                            <div className="product-item">
+                              <Link
+                                href={{
+                                  pathname: '/productos/[nombre]',
+                                  query: {
+                                    nombre: pro.name
+                                      .toLowerCase()
+                                      .replace(/ /g, '-'),
+                                  },
+                                }}
                               >
-                                No disponible<span>(En Stock)</span>
-                              </p>
-                            )}
-                            <h4>{pro.name}</h4>
-                            <div className="product-price">
-                              Bs{' '}
-                              {expectedRound
-                                .round10(
-                                  pro.precioVenta -
-                                    (pro.descuento * pro.precioVenta) /
-                                      100,
-                                  -1
-                                )
-                                .toFixed(2)}
-                              {pro.descuento > 0 && (
-                                <span>
-                                  Bs {pro.precioVenta.toFixed(2)}
-                                </span>
-                              )}
-                            </div>
-
-                            <div className="qty-cart">
-                              <div className="quantity buttons_added">
-                                <input
-                                  type="button"
-                                  defaultValue="-"
-                                  className="minus minus-btn"
-                                  onClick={() =>
-                                    restarCantidad(
-                                      index,
-                                      pro.tipoVenta === 'Unidad' ? 1 : 0.5
+                                <a className="product-img">
+                                  <img
+                                    src={GetImg(
+                                      pro.img[0],
+                                      `${API_URL}/upload/producto`
+                                    )}
+                                    alt={pro.name}
+                                  />
+                                  <div className="product-absolute-options">
+                                    {pro.descuento > 0 && (
+                                      <span className="offer-badge-1">
+                                        {pro.descuento}% de descuento
+                                      </span>
+                                    )}
+                                    <span
+                                      className={`like-icon ${
+                                        likes.includes(pro._id)
+                                          ? 'liked'
+                                          : ''
+                                      }`}
+                                      title="wishlist"
+                                      onClick={() => addLiked(pro._id)}
+                                    ></span>
+                                  </div>
+                                </a>
+                              </Link>
+                              <div className="product-text-dt">
+                                {pro.stock >= 0.5 ? (
+                                  <p>
+                                    Disponible<span>(En Stock)</span>
+                                  </p>
+                                ) : (
+                                  <p
+                                    style={{
+                                      color: 'red',
+                                      fontSize: '20px',
+                                    }}
+                                  >
+                                    No disponible<span>(En Stock)</span>
+                                  </p>
+                                )}
+                                <h4>{pro.name}</h4>
+                                <div className="product-price">
+                                  Bs{' '}
+                                  {expectedRound
+                                    .round10(
+                                      pro.precioVenta -
+                                        (pro.descuento * pro.precioVenta) /
+                                          100,
+                                      -1
                                     )
-                                  }
-                                />
-                                <input
-                                  type="number"
-                                  step={
-                                    pro.tipoVenta === 'Unidad'
-                                      ? '1'
-                                      : '0.5'
-                                  }
-                                  min={
-                                    pro.tipoVenta === 'Unidad'
-                                      ? '1'
-                                      : '0.5'
-                                  }
-                                  name="quantity"
-                                  defaultValue="1"
-                                  className="input-text qty text"
-                                  ref={cantidadAsignado.current[index]}
-                                  onChange={(event) =>
-                                    updateLength({
-                                      valor: event.target.value,
-                                      index: index,
-                                      tipoVenta: pro.tipoVenta,
-                                    })
-                                  }
-                                />
-                                <input
-                                  type="button"
-                                  defaultValue="+"
-                                  className="plus plus-btn"
-                                  onClick={() =>
-                                    sumarCantidad(
-                                      index,
-                                      pro.tipoVenta === 'Unidad' ? 1 : 0.5
-                                    )
-                                  }
-                                />
-                              </div>
+                                    .toFixed(2)}
+                                  {pro.descuento > 0 && (
+                                    <span>
+                                      Bs {pro.precioVenta.toFixed(2)}
+                                    </span>
+                                  )}
+                                </div>
 
-                              <strong style={{ marginLeft: '10px' }}>
-                                {pro.tipoVenta === 'Unidad'
-                                  ? 'Uds.'
-                                  : 'Kgs.'}
-                              </strong>
-                              {pro.stock >= 0.5 && (
-                                <span className="cart-icon">
-                                  <i
-                                    className="uil uil-shopping-cart-alt"
-                                    onClick={() =>
-                                      handlerAgregarAlCarrito(
-                                        pro,
-                                        parseFloat(
-                                          cantidadAsignado.current[index]
-                                            .current.value
+                                <div className="qty-cart">
+                                  <div className="quantity buttons_added">
+                                    <input
+                                      type="button"
+                                      defaultValue="-"
+                                      className="minus minus-btn"
+                                      onClick={() =>
+                                        restarCantidad(
+                                          index,
+                                          pro.tipoVenta === 'Unidad'
+                                            ? 1
+                                            : 0.5
                                         )
-                                      )
-                                    }
-                                  ></i>
-                                </span>
-                              )}
-                              {/* {cantidadAsignado.current[index].current &&
+                                      }
+                                    />
+                                    <input
+                                      type="number"
+                                      step={
+                                        pro.tipoVenta === 'Unidad'
+                                          ? '1'
+                                          : '0.5'
+                                      }
+                                      min={
+                                        pro.tipoVenta === 'Unidad'
+                                          ? '1'
+                                          : '0.5'
+                                      }
+                                      name="quantity"
+                                      defaultValue="1"
+                                      className="input-text qty text"
+                                      ref={cantidadAsignado.current[index]}
+                                      onChange={(event) =>
+                                        updateLength({
+                                          valor: event.target.value,
+                                          index: index,
+                                          tipoVenta: pro.tipoVenta,
+                                        })
+                                      }
+                                    />
+                                    <input
+                                      type="button"
+                                      defaultValue="+"
+                                      className="plus plus-btn"
+                                      onClick={() =>
+                                        sumarCantidad(
+                                          index,
+                                          pro.tipoVenta === 'Unidad'
+                                            ? 1
+                                            : 0.5
+                                        )
+                                      }
+                                    />
+                                  </div>
+
+                                  <strong style={{ marginLeft: '10px' }}>
+                                    {pro.tipoVenta === 'Unidad'
+                                      ? 'Uds.'
+                                      : 'Kgs.'}
+                                  </strong>
+                                  {pro.stock >= 0.5 && (
+                                    <span className="cart-icon">
+                                      <i
+                                        className="uil uil-shopping-cart-alt"
+                                        onClick={() =>
+                                          handlerAgregarAlCarrito(
+                                            pro,
+                                            parseFloat(
+                                              cantidadAsignado.current[
+                                                index
+                                              ].current.value
+                                            )
+                                          )
+                                        }
+                                      ></i>
+                                    </span>
+                                  )}
+                                  {/* {cantidadAsignado.current[index].current &&
                                 (parseFloat(
                                   cantidadAsignado.current[index].current
                                     .value
@@ -304,12 +316,13 @@ export default ({ title, productos, url, categoriaAleatorio = false }) => {
                                     ></i>
                                   </span>
                                 ))} */}
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                  ))}
+                      )
+                  )}
                 </div>
               </div>
               <div className="owl-nav">

@@ -203,116 +203,127 @@ export default ({
           <div className="product-list-view">
             <div className="row">
               {productos.length > 0 &&
-                productos.map((pro, i) => (
-                  <div className="col-lg-3 col-md-6" key={i}>
-                    <div className="product-item mb-30">
-                      <Link
-                        href={{
-                          pathname: '/productos/[nombre]',
-                          query: {
-                            nombre: pro.name
-                              .toLowerCase()
-                              .replace(/ /g, '-'),
-                          },
-                        }}
-                      >
-                        <a className="product-img">
-                          <img
-                            src={GetImg(
-                              pro.img[0],
-                              `${API_URL}/upload/producto`
+                productos.map(
+                  (pro, i) =>
+                    pro.ventaOnline && (
+                      <div className="col-lg-3 col-md-6" key={i}>
+                        <div className="product-item mb-30">
+                          <Link
+                            href={{
+                              pathname: '/productos/[nombre]',
+                              query: {
+                                nombre: pro.name
+                                  .toLowerCase()
+                                  .replace(/ /g, '-'),
+                              },
+                            }}
+                          >
+                            <a className="product-img">
+                              <img
+                                src={GetImg(
+                                  pro.img[0],
+                                  `${API_URL}/upload/producto`
+                                )}
+                                alt={pro.name}
+                              />
+                              <div className="product-absolute-options">
+                                {pro.descuento > 0 && (
+                                  <span className="offer-badge-1">
+                                    {pro.descuento}% de descuento
+                                  </span>
+                                )}
+                                <span
+                                  className={`like-icon ${
+                                    likes.includes(pro._id) ? 'liked' : ''
+                                  }`}
+                                  title="Me gusta"
+                                  onClick={() => addLiked(pro._id)}
+                                ></span>
+                              </div>
+                            </a>
+                          </Link>
+                          <div className="product-text-dt">
+                            {pro.stock > 0 ? (
+                              <p>
+                                Disponible<span>(En Stock)</span>
+                              </p>
+                            ) : (
+                              <p
+                                style={{ color: 'red', fontSize: '20px' }}
+                              >
+                                No disponible<span>(En Stock)</span>
+                              </p>
                             )}
-                            alt={pro.name}
-                          />
-                          <div className="product-absolute-options">
-                            {pro.descuento > 0 && (
-                              <span className="offer-badge-1">
-                                {pro.descuento}% de descuento
-                              </span>
-                            )}
-                            <span
-                              className={`like-icon ${
-                                likes.includes(pro._id) ? 'liked' : ''
-                              }`}
-                              title="Me gusta"
-                              onClick={() => addLiked(pro._id)}
-                            ></span>
-                          </div>
-                        </a>
-                      </Link>
-                      <div className="product-text-dt">
-                        {pro.stock > 0 ? (
-                          <p>
-                            Disponible<span>(En Stock)</span>
-                          </p>
-                        ) : (
-                          <p style={{ color: 'red', fontSize: '20px' }}>
-                            No disponible<span>(En Stock)</span>
-                          </p>
-                        )}
 
-                        <h4>{pro.name}</h4>
-                        <div className="product-price">
-                          Bs{' '}
-                          {expectedRound
-                            .round10(
-                              pro.precioVenta -
-                                (pro.descuento * pro.precioVenta) / 100,
-                              -1
-                            )
-                            .toFixed(2)}
-                          {pro.descuento > 0 && (
-                            <span>Bs {pro.precioVenta.toFixed(2)}</span>
-                          )}
-                        </div>
+                            <h4>{pro.name}</h4>
+                            <div className="product-price">
+                              Bs{' '}
+                              {expectedRound
+                                .round10(
+                                  pro.precioVenta -
+                                    (pro.descuento * pro.precioVenta) /
+                                      100,
+                                  -1
+                                )
+                                .toFixed(2)}
+                              {pro.descuento > 0 && (
+                                <span>
+                                  Bs {pro.precioVenta.toFixed(2)}
+                                </span>
+                              )}
+                            </div>
 
-                        <div className="qty-cart">
-                          <div className="quantity buttons_added">
-                            <input
-                              type="button"
-                              defaultValue="-"
-                              className="minus minus-btn"
-                              onClick={() =>
-                                restarCantidad(
-                                  i,
-                                  pro.tipoVenta === 'Unidad' ? 1 : 0.5
-                                )
-                              }
-                            />
-                            <input
-                              type="number"
-                              step="1"
-                              min={
-                                pro.tipoVenta === 'Unidad' ? '1' : '0.5'
-                              }
-                              name="quantity"
-                              defaultValue="1"
-                              className="input-text qty text"
-                              ref={cantidadAsignado.current[i]}
-                              onChange={(event) =>
-                                updateLength({
-                                  valor: event.target.value,
-                                  index: i,
-                                  tipoVenta: pro.tipoVenta,
-                                })
-                              }
-                            />
-                            <input
-                              type="button"
-                              defaultValue="+"
-                              className="plus plus-btn"
-                              onClick={() =>
-                                sumarCantidad(
-                                  i,
-                                  pro.tipoVenta === 'Unidad' ? 1 : 0.5
-                                )
-                              }
-                            />
-                          </div>
-                          <strong style={{ marginLeft: '10px' }}>
-                            {pro.tipoVenta === 'Unidad' ? 'Uds.' : 'Kgs.'}
-                          </strong>
-                          {/* {cantidadAsignado.current[i]
+                            <div className="qty-cart">
+                              <div className="quantity buttons_added">
+                                <input
+                                  type="button"
+                                  defaultValue="-"
+                                  className="minus minus-btn"
+                                  onClick={() =>
+                                    restarCantidad(
+                                      i,
+                                      pro.tipoVenta === 'Unidad' ? 1 : 0.5
+                                    )
+                                  }
+                                />
+                                <input
+                                  type="number"
+                                  step="1"
+                                  min={
+                                    pro.tipoVenta === 'Unidad'
+                                      ? '1'
+                                      : '0.5'
+                                  }
+                                  name="quantity"
+                                  defaultValue="1"
+                                  className="input-text qty text"
+                                  ref={cantidadAsignado.current[i]}
+                                  onChange={(event) =>
+                                    updateLength({
+                                      valor: event.target.value,
+                                      index: i,
+                                      tipoVenta: pro.tipoVenta,
+                                    })
+                                  }
+                                />
+                                <input
+                                  type="button"
+                                  defaultValue="+"
+                                  className="plus plus-btn"
+                                  onClick={() =>
+                                    sumarCantidad(
+                                      i,
+                                      pro.tipoVenta === 'Unidad' ? 1 : 0.5
+                                    )
+                                  }
+                                />
+                              </div>
+                              <strong style={{ marginLeft: '10px' }}>
+                                {pro.tipoVenta === 'Unidad'
+                                  ? 'Uds.'
+                                  : 'Kgs.'}
+                              </strong>
+                              {/* {cantidadAsignado.current[i]
                             ? cantidadAsignado.current[i].current &&
                               (parseFloat(
                                 cantidadAsignado.current[i].current.value
@@ -323,30 +334,31 @@ export default ({
                                   </p>
                                 </span>
                               ) : ( */}
-                          {cantidadAsignado.current[i] &&
-                            pro.stock > 0 && (
-                              <span className="cart-icon">
-                                <i
-                                  className="uil uil-shopping-cart-alt"
-                                  onClick={() =>
-                                    handlerAgregarAlCarrito(
-                                      pro,
-                                      parseFloat(
-                                        cantidadAsignado.current[i].current
-                                          .value
-                                      )
-                                    )
-                                  }
-                                ></i>
-                              </span>
-                            )}
-                          {/* ))
+                              {cantidadAsignado.current[i] &&
+                                pro.stock > 0 && (
+                                  <span className="cart-icon">
+                                    <i
+                                      className="uil uil-shopping-cart-alt"
+                                      onClick={() =>
+                                        handlerAgregarAlCarrito(
+                                          pro,
+                                          parseFloat(
+                                            cantidadAsignado.current[i]
+                                              .current.value
+                                          )
+                                        )
+                                      }
+                                    ></i>
+                                  </span>
+                                )}
+                              {/* ))
                             : ''} */}
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                ))}
+                    )
+                )}
               {sonTodos ? (
                 <div className="col-md-12">
                   <div className="more-product-btn">
