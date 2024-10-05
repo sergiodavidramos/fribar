@@ -6,13 +6,10 @@ export const Carrousel = ({ productosDescuento }) => (
       <div className="row">
         <div className="col-md-12">
           <div className="owl-carousel offers-banner owl-theme">
-            {productosDescuento.length > 0 ? (
+            {productosDescuento.length > 0 &&
               productosDescuento.map((producto, index) => (
                 <Item key={index} producto={producto} />
-              ))
-            ) : (
-              <Loader />
-            )}
+              ))}
           </div>
         </div>
       </div>
