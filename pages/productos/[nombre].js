@@ -1,7 +1,5 @@
 import Header from '../../components/Header'
 import SingleProduct from '../../components/SingleProduct'
-import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
 import { API_URL } from '../../components/Config'
 import Breadcrumb from '../../components/Breadcrumb'
 import Footer from '../../components/Footer'
@@ -82,5 +80,6 @@ export async function getStaticProps({ params }) {
       producto: product.body[0],
       productosDestacados: proDestacados.body,
     },
+    revalidate: 1,
   }
 }

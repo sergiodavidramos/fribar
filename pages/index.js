@@ -185,6 +185,7 @@ export async function getStaticProps() {
           productosNuevos: proNuevos.body[0],
           ofertas: ofertas.body,
         },
+        revalidate: 1,
       }
     if (proDestacados.error)
       return {
@@ -194,6 +195,7 @@ export async function getStaticProps() {
           ofertas: ofertas.body,
           productosDestacados: [],
         },
+        revalidate: 1,
       }
     if (proNuevos.error)
       return {
@@ -203,6 +205,7 @@ export async function getStaticProps() {
           ofertas: ofertas.body,
           productosNuevos: [],
         },
+        revalidate: 1,
       }
     if (ofertas.error)
       return {
@@ -212,6 +215,7 @@ export async function getStaticProps() {
           productosNuevos: proNuevos.body[0],
           ofertas: [],
         },
+        revalidate: 1,
       }
     return {
       props: {
@@ -220,6 +224,7 @@ export async function getStaticProps() {
         productosNuevos: proNuevos.body[0],
         ofertas: ofertas.body,
       },
+      revalidate: 1,
     }
   } catch (error) {
     return {

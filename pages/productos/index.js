@@ -112,5 +112,6 @@ export async function getStaticProps() {
   const productosNuevos = await res.json()
   return {
     props: { productosNuevos: productosNuevos.body[0], isFallback: true },
+    revalidate: 1,
   }
 }

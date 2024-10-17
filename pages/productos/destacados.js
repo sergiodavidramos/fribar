@@ -101,5 +101,6 @@ export async function getStaticProps() {
   const productosDestacados = await res.json()
   return {
     props: { productosDestacados: productosDestacados.body },
+    revalidate: 1,
   }
 }
