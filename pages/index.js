@@ -14,12 +14,12 @@ import Loader from '../components/Loader'
 import Link from 'next/link'
 import PedidoPendiente from '../components/PedidoPendiente'
 
-const Home = ({
-  productosDescuento,
-  productosDestacados,
-  productosNuevos,
-  ofertas,
-}) => {
+const Home = () => {
+  const [productosDescuento, setProductosDescuento] = useState([])
+  const [productosDestacados, setProductosDestacados] = useState([])
+  const [productosNuevos, setProductosNuevos] = useState([])
+  const [ofertas, setOfertas] = useState([])
+
   let categoriaAletorio
   const { categorias } = useContext(UserContext)
   const [localCategoria, setLocalCategoria] = useState(false)
@@ -46,8 +46,36 @@ const Home = ({
           console.log('scope is: ', registration.scope)
         )
     }
+    getDatosInicio()
   }, [])
-
+  async function getDatosInicio() {
+    try {
+      const resProductosDescuento = await fetch(
+        `${API_URL}/productos/filtrados/descuento`
+      )
+      const resProductosDestacados = await fetch(
+        `${API_URL}/productos/destacados/principales`
+      )
+      const resProductosNuevos = await fetch(
+        `${API_URL}/productos?desde=0&limite=8`
+      )
+      const resOfertas = await fetch(`${API_URL}/offers?state=true`)
+      const proDescuento = await resProductosDescuento.json()
+      const proDestacados = await resProductosDestacados.json()
+      const proNuevos = await resProductosNuevos.json()
+      const ofertas = await resOfertas.json()
+      setProductosDescuento(proDescuento.body),
+        setProductosDestacados(proDestacados.body),
+        setProductosNuevos(proNuevos.body[0]),
+        setOfertas(ofertas.body)
+    } catch (error) {
+      console.log(error)
+      setProductosDescuento([]),
+        setProductosDestacados([]),
+        setProductosNuevos([]),
+        setOfertas([])
+    }
+  }
   async function getProductosCategoria(idCategoria) {
     if (idCategoria) {
       const res = await fetch(
@@ -161,80 +189,80 @@ const Home = ({
   )
 }
 
-export async function getStaticProps() {
-  try {
-    const resProductosDescuento = await fetch(
-      `${API_URL}/productos/filtrados/descuento`
-    )
-    const resProductosDestacados = await fetch(
-      `${API_URL}/productos/destacados/principales`
-    )
-    const resProductosNuevos = await fetch(
-      `${API_URL}/productos?desde=0&limite=8`
-    )
-    const resOfertas = await fetch(`${API_URL}/offers?state=true`)
-    const proDescuento = await resProductosDescuento.json()
-    const proDestacados = await resProductosDestacados.json()
-    const proNuevos = await resProductosNuevos.json()
-    const ofertas = await resOfertas.json()
-    if (proDescuento.error)
-      return {
-        props: {
-          productosDescuento: [],
-          productosDestacados: proDestacados.body,
-          productosNuevos: proNuevos.body[0],
-          ofertas: ofertas.body,
-        },
-        revalidate: 1,
-      }
-    if (proDestacados.error)
-      return {
-        props: {
-          productosDescuento: proDescuento.body,
-          productosNuevos: proNuevos.body[0],
-          ofertas: ofertas.body,
-          productosDestacados: [],
-        },
-        revalidate: 1,
-      }
-    if (proNuevos.error)
-      return {
-        props: {
-          productosDescuento: proDescuento.body,
-          productosDestacados: proDestacados.body,
-          ofertas: ofertas.body,
-          productosNuevos: [],
-        },
-        revalidate: 1,
-      }
-    if (ofertas.error)
-      return {
-        props: {
-          productosDescuento: proDescuento.body,
-          productosDestacados: proDestacados.body,
-          productosNuevos: proNuevos.body[0],
-          ofertas: [],
-        },
-        revalidate: 1,
-      }
-    return {
-      props: {
-        productosDescuento: proDescuento.body,
-        productosDestacados: proDestacados.body,
-        productosNuevos: proNuevos.body[0],
-        ofertas: ofertas.body,
-      },
-      revalidate: 1,
-    }
-  } catch (error) {
-    return {
-      props: {
-        productosDescuento: [],
-        productosDestacados: [],
-        productosNuevos: [],
-        ofertas: [],
-      },
-    }
-  }
-}
+// export async function getStaticProps() {
+//   try {
+//     const resProductosDescuento = await fetch(
+//       `${API_URL}/productos/filtrados/descuento`
+//     )
+//     const resProductosDestacados = await fetch(
+//       `${API_URL}/productos/destacados/principales`
+//     )
+//     const resProductosNuevos = await fetch(
+//       `${API_URL}/productos?desde=0&limite=8`
+//     )
+//     const resOfertas = await fetch(`${API_URL}/offers?state=true`)
+//     const proDescuento = await resProductosDescuento.json()
+//     const proDestacados = await resProductosDestacados.json()
+//     const proNuevos = await resProductosNuevos.json()
+//     const ofertas = await resOfertas.json()
+//     if (proDescuento.error)
+//       return {
+//         props: {
+//           productosDescuento: [],
+//           productosDestacados: proDestacados.body,
+//           productosNuevos: proNuevos.body[0],
+//           ofertas: ofertas.body,
+//         },
+//         revalidate: 1,
+//       }
+//     if (proDestacados.error)
+//       return {
+//         props: {
+//           productosDescuento: proDescuento.body,
+//           productosNuevos: proNuevos.body[0],
+//           ofertas: ofertas.body,
+//           productosDestacados: [],
+//         },
+//         revalidate: 1,
+//       }
+//     if (proNuevos.error)
+//       return {
+//         props: {
+//           productosDescuento: proDescuento.body,
+//           productosDestacados: proDestacados.body,
+//           ofertas: ofertas.body,
+//           productosNuevos: [],
+//         },
+//         revalidate: 1,
+//       }
+//     if (ofertas.error)
+//       return {
+//         props: {
+//           productosDescuento: proDescuento.body,
+//           productosDestacados: proDestacados.body,
+//           productosNuevos: proNuevos.body[0],
+//           ofertas: [],
+//         },
+//         revalidate: 1,
+//       }
+//     return {
+//       props: {
+//         productosDescuento: proDescuento.body,
+//         productosDestacados: proDestacados.body,
+//         productosNuevos: proNuevos.body[0],
+//         ofertas: ofertas.body,
+//       },
+//       revalidate: 1,
+//     }
+//   } catch (error) {
+//     return {
+//       props: {
+//         productosDescuento: [],
+//         productosDestacados: [],
+//         productosNuevos: [],
+//         ofertas: [],
+//       },
+//     }
+//   }
+// }
 export default Home
