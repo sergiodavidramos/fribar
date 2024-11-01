@@ -27,6 +27,11 @@ const Home = () => {
   const [productosCategoria, setProductosCategoria] = useState([])
   const [pedidos, setPedido] = useState([])
 
+  const [localProductosDescuento, setProductosDescuento] = useState([])
+  const [localProductosDestacados, setProductosDestacados] = useState([])
+  const [localProductosNuevos, setProductosNuevos] = useState([])
+  const [localOfertas, setOfertas] = useState([])
+
   useEffect(() => {
     const token = localStorage.getItem('fribar-token')
     if (categorias.length > 0) {
@@ -38,7 +43,26 @@ const Home = () => {
     if (token) {
       getMisPedidos(token)
     }
-  }, [categorias])
+
+    if (productosDescuento.length > 0) {
+      setProductosDescuento(productosDescuento)
+    }
+    if (productosDestacados.length > 0) {
+      setProductosDestacados(productosDestacados)
+    }
+    if (productosNuevos.length > 0) {
+      setProductosNuevos(productosNuevos)
+    }
+    if (ofertas.length > 0) {
+      setOfertas(ofertas)
+    }
+  }, [
+    categorias,
+    productosDescuento,
+    productosDestacados,
+    productosNuevos,
+    ofertas,
+  ])
   useEffect(() => {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker
@@ -119,21 +143,23 @@ const Home = () => {
       </Head>
       <Header />
       <div className="wrapper">
-        <Carrousel productosDescuento={productosDescuento} />
+        <Carrousel productosDescuento={localProductosDescuento} />
 
         {pedidos.length > 0 && <PedidoPendiente pedidos={pedidos} />}
         <Categories />
-        {productosDestacados.length > 0 ? (
+        {localProductosDestacados.length > 0 ? (
           <Destacados
             title="Principales Productos Destacados"
-            productos={productosDestacados}
+            productos={localProductosDestacados}
             url="/productos/destacados"
           />
         ) : (
           <Loader />
         )}
 
-        {ofertas.length > 0 && <MejoresValores ofertas={ofertas} />}
+        {localOfertas.length > 0 && (
+          <MejoresValores ofertas={localOfertas} />
+        )}
         {localCategoria &&
           (productosCategoria.length > 0 ? (
             <Destacados
@@ -146,10 +172,10 @@ const Home = () => {
             <Loader />
           ))}
 
-        {productosNuevos.length > 0 ? (
+        {localProductosNuevos.length > 0 ? (
           <Destacados
             title="Nuevos Productos Agregados"
-            productos={productosNuevos}
+            productos={localProductosNuevos}
             url="/productos"
           />
         ) : (
