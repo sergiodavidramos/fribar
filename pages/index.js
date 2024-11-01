@@ -37,6 +37,7 @@ const Home = () => {
     if (token) {
       getMisPedidos(token)
     }
+    getDatosInicio()
   }, [categorias])
   useEffect(() => {
     if ('serviceWorker' in navigator) {
@@ -46,7 +47,6 @@ const Home = () => {
           console.log('scope is: ', registration.scope)
         )
     }
-    getDatosInicio()
   }, [])
   async function getDatosInicio() {
     try {
