@@ -42,10 +42,10 @@ export default class MyApp extends App {
       direccionEnvio: false,
       generarQR: 100,
 
-      productosDescuento: [],
-      productosDestacados: [],
-      productosNuevos: [],
-      ofertas: [],
+      //   productosDescuento: [],
+      //   productosDestacados: [],
+      //   productosNuevos: [],
+      //   ofertas: [],
     }
   }
   getMovimientos = (token) => {
@@ -89,42 +89,42 @@ export default class MyApp extends App {
     if (cate.error) notify.show('Error al obtener las categorias', 'error')
     else this.setState({ categorias: cate.body })
   }
-  getProductosDescuento = async () => {
-    const resProductosDescuento = await fetch(
-      `${API_URL}/productos/filtrados/descuento`
-    )
-    const proDescuento = await resProductosDescuento.json()
-    if (proDescuento.error)
-      notify.show('Error al obtener los productos con descuento', 'error')
-    else this.setState({ productosDescuento: proDescuento.body })
-    console.log('---->1', proDescuento.body)
-  }
-  getProductosDestacados = async () => {
-    const resProductosDestacados = await fetch(
-      `${API_URL}/productos/destacados/principales`
-    )
-    const proDestacados = await resProductosDestacados.json()
-    if (proDestacados.error)
-      notify.show('Error al obtener los productos destacados', 'error')
-    else this.setState({ productosDestacados: proDestacados.body })
-    console.log('---->2', proDestacados.body)
-  }
-  getProductosNuevos = async () => {
-    const resProductosNuevos = await fetch(
-      `${API_URL}/productos?desde=0&limite=8`
-    )
-    const proNuevos = await resProductosNuevos.json()
-    if (proNuevos.error)
-      notify.show('Error al obtener los productos Nuevos', 'error')
-    else this.setState({ productosNuevos: proNuevos.body[0] })
-  }
-  getOfertas = async () => {
-    const resOfertas = await fetch(`${API_URL}/offers?state=true`)
-    const ofertas = await resOfertas.json()
-    if (ofertas.error) notify.show('Error al obtener las ofertas', 'error')
-    else this.setState({ ofertas: ofertas.body })
-    console.log('---->3', ofertas.body)
-  }
+  //   getProductosDescuento = async () => {
+  //     const resProductosDescuento = await fetch(
+  //       `${API_URL}/productos/filtrados/descuento`
+  //     )
+  //     const proDescuento = await resProductosDescuento.json()
+  //     if (proDescuento.error)
+  //       notify.show('Error al obtener los productos con descuento', 'error')
+  //     else this.setState({ productosDescuento: proDescuento.body })
+  //     console.log('---->1', proDescuento.body)
+  //   }
+  //   getProductosDestacados = async () => {
+  //     const resProductosDestacados = await fetch(
+  //       `${API_URL}/productos/destacados/principales`
+  //     )
+  //     const proDestacados = await resProductosDestacados.json()
+  //     if (proDestacados.error)
+  //       notify.show('Error al obtener los productos destacados', 'error')
+  //     else this.setState({ productosDestacados: proDestacados.body })
+  //     console.log('---->2', proDestacados.body)
+  //   }
+  //   getProductosNuevos = async () => {
+  //     const resProductosNuevos = await fetch(
+  //       `${API_URL}/productos?desde=0&limite=8`
+  //     )
+  //     const proNuevos = await resProductosNuevos.json()
+  //     if (proNuevos.error)
+  //       notify.show('Error al obtener los productos Nuevos', 'error')
+  //     else this.setState({ productosNuevos: proNuevos.body[0] })
+  //   }
+  //   getOfertas = async () => {
+  //     const resOfertas = await fetch(`${API_URL}/offers?state=true`)
+  //     const ofertas = await resOfertas.json()
+  //     if (ofertas.error) notify.show('Error al obtener las ofertas', 'error')
+  //     else this.setState({ ofertas: ofertas.body })
+  //     console.log('---->3', ofertas.body)
+  //   }
   componentDidMount() {
     const user = localStorage.getItem('fribar-user')
     const token = localStorage.getItem('fribar-token')
@@ -177,10 +177,10 @@ export default class MyApp extends App {
     this.getCiudades()
     this.getCategorias()
 
-    this.getProductosDescuento()
-    this.getProductosDestacados()
-    this.getProductosNuevos()
-    this.getOfertas()
+    // this.getProductosDescuento()
+    // this.getProductosDestacados()
+    // this.getProductosNuevos()
+    // this.getOfertas()
   }
   addProductCar = (p, c) => {
     let ban = false
@@ -418,10 +418,10 @@ export default class MyApp extends App {
               carrito: this.state.carrito,
               cantidades: this.state.cantidadProducto,
               categorias: this.state.categorias,
-              productosDescuento: this.state.productosDescuento,
-              productosDestacados: this.state.productosDestacados,
-              productosNuevos: this.state.productosNuevos,
-              ofertas: this.state.ofertas,
+              //   productosDescuento: this.state.productosDescuento,
+              //   productosDestacados: this.state.productosDestacados,
+              //   productosNuevos: this.state.productosNuevos,
+              //   ofertas: this.state.ofertas,
               modoNoche: this.state.modoNoche,
               direcciones: this.state.direcciones,
               total: this.state.total,

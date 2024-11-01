@@ -14,23 +14,28 @@ import Loader from '../components/Loader'
 import Link from 'next/link'
 import PedidoPendiente from '../components/PedidoPendiente'
 
-const Home = () => {
+const Home = ({
+  productosDescuento,
+  productosDestacados,
+  productosNuevos,
+  ofertas,
+}) => {
   let categoriaAletorio
   const {
     categorias,
-    productosDescuento,
-    productosDestacados,
-    productosNuevos,
-    ofertas,
+    // productosDescuento,
+    // productosDestacados,
+    // productosNuevos,
+    // ofertas,
   } = useContext(UserContext)
   const [localCategoria, setLocalCategoria] = useState(false)
   const [productosCategoria, setProductosCategoria] = useState([])
   const [pedidos, setPedido] = useState([])
 
-  const [localProductosDescuento, setProductosDescuento] = useState([])
-  const [localProductosDestacados, setProductosDestacados] = useState([])
-  const [localProductosNuevos, setProductosNuevos] = useState([])
-  const [localOfertas, setOfertas] = useState([])
+  //   const [localProductosDescuento, setProductosDescuento] = useState([])
+  //   const [localProductosDestacados, setProductosDestacados] = useState([])
+  //   const [localProductosNuevos, setProductosNuevos] = useState([])
+  //   const [localOfertas, setOfertas] = useState([])
 
   useEffect(() => {
     const token = localStorage.getItem('fribar-token')
@@ -44,24 +49,24 @@ const Home = () => {
       getMisPedidos(token)
     }
 
-    if (productosDescuento.length > 0) {
-      setProductosDescuento(productosDescuento)
-    }
-    if (productosDestacados.length > 0) {
-      setProductosDestacados(productosDestacados)
-    }
-    if (productosNuevos.length > 0) {
-      setProductosNuevos(productosNuevos)
-    }
-    if (ofertas.length > 0) {
-      setOfertas(ofertas)
-    }
+    // if (productosDescuento.length > 0) {
+    //   setProductosDescuento(productosDescuento)
+    // }
+    // if (productosDestacados.length > 0) {
+    //   setProductosDestacados(productosDestacados)
+    // }
+    // if (productosNuevos.length > 0) {
+    //   setProductosNuevos(productosNuevos)
+    // }
+    // if (ofertas.length > 0) {
+    //   setOfertas(ofertas)
+    // }
   }, [
     categorias,
-    productosDescuento,
-    productosDestacados,
-    productosNuevos,
-    ofertas,
+    // productosDescuento,
+    // productosDestacados,
+    // productosNuevos,
+    // ofertas,
   ])
   useEffect(() => {
     if ('serviceWorker' in navigator) {
@@ -143,23 +148,21 @@ const Home = () => {
       </Head>
       <Header />
       <div className="wrapper">
-        <Carrousel productosDescuento={localProductosDescuento} />
+        <Carrousel productosDescuento={productosDescuento} />
 
         {pedidos.length > 0 && <PedidoPendiente pedidos={pedidos} />}
         <Categories />
-        {localProductosDestacados.length > 0 ? (
+        {productosDestacados.length > 0 ? (
           <Destacados
             title="Principales Productos Destacados"
-            productos={localProductosDestacados}
+            productos={productosDestacados}
             url="/productos/destacados"
           />
         ) : (
           <Loader />
         )}
 
-        {localOfertas.length > 0 && (
-          <MejoresValores ofertas={localOfertas} />
-        )}
+        {ofertas.length > 0 && <MejoresValores ofertas={ofertas} />}
         {localCategoria &&
           (productosCategoria.length > 0 ? (
             <Destacados
@@ -172,10 +175,10 @@ const Home = () => {
             <Loader />
           ))}
 
-        {localProductosNuevos.length > 0 ? (
+        {productosNuevos.length > 0 ? (
           <Destacados
             title="Nuevos Productos Agregados"
-            productos={localProductosNuevos}
+            productos={productosNuevos}
             url="/productos"
           />
         ) : (
@@ -187,80 +190,80 @@ const Home = () => {
   )
 }
 
-// export async function getStaticProps() {
-//   try {
-//     const resProductosDescuento = await fetch(
-//       `${API_URL}/productos/filtrados/descuento`
-//     )
-//     const resProductosDestacados = await fetch(
-//       `${API_URL}/productos/destacados/principales`
-//     )
-//     const resProductosNuevos = await fetch(
-//       `${API_URL}/productos?desde=0&limite=8`
-//     )
-//     const resOfertas = await fetch(`${API_URL}/offers?state=true`)
-//     const proDescuento = await resProductosDescuento.json()
-//     const proDestacados = await resProductosDestacados.json()
-//     const proNuevos = await resProductosNuevos.json()
-//     const ofertas = await resOfertas.json()
-//     if (proDescuento.error)
-//       return {
-//         props: {
-//           productosDescuento: [],
-//           productosDestacados: proDestacados.body,
-//           productosNuevos: proNuevos.body[0],
-//           ofertas: ofertas.body,
-//         },
-//         revalidate: 1,
-//       }
-//     if (proDestacados.error)
-//       return {
-//         props: {
-//           productosDescuento: proDescuento.body,
-//           productosNuevos: proNuevos.body[0],
-//           ofertas: ofertas.body,
-//           productosDestacados: [],
-//         },
-//         revalidate: 1,
-//       }
-//     if (proNuevos.error)
-//       return {
-//         props: {
-//           productosDescuento: proDescuento.body,
-//           productosDestacados: proDestacados.body,
-//           ofertas: ofertas.body,
-//           productosNuevos: [],
-//         },
-//         revalidate: 1,
-//       }
-//     if (ofertas.error)
-//       return {
-//         props: {
-//           productosDescuento: proDescuento.body,
-//           productosDestacados: proDestacados.body,
-//           productosNuevos: proNuevos.body[0],
-//           ofertas: [],
-//         },
-//         revalidate: 1,
-//       }
-//     return {
-//       props: {
-//         productosDescuento: proDescuento.body,
-//         productosDestacados: proDestacados.body,
-//         productosNuevos: proNuevos.body[0],
-//         ofertas: ofertas.body,
-//       },
-//       revalidate: 1,
-//     }
-//   } catch (error) {
-//     return {
-//       props: {
-//         productosDescuento: [],
-//         productosDestacados: [],
-//         productosNuevos: [],
-//         ofertas: [],
-//       },
-//     }
-//   }
-// }
+export async function getStaticProps() {
+  try {
+    const resProductosDescuento = await fetch(
+      `${API_URL}/productos/filtrados/descuento`
+    )
+    const resProductosDestacados = await fetch(
+      `${API_URL}/productos/destacados/principales`
+    )
+    const resProductosNuevos = await fetch(
+      `${API_URL}/productos?desde=0&limite=8`
+    )
+    const resOfertas = await fetch(`${API_URL}/offers?state=true`)
+    const proDescuento = await resProductosDescuento.json()
+    const proDestacados = await resProductosDestacados.json()
+    const proNuevos = await resProductosNuevos.json()
+    const ofertas = await resOfertas.json()
+    if (proDescuento.error)
+      return {
+        props: {
+          productosDescuento: [],
+          productosDestacados: proDestacados.body,
+          productosNuevos: proNuevos.body[0],
+          ofertas: ofertas.body,
+        },
+        revalidate: 1,
+      }
+    if (proDestacados.error)
+      return {
+        props: {
+          productosDescuento: proDescuento.body,
+          productosNuevos: proNuevos.body[0],
+          ofertas: ofertas.body,
+          productosDestacados: [],
+        },
+        revalidate: 1,
+      }
+    if (proNuevos.error)
+      return {
+        props: {
+          productosDescuento: proDescuento.body,
+          productosDestacados: proDestacados.body,
+          ofertas: ofertas.body,
+          productosNuevos: [],
+        },
+        revalidate: 1,
+      }
+    if (ofertas.error)
+      return {
+        props: {
+          productosDescuento: proDescuento.body,
+          productosDestacados: proDestacados.body,
+          productosNuevos: proNuevos.body[0],
+          ofertas: [],
+        },
+        revalidate: 1,
+      }
+    return {
+      props: {
+        productosDescuento: proDescuento.body,
+        productosDestacados: proDestacados.body,
+        productosNuevos: proNuevos.body[0],
+        ofertas: ofertas.body,
+      },
+      revalidate: 1,
+    }
+  } catch (error) {
+    return {
+      props: {
+        productosDescuento: [],
+        productosDestacados: [],
+        productosNuevos: [],
+        ofertas: [],
+      },
+    }
+  }
+}
 export default Home

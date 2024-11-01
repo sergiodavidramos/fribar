@@ -1,7 +1,6 @@
 import Loader from '../Loader'
 import { Item } from './Item'
 export const Carrousel = ({ productosDescuento }) => {
-  console.log('--->>', productosDescuento)
   return (
     <div className="main-banner-slider">
       <div className="container">
