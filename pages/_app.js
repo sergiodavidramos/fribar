@@ -97,6 +97,7 @@ export default class MyApp extends App {
     if (proDescuento.error)
       notify.show('Error al obtener los productos con descuento', 'error')
     else this.setState({ productosDescuento: proDescuento.body })
+    console.log('---->1', proDescuento.body)
   }
   getProductosDestacados = async () => {
     const resProductosDestacados = await fetch(
@@ -106,6 +107,7 @@ export default class MyApp extends App {
     if (proDestacados.error)
       notify.show('Error al obtener los productos destacados', 'error')
     else this.setState({ productosDestacados: proDestacados.body })
+    console.log('---->2', proDestacados.body)
   }
   getProductosNuevos = async () => {
     const resProductosNuevos = await fetch(
@@ -121,6 +123,7 @@ export default class MyApp extends App {
     const ofertas = await resOfertas.json()
     if (ofertas.error) notify.show('Error al obtener las ofertas', 'error')
     else this.setState({ ofertas: ofertas.body })
+    console.log('---->3', ofertas.body)
   }
   componentDidMount() {
     const user = localStorage.getItem('fribar-user')
