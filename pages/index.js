@@ -15,13 +15,14 @@ import Link from 'next/link'
 import PedidoPendiente from '../components/PedidoPendiente'
 
 const Home = () => {
-  const [productosDescuento, setProductosDescuento] = useState([])
-  const [productosDestacados, setProductosDestacados] = useState([])
-  const [productosNuevos, setProductosNuevos] = useState([])
-  const [ofertas, setOfertas] = useState([])
-
   let categoriaAletorio
-  const { categorias } = useContext(UserContext)
+  const {
+    categorias,
+    productosDescuento,
+    productosDestacados,
+    productosNuevos,
+    ofertas,
+  } = useContext(UserContext)
   const [localCategoria, setLocalCategoria] = useState(false)
   const [productosCategoria, setProductosCategoria] = useState([])
   const [pedidos, setPedido] = useState([])
@@ -37,7 +38,6 @@ const Home = () => {
     if (token) {
       getMisPedidos(token)
     }
-    getDatosInicio()
   }, [categorias])
   useEffect(() => {
     if ('serviceWorker' in navigator) {
@@ -48,34 +48,6 @@ const Home = () => {
         )
     }
   }, [])
-  async function getDatosInicio() {
-    try {
-      const resProductosDescuento = await fetch(
-        `${API_URL}/productos/filtrados/descuento`
-      )
-      const resProductosDestacados = await fetch(
-        `${API_URL}/productos/destacados/principales`
-      )
-      const resProductosNuevos = await fetch(
-        `${API_URL}/productos?desde=0&limite=8`
-      )
-      const resOfertas = await fetch(`${API_URL}/offers?state=true`)
-      const proDescuento = await resProductosDescuento.json()
-      const proDestacados = await resProductosDestacados.json()
-      const proNuevos = await resProductosNuevos.json()
-      const ofertas = await resOfertas.json()
-      setProductosDescuento(proDescuento.body),
-        setProductosDestacados(proDestacados.body),
-        setProductosNuevos(proNuevos.body[0]),
-        setOfertas(ofertas.body)
-    } catch (error) {
-      console.log(error)
-      setProductosDescuento([]),
-        setProductosDestacados([]),
-        setProductosNuevos([]),
-        setOfertas([])
-    }
-  }
   async function getProductosCategoria(idCategoria) {
     if (idCategoria) {
       const res = await fetch(
