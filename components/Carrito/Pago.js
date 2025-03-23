@@ -1,4 +1,4 @@
-import { API_URL, TOKENMAP } from '../Config'
+import { API_URL, mapboxglAccessToken } from '../Config'
 import { useContext, useEffect, useState } from 'react'
 import UserContext from '../UserContext'
 import { notify } from 'react-notify-toast'
@@ -98,7 +98,7 @@ export const Pago = () => {
       for (let suc of sucursales) {
         const sucLon = suc.direccion.lon
         const sucLat = suc.direccion.lat
-        const urlMapBox = `https://api.mapbox.com/directions/v5/mapbox/driving/${sucLon},${sucLat};${lonUser},${latUser}?alternatives=false&geometries=geojson&language=en&overview=full&steps=true&access_token=${TOKENMAP}`
+        const urlMapBox = `https://api.mapbox.com/directions/v5/mapbox/driving/${sucLon},${sucLat};${lonUser},${latUser}?alternatives=false&geometries=geojson&language=en&overview=full&steps=true&access_token=${mapboxglAccessToken}`
         const resDatosMapa = await fetch(urlMapBox)
         const datosMapa = await resDatosMapa.json()
         if (datosMapa.routes[0].distance / 1000 > mayorDistancia) {
