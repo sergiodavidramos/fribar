@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import { useEffect, useContext } from 'react'
+import { useEffect, useContext, useState } from 'react'
 import Notifications, { notify } from 'react-notify-toast'
 import FacebookLogin from 'react-facebook-login'
 import UserContext from '../components/UserContext'
@@ -9,6 +9,7 @@ import { encode } from 'base-64'
 import Link from 'next/link'
 import { API_URL } from '../components/Config'
 export default () => {
+  const [refrescar, setRefrescar] = useState(false)
   var auth2
   const { signIn, token } = useContext(UserContext)
   const setUser = (userResponse) => {
@@ -59,12 +60,9 @@ export default () => {
       },
       function (error) {
         notify.show(
-          `No se pudo iniciar sesion: ${JSON.stringify(
-            error,
-            undefined,
-            2
-          )}`,
-          'error'
+          'Error al iniciar sesión con Google: El navegador no es compatible con la autenticación de Google, por favor intente con su navegador predeterminado',
+          'error',
+          5
         )
       }
     )
@@ -91,7 +89,9 @@ export default () => {
         notify.show('Error en el Servidor', 'error')
       })
   }
-  const componentClicked = () => {}
+  const componentClicked = () => {
+    setRefrescar(!refrescar)
+  }
 
   useEffect(() => {
     startApp()
@@ -116,7 +116,7 @@ export default () => {
         fjs.parentNode.insertBefore(js, fjs)
       })(document, 'script', 'facebook-jssdk')
     }
-  })
+  }, [refrescar])
   function handlerSubmit() {
     event.preventDefault()
     let headers = new Headers()
@@ -187,7 +187,7 @@ export default () => {
                         <div className="container-face">
                           <FacebookLogin
                             appId="333033351546623"
-                            autoLoad={true}
+                            autoLoad={false}
                             onClick={componentClicked}
                             callback={responseFacebook}
                             cssClass="btn btn-lg btn-facebook"
