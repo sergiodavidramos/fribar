@@ -58,7 +58,7 @@ export default () => {
           })
       },
       function (error) {
-        notify.show(`No se pudo iniciar sesion: ${error.error}`, 'error')
+        notify.show(`No se pudo iniciar sesion: ${error}`, 'error')
       }
     )
   }
@@ -180,7 +180,7 @@ export default () => {
                         <div className="container-face">
                           <FacebookLogin
                             appId="333033351546623"
-                            autoLoad={false}
+                            autoLoad={true}
                             onClick={componentClicked}
                             callback={responseFacebook}
                             cssClass="btn btn-lg btn-facebook"
