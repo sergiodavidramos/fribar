@@ -62,7 +62,7 @@ export default () => {
         notify.show(
           'Error al iniciar sesión con Google: El navegador no es compatible con la autenticación de Google, por favor intente con su navegador predeterminado',
           'error',
-          5
+          7000
         )
       }
     )
