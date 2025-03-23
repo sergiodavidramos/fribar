@@ -63,7 +63,7 @@ export default () => {
 
   function mostrarUbicacion(ubicacion, setCiudad) {
     fetch(
-      `https://api.mapbox.com/geocoding/v5/mapbox.places/${ubicacion.coords.longitude},${ubicacion.coords.latitude}.json?access_token=${TOKENMAP}`
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${ubicacion.coords.longitude},${ubicacion.coords.latitude}.json?access_token=${mapboxglAccessToken}`
     )
       .then((res) => res.json())
       .then((re) => {

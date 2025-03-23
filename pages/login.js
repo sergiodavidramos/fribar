@@ -58,7 +58,10 @@ export default () => {
           })
       },
       function (error) {
-        notify.show(`No se pudo iniciar sesion: ${error}`, 'error')
+        notify.show(
+          `No se pudo iniciar sesion: ${error} ${error.length} ${error[0]}`,
+          'error'
+        )
       }
     )
   }
