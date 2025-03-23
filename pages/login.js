@@ -59,7 +59,11 @@ export default () => {
       },
       function (error) {
         notify.show(
-          `No se pudo iniciar sesion: ${error} ${error.length} ${error[0]}`,
+          `No se pudo iniciar sesion: ${JSON.stringify(
+            error,
+            undefined,
+            2
+          )}`,
           'error'
         )
       }
